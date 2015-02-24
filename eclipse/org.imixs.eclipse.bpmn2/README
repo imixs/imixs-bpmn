@@ -1,0 +1,14 @@
+
+Current open issues:
+----------------------
+
+Seems like  MyTaskFeatureContainer need to extends CustomElementFeatureContainer. 
+But this is still not clear??? See also Extension point 'CustomTask'
+
+
+
+Man muss rausfinden wie man bestimmt welche Elemente in der runtime verfügbar sidn und welche nicht
+ 
+
+
+

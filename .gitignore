@@ -1,0 +1,21 @@
+# ignore all bin directories
+# matches "bin" in any subfolder
+bin/
+
+# ignore all target directories
+target/
+
+# ignore all files ending with ~
+*~ 
+
+# ignore eclipse directories and project files
+.settings/
+.project
+.classpath
+
+# ignore eclipse update site folders
+eclipse/org.imixs.eclipse.updatesite/features/
+eclipse/org.imixs.eclipse.updatesite/plugins/
+eclipse/org.imixs.eclipse.updatesite/artifacts.jar
+eclipse/org.imixs.eclipse.updatesite/content.jar
+eclipse/org.imixs.eclipse.updatesite/logs.zip

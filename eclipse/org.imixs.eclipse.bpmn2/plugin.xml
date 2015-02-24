@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated imixs -->
+      <package
+            uri="http://www.imixs.org/bpmn2"
+            class="org.imixs.bpmn.model.ModelPackage"
+            genModel="model/imixs.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated imixs -->
+      <parser
+            type="bpmn"
+            class="org.imixs.bpmn.model.util.ModelResourceFactoryImpl"/>
+   </extension>
+   <extension
+         point="org.eclipse.bpmn2.modeler.runtime">
+      <runtime
+            class="org.imixs.bpmn.model.ImixsRuntimeExtension"
+            description="Imixs-Workflow BPMN Runtime Extension"
+            id="org.imixs.workflow.bpmn.runtime"
+            name="Imixs-Workflow">
+      </runtime>
+      <model
+            resourceFactory="org.imixs.bpmn.model.util.ModelResourceFactoryImpl"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            uri="http://www.imixs.org/bpmn2">
+      </model>
+      <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer -->
+      <customTask
+            category="My Task"
+            description="Imixs Task"
+            featureContainer="org.imixs.bpmn.model.MyTaskFeatureContainer"
+            id="org.imxis.workflow.bpmn.customTask"
+            name="Imixs Task"
+            propertyTabs="org.imixs.bpmn.model.propertytabid"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="Task">
+         <property
+               name="type"
+               value="MyTask">
+         </property>
+         <property  name="extensionValues">
+            <value>
+               <property  name="taskConfig">
+                  <value>
+                     <property name="parameters">
+                        <value>
+                           <property  name="name" value="taskName">
+                           </property>
+                           <property name="value" value="My custom task">
+                           </property>
+                        </value>
+                     </property>
+                     <property  name="parameters">
+                        <value>
+                           <property name="name"  value="processing time">
+                           </property>
+                           <property  name="value" value="1 h">
+                           </property>
+                        </value>
+                     </property>
+                  </value>
+               </property>
+            </value>
+         </property>
+      </customTask>
+      <propertyTab
+            class="default"
+            features="extensionValues#TaskConfig.parameters"
+            id="org.imixs.bpmn.model.propertytabid"
+            label="My Task"
+            runtimeId="org.imixs.workflow.bpmn.runtime">
+      </propertyTab>
+      <modelEnablement
+            id="Imixs-BPMN2.modelEnablement2"
+            profile="Imixs-BPMN2.modelEnablement2"
+            runtimeId="org.imixs.workflow.bpmn.runtime">
+      </modelEnablement>
+   </extension>
+</plugin>
