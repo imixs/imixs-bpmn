@@ -35,9 +35,9 @@
       </model>
       <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer -->
       <customTask
-            category="My Task"
+            category="Imixs-Workflow"
             description="Imixs Task"
-            featureContainer="org.imixs.bpmn.model.MyTaskFeatureContainer"
+            featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
             id="org.imxis.workflow.bpmn.customTask"
             name="Imixs Task"
             propertyTabs="org.imixs.bpmn.model.propertytabid"
@@ -71,18 +71,54 @@
                </property>
             </value>
          </property>
+         <property
+               name="name"
+               value="Imixs">
+         </property>
+         <property
+               description="Potential benefit provided by this Mitigation activity"
+               name="benefit"
+               type="EInt"
+               value="0">
+         </property>
       </customTask>
+      
+      
+      <customTask
+			description="This task attempts to minimize the impact of risk."
+			featureContainer="org.imixs.bpmn.model.sample.SampleCustomTaskFeatureContainer"
+			id="org.imixs.examples.dynamic.mitigation"
+			name="Mitigation Task"
+			category="Risk &amp; Mitigation"
+			icon="mitigation.png"
+			runtimeId="org.imixs.workflow.bpmn.runtime"
+			type="TextAnnotation">
+			<property name="name" value="Mitigation Task" type="EString"/>
+			<property name="text" value="Mitigation Task" type="EString"/>
+			<property name="evaluate" value="true" type="EBoolean" description="Include this activity in Risk Calculations"/>
+			<property name="benefit" value="0" type="EInt" description="Potential benefit provided by this Mitigation activity"/>
+		</customTask>
+		
       <propertyTab
             class="default"
             features="extensionValues#TaskConfig.parameters"
             id="org.imixs.bpmn.model.propertytabid"
+            indented="true"
             label="My Task"
-            runtimeId="org.imixs.workflow.bpmn.runtime">
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
       </propertyTab>
       <modelEnablement
             id="Imixs-BPMN2.modelEnablement2"
-            profile="Imixs-BPMN2.modelEnablement2"
+            profile="Full"
+            ref="org.eclipse.bpmn2.modeler.runtime.none:Full"
             runtimeId="org.imixs.workflow.bpmn.runtime">
+         <enable
+               object="TaskConfig">
+         </enable>
+         <enable
+               object="Parameter">
+         </enable>
       </modelEnablement>
    </extension>
 </plugin>
