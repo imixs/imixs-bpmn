@@ -2,11 +2,10 @@
  */
 package org.imixs.bpmn.model.util;
 
+import org.eclipse.bpmn2.modeler.core.model.Bpmn2ModelerResourceFactoryImpl;
+import org.eclipse.bpmn2.modeler.core.model.Bpmn2ModelerResourceImpl;
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
-import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
  * @see org.imixs.bpmn.model.util.ModelResourceImpl
  * @generated NOT
  */
-public class ModelResourceFactoryImpl extends ResourceFactoryImpl {
+public class ModelResourceFactoryImpl  extends Bpmn2ModelerResourceFactoryImpl {
 	/**
 	 * Creates an instance of the resource factory.
 	 * <!-- begin-user-doc -->
@@ -34,8 +33,8 @@ public class ModelResourceFactoryImpl extends ResourceFactoryImpl {
 	 */
 	@Override
 	public Resource createResource(URI uri) {
-		Resource result = new ModelResourceImpl(uri);
-		return result;
+		Bpmn2ModelerResourceImpl resource = new Bpmn2ModelerResourceImpl(uri);
+		return resource;
 	}
 
-} //ModelResourceFactoryImpl
+} //MyModelResourceFactoryImpl

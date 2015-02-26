@@ -6,20 +6,6 @@
 
 <plugin>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated imixs -->
-      <package
-            uri="http://www.imixs.org/bpmn2"
-            class="org.imixs.bpmn.model.ModelPackage"
-            genModel="model/imixs.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated imixs -->
-      <parser
-            type="bpmn"
-            class="org.imixs.bpmn.model.util.ModelResourceFactoryImpl"/>
-   </extension>
    <extension
          point="org.eclipse.bpmn2.modeler.runtime">
       <runtime
@@ -38,42 +24,18 @@
             category="Imixs-Workflow"
             description="Imixs Task"
             featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
+            icon="risk.png"
             id="org.imxis.workflow.bpmn.customTask"
             name="Imixs Task"
-            propertyTabs="org.imixs.bpmn.model.propertytabid"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
                name="type"
                value="MyTask">
          </property>
-         <property  name="extensionValues">
-            <value>
-               <property  name="taskConfig">
-                  <value>
-                     <property name="parameters">
-                        <value>
-                           <property  name="name" value="taskName">
-                           </property>
-                           <property name="value" value="My custom task">
-                           </property>
-                        </value>
-                     </property>
-                     <property  name="parameters">
-                        <value>
-                           <property name="name"  value="processing time">
-                           </property>
-                           <property  name="value" value="1 h">
-                           </property>
-                        </value>
-                     </property>
-                  </value>
-               </property>
-            </value>
-         </property>
          <property
-               name="name"
-               value="Imixs">
+               name="Imixs"
+               value="Hello World">
          </property>
          <property
                description="Potential benefit provided by this Mitigation activity"
@@ -100,7 +62,7 @@
 		</customTask>
 		
       <propertyTab
-            class="default"
+            class="org.imixs.bpmn.model.ImixsTaskPropertySection"
             features="extensionValues#TaskConfig.parameters"
             id="org.imixs.bpmn.model.propertytabid"
             indented="true"
@@ -120,5 +82,19 @@
                object="Parameter">
          </enable>
       </modelEnablement>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated imixs -->
+      <package
+            uri="http://www.imixs.org/bpmn2"
+            class="org.imixs.bpmn.model.ModelPackage"
+            genModel="model/imixs.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated imixs -->
+      <parser
+            type="bpmn"
+            class="org.imixs.bpmn.model.util.ModelResourceFactoryImpl"/>
    </extension>
 </plugin>
