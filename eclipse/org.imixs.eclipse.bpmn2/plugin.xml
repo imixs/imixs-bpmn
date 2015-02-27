@@ -25,7 +25,7 @@
             description="Imixs Task"
             featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
             icon="risk.png"
-            id="org.imxis.workflow.bpmn.customTask"
+            id="org.imixs.workflow.bpmn.customTask"
             name="Imixs Task"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">

@@ -57,7 +57,7 @@ public class ImixsTaskPropertySection extends DefaultPropertySection {
 				TargetRuntime rt = getTargetRuntime();
 				// We need our CustomTaskDescriptor for this Task. The ID must match
 				// the one defined in the <customTask> extension point in plugin.xml
-				CustomTaskDescriptor ctd = rt.getCustomTask("org.imxis.workflow.bpmn.customTask");
+				CustomTaskDescriptor ctd = rt.getCustomTask("org.imixs.workflow.bpmn.customTask");
 				// Get the model feature for the "taskConfig" element name.
 				// Again, this must match the <property> element in <customTask>
 				EStructuralFeature feature = ctd.getModelDecorator().getEStructuralFeature(be, "taskConfig");

@@ -14,7 +14,7 @@ public class ImixsTaskFeatureContainer  extends CustomShapeFeatureContainer {
 
 	// these values must match what's in the plugin.xml
 	private final static String TYPE_VALUE = "MyTask";
-	private final static String CUSTOM_TASK_ID = "org.imxis.workflow.bpmn.customTask";
+	private final static String CUSTOM_TASK_ID = "org.imixs.workflow.bpmn.customTask";
 
 	public ImixsTaskFeatureContainer() {
 		
