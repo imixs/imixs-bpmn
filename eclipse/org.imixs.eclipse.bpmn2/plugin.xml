@@ -46,27 +46,13 @@
       </customTask>
       
       
-      <customTask
-			description="This task attempts to minimize the impact of risk."
-			featureContainer="org.imixs.bpmn.model.sample.SampleCustomTaskFeatureContainer"
-			id="org.imixs.examples.dynamic.mitigation"
-			name="Mitigation Task"
-			category="Risk &amp; Mitigation"
-			icon="mitigation.png"
-			runtimeId="org.imixs.workflow.bpmn.runtime"
-			type="TextAnnotation">
-			<property name="name" value="Mitigation Task" type="EString"/>
-			<property name="text" value="Mitigation Task" type="EString"/>
-			<property name="evaluate" value="true" type="EBoolean" description="Include this activity in Risk Calculations"/>
-			<property name="benefit" value="0" type="EInt" description="Potential benefit provided by this Mitigation activity"/>
-		</customTask>
 		
       <propertyTab
             class="org.imixs.bpmn.model.ImixsTaskPropertySection"
             features="extensionValues#TaskConfig.parameters"
             id="org.imixs.bpmn.model.propertytabid"
-            indented="true"
-            label="My Task"
+            label="Process"
+            popup="true"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
