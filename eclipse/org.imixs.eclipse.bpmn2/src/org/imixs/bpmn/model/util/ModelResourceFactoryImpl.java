@@ -15,26 +15,26 @@ import org.eclipse.emf.ecore.resource.Resource;
  * @generated NOT
  */
 public class ModelResourceFactoryImpl  extends Bpmn2ModelerResourceFactoryImpl {
-	/**
+	 /**
 	 * Creates an instance of the resource factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelResourceFactoryImpl() {
-		super();
-	}
+	 public ModelResourceFactoryImpl() {
+		 super();
+	 }
 
-	/**
+	 /**
 	 * Creates an instance of the resource.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Resource createResource(URI uri) {
-		Bpmn2ModelerResourceImpl resource = new Bpmn2ModelerResourceImpl(uri);
-		return resource;
-	}
-
+	 @Override
+	 public Resource createResource(URI uri) {
+		 Bpmn2ModelerResourceImpl resource = new Bpmn2ModelerResourceImpl(uri);
+		 return resource;
+	 }
 } //MyModelResourceFactoryImpl
+

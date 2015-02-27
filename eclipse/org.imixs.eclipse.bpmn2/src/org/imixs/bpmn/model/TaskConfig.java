@@ -35,6 +35,7 @@ public interface TaskConfig extends EObject {
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see org.imixs.bpmn.model.ModelPackage#getTaskConfig_Parameters()
 	 * @model containment="true"
+	 *        extendedMetaData="name='parameter' kind='element' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	EList<Parameter> getParameters();

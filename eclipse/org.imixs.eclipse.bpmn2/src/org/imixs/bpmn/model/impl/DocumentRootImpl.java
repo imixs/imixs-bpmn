@@ -2,20 +2,12 @@
  */
 package org.imixs.bpmn.model.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.imixs.bpmn.model.DocumentRoot;
 import org.imixs.bpmn.model.ModelPackage;
 import org.imixs.bpmn.model.TaskConfig;
@@ -35,14 +27,14 @@ import org.imixs.bpmn.model.TaskConfig;
  */
 public class DocumentRootImpl extends MinimalEObjectImpl.Container implements DocumentRoot {
 	/**
-	 * The cached value of the '{@link #getTaskConfig() <em>Task Config</em>}' containment reference list.
+	 * The cached value of the '{@link #getTaskConfig() <em>Task Config</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTaskConfig()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TaskConfig> taskConfig;
+	protected TaskConfig taskConfig;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,11 +60,42 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TaskConfig> getTaskConfig() {
-		if (taskConfig == null) {
-			taskConfig = new EObjectContainmentEList<TaskConfig>(TaskConfig.class, this, ModelPackage.DOCUMENT_ROOT__TASK_CONFIG);
-		}
+	public TaskConfig getTaskConfig() {
 		return taskConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTaskConfig(TaskConfig newTaskConfig, NotificationChain msgs) {
+		TaskConfig oldTaskConfig = taskConfig;
+		taskConfig = newTaskConfig;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__TASK_CONFIG, oldTaskConfig, newTaskConfig);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTaskConfig(TaskConfig newTaskConfig) {
+		if (newTaskConfig != taskConfig) {
+			NotificationChain msgs = null;
+			if (taskConfig != null)
+				msgs = ((InternalEObject)taskConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__TASK_CONFIG, null, msgs);
+			if (newTaskConfig != null)
+				msgs = ((InternalEObject)newTaskConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__TASK_CONFIG, null, msgs);
+			msgs = basicSetTaskConfig(newTaskConfig, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__TASK_CONFIG, newTaskConfig, newTaskConfig));
 	}
 
 	/**
@@ -84,7 +107,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ModelPackage.DOCUMENT_ROOT__TASK_CONFIG:
-				return ((InternalEList<?>)getTaskConfig()).basicRemove(otherEnd, msgs);
+				return basicSetTaskConfig(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -113,8 +136,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.DOCUMENT_ROOT__TASK_CONFIG:
-				getTaskConfig().clear();
-				getTaskConfig().addAll((Collection<? extends TaskConfig>)newValue);
+				setTaskConfig((TaskConfig)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,7 +151,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ModelPackage.DOCUMENT_ROOT__TASK_CONFIG:
-				getTaskConfig().clear();
+				setTaskConfig((TaskConfig)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -144,7 +166,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ModelPackage.DOCUMENT_ROOT__TASK_CONFIG:
-				return taskConfig != null && !taskConfig.isEmpty();
+				return taskConfig != null;
 		}
 		return super.eIsSet(featureID);
 	}

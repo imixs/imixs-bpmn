@@ -13,10 +13,15 @@ import org.eclipse.emf.common.util.URI;
  * @generated NOT
  */
 public class ModelResourceImpl extends Bpmn2ModelerResourceImpl {
-	public ModelResourceImpl(URI uri) {
-		super(uri);
-		// TODO Auto-generated constructor stub
-	}
+	 /**
+	 * Creates an instance of the resource.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param uri the URI of the new resource.
+	 * @generated
+	 */
+	 public ModelResourceImpl(URI uri) {
+		 super(uri);
+	 }
 
-	
-}
+} //ModelResourceImpl
