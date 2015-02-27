@@ -14,7 +14,7 @@ public class ImixsRuntimeExtension implements IBpmn2RuntimeExtension {
 
 	public static final String RUNTIME_ID = "org.imixs.workflow.bpmn.runtime";
 
-	private static final String targetNamespace = "http://www.imixs.org/bpmn2";
+	public static final String targetNamespace = "http://www.imixs.org/bpmn2";
 
 	@Override
 	public String getTargetNamespace(Bpmn2DiagramType diagramType) {

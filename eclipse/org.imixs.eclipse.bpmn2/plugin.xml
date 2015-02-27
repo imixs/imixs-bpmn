@@ -22,11 +22,12 @@
       <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer -->
       <customTask
             category="Imixs-Workflow"
-            description="Imixs Task"
+            description="Imixs Process Entity"
             featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
             icon="risk.png"
-            id="org.imixs.workflow.bpmn.customTask"
+            id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
+            propertyTabs="org.imixs.bpmn.model.propertytabid"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
