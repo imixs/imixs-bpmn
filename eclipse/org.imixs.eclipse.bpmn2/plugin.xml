@@ -44,16 +44,22 @@
                type="EInt"
                value="0">
          </property>
+         <property
+               label="config"
+               name="taskConfig"
+               type="TaskConfig">
+         </property>
+         
+         
+         
       </customTask>
       
       
 		
       <propertyTab
-            class="org.imixs.bpmn.model.ImixsTaskPropertySection"
-            features="extensionValues#TaskConfig.parameters"
+            class="org.imixs.bpmn.model.ProcessPropertySection"
             id="org.imixs.bpmn.model.propertytabid"
-            label="Process"
-            popup="true"
+            label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
@@ -66,8 +72,13 @@
                object="TaskConfig">
          </enable>
          <enable
-               object="Parameter">
+               object="Parameter">               
          </enable>
+         <!--
+          <enable
+               object="Task" feature="id">               
+         </enable>
+         -->
       </modelEnablement>
    </extension>
    <extension point="org.eclipse.emf.ecore.generated_package">
