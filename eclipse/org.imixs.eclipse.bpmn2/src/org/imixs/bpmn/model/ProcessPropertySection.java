@@ -10,10 +10,13 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractListComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.Messages;
+import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
+import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.runtime.CustomTaskDescriptor;
 import org.eclipse.bpmn2.modeler.core.runtime.TargetRuntime;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.ISelection;
@@ -98,7 +101,11 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 
 			this.createLabel(mailAttributesComposite, "noch ne label");
 
+			
+			
 		
+			
+		//TextObjectEditor
 		}
 
 		@Override
@@ -129,6 +136,7 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 				Parameter parm = ModelFactory.eINSTANCE.createParameter();
 				parm.setName("hello");
 				parm.setValue("World");
+				
 				taskConfig.getParameters().add(parm);
 
 				TargetRuntime rt = getTargetRuntime();
@@ -161,8 +169,29 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 					ModelPackage.eINSTANCE.getTaskConfig_Parameters());
 			// ding.setVisible(false);
 
-			// Composite x = bindProperty(be, "type");
+			
+			
+			/*
+			 * Hier bauen wir ein richties Editor Teilchen zusammen das auch funktioniert
+			 * Es nimmt einfach den ersten eintrag vom customTask object
+			 */
+			EList<Parameter> irgendwas = taskConfig.getParameters();
+			Parameter nowas = irgendwas.get(0);
+			
+			TargetRuntime rt = getTargetRuntime();
+			CustomTaskDescriptor ctd = rt
+					.getCustomTask(ImixsTaskFeatureContainer.PROCESSENTITY_TASK_ID);
+			EStructuralFeature feature1 = ctd.getModelDecorator()
+					.getEStructuralFeature(nowas, "value");
+			
+			ObjectEditor editor = new TextObjectEditor(this,nowas,feature1);
+			editor.createControl(parent,"Hello Seppig");
+//			
+			
+			
+	//		bindAttribute(parent, nowas,"value","servs"); 
 
+			
 		}
 
 	}
