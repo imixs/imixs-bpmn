@@ -3,15 +3,20 @@ package org.imixs.bpmn.properties;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.model.ImixsRuntimeExtension;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Application config.
  * 
  * @author rsoika
  *
  */
-public class ProcessApplicationPropertySection extends AbstractImixsPropertySection {
+public class ProcessApplicationPropertySection extends
+		AbstractImixsPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -23,7 +28,8 @@ public class ProcessApplicationPropertySection extends AbstractImixsPropertySect
 		return new ApplicationDetailComposite(parent, style);
 	}
 
-	public class ApplicationDetailComposite extends AbstractImixsDetailComposite {
+	public class ApplicationDetailComposite extends
+			AbstractImixsDetailComposite {
 
 		public ApplicationDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
@@ -39,20 +45,40 @@ public class ProcessApplicationPropertySection extends AbstractImixsPropertySect
 			super.createBindings(be);
 
 			setTitle("Application Properties");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("txtEditorID"), "value", "Form Name");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("txtImageURL"), "value", "Image URL");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("txtType"), "value", "Type");
-		}
 
-		@Override
-		public void initializeProperties() {
-			initializeProperty("txtEditorID", "");
-			initializeProperty("txtImageURL", "");
-			initializeProperty("txtType", "");
+			// if the domain was created before we need to put the code into a
+			// transaction...
+			TransactionalEditingDomain domain = TransactionUtil
+					.getEditingDomain(taskConfig);
+			if (domain != null) {
 
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+					public void doExecute() {
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension.getProperty(taskConfig,
+										"txtEditorID"), "value", "Form Name");
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension.getProperty(taskConfig,
+										"txtImageURL"), "value", "Image URL");
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension
+										.getProperty(taskConfig, "txtType"), "value",
+								"Type");
+					}
+				});
+			} else {
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension.getProperty(taskConfig,
+								"txtEditorID"), "value", "Form Name");
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension.getProperty(taskConfig,
+								"txtImageURL"), "value", "Image URL");
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension
+								.getProperty(taskConfig, "txtType"), "value",
+						"Type");
+
+			}
 		}
 
 	}

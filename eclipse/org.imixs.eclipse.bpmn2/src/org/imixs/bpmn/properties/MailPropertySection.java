@@ -3,7 +3,11 @@ package org.imixs.bpmn.properties;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.model.ImixsRuntimeExtension;
 
 /**
  * This PorpertySection provides the attributes for Mail config.
@@ -39,22 +43,39 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 			super.createBindings(be);
 
 			setTitle("Mail Configuration");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("namMailReceiver"), "value", "To");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("txtMailSubject"), "value", "Subject");
-			bindAttribute(this.getAttributesParent(),
-					getProperty("rtfMailBody"), "value", "Body");
-		}
 
-		@Override
-		public void initializeProperties() {
-			initializeProperty("txtMailSubject", "");
-			initializeProperty("namMailReceiver", "");
-			initializeProperty("keyMailReceiverFields", "");
-			initializeProperty("namMailReceiverCC", "");
-			initializeProperty("keyMailReceiverFieldsCC", "");
-			initializeProperty("rtfMailBody", "");
+			// if the domain was created before we need to put the code into a
+			// transaction...
+			TransactionalEditingDomain domain = TransactionUtil
+					.getEditingDomain(taskConfig);
+			if (domain != null) {
+
+				domain.getCommandStack().execute(new RecordingCommand(domain) {
+					public void doExecute() {
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension.getProperty(taskConfig,
+										"namMailReceiver"), "value", "To");
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension.getProperty(taskConfig,
+										"txtMailSubject"), "value", "Subject");
+						bindAttribute(getAttributesParent(),
+								ImixsRuntimeExtension.getProperty(taskConfig,
+										"rtfMailBody"), "value", "Body");
+
+					}
+				});
+			} else {
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension.getProperty(taskConfig,
+								"namMailReceiver"), "value", "To");
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension.getProperty(taskConfig,
+								"txtMailSubject"), "value", "Subject");
+				bindAttribute(getAttributesParent(),
+						ImixsRuntimeExtension.getProperty(taskConfig,
+								"rtfMailBody"), "value", "Body");
+
+			}
 
 		}
 

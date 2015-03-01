@@ -19,7 +19,9 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             uri="http://www.imixs.org/bpmn2">
       </model>
-      <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer -->
+      <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer 
+       org.imixs.bpmn.propertytab.application org.imixs.bpmn.propertytab.mail
+      -->
       <customTask
             category="Imixs-Workflow"
             description="Imixs Process Entity"
@@ -27,7 +29,7 @@
             icon="inbox.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
-            propertyTabs="org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application org.imixs.bpmn.propertytab.mail"
+            propertyTabs="org.imixs.bpmn.propertytab.mail org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
@@ -52,14 +54,7 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
-      
-	  <propertyTab
-            class="org.imixs.bpmn.properties.ProcessSummaryPropertySection"
-            id="org.imixs.bpmn.propertytab.summary"
-            label="Summary"
-            runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.Task">
-      </propertyTab>
+
       
       <propertyTab
             class="org.imixs.bpmn.properties.ProcessApplicationPropertySection"
@@ -68,6 +63,15 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
+        
+	  <propertyTab
+            class="org.imixs.bpmn.properties.ProcessSummaryPropertySection"
+            id="org.imixs.bpmn.propertytab.summary"
+            label="Summary"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
+      </propertyTab>
+  <!--  -->
       
       <modelEnablement
             id="Imixs-BPMN2.modelEnablement2"
