@@ -7,7 +7,6 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Composite;
-import org.imixs.bpmn.model.ImixsRuntimeExtension;
 
 /**
  * This PorpertySection provides the attributes for Application config.
@@ -55,29 +54,16 @@ public class ProcessApplicationPropertySection extends
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 					public void doExecute() {
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension.getProperty(taskConfig,
-										"txtEditorID"), "value", "Form Name");
+								getProperty("txtEditorID"), "value",
+								"Form Name");
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension.getProperty(taskConfig,
-										"txtImageURL"), "value", "Image URL");
+								getProperty("txtImageURL"), "value",
+								"Image URL");
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension
-										.getProperty(taskConfig, "txtType"), "value",
-								"Type");
+
+						getProperty("txtType"), "value", "Type");
 					}
 				});
-			} else {
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension.getProperty(taskConfig,
-								"txtEditorID"), "value", "Form Name");
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension.getProperty(taskConfig,
-								"txtImageURL"), "value", "Image URL");
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension
-								.getProperty(taskConfig, "txtType"), "value",
-						"Type");
-
 			}
 		}
 

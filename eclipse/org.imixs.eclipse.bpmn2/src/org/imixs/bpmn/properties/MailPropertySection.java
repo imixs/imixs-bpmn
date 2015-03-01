@@ -53,28 +53,17 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 				domain.getCommandStack().execute(new RecordingCommand(domain) {
 					public void doExecute() {
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension.getProperty(taskConfig,
+								getProperty(
 										"namMailReceiver"), "value", "To");
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension.getProperty(taskConfig,
+								getProperty(
 										"txtMailSubject"), "value", "Subject");
 						bindAttribute(getAttributesParent(),
-								ImixsRuntimeExtension.getProperty(taskConfig,
+								getProperty(
 										"rtfMailBody"), "value", "Body");
 
 					}
 				});
-			} else {
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension.getProperty(taskConfig,
-								"namMailReceiver"), "value", "To");
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension.getProperty(taskConfig,
-								"txtMailSubject"), "value", "Subject");
-				bindAttribute(getAttributesParent(),
-						ImixsRuntimeExtension.getProperty(taskConfig,
-								"rtfMailBody"), "value", "Body");
-
 			}
 
 		}
