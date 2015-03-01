@@ -116,13 +116,19 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 		@Override
 		public void createBindings(EObject be) {
 			TaskConfig taskConfig = null;
-			// This must be a Task because this Property Tab is only active for
-			// Tasks.
-			// The Property Tab will only display the Parameter list in our
-			// TaskConfig
-			// model element (see the definition of this element in
-			// MyModel.ecore).
-
+			
+			
+			if (!( be instanceof Task)) {
+				System.out.println("WARNING: this proeprty tab in only working with Tasks Please check por plugin.xml!");
+				
+			}
+			
+			TargetRuntime rt = getTargetRuntime();
+			// Get the CustomTaskDescriptor for this Task. 
+			CustomTaskDescriptor ctd = rt
+					.getCustomTask(ImixsTaskFeatureContainer.PROCESSENTITY_TASK_ID);
+			
+			
 			Task myTask = (Task) be;
 
 			// Fetch all TaskConfig extension objects from the Task
@@ -133,19 +139,14 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 				// which is required by the Property Sheet UI.
 				taskConfig = ModelFactory.eINSTANCE.createTaskConfig();
 
+				// Initialize properties
 				Parameter parm = ModelFactory.eINSTANCE.createParameter();
 				parm.setName("hello");
 				parm.setValue("World");
 				
 				taskConfig.getParameters().add(parm);
 
-				TargetRuntime rt = getTargetRuntime();
-				// We need our CustomTaskDescriptor for this Task. The ID must
-				// match
-				// the one defined in the <customTask> extension point in
-				// plugin.xml
-				CustomTaskDescriptor ctd = rt
-						.getCustomTask(ImixsTaskFeatureContainer.PROCESSENTITY_TASK_ID);
+			
 				// Get the model feature for the "taskConfig" element name.
 				// Again, this must match the <property> element in <customTask>
 				EStructuralFeature feature = ctd.getModelDecorator()
@@ -178,18 +179,7 @@ public class ProcessPropertySection extends AbstractBpmn2PropertySection {
 			EList<Parameter> irgendwas = taskConfig.getParameters();
 			Parameter nowas = irgendwas.get(0);
 			
-			TargetRuntime rt = getTargetRuntime();
-			CustomTaskDescriptor ctd = rt
-					.getCustomTask(ImixsTaskFeatureContainer.PROCESSENTITY_TASK_ID);
-			EStructuralFeature feature1 = ctd.getModelDecorator()
-					.getEStructuralFeature(nowas, "value");
-			
-			ObjectEditor editor = new TextObjectEditor(this,nowas,feature1);
-			editor.createControl(parent,"Hello Seppig");
-//			
-			
-			
-	//		bindAttribute(parent, nowas,"value","servs"); 
+			bindAttribute(parent, nowas,"value","servs"); 
 
 			
 		}

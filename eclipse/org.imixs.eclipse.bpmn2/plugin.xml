@@ -24,10 +24,10 @@
             category="Imixs-Workflow"
             description="Imixs Process Entity"
             featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
-            icon="risk.png"
+            icon="inbox.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
-            propertyTabs="org.imixs.bpmn.model.propertytabid"
+            propertyTabs="org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application org.imixs.bpmn.propertytab.mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
@@ -39,30 +39,36 @@
                value="Hello World">
          </property>
          <property
-               description="Potential benefit provided by this Mitigation activity"
-               name="benefit"
-               type="EInt"
-               value="0">
-         </property>
-         <property
-               label="config"
+               label="Properties"
                name="taskConfig"
                type="TaskConfig">
          </property>
-         
-         
-         
       </customTask>
-      
-      
 		
       <propertyTab
-            class="org.imixs.bpmn.model.ProcessPropertySection"
-            id="org.imixs.bpmn.model.propertytabid"
+            class="org.imixs.bpmn.properties.MailPropertySection"
+            id="org.imixs.bpmn.propertytab.mail"
             label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
+      
+	  <propertyTab
+            class="org.imixs.bpmn.properties.ProcessSummaryPropertySection"
+            id="org.imixs.bpmn.propertytab.summary"
+            label="Summary"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
+      </propertyTab>
+      
+      <propertyTab
+            class="org.imixs.bpmn.properties.ProcessApplicationPropertySection"
+            id="org.imixs.bpmn.propertytab.application"
+            label="Application"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
+      </propertyTab>
+      
       <modelEnablement
             id="Imixs-BPMN2.modelEnablement2"
             profile="Full"
@@ -80,6 +86,7 @@
          </enable>
          -->
       </modelEnablement>
+     
    </extension>
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated imixs -->
