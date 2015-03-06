@@ -30,7 +30,7 @@ public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
 	@Override
 	public String getId(EObject object) {
 		EStructuralFeature feature = ModelDecorator.getAnyAttribute(object,
-				"type");
+				"processid");
 		if (feature != null && feature instanceof EAttribute) {
 			if (ImixsRuntimeExtension.targetNamespace
 					.equals(((EAttributeImpl) feature).getExtendedMetaData()
@@ -46,4 +46,18 @@ public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
 		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

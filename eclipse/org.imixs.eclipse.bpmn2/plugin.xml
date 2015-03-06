@@ -33,18 +33,31 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
-               name="type"
-               value="MyTask">
-         </property>
-         <property
-               name="Imixs"
-               value="Hello World">
+               label="Process ID"
+               name="processid"
+               type="EInt"
+               value="100">
          </property>
          <property
                label="Properties"
                name="taskConfig"
                type="TaskConfig">
          </property>
+      </customTask>
+      
+      
+       <customTask
+             category="Imixs-Workflow"
+             featureContainer="org.imixs.bpmn.model.ActivityEventDefinitionContainer"
+             id="org.imixs.workflow.bpmn.ActivityEntityEvent"
+             name="Imixs Activity"
+             runtimeId="org.imixs.workflow.bpmn.runtime"
+             type="IntermediateCatchEvent">
+          <property
+                name="test"
+                value="aaa">
+          </property>
+            
       </customTask>
 		
       <propertyTab
@@ -90,6 +103,7 @@
          </enable>
          -->
       </modelEnablement>
+     
      
    </extension>
    <extension point="org.eclipse.emf.ecore.generated_package">
