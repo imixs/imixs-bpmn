@@ -50,14 +50,4 @@ public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

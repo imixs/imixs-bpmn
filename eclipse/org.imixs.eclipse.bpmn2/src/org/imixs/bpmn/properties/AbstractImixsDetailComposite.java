@@ -2,6 +2,8 @@ package org.imixs.bpmn.properties;
 
 import java.util.List;
 
+import org.eclipse.bpmn2.CatchEvent;
+import org.eclipse.bpmn2.FlowNode;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
@@ -22,7 +24,8 @@ import org.imixs.bpmn.model.TaskConfig;
 
 /**
  * This PorpertySection provides methods to manage the imixs bpmn model
- * extensions
+ * extensions. The method adds a TaskConfig object to ImixsActivities and
+ * ImixsProcessEntities.
  * 
  * @author rsoika
  *
@@ -31,7 +34,7 @@ public abstract class AbstractImixsDetailComposite extends
 		AbstractDetailComposite {
 
 	TaskConfig taskConfig = null;
-	Task task = null;
+	FlowNode flowNode = null;
 
 	public AbstractImixsDetailComposite(AbstractBpmn2PropertySection section) {
 		super(section);
@@ -45,12 +48,21 @@ public abstract class AbstractImixsDetailComposite extends
 		super.initialize();
 	}
 
+	/**
+	 * We verify if the binding object is an instance of a FlowNode which is the
+	 * common base interface for Task and CachEvent classes
+	 */
 	@Override
 	public void createBindings(EObject be) {
-		task = (Task) be;
+
+		if (be==null || !(be instanceof FlowNode)) {
+			return;
+		}
+		// task = (Task) be;
+		flowNode = (FlowNode) be;
 		// Fetch all TaskConfig extension objects from the Task
 		List<TaskConfig> allTaskConfigs = ModelDecorator
-				.getAllExtensionAttributeValues(task, TaskConfig.class);
+				.getAllExtensionAttributeValues(flowNode, TaskConfig.class);
 		if (allTaskConfigs.size() == 0) {
 			// There are none, so we need to construct a new TaskConfig
 			// which is required by the Property Sheet UI.
@@ -72,7 +84,7 @@ public abstract class AbstractImixsDetailComposite extends
 					// Again, this must match the <property> element in
 					// <customTask>
 					EStructuralFeature feature = ctd.getModelDecorator()
-							.getEStructuralFeature(task, "taskConfig");
+							.getEStructuralFeature(flowNode, "taskConfig");
 
 					// Add the newly constructed TaskConfig object to the Task's
 					// Extension Values list.
@@ -81,8 +93,9 @@ public abstract class AbstractImixsDetailComposite extends
 					// (e.g. the Parameter.name).
 					// This is because we need the object immediately for
 					// binding the widget in the different property sections!
-					ModelDecorator.addExtensionAttributeValue(task, feature,
-							taskConfig, false); // !! need to be false!!
+					ModelDecorator.addExtensionAttributeValue(flowNode,
+							feature, taskConfig, false); // !! need to be
+															// false!!
 				}
 			});
 

@@ -29,7 +29,7 @@
             icon="inbox.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
-            propertyTabs="org.imixs.bpmn.propertytab.mail org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application"
+            propertyTabs="org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
@@ -51,11 +51,18 @@
              featureContainer="org.imixs.bpmn.model.ActivityEventDefinitionContainer"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
+             propertyTabs="org.imixs.bpmn.propertytab.mail "
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
-                name="test"
-                value="aaa">
+                name="activityid"
+                type="EInt"
+                value="10">
+          </property>
+          <property
+                label="Properties"
+                name="taskConfig"
+                type="TaskConfig">
           </property>
             
       </customTask>
