@@ -2,13 +2,13 @@
  */
 package org.imixs.bpmn.model.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.imixs.bpmn.model.ModelPackage;
 import org.imixs.bpmn.model.Parameter;
 
@@ -21,6 +21,7 @@ import org.imixs.bpmn.model.Parameter;
  * <ul>
  *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,7 +56,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
+	protected static final String VALUE_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -66,6 +67,16 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getItem() <em>Item</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getItem()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> item;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +144,18 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getItem() {
+		if (item == null) {
+			item = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.PARAMETER__ITEM);
+		}
+		return item;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -140,6 +163,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 				return getName();
 			case ModelPackage.PARAMETER__VALUE:
 				return getValue();
+			case ModelPackage.PARAMETER__ITEM:
+				return getItem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -149,6 +174,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -157,6 +183,10 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 				return;
 			case ModelPackage.PARAMETER__VALUE:
 				setValue((String)newValue);
+				return;
+			case ModelPackage.PARAMETER__ITEM:
+				getItem().clear();
+				getItem().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,6 +206,9 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 			case ModelPackage.PARAMETER__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case ModelPackage.PARAMETER__ITEM:
+				getItem().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,6 +225,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.PARAMETER__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case ModelPackage.PARAMETER__ITEM:
+				return item != null && !item.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -210,6 +245,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 		result.append(name);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", item: ");
+		result.append(item);
 		result.append(')');
 		return result.toString();
 	}

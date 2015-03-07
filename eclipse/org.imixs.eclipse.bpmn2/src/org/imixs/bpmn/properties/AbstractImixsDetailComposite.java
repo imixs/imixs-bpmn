@@ -2,9 +2,7 @@ package org.imixs.bpmn.properties;
 
 import java.util.List;
 
-import org.eclipse.bpmn2.CatchEvent;
 import org.eclipse.bpmn2.FlowNode;
-import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
@@ -12,6 +10,7 @@ import org.eclipse.bpmn2.modeler.core.runtime.CustomTaskDescriptor;
 import org.eclipse.bpmn2.modeler.core.runtime.TargetRuntime;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -134,6 +133,10 @@ public abstract class AbstractImixsDetailComposite extends
 		Parameter param = ModelFactory.eINSTANCE.createParameter();
 		param.setName(propertyName);
 		param.setValue(defaultVaue);
+		
+		EReference sevus = param.eContainmentFeature();
+		
+		
 		taskConfig.getParameters().add(param);
 
 		return param;

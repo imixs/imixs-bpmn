@@ -122,13 +122,22 @@ public interface ModelPackage extends EPackage {
 	int PARAMETER__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Item</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__ITEM = 2;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = 2;
+	int PARAMETER_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Parameter</em>' class.
@@ -231,6 +240,17 @@ public interface ModelPackage extends EPackage {
 	EAttribute getParameter_Value();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.imixs.bpmn.model.Parameter#getItem <em>Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Item</em>'.
+	 * @see org.imixs.bpmn.model.Parameter#getItem()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Item();
+
+	/**
 	 * Returns the meta object for class '{@link org.imixs.bpmn.model.TaskConfig <em>Task Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -317,6 +337,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Item</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__ITEM = eINSTANCE.getParameter_Item();
 
 		/**
 		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.TaskConfigImpl <em>Task Config</em>}' class.

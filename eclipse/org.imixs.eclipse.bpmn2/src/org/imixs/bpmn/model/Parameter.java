@@ -2,6 +2,7 @@
  */
 package org.imixs.bpmn.model;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.imixs.bpmn.model.Parameter#getName <em>Name</em>}</li>
  *   <li>{@link org.imixs.bpmn.model.Parameter#getValue <em>Value</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.Parameter#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +52,7 @@ public interface Parameter extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
@@ -59,7 +62,7 @@ public interface Parameter extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.imixs.bpmn.model.ModelPackage#getParameter_Value()
-	 * @model
+	 * @model default=""
 	 * @generated
 	 */
 	String getValue();
@@ -73,5 +76,21 @@ public interface Parameter extends EObject {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Item</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Item</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Item</em>' attribute list.
+	 * @see org.imixs.bpmn.model.ModelPackage#getParameter_Item()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getItem();
 
 } // Parameter
