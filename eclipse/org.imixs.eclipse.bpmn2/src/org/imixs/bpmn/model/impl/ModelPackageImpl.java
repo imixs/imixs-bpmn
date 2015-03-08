@@ -143,7 +143,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameter_Value() {
+	public EAttribute getParameter_Valuelist() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -152,7 +152,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameter_Item() {
+	public EAttribute getParameter_Value() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -207,8 +207,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		parameterEClass = createEClass(PARAMETER);
 		createEAttribute(parameterEClass, PARAMETER__NAME);
+		createEAttribute(parameterEClass, PARAMETER__VALUELIST);
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
-		createEAttribute(parameterEClass, PARAMETER__ITEM);
 
 		taskConfigEClass = createEClass(TASK_CONFIG);
 		createEReference(taskConfigEClass, TASK_CONFIG__PARAMETERS);
@@ -249,8 +249,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", "", 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParameter_Item(), ecorePackage.getEString(), "item", null, 0, -1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameter_Valuelist(), ecorePackage.getEString(), "valuelist", null, 0, -1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskConfigEClass, TaskConfig.class, "TaskConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskConfig_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, TaskConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

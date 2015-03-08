@@ -2,6 +2,7 @@ package org.imixs.bpmn.properties;
 
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -65,19 +66,20 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 						Parameter subjectParam = getProperty("txtMailSubject");
 						
 						
+					
 						
+						subjectParam.getValuelist().add("Hello");
 						
-						
-						subjectParam.getItem().add("Hello");
+						EList<String> neListe = subjectParam.getValuelist();
 						
 					
-						 EStructuralFeature itemFeature = subjectParam.eClass().getEStructuralFeature("item");
+						 EStructuralFeature itemFeature = subjectParam.eClass().getEStructuralFeature("valuelist");
 						
 						 EAttribute itemAtrib = (EAttribute)itemFeature;
 						 EObject wer = itemAtrib.eContents().get(0);
 						
 						
-						bindAttribute(getAttributesParent(),subjectParam,"item", "Subject");
+						bindAttribute(getAttributesParent(),subjectParam,"value", "Subject");
 						
 //						bindAttribute(getAttributesParent(),
 //								getProperty(
@@ -98,7 +100,7 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 						
 						
 						bindAttribute(getAttributesParent(),
-								rtfBodyParam, "item", "Body");
+								rtfBodyParam, "value", "Body");
 
 						
 					//	bindReference(getAttributesParent(), rtfBodyParam,rtfBodyParam.getItem().get(0));

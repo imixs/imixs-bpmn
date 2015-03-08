@@ -20,8 +20,8 @@ import org.imixs.bpmn.model.Parameter;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getValuelist <em>Valuelist</em>}</li>
  *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.imixs.bpmn.model.impl.ParameterImpl#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,6 +49,16 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getValuelist() <em>Valuelist</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValuelist()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> valuelist;
+
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,7 +66,7 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = "";
+	protected static final String VALUE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -67,16 +77,6 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getItem() <em>Item</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getItem()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> item;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,6 +123,18 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getValuelist() {
+		if (valuelist == null) {
+			valuelist = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.PARAMETER__VALUELIST);
+		}
+		return valuelist;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getValue() {
 		return value;
 	}
@@ -144,27 +156,15 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getItem() {
-		if (item == null) {
-			item = new EDataTypeUniqueEList<String>(String.class, this, ModelPackage.PARAMETER__ITEM);
-		}
-		return item;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.PARAMETER__NAME:
 				return getName();
+			case ModelPackage.PARAMETER__VALUELIST:
+				return getValuelist();
 			case ModelPackage.PARAMETER__VALUE:
 				return getValue();
-			case ModelPackage.PARAMETER__ITEM:
-				return getItem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,12 +181,12 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 			case ModelPackage.PARAMETER__NAME:
 				setName((String)newValue);
 				return;
+			case ModelPackage.PARAMETER__VALUELIST:
+				getValuelist().clear();
+				getValuelist().addAll((Collection<? extends String>)newValue);
+				return;
 			case ModelPackage.PARAMETER__VALUE:
 				setValue((String)newValue);
-				return;
-			case ModelPackage.PARAMETER__ITEM:
-				getItem().clear();
-				getItem().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -203,11 +203,11 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 			case ModelPackage.PARAMETER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ModelPackage.PARAMETER__VALUELIST:
+				getValuelist().clear();
+				return;
 			case ModelPackage.PARAMETER__VALUE:
 				setValue(VALUE_EDEFAULT);
-				return;
-			case ModelPackage.PARAMETER__ITEM:
-				getItem().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -223,10 +223,10 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 		switch (featureID) {
 			case ModelPackage.PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ModelPackage.PARAMETER__VALUELIST:
+				return valuelist != null && !valuelist.isEmpty();
 			case ModelPackage.PARAMETER__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case ModelPackage.PARAMETER__ITEM:
-				return item != null && !item.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -243,10 +243,10 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", valuelist: ");
+		result.append(valuelist);
 		result.append(", value: ");
 		result.append(value);
-		result.append(", item: ");
-		result.append(item);
 		result.append(')');
 		return result.toString();
 	}
