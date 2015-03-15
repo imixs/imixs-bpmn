@@ -2,7 +2,6 @@
  */
 package org.imixs.bpmn.model;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.imixs.bpmn.model.Parameter#getName <em>Name</em>}</li>
- *   <li>{@link org.imixs.bpmn.model.Parameter#getValuelist <em>Valuelist</em>}</li>
  *   <li>{@link org.imixs.bpmn.model.Parameter#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
@@ -49,22 +47,6 @@ public interface Parameter extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Valuelist</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Valuelist</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Valuelist</em>' attribute list.
-	 * @see org.imixs.bpmn.model.ModelPackage#getParameter_Valuelist()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getValuelist();
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

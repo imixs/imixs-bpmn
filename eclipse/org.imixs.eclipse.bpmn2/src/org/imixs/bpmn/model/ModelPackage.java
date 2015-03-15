@@ -76,13 +76,22 @@ public interface ModelPackage extends EPackage {
 	int DOCUMENT_ROOT__TASK_CONFIG = 0;
 
 	/**
+	 * The feature id for the '<em><b>Config Item</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__CONFIG_ITEM = 1;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 1;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -113,22 +122,13 @@ public interface ModelPackage extends EPackage {
 	int PARAMETER__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Valuelist</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER__VALUELIST = 1;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER__VALUE = 2;
+	int PARAMETER__VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -137,7 +137,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = 3;
+	int PARAMETER_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Parameter</em>' class.
@@ -149,6 +149,61 @@ public interface ModelPackage extends EPackage {
 	int PARAMETER_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.imixs.bpmn.model.impl.ConfigItemImpl <em>Config Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imixs.bpmn.model.impl.ConfigItemImpl
+	 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getConfigItem()
+	 * @generated
+	 */
+	int CONFIG_ITEM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_ITEM__MIXED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_ITEM__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_ITEM__VALUE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Config Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_ITEM_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Config Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONFIG_ITEM_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.imixs.bpmn.model.impl.TaskConfigImpl <em>Task Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -156,7 +211,7 @@ public interface ModelPackage extends EPackage {
 	 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getTaskConfig()
 	 * @generated
 	 */
-	int TASK_CONFIG = 2;
+	int TASK_CONFIG = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -208,6 +263,17 @@ public interface ModelPackage extends EPackage {
 	EReference getDocumentRoot_TaskConfig();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.imixs.bpmn.model.DocumentRoot#getConfigItem <em>Config Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Config Item</em>'.
+	 * @see org.imixs.bpmn.model.DocumentRoot#getConfigItem()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_ConfigItem();
+
+	/**
 	 * Returns the meta object for class '{@link org.imixs.bpmn.model.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -229,17 +295,6 @@ public interface ModelPackage extends EPackage {
 	EAttribute getParameter_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.imixs.bpmn.model.Parameter#getValuelist <em>Valuelist</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Valuelist</em>'.
-	 * @see org.imixs.bpmn.model.Parameter#getValuelist()
-	 * @see #getParameter()
-	 * @generated
-	 */
-	EAttribute getParameter_Valuelist();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Parameter#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -249,6 +304,49 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getParameter_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.imixs.bpmn.model.ConfigItem <em>Config Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Config Item</em>'.
+	 * @see org.imixs.bpmn.model.ConfigItem
+	 * @generated
+	 */
+	EClass getConfigItem();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.imixs.bpmn.model.ConfigItem#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.imixs.bpmn.model.ConfigItem#getMixed()
+	 * @see #getConfigItem()
+	 * @generated
+	 */
+	EAttribute getConfigItem_Mixed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.ConfigItem#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.imixs.bpmn.model.ConfigItem#getName()
+	 * @see #getConfigItem()
+	 * @generated
+	 */
+	EAttribute getConfigItem_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.ConfigItem#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.imixs.bpmn.model.ConfigItem#getValue()
+	 * @see #getConfigItem()
+	 * @generated
+	 */
+	EAttribute getConfigItem_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.imixs.bpmn.model.TaskConfig <em>Task Config</em>}'.
@@ -313,6 +411,14 @@ public interface ModelPackage extends EPackage {
 		EReference DOCUMENT_ROOT__TASK_CONFIG = eINSTANCE.getDocumentRoot_TaskConfig();
 
 		/**
+		 * The meta object literal for the '<em><b>Config Item</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__CONFIG_ITEM = eINSTANCE.getDocumentRoot_ConfigItem();
+
+		/**
 		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -331,12 +437,38 @@ public interface ModelPackage extends EPackage {
 		EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Valuelist</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARAMETER__VALUELIST = eINSTANCE.getParameter_Valuelist();
+		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.ConfigItemImpl <em>Config Item</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imixs.bpmn.model.impl.ConfigItemImpl
+		 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getConfigItem()
+		 * @generated
+		 */
+		EClass CONFIG_ITEM = eINSTANCE.getConfigItem();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_ITEM__MIXED = eINSTANCE.getConfigItem_Mixed();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONFIG_ITEM__NAME = eINSTANCE.getConfigItem_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -344,7 +476,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+		EAttribute CONFIG_ITEM__VALUE = eINSTANCE.getConfigItem_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.TaskConfigImpl <em>Task Config</em>}' class.

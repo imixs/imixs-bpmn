@@ -6,7 +6,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import org.imixs.bpmn.model.ConfigItem;
 import org.imixs.bpmn.model.DocumentRoot;
 import org.imixs.bpmn.model.ModelFactory;
 import org.imixs.bpmn.model.ModelPackage;
@@ -33,6 +36,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass configItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,6 +135,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDocumentRoot_ConfigItem() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameter() {
 		return parameterEClass;
 	}
@@ -143,7 +162,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameter_Valuelist() {
+	public EAttribute getParameter_Value() {
 		return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -152,8 +171,35 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameter_Value() {
-		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
+	public EClass getConfigItem() {
+		return configItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConfigItem_Mixed() {
+		return (EAttribute)configItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConfigItem_Name() {
+		return (EAttribute)configItemEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConfigItem_Value() {
+		return (EAttribute)configItemEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -204,11 +250,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Create classes and their features
 		documentRootEClass = createEClass(DOCUMENT_ROOT);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_CONFIG);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__CONFIG_ITEM);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEAttribute(parameterEClass, PARAMETER__NAME);
-		createEAttribute(parameterEClass, PARAMETER__VALUELIST);
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
+
+		configItemEClass = createEClass(CONFIG_ITEM);
+		createEAttribute(configItemEClass, CONFIG_ITEM__MIXED);
+		createEAttribute(configItemEClass, CONFIG_ITEM__NAME);
+		createEAttribute(configItemEClass, CONFIG_ITEM__VALUE);
 
 		taskConfigEClass = createEClass(TASK_CONFIG);
 		createEReference(taskConfigEClass, TASK_CONFIG__PARAMETERS);
@@ -246,11 +297,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		// Initialize classes, features, and operations; add parameters
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDocumentRoot_TaskConfig(), this.getTaskConfig(), null, "taskConfig", null, 0, -2, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_ConfigItem(), this.getConfigItem(), null, "configItem", null, 0, -2, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParameter_Valuelist(), ecorePackage.getEString(), "valuelist", null, 0, -1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(configItemEClass, ConfigItem.class, "ConfigItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConfigItem_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, ConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConfigItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConfigItem_Value(), ecorePackage.getEString(), "value", null, 0, 1, ConfigItem.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		initEClass(taskConfigEClass, TaskConfig.class, "TaskConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskConfig_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, TaskConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -284,6 +340,29 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "name", "taskConfig",
 			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });	
+		addAnnotation
+		  (getDocumentRoot_ConfigItem(), 
+		   source, 
+		   new String[] {
+			 "name", "configItem",
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });	
+		addAnnotation
+		  (configItemEClass, 
+		   source, 
+		   new String[] {
+			 "kind", "mixed",
+			 "namespace", "##targetNamespace"
+		   });	
+		addAnnotation
+		  (getConfigItem_Mixed(), 
+		   source, 
+		   new String[] {
+			 "kind", "elementWildcard",
+			 "name", ":mixed",
 			 "namespace", "##targetNamespace"
 		   });	
 		addAnnotation

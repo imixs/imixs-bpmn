@@ -78,6 +78,12 @@ public class ModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.CONFIG_ITEM: {
+				ConfigItem configItem = (ConfigItem)theEObject;
+				T result = caseConfigItem(configItem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.TASK_CONFIG: {
 				TaskConfig taskConfig = (TaskConfig)theEObject;
 				T result = caseTaskConfig(taskConfig);
@@ -115,6 +121,21 @@ public class ModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameter(Parameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Config Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Config Item</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConfigItem(ConfigItem object) {
 		return null;
 	}
 
