@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.model.ConfigItem;
 import org.imixs.bpmn.model.ModelFactory;
@@ -76,8 +77,9 @@ public class MailPropertySection extends AbstractImixsPropertySection {
                 });
 	        } else {
 	        	 TextObjectEditor valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
-	            // valueEditor.setMultiLine(true);
+	           //  valueEditor.setMultiLine(true);
 	            
+	             valueEditor.setStyle( SWT.MULTI | SWT.V_SCROLL);
 	             valueEditor.createControl(this, "Value");
 	        }
 
