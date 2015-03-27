@@ -75,10 +75,7 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(this, "Body");
 
-			
-			
-		
-			
+				
 			
 		}
 
