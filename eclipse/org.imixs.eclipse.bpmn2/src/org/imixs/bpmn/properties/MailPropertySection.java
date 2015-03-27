@@ -58,42 +58,43 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 			setTitle("Mail Configuration");
 
 			// create a new Property Tab section with a twistie
-			Composite section = createSectionComposite(this, "Mail Body");
-			
-			ConfigItem metaData=	getConfigItemByName((BaseElement)be,"txtSubject","Some Subject....");
+		//	Composite section = createSectionComposite(this, "Mail Body");
+
+			ConfigItem metaData = getConfigItemByName((BaseElement) be,
+					"txtSubject", "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
-			valueEditor.createControl(this, "Value");
-			
-			
-			
-			
-			ConfigItem metaData2=	getConfigItemByName((BaseElement)be,"txtBody","Mail Body....");
-			TextObjectEditor	 valueEditor2 = new TextObjectEditor(this, metaData2,
-					METADATA_VALUE);
-			// valueEditor.setMultiLine(true);
+			valueEditor.createControl(this, "Subject");
 
-			valueEditor2.setStyle(SWT.MULTI | SWT.V_SCROLL);
-			valueEditor2.createControl(this, "Value");
+			metaData = getConfigItemByName((BaseElement) be,
+					"txtBody", "Mail Body....");
+			 valueEditor = new TextObjectEditor(this,
+					metaData, METADATA_VALUE);
+			 valueEditor.setMultiLine(true);
 
+			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
+			valueEditor.createControl(this, "Body");
+
+			
+			
+		
+			
+			
 		}
 
-		
-		
-		
-		
-		
 		/**
-		 * This method returns a ConfigItem of a TaskElement by its name. 
-		 * If no ConfigItem with the given Name was yet inserted, the method creates a new ConfigItem and adds it
-		 * into the ExtensionAttribute List of the Task Element.
-		 *  
+		 * This method returns a ConfigItem of a TaskElement by its name. If no
+		 * ConfigItem with the given Name was yet inserted, the method creates a
+		 * new ConfigItem and adds it into the ExtensionAttribute List of the
+		 * Task Element.
+		 * 
 		 * @param be
 		 * @return
 		 */
-		ConfigItem getConfigItemByName(BaseElement be,String itemName,String defaultValue) {
-			ConfigItem metaData = (ConfigItem) findExtensionAttributeValue(
-					be, METADATA_FEATURE, itemName);
+		ConfigItem getConfigItemByName(BaseElement be, String itemName,
+				String defaultValue) {
+			ConfigItem metaData = (ConfigItem) findExtensionAttributeValue(be,
+					METADATA_FEATURE, itemName);
 			if (metaData == null) {
 				// create the new MetaData and insert it into the
 				// BaseElement's extension elements container
@@ -102,53 +103,41 @@ public class MailPropertySection extends AbstractImixsPropertySection {
 				metaData.setName(itemName);
 
 				// addExtensionAttributeValue
-				ExtensionAttributeValue eav = null;
-				if (( be).getExtensionValues().size() == 0) {
-					// otherwise create a new one
-					eav = Bpmn2Factory.eINSTANCE
-							.createExtensionAttributeValue();
-					InsertionAdapter.add(eav, METADATA_FEATURE, metaData);
-					InsertionAdapter.add(be, Bpmn2Package.eINSTANCE
-							.getBaseElement_ExtensionValues(), eav);
-				} else {
-					// reuse the <bpmn2:extensionElements> container if this
-					// BaseElement already has one
-					eav =  be.getExtensionValues().get(0);
-				}
-
+				ExtensionAttributeValue eav = Bpmn2Factory.eINSTANCE
+						.createExtensionAttributeValue();
+				InsertionAdapter.add(eav, METADATA_FEATURE, metaData);
+				InsertionAdapter
+						.add(be, Bpmn2Package.eINSTANCE
+								.getBaseElement_ExtensionValues(), eav);
 			}
-			
+
 			return metaData;
 		}
-		
-		
-		
-		
-		
-		
-		
+
 		/**
 		 * Find the first entry in this BaseElement's extension elements
-		 * container that matches the given structural feature ConfigItem and
-		 * matches the name.
+		 * container that matches the given structural feature ConfigItem with
+		 * the given name.
 		 * 
 		 * @param be
 		 *            a BaseElement
 		 * @param feature
 		 *            the structural feature to search for
-		 * @return the value of the extension element
+		 * @return the value of the extension element or null if no ConfigItem
+		 *         with this name exists
 		 */
 		Object findExtensionAttributeValue(BaseElement be,
 				EStructuralFeature feature, String itemName) {
 			for (ExtensionAttributeValue eav : be.getExtensionValues()) {
+				// check all extensionAttribute values...
 				for (FeatureMap.Entry entry : eav.getValue()) {
 					if (entry.getEStructuralFeature() == feature) {
 
 						if (entry.getValue() instanceof ConfigItem) {
 							ConfigItem confItem = (ConfigItem) entry.getValue();
+							// compare the configitem name element....
 							if (confItem.getName().equals(itemName))
 								return confItem;
-							// return entry.getValue();
 						}
 					}
 				}
