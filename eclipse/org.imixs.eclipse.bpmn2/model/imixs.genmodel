@@ -7,20 +7,13 @@
   <genPackages prefix="Model" basePackage="org.imixs.bpmn" resource="XML" disposableProviderFactory="true"
       fileExtensions="bpmn" ecorePackage="imixs.ecore#/">
     <genClasses ecoreClass="imixs.ecore#//DocumentRoot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference imixs.ecore#//DocumentRoot/taskConfig"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference imixs.ecore#//DocumentRoot/configItem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference imixs.ecore#//DocumentRoot/property"/>
     </genClasses>
-    <genClasses ecoreClass="imixs.ecore#//Parameter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//Parameter/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//Parameter/value"/>
-    </genClasses>
-    <genClasses ecoreClass="imixs.ecore#//ConfigItem">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute imixs.ecore#//ConfigItem/mixed"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//ConfigItem/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//ConfigItem/value"/>
-    </genClasses>
-    <genClasses ecoreClass="imixs.ecore#//TaskConfig">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference imixs.ecore#//TaskConfig/parameters"/>
+    <genClasses ecoreClass="imixs.ecore#//Property">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute imixs.ecore#//Property/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//Property/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute imixs.ecore#//Property/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

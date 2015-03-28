@@ -1,4 +1,4 @@
-package org.imixs.bpmn.properties;
+package org.imixs.bpmn.ui;
 
 import org.eclipse.bpmn2.di.BPMNDiagram;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;

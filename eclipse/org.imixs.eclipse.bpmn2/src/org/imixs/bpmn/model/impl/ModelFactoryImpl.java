@@ -57,9 +57,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.DOCUMENT_ROOT: return createDocumentRoot();
-			case ModelPackage.PARAMETER: return createParameter();
-			case ModelPackage.CONFIG_ITEM: return createConfigItem();
-			case ModelPackage.TASK_CONFIG: return createTaskConfig();
+			case ModelPackage.PROPERTY: return createProperty();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -80,29 +78,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter createParameter() {
-		ParameterImpl parameter = new ParameterImpl();
-		return parameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConfigItem createConfigItem() {
-		ConfigItemImpl configItem = new ConfigItemImpl();
-		return configItem;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TaskConfig createTaskConfig() {
-		TaskConfigImpl taskConfig = new TaskConfigImpl();
-		return taskConfig;
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		return property;
 	}
 
 	/**

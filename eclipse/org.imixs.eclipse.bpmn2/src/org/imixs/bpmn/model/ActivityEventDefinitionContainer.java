@@ -20,7 +20,7 @@ public class ActivityEventDefinitionContainer extends
 	IntermediateCatchEvent x;
 	// these values must match what's in the plugin.xml
 	public final static String ACTIVITYNTITY_TASK_ID = "org.imixs.workflow.bpmn.ActivityEntityEvent";
-	final static EStructuralFeature METADATA_FEATURE = ModelPackage.eINSTANCE.getDocumentRoot_ConfigItem();
+	final static EStructuralFeature METADATA_FEATURE = ModelPackage.eINSTANCE.getDocumentRoot_Property();
 
 	/**
 	 * This method inspects the object to determine what its custom task ID

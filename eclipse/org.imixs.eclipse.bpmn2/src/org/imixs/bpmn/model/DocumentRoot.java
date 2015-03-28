@@ -12,8 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getTaskConfig <em>Task Config</em>}</li>
- *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getConfigItem <em>Config Item</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getProperty <em>Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,57 +22,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DocumentRoot extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Task Config</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Property</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Task Config</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Property</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Task Config</em>' containment reference.
-	 * @see #setTaskConfig(TaskConfig)
-	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_TaskConfig()
+	 * @return the value of the '<em>Property</em>' containment reference.
+	 * @see #setProperty(Property)
+	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_Property()
 	 * @model containment="true" upper="-2"
-	 *        extendedMetaData="name='taskConfig' kind='element' namespace='##targetNamespace'"
+	 *        extendedMetaData="name='property' kind='element' namespace='##targetNamespace'"
 	 * @generated
 	 */
-	TaskConfig getTaskConfig();
+	Property getProperty();
 
 	/**
-	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getTaskConfig <em>Task Config</em>}' containment reference.
+	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getProperty <em>Property</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Task Config</em>' containment reference.
-	 * @see #getTaskConfig()
+	 * @param value the new value of the '<em>Property</em>' containment reference.
+	 * @see #getProperty()
 	 * @generated
 	 */
-	void setTaskConfig(TaskConfig value);
-
-	/**
-	 * Returns the value of the '<em><b>Config Item</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Config Item</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Config Item</em>' containment reference.
-	 * @see #setConfigItem(ConfigItem)
-	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_ConfigItem()
-	 * @model containment="true" upper="-2"
-	 *        extendedMetaData="name='configItem' kind='element' namespace='##targetNamespace'"
-	 * @generated
-	 */
-	ConfigItem getConfigItem();
-
-	/**
-	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getConfigItem <em>Config Item</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Config Item</em>' containment reference.
-	 * @see #getConfigItem()
-	 * @generated
-	 */
-	void setConfigItem(ConfigItem value);
+	void setProperty(Property value);
 
 } // DocumentRoot

@@ -41,37 +41,5 @@ public class ImixsTaskPropertySection extends DefaultPropertySection {
 			super(parent, style);
 		}
 
-		@Override
-		public void createBindings(EObject be) {
-			// This must be a Task because this Property Tab is only active for Tasks.
-			// The Property Tab will only display the Parameter list in our TaskConfig
-			// model element (see the definition of this element in MyModel.ecore). 
-			Task myTask = (Task)be;
-			TaskConfig taskConfig = null;
-			// Fetch all TaskConfig extension objects from the Task
-			List<TaskConfig> allTaskConfigs = ModelDecorator.getAllExtensionAttributeValues(myTask, TaskConfig.class);
-			if (allTaskConfigs.size()==0) {
-				// There are none, so we need to construct a new TaskConfig
-				// which is required by the Property Sheet UI.
-				taskConfig = ModelFactory.eINSTANCE.createTaskConfig();
-				TargetRuntime rt = getTargetRuntime();
-				// We need our CustomTaskDescriptor for this Task. The ID must match
-				// the one defined in the <customTask> extension point in plugin.xml
-				CustomTaskDescriptor ctd = rt.getCustomTask(ImixsTaskFeatureContainer.PROCESSENTITY_TASK_ID);
-				// Get the model feature for the "taskConfig" element name.
-				// Again, this must match the <property> element in <customTask>
-				EStructuralFeature feature = ctd.getModelDecorator().getEStructuralFeature(be, "taskConfig");
-				// Add the newly constructed TaskConfig object to the Task's Extension Values list.
-				// Note that we will delay the actual insertion of the new object until some feature
-				// of the object changes (e.g. the Parameter.name)
-				ModelDecorator.addExtensionAttributeValue(myTask, feature, taskConfig, true);
-			}
-			else {
-				// Else reuse the existing TaskConfig object.
-				taskConfig = allTaskConfigs.get(0);
-			}
-			// Display the Parameters list in TaskConfig 
-			bindList(taskConfig, ModelPackage.eINSTANCE.getTaskConfig_Parameters());
-		}
 	}
 }

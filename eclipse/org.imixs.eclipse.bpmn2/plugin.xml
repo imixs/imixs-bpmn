@@ -68,7 +68,7 @@
       </customTask>
 		
       <propertyTab
-            class="org.imixs.bpmn.properties.MailPropertySection"
+            class="org.imixs.bpmn.ui.activity.MailPropertySection"
             id="org.imixs.bpmn.propertytab.mail"
             label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
@@ -77,7 +77,7 @@
 
       
       <propertyTab
-            class="org.imixs.bpmn.properties.ProcessApplicationPropertySection"
+            class="org.imixs.bpmn.ui.process.ProcessApplicationPropertySection"
             id="org.imixs.bpmn.propertytab.application"
             label="Application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
@@ -85,7 +85,7 @@
       </propertyTab>
         
 	  <propertyTab
-            class="org.imixs.bpmn.properties.ProcessSummaryPropertySection"
+            class="org.imixs.bpmn.ui.process.ProcessSummaryPropertySection"
             id="org.imixs.bpmn.propertytab.summary"
             label="Summary"
             runtimeId="org.imixs.workflow.bpmn.runtime"

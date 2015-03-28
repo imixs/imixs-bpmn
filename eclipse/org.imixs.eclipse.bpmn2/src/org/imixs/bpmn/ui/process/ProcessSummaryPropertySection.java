@@ -1,12 +1,17 @@
-package org.imixs.bpmn.properties;
+package org.imixs.bpmn.ui.process;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
+import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.ui.AbstractImixsPropertySection;
+import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
  * This PorpertySection provides the attributes for Mail config.
@@ -26,7 +31,7 @@ public class ProcessSummaryPropertySection extends AbstractImixsPropertySection 
 		return new SummaryDetailComposite(parent, style);
 	}
 
-	public class SummaryDetailComposite extends AbstractImixsDetailComposite {
+	public class SummaryDetailComposite extends ImixsDetailComposite {
 
 		public SummaryDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
@@ -38,28 +43,17 @@ public class ProcessSummaryPropertySection extends AbstractImixsPropertySection 
 
 		@Override
 		public void createBindings(EObject be) {
+			setTitle("Application");
 
-			super.createBindings(be);
+			// create a new Property Tab section with a twistie
+			// Composite section = createSectionComposite(this, "Mail Body");
 
-			setTitle("Workflow Summary");
+			Property metaData = getPropertyByName((BaseElement) be, "txtSummary",
+					"Summ Form....");
+			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
+					METADATA_VALUE);
+			valueEditor.createControl(this, "Summary");
 
-			// if the domain was created before we need to put the code into a
-			// transaction...
-			TransactionalEditingDomain domain = TransactionUtil
-					.getEditingDomain(taskConfig);
-			if (domain != null) {
-				domain.getCommandStack().execute(new RecordingCommand(domain) {
-					public void doExecute() {
-						// do the changes here
-						bindAttribute(getAttributesParent(),
-								getProperty("txtworkflowsummary"), "value",
-								"Summary");
-						bindAttribute(getAttributesParent(),
-								getProperty("txtworkflowabstract"), "value",
-								"Abstract");
-					}
-				});
-			}
 
 		}
 

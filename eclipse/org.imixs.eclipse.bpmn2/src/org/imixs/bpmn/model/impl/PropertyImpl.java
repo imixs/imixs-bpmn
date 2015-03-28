@@ -13,25 +13,26 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.imixs.bpmn.model.ConfigItem;
 import org.imixs.bpmn.model.ModelPackage;
+import org.imixs.bpmn.model.Property;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Config Item</b></em>'.
+ * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.imixs.bpmn.model.impl.ConfigItemImpl#getMixed <em>Mixed</em>}</li>
- *   <li>{@link org.imixs.bpmn.model.impl.ConfigItemImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.imixs.bpmn.model.impl.ConfigItemImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.PropertyImpl#getMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.PropertyImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.PropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.PropertyImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConfigItemImpl extends MinimalEObjectImpl.Container implements ConfigItem {
+public class PropertyImpl extends MinimalEObjectImpl.Container implements Property {
 	/**
 	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -63,6 +64,26 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +98,7 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConfigItemImpl() {
+	protected PropertyImpl() {
 		super();
 	}
 
@@ -88,7 +109,7 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.CONFIG_ITEM;
+		return ModelPackage.Literals.PROPERTY;
 	}
 
 	/**
@@ -98,7 +119,7 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	 */
 	public FeatureMap getMixed() {
 		if (mixed == null) {
-			mixed = new BasicFeatureMap(this, ModelPackage.CONFIG_ITEM__MIXED);
+			mixed = new BasicFeatureMap(this, ModelPackage.PROPERTY__MIXED);
 		}
 		return mixed;
 	}
@@ -121,7 +142,28 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CONFIG_ITEM__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.PROPERTY__TYPE, oldType, type));
 	}
 
 	   /**
@@ -160,6 +202,7 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
         getMixed().add(cdata);
     }
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,7 +211,7 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.CONFIG_ITEM__MIXED:
+			case ModelPackage.PROPERTY__MIXED:
 				return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,12 +225,14 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.CONFIG_ITEM__MIXED:
+			case ModelPackage.PROPERTY__MIXED:
 				if (coreType) return getMixed();
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
-			case ModelPackage.CONFIG_ITEM__NAME:
+			case ModelPackage.PROPERTY__NAME:
 				return getName();
-			case ModelPackage.CONFIG_ITEM__VALUE:
+			case ModelPackage.PROPERTY__TYPE:
+				return getType();
+			case ModelPackage.PROPERTY__VALUE:
 				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -201,13 +246,16 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.CONFIG_ITEM__MIXED:
+			case ModelPackage.PROPERTY__MIXED:
 				((FeatureMap.Internal)getMixed()).set(newValue);
 				return;
-			case ModelPackage.CONFIG_ITEM__NAME:
+			case ModelPackage.PROPERTY__NAME:
 				setName((String)newValue);
 				return;
-			case ModelPackage.CONFIG_ITEM__VALUE:
+			case ModelPackage.PROPERTY__TYPE:
+				setType((String)newValue);
+				return;
+			case ModelPackage.PROPERTY__VALUE:
 				setValue((String)newValue);
 				return;
 		}
@@ -222,13 +270,16 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CONFIG_ITEM__MIXED:
+			case ModelPackage.PROPERTY__MIXED:
 				getMixed().clear();
 				return;
-			case ModelPackage.CONFIG_ITEM__NAME:
+			case ModelPackage.PROPERTY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.CONFIG_ITEM__VALUE:
+			case ModelPackage.PROPERTY__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case ModelPackage.PROPERTY__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -243,11 +294,13 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CONFIG_ITEM__MIXED:
+			case ModelPackage.PROPERTY__MIXED:
 				return mixed != null && !mixed.isEmpty();
-			case ModelPackage.CONFIG_ITEM__NAME:
+			case ModelPackage.PROPERTY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.CONFIG_ITEM__VALUE:
+			case ModelPackage.PROPERTY__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case ModelPackage.PROPERTY__VALUE:
 				return VALUE_EDEFAULT == null ? getValue() != null : !VALUE_EDEFAULT.equals(getValue());
 		}
 		return super.eIsSet(featureID);
@@ -267,8 +320,10 @@ public class ConfigItemImpl extends MinimalEObjectImpl.Container implements Conf
 		result.append(mixed);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}
 
-} //ConfigItemImpl
+} //PropertyImpl

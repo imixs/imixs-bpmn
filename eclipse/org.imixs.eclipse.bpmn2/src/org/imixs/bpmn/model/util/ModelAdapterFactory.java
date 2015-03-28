@@ -72,16 +72,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createDocumentRootAdapter();
 			}
 			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
-			}
-			@Override
-			public Adapter caseConfigItem(ConfigItem object) {
-				return createConfigItemAdapter();
-			}
-			@Override
-			public Adapter caseTaskConfig(TaskConfig object) {
-				return createTaskConfigAdapter();
+			public Adapter caseProperty(Property object) {
+				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -118,44 +110,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.imixs.bpmn.model.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.imixs.bpmn.model.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.imixs.bpmn.model.Parameter
+	 * @see org.imixs.bpmn.model.Property
 	 * @generated
 	 */
-	public Adapter createParameterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.imixs.bpmn.model.ConfigItem <em>Config Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.imixs.bpmn.model.ConfigItem
-	 * @generated
-	 */
-	public Adapter createConfigItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.imixs.bpmn.model.TaskConfig <em>Task Config</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.imixs.bpmn.model.TaskConfig
-	 * @generated
-	 */
-	public Adapter createTaskConfigAdapter() {
+	public Adapter createPropertyAdapter() {
 		return null;
 	}
 

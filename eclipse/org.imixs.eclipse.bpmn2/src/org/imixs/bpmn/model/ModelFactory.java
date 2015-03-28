@@ -31,31 +31,13 @@ public interface ModelFactory extends EFactory {
 	DocumentRoot createDocumentRoot();
 
 	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
+	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
+	 * @return a new object of class '<em>Property</em>'.
 	 * @generated
 	 */
-	Parameter createParameter();
-
-	/**
-	 * Returns a new object of class '<em>Config Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Config Item</em>'.
-	 * @generated
-	 */
-	ConfigItem createConfigItem();
-
-	/**
-	 * Returns a new object of class '<em>Task Config</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Task Config</em>'.
-	 * @generated
-	 */
-	TaskConfig createTaskConfig();
+	Property createProperty();
 
 	/**
 	 * Returns the package supported by this factory.
