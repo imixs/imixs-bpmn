@@ -1,4 +1,4 @@
-package org.imixs.bpmn.model;
+package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.modeler.core.IBpmn2RuntimeExtension;
 import org.eclipse.bpmn2.modeler.core.LifecycleEvent;

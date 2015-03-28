@@ -9,7 +9,7 @@
    <extension
          point="org.eclipse.bpmn2.modeler.runtime">
       <runtime
-            class="org.imixs.bpmn.model.ImixsRuntimeExtension"
+            class="org.imixs.bpmn.ImixsRuntimeExtension"
             description="Imixs-Workflow BPMN Runtime Extension"
             id="org.imixs.workflow.bpmn.runtime"
             name="Imixs-Workflow">
@@ -25,7 +25,7 @@
       <customTask
             category="Imixs-Workflow"
             description="Imixs Process Entity"
-            featureContainer="org.imixs.bpmn.model.ImixsTaskFeatureContainer"
+            featureContainer="org.imixs.bpmn.ImixsTaskFeatureContainer"
             icon="inbox.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
@@ -38,17 +38,12 @@
                type="EInt"
                value="100">
          </property>
-         <property
-               label="Properties"
-               name="taskConfig"
-               type="TaskConfig">
-         </property>
       </customTask>
       
       
        <customTask
              category="Imixs-Workflow"
-             featureContainer="org.imixs.bpmn.model.ActivityEventDefinitionContainer"
+             featureContainer="org.imixs.bpmn.ActivityEventDefinitionContainer"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
              propertyTabs="org.imixs.bpmn.propertytab.mail "
@@ -58,11 +53,6 @@
                 name="activityid"
                 type="EInt"
                 value="10">
-          </property>
-          <property
-                label="Properties"
-                name="taskConfig"
-                type="TaskConfig">
           </property>
             
       </customTask>
@@ -99,10 +89,7 @@
             ref="org.eclipse.bpmn2.modeler.runtime.none:Full"
             runtimeId="org.imixs.workflow.bpmn.runtime">
          <enable
-               object="TaskConfig">
-         </enable>
-         <enable
-               object="Parameter">               
+               object="Property">
          </enable>
          <!--
           <enable

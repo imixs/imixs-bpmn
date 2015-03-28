@@ -1,4 +1,4 @@
-package org.imixs.bpmn.model;
+package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
+import org.imixs.bpmn.model.ModelPackage;
 
 public class ActivityEventDefinitionContainer extends
 		CustomShapeFeatureContainer {

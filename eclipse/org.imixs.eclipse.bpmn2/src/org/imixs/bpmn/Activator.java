@@ -1,4 +1,4 @@
-package org.imixs.bpmn.model;
+package org.imixs.bpmn;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
