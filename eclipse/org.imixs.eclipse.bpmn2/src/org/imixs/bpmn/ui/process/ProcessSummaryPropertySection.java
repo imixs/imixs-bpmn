@@ -3,14 +3,11 @@ package org.imixs.bpmn.ui.process;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
+import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.model.Property;
-import org.imixs.bpmn.ui.AbstractImixsPropertySection;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
@@ -19,7 +16,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  * @author rsoika
  *
  */
-public class ProcessSummaryPropertySection extends AbstractImixsPropertySection {
+public class ProcessSummaryPropertySection extends DefaultPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
