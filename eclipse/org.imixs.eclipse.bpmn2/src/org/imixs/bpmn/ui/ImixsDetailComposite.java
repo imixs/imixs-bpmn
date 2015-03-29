@@ -30,10 +30,10 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 	}
 	
 
-	@Override
-	public void createBindings(EObject be) {
-		
-	}
+//	@Override
+//	public void createBindings(EObject be) {
+//		
+//	}
 
 	
 	/**
@@ -81,7 +81,7 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 	 * @return the value of the extension element or null if no ConfigItem
 	 *         with this name exists
 	 */
-	protected Property findPropertyByName(BaseElement be,
+	private Property findPropertyByName(BaseElement be,
 			EStructuralFeature feature, String itemName) {
 		for (ExtensionAttributeValue eav : be.getExtensionValues()) {
 			// check all extensionAttribute values...

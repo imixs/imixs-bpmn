@@ -37,31 +37,6 @@ public class ActivityEventDefinitionContainer extends
 			if (ImixsRuntimeExtension.targetNamespace
 					.equals(((EAttributeImpl) feature).getExtendedMetaData()
 							.getNamespace())) {
-				
-				
-//				if (object instanceof BaseElement) {
-//					BaseElement be=(BaseElement)object;
-//					
-//					if (be.getExtensionValues().size()==0) {
-//					
-//					// ein bischen sonder code
-//					ConfigItem metaData = ModelFactory.eINSTANCE.createConfigItem();
-//					metaData.setValue("Orangen");
-//					metaData.setName("Saft");
-//					
-//					// alles gut
-//					addExtensionAttributeValue((BaseElement)object, METADATA_FEATURE, metaData);
-//				
-//					}
-//				
-//				}
-				
-				
-				
-				
-				
-				
-				
 				return ACTIVITYNTITY_TASK_ID;
 			}
 		}
@@ -85,23 +60,5 @@ public class ActivityEventDefinitionContainer extends
 	
 	
 	
-	/**
-	 * Add a new extension element to the given BaseElement.
-	 * 
-	 * @param be a BaseElement
-	 * @param feature the structural feature
-	 */
-	void addExtensionAttributeValue(BaseElement be, EStructuralFeature feature, Object value) {
-		ExtensionAttributeValue eav = null;
-		if (be.getExtensionValues().size()>0) {
-			// reuse the <bpmn2:extensionElements> container if this BaseElement already has one
-			eav = be.getExtensionValues().get(0);
-		}
-		else {
-			// otherwise create a new one
-			eav = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
-			be.getExtensionValues().add(eav);
-		}
-		eav.getValue().add(feature, value);
-	}
+	
 }

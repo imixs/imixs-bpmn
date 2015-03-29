@@ -56,13 +56,17 @@
           </property>
             
       </customTask>
+      
+      
+      
+      
 		
       <propertyTab
             class="org.imixs.bpmn.ui.activity.MailPropertySection"
             id="org.imixs.bpmn.propertytab.mail"
             label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.Task">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
 
       
@@ -81,7 +85,18 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
-  <!--  -->
+      
+        <!-- org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration -->
+       <propertyTab
+            class="org.imixs.bpmn.ui.process.TestPropertySection"
+            id="Imixs-BPMN2.propertyTab1"
+            label="WorkflowGroup"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration">
+      </propertyTab>
+    
+    
+
       
       <modelEnablement
             id="Imixs-BPMN2.modelEnablement2"
@@ -97,6 +112,10 @@
          </enable>
          -->
       </modelEnablement>
+      
+      
+      <!-- -->
+     
      
      
    </extension>
