@@ -45,7 +45,7 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 	 * @param be
 	 * @return
 	 */
-	protected Property getPropertyByName(BaseElement be, String itemName,
+	protected Property getPropertyByName(BaseElement be, String itemName, String itemType,
 			String defaultValue) {
 		Property property = (Property) findPropertyByName(be,
 				METADATA_FEATURE, itemName);
@@ -55,8 +55,11 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 			property = ModelFactory.eINSTANCE.createProperty();
 			property.setValue(defaultValue);
 			property.setName(itemName);
-			property.setType("xs:string");
-
+			if (itemType==null || "".equals(itemType))
+				property.setType("xs:string");
+			else
+				property.setType(itemType);
+				
 			// addExtensionAttributeValue
 			ExtensionAttributeValue eav = Bpmn2Factory.eINSTANCE
 					.createExtensionAttributeValue();

@@ -79,13 +79,13 @@ public class TestPropertySection extends DefaultPropertySection {
 			setTitle("Imixs");
 
 			Property metaData = getPropertyByName((BaseElement) be,
-					"txtSubject", "Some Subject....");
+					"txtSubject",null, "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			// boolean test
-			metaData = getPropertyByName((BaseElement) be, "keyListe", "true");
+			metaData = getPropertyByName((BaseElement) be, "keyListe",null, "true");
 			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData,
 					METADATA_VALUE);
 			aBooleanEditor.createControl(this, "Subject");
@@ -95,7 +95,7 @@ public class TestPropertySection extends DefaultPropertySection {
 			optionList.add("Small|1");
 			optionList.add("Medium|2");
 			optionList.add("Large|3");
-			metaData = getPropertyByName((BaseElement) be, "keyMultiListe", "");
+			metaData = getPropertyByName((BaseElement) be, "keyMultiListe",null, "");
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
 					METADATA_VALUE, optionList);
 			aEditor.createControl(this, "Priority");

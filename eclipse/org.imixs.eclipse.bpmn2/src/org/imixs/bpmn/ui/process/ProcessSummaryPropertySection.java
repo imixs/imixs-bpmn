@@ -45,7 +45,7 @@ public class ProcessSummaryPropertySection extends DefaultPropertySection {
 			// create a new Property Tab section with a twistie
 			// Composite section = createSectionComposite(this, "Mail Body");
 
-			Property metaData = getPropertyByName((BaseElement) be, "txtSummary",
+			Property metaData = getPropertyByName((BaseElement) be, "txtSummary",null,
 					"Summ Form....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);

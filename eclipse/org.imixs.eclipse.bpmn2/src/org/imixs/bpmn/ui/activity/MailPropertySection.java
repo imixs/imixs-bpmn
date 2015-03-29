@@ -50,13 +50,16 @@ public class MailPropertySection extends DefaultPropertySection {
 		//	Composite section = createSectionComposite(this, "Mail Body");
 
 			Property metaData = getPropertyByName((BaseElement) be,
-					"txtSubject", "Some Subject....");
+					"txtSubject",null, "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			metaData = getPropertyByName((BaseElement) be,
-					"txtBody", "Mail Body....");
+					"txtBody","CDATA", "Mail Body....");
+			
+			
+			
 			 valueEditor = new TextObjectEditor(this,
 					metaData, METADATA_VALUE);
 			 valueEditor.setMultiLine(true);

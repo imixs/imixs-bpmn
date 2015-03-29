@@ -51,7 +51,7 @@ DefaultPropertySection {
 			// create a new Property Tab section with a twistie
 			// Composite section = createSectionComposite(this, "Mail Body");
 
-			Property metaData = getPropertyByName((BaseElement) be, "txtForm",
+			Property metaData = getPropertyByName((BaseElement) be, "txtForm",null,
 					"Some Form....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
