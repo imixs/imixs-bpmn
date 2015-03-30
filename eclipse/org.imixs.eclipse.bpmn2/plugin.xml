@@ -33,7 +33,8 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
-               label="Process ID"
+               description="Workflow Process ID"
+               label="ID"
                name="processid"
                type="EInt"
                value="100">
@@ -74,16 +75,18 @@
             class="org.imixs.bpmn.ui.process.ProcessApplicationPropertySection"
             id="org.imixs.bpmn.propertytab.application"
             label="Application"
+            replaceTab="org.eclipse.bpmn2.modeler.task.tab"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
         
 	  <propertyTab
-            class="org.imixs.bpmn.ui.process.ProcessSummaryPropertySection"
-            id="org.imixs.bpmn.propertytab.summary"
-            label="Summary"
-            runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.Task">
+         class="org.imixs.bpmn.ui.process.ProcessSummaryPropertySection"
+         id="org.imixs.bpmn.propertytab.summary"
+         label="Summary"
+         replaceTab="org.eclipse.bpmn2.modeler.activity.io.tab"
+         runtimeId="org.imixs.workflow.bpmn.runtime"
+         type="org.eclipse.bpmn2.Task">
       </propertyTab>
       
         <!-- org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration -->

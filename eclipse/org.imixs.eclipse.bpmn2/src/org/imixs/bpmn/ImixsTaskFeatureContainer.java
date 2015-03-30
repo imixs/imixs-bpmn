@@ -42,9 +42,14 @@ public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
 		return null;
 	}
 
+	
+	/**
+	 * overwrite task features displayed during mouse over 
+	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		return super.getCustomFeatures(fp);
 	}
 
 
