@@ -1,4 +1,4 @@
-package org.imixs.bpmn.ui.activity;
+package org.imixs.bpmn.ui.event;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;

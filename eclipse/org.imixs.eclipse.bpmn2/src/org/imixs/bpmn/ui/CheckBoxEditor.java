@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Label;
  *
  */
 public class CheckBoxEditor extends ObjectEditor {
-	protected Composite buttons;
+	protected Composite editorComposite;
 	protected ValueListAdapter valueListAdapter;
 
 	/**
@@ -55,14 +55,31 @@ public class CheckBoxEditor extends ObjectEditor {
 
 		// create a separate label to the LEFT of the checkbox set
 		Label labelWidget = getToolkit().createLabel(composite, label);
-		labelWidget.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
+		labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
 				false, 1, 1));
 		updateLabelDecorator();
 
-		buttons = new Composite(composite, SWT.NONE);
-		buttons.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false,
-				1, 1));
-		buttons.setLayout(new FillLayout(SWT.VERTICAL));
+		editorComposite = new Composite(composite, SWT.NONE);
+		
+		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		
+//		editorComposite.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false,
+//				1, 1));
+		
+		editorComposite.setLayoutData(data);
+		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
 		// create a checkbox for each entry from the OptionList
 		for (String aOption : valueListAdapter.getOptionList()) {
 
@@ -77,7 +94,7 @@ public class CheckBoxEditor extends ObjectEditor {
 				aValue = aOption;
 			}
 
-			Button button = getToolkit().createButton(buttons, aLabel,
+			Button button = getToolkit().createButton(editorComposite, aLabel,
 					SWT.CHECK);
 			button.setSelection(valueListAdapter.isSelected(aValue));
 			button.setData(aValue);
@@ -100,7 +117,7 @@ public class CheckBoxEditor extends ObjectEditor {
 			});
 
 		}
-		return buttons;
+		return editorComposite;
 	}
 
 	@Override
@@ -115,20 +132,20 @@ public class CheckBoxEditor extends ObjectEditor {
 
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
-		buttons.setVisible(visible);
-		GridData data = (GridData) buttons.getLayoutData();
+		editorComposite.setVisible(visible);
+		GridData data = (GridData) editorComposite.getLayoutData();
 		data.exclude = !visible;
 	}
 
 	public void dispose() {
 		super.dispose();
-		if (buttons != null && !buttons.isDisposed()) {
-			buttons.dispose();
-			buttons = null;
+		if (editorComposite != null && !editorComposite.isDisposed()) {
+			editorComposite.dispose();
+			editorComposite = null;
 		}
 	}
 
 	public Control getControl() {
-		return buttons;
+		return editorComposite;
 	}
 }

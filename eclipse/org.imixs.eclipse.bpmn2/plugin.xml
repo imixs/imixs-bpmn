@@ -63,7 +63,7 @@
       
 		
       <propertyTab
-            class="org.imixs.bpmn.ui.activity.MailPropertySection"
+            class="org.imixs.bpmn.ui.event.MailPropertySection"
             id="org.imixs.bpmn.propertytab.mail"
             label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
@@ -72,7 +72,7 @@
 
       
       <propertyTab
-            class="org.imixs.bpmn.ui.process.ProcessApplicationPropertySection"
+            class="org.imixs.bpmn.ui.task.ProcessApplicationPropertySection"
             id="org.imixs.bpmn.propertytab.application"
             label="Application"
             replaceTab="org.eclipse.bpmn2.modeler.task.tab"
@@ -81,7 +81,7 @@
       </propertyTab>
         
 	  <propertyTab
-         class="org.imixs.bpmn.ui.process.ProcessSummaryPropertySection"
+         class="org.imixs.bpmn.ui.task.ProcessSummaryPropertySection"
          id="org.imixs.bpmn.propertytab.summary"
          label="Summary"
          replaceTab="org.eclipse.bpmn2.modeler.activity.io.tab"

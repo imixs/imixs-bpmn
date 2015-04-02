@@ -19,6 +19,7 @@ import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.BooleanEditor;
 import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
+import org.imixs.bpmn.ui.PluginEditor;
 
 /**
  * This PorpertySection provides the attributes for the main workflow configuration.
@@ -88,8 +89,11 @@ public class TestPropertySection extends DefaultPropertySection {
 			metaData = getPropertyByName((BaseElement) be, "keyListe",null, "true");
 			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData,
 					METADATA_VALUE);
-			aBooleanEditor.createControl(this, "Subject");
+			aBooleanEditor.createControl(this, "Was1");
 
+			
+			
+			
 			// checkbox multi test
 			List<String> optionList = new ArrayList<String>();
 			optionList.add("Small|1");
@@ -99,7 +103,30 @@ public class TestPropertySection extends DefaultPropertySection {
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
 					METADATA_VALUE, optionList);
 			aEditor.createControl(this, "Priority");
+		
+			
+			
+			
+			
+			// boolean test 2
+			metaData = getPropertyByName((BaseElement) be, "keyListe2",null, "true");
+			 aBooleanEditor = new BooleanEditor(this, metaData,
+					METADATA_VALUE);
+			aBooleanEditor.createControl(this, "Was2");
 
+		
+			
+			
+			// plugin editor
+			metaData = getPropertyByName((BaseElement) be, "keyPluginListe",null, "");
+			PluginEditor pluginEditor = new PluginEditor(this, metaData,
+					METADATA_VALUE);
+			pluginEditor.createControl(this, "Plugins");
+			
+			
+		
+			
+		
 		}
 
 	}
