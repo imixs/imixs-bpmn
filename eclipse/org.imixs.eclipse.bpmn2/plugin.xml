@@ -26,7 +26,7 @@
             category="Imixs-Workflow"
             description="Imixs Process Entity"
             featureContainer="org.imixs.bpmn.ImixsTaskFeatureContainer"
-            icon="inbox.png"
+            icon="process-bubble.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
             propertyTabs="org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application"
