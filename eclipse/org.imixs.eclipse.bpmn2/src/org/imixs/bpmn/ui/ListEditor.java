@@ -32,10 +32,11 @@ import org.imixs.bpmn.Activator;
  * @author Ralph Soika
  *
  */
-public class PluginEditor extends ObjectEditor {
+public class ListEditor extends ObjectEditor {
 	protected Composite editorComposite;
 	protected ValueListAdapter valueListAdapter;
-	final Image pluginImage;
+	Image image;
+	boolean sortable = false;
 	Table table;
 
 	/**
@@ -44,7 +45,7 @@ public class PluginEditor extends ObjectEditor {
 	 * @param businessObject
 	 * @param feature
 	 */
-	public PluginEditor(AbstractDetailComposite parent, EObject obj,
+	public ListEditor(AbstractDetailComposite parent, EObject obj,
 			EStructuralFeature feat) {
 		super(parent, obj, feat);
 
@@ -53,9 +54,22 @@ public class PluginEditor extends ObjectEditor {
 			v = "";
 		valueListAdapter = new ValueListAdapter(v.toString());
 
-		pluginImage = Activator.getDefault().getIcon("plugin_obj.gif")
-				.createImage();
+	}
 
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public boolean isSortable() {
+		return sortable;
+	}
+
+	public void setSortable(boolean sortable) {
+		this.sortable = sortable;
 	}
 
 	/**
@@ -151,34 +165,37 @@ public class PluginEditor extends ObjectEditor {
 			}
 		});
 
-		// Move Up Button
-		button = getToolkit().createButton(compositeButtons, "Up", SWT.PUSH);
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				int iCurrent = table.getSelectionIndex();
-				if (iCurrent > 0) {
-					valueListAdapter.moveUp(iCurrent);
-					setValue(valueListAdapter.getValue());
-					updateTable();
-					table.select(iCurrent - 1);
+		if (sortable) {
+			// Move Up Button
+			button = getToolkit()
+					.createButton(compositeButtons, "Up", SWT.PUSH);
+			button.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					int iCurrent = table.getSelectionIndex();
+					if (iCurrent > 0) {
+						valueListAdapter.moveUp(iCurrent);
+						setValue(valueListAdapter.getValue());
+						updateTable();
+						table.select(iCurrent - 1);
+					}
 				}
-			}
-		});
+			});
 
-		// Move Down Button
-		button = getToolkit().createButton(compositeButtons, "Down", SWT.PUSH);
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				int iCurrent = table.getSelectionIndex();
-				if (iCurrent < valueListAdapter.valueList.size() - 1) {
-					valueListAdapter.moveDown(iCurrent);
-					setValue(valueListAdapter.getValue());
-					updateTable();
-					table.select(iCurrent + 1);
+			// Move Down Button
+			button = getToolkit().createButton(compositeButtons, "Down",
+					SWT.PUSH);
+			button.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					int iCurrent = table.getSelectionIndex();
+					if (iCurrent < valueListAdapter.valueList.size() - 1) {
+						valueListAdapter.moveDown(iCurrent);
+						setValue(valueListAdapter.getValue());
+						updateTable();
+						table.select(iCurrent + 1);
+					}
 				}
-			}
-		});
-
+			});
+		}
 		return editorComposite;
 	}
 
@@ -189,7 +206,9 @@ public class PluginEditor extends ObjectEditor {
 		for (String avalue : valueListAdapter.valueList) {
 			TableItem tabelItem = new TableItem(table, SWT.NONE);
 			tabelItem.setText(avalue);
-			tabelItem.setImage(pluginImage);
+			if (image != null) {
+				tabelItem.setImage(image);
+			}
 		}
 
 	}
@@ -222,7 +241,5 @@ public class PluginEditor extends ObjectEditor {
 	public Control getControl() {
 		return editorComposite;
 	}
-
-	
 
 }

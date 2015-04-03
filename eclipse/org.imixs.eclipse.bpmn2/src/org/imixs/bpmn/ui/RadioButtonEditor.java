@@ -18,55 +18,56 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * This ObjectEditor creates a composite with a list of Check boxes based on a
- * given OptionList. This value results to a String object with a <value> tag
- * for each selected option.
+ * Implementation of Radio Button widget based on a option list.
  * 
- * @see org.imixs.bpmn.ui.OptionListAdapter
+ * This value results to a String object with a <value> tag for each selected
+ * option.
+ * 
+ * 
+ * yes|2
+ * 
+ * results in
+ * 
+ * <code>
+ *   <value>2</value>
+ * </code>
+ * 
  * @see org.eclipse.bpmn2.modeler.core.merrimac.dialogs.BooleanObjectEditor
  * @author Ralph Soika
  *
  */
-public class CheckBoxEditor extends ObjectEditor {
+public class RadioButtonEditor extends ObjectEditor {
+
 	protected Composite editorComposite;
-	protected OptionListAdapter valueListAdapter;
+	protected List<String> optionList;
 
 	/**
 	 * @param businessObject
 	 * @param feature
 	 */
-	public CheckBoxEditor(AbstractDetailComposite parent, EObject obj,
+	public RadioButtonEditor(AbstractDetailComposite parent, EObject obj,
 			EStructuralFeature feat, List<String> aoptionList) {
 		super(parent, obj, feat);
-
-		Object v = getBusinessObjectDelegate().getValue(object, feature);
-		if (v == null)
-			v = "";
-		valueListAdapter = new OptionListAdapter(aoptionList, v.toString());
-
+		optionList = aoptionList;
 	}
 
-	/**
-	 * This method creates a composite with a separate CheckBox for each Element
-	 * form the OpitonList. The selection is managed by the valueListAdapter
-	 * class.
-	 */
 	protected Control createControl(Composite composite, String label, int style) {
 
 		// create a separate label to the LEFT of the checkbox set
 		Label labelWidget = getToolkit().createLabel(composite, label);
-		labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
-				false, 1, 1));
+		labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
+				1, 1));
 		updateLabelDecorator();
 
 		editorComposite = new Composite(composite, SWT.NONE);
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		editorComposite.setLayoutData(data);
-		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
-		
-		
+		editorComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+
+		String sCurrentValue = getValue();
+
 		// create a checkbox for each entry from the OptionList
-		for (String aOption : valueListAdapter.getOptionList()) {
+		for (String aOption : optionList) {
 
 			String aLabel = null;
 			String aValue = null;
@@ -80,8 +81,8 @@ public class CheckBoxEditor extends ObjectEditor {
 			}
 
 			Button button = getToolkit().createButton(editorComposite, aLabel,
-					SWT.CHECK);
-			button.setSelection(valueListAdapter.isSelected(aValue));
+					SWT.RADIO);
+			button.setSelection(aValue.equals(sCurrentValue));
 			button.setData(aValue);
 			button.addSelectionListener(new SelectionListener() {
 				@Override
@@ -89,10 +90,11 @@ public class CheckBoxEditor extends ObjectEditor {
 					Button bb = (Button) e.getSource();
 					if (!isWidgetUpdating) {
 						boolean checked = bb.getSelection();
-						String aValue = (String) bb.getData();
-						valueListAdapter.setSelection(aValue, checked);
-						setValue(valueListAdapter.getValue());
-						bb.setSelection(checked);
+						if (checked) {
+							String aValue = (String) bb.getData();
+							setValue(aValue);
+							bb.setSelection(checked);
+						}
 					}
 				}
 
@@ -102,12 +104,16 @@ public class CheckBoxEditor extends ObjectEditor {
 			});
 
 		}
+
 		return editorComposite;
 	}
 
 	@Override
 	public String getValue() {
-		return valueListAdapter.getValue();
+		Object v = getBusinessObjectDelegate().getValue(object, feature);
+
+		return v.toString();
+
 	}
 
 	@Override
@@ -133,4 +139,5 @@ public class CheckBoxEditor extends ObjectEditor {
 	public Control getControl() {
 		return editorComposite;
 	}
+
 }
