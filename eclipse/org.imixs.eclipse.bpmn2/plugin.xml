@@ -47,7 +47,7 @@
              featureContainer="org.imixs.bpmn.ActivityEventDefinitionContainer"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule"
+             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
@@ -87,6 +87,14 @@
             class="org.imixs.bpmn.ui.event.BusinessRulePropertySection"
             id="org.imixs.bpmn.propertytab.event.businessrule"
             label="Business Rule"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
+      <propertyTab
+            afterTab="org.imixs.bpmn.propertytab.event.mail"
+            class="org.imixs.bpmn.ui.event.ReportPropertySection"
+            id="org.imixs.bpmn.propertytab.event.report"
+            label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
