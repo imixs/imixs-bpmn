@@ -29,7 +29,7 @@
             icon="process-bubble.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
-            propertyTabs="org.imixs.bpmn.propertytab.summary org.imixs.bpmn.propertytab.application"
+            propertyTabs="org.imixs.bpmn.propertytab.task.workflow org.imixs.bpmn.propertytab.task.application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
@@ -47,52 +47,80 @@
              featureContainer="org.imixs.bpmn.ActivityEventDefinitionContainer"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
-             propertyTabs="org.imixs.bpmn.propertytab.mail "
+             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
                 name="activityid"
-                type="EInt"
-                value="10">
-          </property>
-            
+                type="EInt">
+          </property>            
       </customTask>
       
       
       
+      <!-- Activity Tabs -->
+	  <propertyTab
+            class="org.imixs.bpmn.ui.event.WorkflowPropertySection"
+            id="org.imixs.bpmn.propertytab.event.workflow"
+            label="Workflow"
+            replaceTab="org.eclipse.bpmn2.modeler.commonEvent.tab"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
       
-		
       <propertyTab
+            afterTab="org.imixs.bpmn.propertytab.event.history"
             class="org.imixs.bpmn.ui.event.MailPropertySection"
-            id="org.imixs.bpmn.propertytab.mail"
+            id="org.imixs.bpmn.propertytab.event.mail"
             label="Mail"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
+      <propertyTab
+            class="org.imixs.bpmn.ui.event.HistoryPropertySection"
+            id="org.imixs.bpmn.propertytab.event.history"
+            label="History"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
+      <propertyTab
+            class="org.imixs.bpmn.ui.event.BusinessRulePropertySection"
+            id="org.imixs.bpmn.propertytab.event.businessrule"
+            label="Business Rule"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
 
       
+      <!-- Process Tabs -->
       <propertyTab
-            class="org.imixs.bpmn.ui.task.ProcessApplicationPropertySection"
-            id="org.imixs.bpmn.propertytab.application"
-            label="Application"
-            replaceTab="org.eclipse.bpmn2.modeler.task.tab"
-            runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.Task">
-      </propertyTab>
-        
-	  <propertyTab
-         class="org.imixs.bpmn.ui.task.ProcessSummaryPropertySection"
-         id="org.imixs.bpmn.propertytab.summary"
-         label="Summary"
-         replaceTab="org.eclipse.bpmn2.modeler.activity.io.tab"
+         class="org.imixs.bpmn.ui.task.ProcessWorkflowPropertySection"
+         id="org.imixs.bpmn.propertytab.task.workflow"
+         label="Workflow"
+         replaceTab="org.eclipse.bpmn2.modeler.task.tab"
          runtimeId="org.imixs.workflow.bpmn.runtime"
          type="org.eclipse.bpmn2.Task">
       </propertyTab>
       
-        <!-- org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration -->
+      <propertyTab
+            afterTab="org.imixs.bpmn.propertytab.task.workflow"
+            class="org.imixs.bpmn.ui.task.ProcessApplicationPropertySection"
+            id="org.imixs.bpmn.propertytab.task.application"
+            label="Application"
+            replaceTab="org.eclipse.bpmn2.modeler.activity.io.tab"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
+      </propertyTab>
+        
+	 
+       
+       
+       
+       
+       <!-- WorkflowGroup Tab -->
        <propertyTab
             class="org.imixs.bpmn.ui.process.TestPropertySection"
-            id="Imixs-BPMN2.propertyTab1"
+            id="org.imixs.bpmn.propertytab.process.workflow"
             label="WorkflowGroup"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration">
