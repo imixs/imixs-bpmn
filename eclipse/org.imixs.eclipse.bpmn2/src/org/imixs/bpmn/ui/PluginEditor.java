@@ -1,10 +1,5 @@
 package org.imixs.bpmn.ui;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
@@ -14,24 +9,25 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.imixs.bpmn.Activator;
 
 /**
- * This ObjectEditor creates a composite with a list of Check boxes based on a
- * given OptionList. This value results to a String object with a <value> tag
- * for each selected option.
+ * This ObjectEditor creates a composite with a list of editable values. This
+ * value results to a String object with a <value> tag for each entry option.
  * 
- * @see org.imixs.bpmn.ui.ValueListAdapter
+ * @see org.imixs.bpmn.ui.OptionListAdapter
  * @see org.eclipse.bpmn2.modeler.core.merrimac.dialogs.BooleanObjectEditor
  * @author Ralph Soika
  *
@@ -39,6 +35,8 @@ import org.eclipse.swt.widgets.TableItem;
 public class PluginEditor extends ObjectEditor {
 	protected Composite editorComposite;
 	protected ValueListAdapter valueListAdapter;
+	final Image pluginImage;
+	Table table;
 
 	/**
 	 * Initialize the default values...
@@ -53,7 +51,10 @@ public class PluginEditor extends ObjectEditor {
 		Object v = getBusinessObjectDelegate().getValue(object, feature);
 		if (v == null)
 			v = "";
-		// valueListAdapter = new ValueListAdapter(aoptionList, v.toString());
+		valueListAdapter = new ValueListAdapter(v.toString());
+
+		pluginImage = Activator.getDefault().getIcon("plugin_obj.gif")
+				.createImage();
 
 	}
 
@@ -71,64 +72,126 @@ public class PluginEditor extends ObjectEditor {
 				false, 1, 1));
 		updateLabelDecorator();
 
-		editorComposite = new Composite(parentcomposite, SWT.BORDER);
-
-		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
-
+		// == editor composite
+		editorComposite = new Composite(parentcomposite, SWT.NONE);
+		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		editorComposite.setLayoutData(data);
-		//editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
-		
-		
-		GridLayout layout = new GridLayout();
-		layout.marginHeight = 5;
-		layout.marginWidth = 5;
-		// the number of pixels of vertical margin that will be placed along
-		// the top and bottom edges of the layout.
- 
-		layout.makeColumnsEqualWidth = true;// make each column have same width
-		layout.numColumns = 4; // number of columns
-		layout.verticalSpacing = 10;
-		
+		editorComposite.setBackground(Display.getDefault().getSystemColor(
+				SWT.COLOR_LIST_BACKGROUND));
 
-		editorComposite.setLayout(layout);
-		
-		//editorComposite.setLayout(new GridLayout());
-		
-		
+		GridLayout gridlayout = new GridLayout();
+		gridlayout.numColumns = 2;
+		editorComposite.setLayout(gridlayout);
 
-		final Table table = getToolkit().createTable(editorComposite,
-				SWT.MULTI | SWT.V_SCROLL);
+		// == Table composite
+		table = getToolkit().createTable(editorComposite,
+				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
+		GridData tableGridData = new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1);
+		table.setLayoutData(tableGridData);
 
-//		 table.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false,
-//		 1, 1));
+		// add current values
+		this.updateTable();
 
-		// table.setLayoutData(new FillLayout(SWT.VERTICAL));
+		// == Button composite
+		Composite compositeButtons = getToolkit().createComposite(
+				editorComposite, SWT.NONE);
+		FillLayout fillLayoutButtons = new FillLayout();
+		fillLayoutButtons.spacing = 2;
+		fillLayoutButtons.type = SWT.VERTICAL;
+		compositeButtons.setLayout(fillLayoutButtons);
 
 		final Shell shell = parent.getShell();
 
-		Button button = getToolkit().createButton(editorComposite, "Add...",
+		Button button = getToolkit().createButton(compositeButtons, "Add...",
 				SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				InputDialog inputDlg = new InputDialog(shell, "Add Entry",
 						"New value", "", null);
 				if (inputDlg.open() == InputDialog.OK) {
-					TableItem tabelItem = new TableItem(table, SWT.NONE);
-					tabelItem.setText(inputDlg.getValue());
-					// tabelItem.setImage(itemImage);
+					valueListAdapter.addValue(inputDlg.getValue());
+					setValue(valueListAdapter.getValue());
+					updateTable();
+				}
+			}
+		});
 
-					// werte neu setzen
-					Vector v = new Vector();
-					TableItem[] items = table.getItems();
-					for (int i = 0; i < items.length; i++) {
-						v.add(items[i].getText());
+		// Remove Button
+		button = getToolkit()
+				.createButton(compositeButtons, "Remove", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				int iCurrent = table.getSelectionIndex();
+				String sCurrent = table.getItems()[iCurrent].getText();
+				valueListAdapter.removeValue(sCurrent);
+				setValue(valueListAdapter.getValue());
+				updateTable();
+
+			}
+		});
+
+		button = getToolkit().createButton(compositeButtons, "Edit", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				int iCurrent = table.getSelectionIndex();
+				if (iCurrent >= 0) {
+					TableItem tabelItem = table.getItem(iCurrent);
+					String sOldValue = tabelItem.getText();
+					InputDialog inputDlg = new InputDialog(shell, "Edit Entry",
+							"New value", sOldValue, null);
+					if (inputDlg.open() == InputDialog.OK) {
+						String sNewValue = inputDlg.getValue();
+
+						valueListAdapter.replaceValue(sOldValue, sNewValue);
+						setValue(valueListAdapter.getValue());
+						updateTable();
 					}
-					// localModelObject.setPropertyValue(localPropertyName, v);
+				}
+			}
+		});
+
+		// Move Up Button
+		button = getToolkit().createButton(compositeButtons, "Up", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				int iCurrent = table.getSelectionIndex();
+				if (iCurrent > 0) {
+					valueListAdapter.moveUp(iCurrent);
+					setValue(valueListAdapter.getValue());
+					updateTable();
+					table.select(iCurrent - 1);
+				}
+			}
+		});
+
+		// Move Down Button
+		button = getToolkit().createButton(compositeButtons, "Down", SWT.PUSH);
+		button.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				int iCurrent = table.getSelectionIndex();
+				if (iCurrent < valueListAdapter.valueList.size() - 1) {
+					valueListAdapter.moveDown(iCurrent);
+					setValue(valueListAdapter.getValue());
+					updateTable();
+					table.select(iCurrent + 1);
 				}
 			}
 		});
 
 		return editorComposite;
+	}
+
+	private void updateTable() {
+
+		table.removeAll();
+		// add current values
+		for (String avalue : valueListAdapter.valueList) {
+			TableItem tabelItem = new TableItem(table, SWT.NONE);
+			tabelItem.setText(avalue);
+			tabelItem.setImage(pluginImage);
+		}
+
 	}
 
 	@Override
@@ -160,38 +223,6 @@ public class PluginEditor extends ObjectEditor {
 		return editorComposite;
 	}
 
-	/**
-	 * Helper Method to set GridData
-	 * 
-	 * @param component
-	 * @param horizontalAligment
-	 * @param grabExcessHorizontalSpace
-	 * @param verticalAligment
-	 * @param grabExcessVerticalSpace
-	 */
-	protected void setGridData(Control component, int horizontalAligment,
-			boolean grabExcessHorizontalSpace, int verticalAligment,
-			boolean grabExcessVerticalSpace) {
-		GridData gd = new GridData();
-		gd.horizontalAlignment = horizontalAligment;
-		gd.grabExcessHorizontalSpace = grabExcessHorizontalSpace;
-		gd.verticalAlignment = verticalAligment;
-		gd.grabExcessVerticalSpace = grabExcessVerticalSpace;
-		component.setLayoutData(gd);
-	}
-
-	protected void setGridData(Control component, int width, int hight,
-			int horizontalAligment, boolean grabExcessHorizontalSpace,
-			int verticalAligment, boolean grabExcessVerticalSpace) {
-		GridData gd = new GridData();
-		gd.widthHint = width;
-
-		gd.heightHint = hight;
-		gd.horizontalAlignment = horizontalAligment;
-		gd.grabExcessHorizontalSpace = grabExcessHorizontalSpace;
-		gd.verticalAlignment = verticalAligment;
-		gd.grabExcessVerticalSpace = grabExcessVerticalSpace;
-		component.setLayoutData(gd);
-	}
+	
 
 }

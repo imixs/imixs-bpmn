@@ -30,14 +30,14 @@ import org.eclipse.swt.widgets.TableItem;
  * given OptionList. This value results to a String object with a <value> tag
  * for each selected option.
  * 
- * @see org.imixs.bpmn.ui.ValueListAdapter
+ * @see org.imixs.bpmn.ui.OptionListAdapter
  * @see org.eclipse.bpmn2.modeler.core.merrimac.dialogs.BooleanObjectEditor
  * @author Ralph Soika
  *
  */
 public class CopyOfPluginEditor extends ObjectEditor {
 	protected Composite buttons;
-	protected ValueListAdapter valueListAdapter;
+	protected OptionListAdapter valueListAdapter;
 
 	/**
 	 * Initialize the default values...
@@ -52,7 +52,7 @@ public class CopyOfPluginEditor extends ObjectEditor {
 		Object v = getBusinessObjectDelegate().getValue(object, feature);
 		if (v == null)
 			v = "";
-		valueListAdapter = new ValueListAdapter(aoptionList, v.toString());
+		valueListAdapter = new OptionListAdapter(aoptionList, v.toString());
 
 	}
 

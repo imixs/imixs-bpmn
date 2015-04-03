@@ -3,7 +3,7 @@ package org.imixs.pbmn;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.imixs.bpmn.ui.ValueListAdapter;
+import org.imixs.bpmn.ui.OptionListAdapter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +34,10 @@ public class ListAdapterTest {
 	@Test
 	public void test1() {
 
-		List<String> ding = ValueListAdapter.getList(value);
+		List<String> ding = OptionListAdapter.getList(value);
 		Assert.assertEquals(3, ding.size());
 
-		String reverse = ValueListAdapter.putList(ding);
+		String reverse = OptionListAdapter.putList(ding);
 		Assert.assertEquals("<value>1</value><value>2</value><value>3</value>",
 				reverse);
 
@@ -46,7 +46,7 @@ public class ListAdapterTest {
 	@Test
 	public void test2() {
 
-		ValueListAdapter adapter = new ValueListAdapter(options, value);
+		OptionListAdapter adapter = new OptionListAdapter(options, value);
 
 		Assert.assertTrue(adapter.isSelected("1"));
 		Assert.assertTrue(adapter.isSelected("2"));
@@ -57,7 +57,7 @@ public class ListAdapterTest {
 	@Test
 	public void test3() {
 
-		ValueListAdapter adapter = new ValueListAdapter(options, value);
+		OptionListAdapter adapter = new OptionListAdapter(options, value);
 
 		adapter.setSelection("1", false);
 		adapter.setSelection("5", true);

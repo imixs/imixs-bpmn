@@ -1,24 +1,18 @@
 package org.imixs.bpmn.ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * This adapter manages a Option List. Each element of the option list can have
- * the boolean value true/false.
+ * This adapter manages a Value List in a string array. The adapter provides methods to add and remove values
  * 
  * This results into a String with <value> elements to be used by UI Widget
- * CheckBox.
+ * TableEditor.
  * 
  * 
- * 
- * 1|2|3
- * 
- * results in
  * 
  * <code>
  *   <value>1</value>
@@ -32,57 +26,63 @@ import java.util.regex.Pattern;
  */
 public class ValueListAdapter {
 
-	Map<String, Boolean> map;
-	List<String> optionList;
 
+	List<String> valueList;
+	public ValueListAdapter() {
+		valueList=new ArrayList<String>();
+	}
 	/**
-	 * converts the optionList into a hash map. For each entry contained in the
-	 * valueList the map entry will be set to true.
-	 * 
+	 * converts the valueList string into a array map. 
 	 * 
 	 * @param valueList
 	 */
-	public ValueListAdapter(List<String> aoptionList, String valueList) {
-
+	public ValueListAdapter(String values) {
 		// get List with all current values from valueList
-		optionList = aoptionList;
-		List<String> values = getList(valueList);
+		valueList = getList(values);
+	}
 
-		// first create a map for each element of the option list
-		map = new HashMap<String, Boolean>();
-		for (String aOption : optionList) {
+	
+	/**
+	 * adds a new value
+	 * 
+	 * @param aOption
+	 * @return
+	 */
+	public void addValue(String value) {
+		valueList.add(value);
+	}
+	
+	public void removeValue(String value) {
+		valueList.remove(value);
+	}
+	
+	/**
+	 * moves a given value up inside the array list
+	 * @param value
+	 */
+	public void moveUp(int i) {
+		if (i>0)
+			Collections.swap(valueList, i, i-1);
+	}
 
-			// if option has label (label|value) cut
-			if (aOption.indexOf('|') > -1) {
-				aOption = aOption.substring(aOption.indexOf('|') + 1).trim();
-			}
-			map.put(aOption, values.indexOf(aOption) > -1);
+	public void moveDown(int i) {
+		if (i<valueList.size()-1) 
+			Collections.swap(valueList, i, i+1);
+	}
+
+	
+	public void replaceValue (String sold,String snew) {
+		int index=valueList.indexOf(sold); 
+		if (index>-1) {
+			valueList.set(index, snew);
+		} else {
+			// old value dos not exist!
+			valueList.add(snew);
 		}
-
 	}
-
-	/**
-	 * returns the state of a option element
-	 * 
-	 * @param aOption
-	 * @return
-	 */
-	public boolean isSelected(String aOption) {
-		return map.get(aOption);
-	}
-
-	/**
-	 * updates the state of a option element
-	 * 
-	 * @param aOption
-	 * @return
-	 */
-	public void setSelection(String aOption, boolean selected) {
-		map.put(aOption, selected);
-	}
-
-	public List<String> getOptionList() {
-		return optionList;
+	
+	public List<String> getValueList() {
+		return valueList;
 	}
 
 	/**
@@ -100,17 +100,9 @@ public class ValueListAdapter {
 	public String getValue() {
 
 		String result = "";
-
-		for (String aOption : optionList) {
-			// if option has label (label|value) cut
-			if (aOption.indexOf('|') > -1) {
-				aOption = aOption.substring(aOption.indexOf('|') + 1).trim();
-			}
-			if (isSelected(aOption)) {
-				result += "<value>" + aOption + "</value>";
-			}
+		for (String aValue : valueList) {
+				result += "<value>" + aValue + "</value>";
 		}
-
 		return result;
 	}
 

@@ -1,5 +1,9 @@
 package org.imixs.bpmn;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -51,4 +55,25 @@ public class Activator extends AbstractUIPlugin {
 		plugin = null;
 		super.stop(context);
 	}
+	
+	
+	
+	
+	/**
+	 * returns an ImageDescriptor to the Image Ressource name
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public ImageDescriptor getIcon(String name) {
+		String iconPath = "icons/";
+		URL pluginUrl = getBundle().getEntry("/");
+		try {
+			return ImageDescriptor.createFromURL(new URL(pluginUrl, iconPath
+					+ name));
+		} catch (MalformedURLException e) {
+			return ImageDescriptor.getMissingImageDescriptor();
+		}
+	}
+
 }
