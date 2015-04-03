@@ -25,7 +25,7 @@
       <customTask
             category="Imixs-Workflow"
             description="Imixs Process Entity"
-            featureContainer="org.imixs.bpmn.ImixsTaskFeatureContainer"
+            featureContainer="org.imixs.bpmn.ImixsFeatureContainerTask"
             icon="process-bubble.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Imixs Task"
@@ -44,7 +44,7 @@
       
        <customTask
              category="Imixs-Workflow"
-             featureContainer="org.imixs.bpmn.ActivityEventDefinitionContainer"
+             featureContainer="org.imixs.bpmn.ImixsFeatureContainerActivity"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
              propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version"

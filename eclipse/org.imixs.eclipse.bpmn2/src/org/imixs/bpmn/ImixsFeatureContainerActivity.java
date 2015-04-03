@@ -1,19 +1,11 @@
 package org.imixs.bpmn;
 
-import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.Bpmn2Factory;
-import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
-import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.ShowPropertiesFeature;
-import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
-import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
-import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer.CreateTaskFeature;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -26,14 +18,11 @@ import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
-import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.services.IGaService;
-import org.eclipse.graphiti.services.IPeService;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.imixs.bpmn.model.ModelPackage;
 
-public class ActivityEventDefinitionContainer extends
+public class ImixsFeatureContainerActivity extends
 		CustomShapeFeatureContainer {
 
 	IntermediateCatchEvent x;

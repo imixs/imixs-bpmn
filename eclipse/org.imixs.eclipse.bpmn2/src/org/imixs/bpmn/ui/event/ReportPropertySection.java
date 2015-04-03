@@ -10,6 +10,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
@@ -55,23 +56,23 @@ public class ReportPropertySection extends AbstractPropertySection {
 			Property metaData = getPropertyByName((BaseElement) be,
 					"txtReportTarget", null, "1");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
-					METADATA_VALUE, optionList);
+					 optionList);
 			aEditor.createControl(this, "Target");
 
 			metaData = getPropertyByName((BaseElement) be, "txtReportName",
 					null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					METADATA_VALUE);
+					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Name");
 
 			metaData = getPropertyByName((BaseElement) be, "txtReportFilePath",
 					null, "");
-			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Filename");
 
 			metaData = getPropertyByName((BaseElement) be, "txtReportParams",
 					null, "");
-			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Parameter");
 
 		}

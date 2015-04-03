@@ -11,7 +11,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.imixs.bpmn.Activator;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
@@ -58,7 +58,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			Property metaData = getPropertyByName((BaseElement) be,
 					"txtactivityresult", "CDATA", "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					METADATA_VALUE);
+					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(this, "Result");
@@ -71,18 +71,17 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			metaData = getPropertyByName((BaseElement) be, "keypublicresult",
 					null, "1");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
-					METADATA_VALUE, optionList);
+					optionList);
 			aEditor.createControl(this, "Visible");
 
 			// Roles
 
 			metaData = getPropertyByName((BaseElement) be, "$readaccess", null,
 					"");
-			ListEditor pluginEditor = new ListEditor(this, metaData,
-					METADATA_VALUE);
+			ListEditor pluginEditor = new ListEditor(this, metaData);
 
-			pluginEditor.setImage(Activator.getDefault()
-					.getIcon("name_obj.gif"));
+			pluginEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
+					"name_obj.gif"));
 			pluginEditor.createControl(this, "Roles");
 
 		}

@@ -10,6 +10,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
@@ -55,16 +56,14 @@ public class VersionPropertySection extends AbstractPropertySection {
 			Property metaData = getPropertyByName((BaseElement) be,
 					"keyVersion", null, "");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
-					METADATA_VALUE, optionList);
+					optionList);
 			aEditor.createControl(this, "Action");
 
-			
-			metaData = getPropertyByName((BaseElement) be, "numVersionActivityID",
-					null, "");
+			metaData = getPropertyByName((BaseElement) be,
+					"numVersionActivityID", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					METADATA_VALUE);
+					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Activity ID");
-
 
 		}
 

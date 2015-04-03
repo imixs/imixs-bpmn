@@ -14,9 +14,8 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.imixs.bpmn.Activator;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.BooleanEditor;
 import org.imixs.bpmn.ui.CheckBoxEditor;
@@ -85,14 +84,13 @@ public class TestPropertySection extends DefaultPropertySection {
 			Property metaData = getPropertyByName((BaseElement) be,
 					"txtSubject", null, "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					METADATA_VALUE);
+					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			// boolean test
 			metaData = getPropertyByName((BaseElement) be, "keyListe", null,
 					"true");
-			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData,
-					METADATA_VALUE);
+			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData);
 			aBooleanEditor.createControl(this, "Was1");
 
 			// checkbox multi test
@@ -103,22 +101,21 @@ public class TestPropertySection extends DefaultPropertySection {
 			metaData = getPropertyByName((BaseElement) be, "keyMultiListe",
 					null, "");
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
-					METADATA_VALUE, optionList);
+					 optionList);
 			aEditor.createControl(this, "Priority");
 
 			// boolean test 2
 			metaData = getPropertyByName((BaseElement) be, "keyListe2", null,
 					"true");
-			aBooleanEditor = new BooleanEditor(this, metaData, METADATA_VALUE);
+			aBooleanEditor = new BooleanEditor(this, metaData);
 			aBooleanEditor.createControl(this, "Was2");
 
 			// plugin editor
 			metaData = getPropertyByName((BaseElement) be, "keyPluginListe",
 					null, "");
-			ListEditor pluginEditor = new ListEditor(this, metaData,
-					METADATA_VALUE);
+			ListEditor pluginEditor = new ListEditor(this, metaData);
 			pluginEditor.setSortable(true);
-			pluginEditor.setImage(Activator.getDefault().getIcon(
+			pluginEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"plugin_obj.gif"));
 			pluginEditor.createControl(this, "Plugins");
 

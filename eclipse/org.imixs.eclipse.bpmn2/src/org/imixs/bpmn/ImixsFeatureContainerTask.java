@@ -1,13 +1,8 @@
 package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.Task;
-import org.eclipse.bpmn2.TextAnnotation;
-import org.eclipse.bpmn2.modeler.core.adapters.ExtendedPropertiesAdapter;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
-import org.eclipse.bpmn2.modeler.core.features.artifact.UpdateTextAnnotationFeature;
-import org.eclipse.bpmn2.modeler.core.features.label.UpdateLabelFeature;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
@@ -19,22 +14,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
-import org.eclipse.graphiti.features.IDirectEditingFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.IReason;
-import org.eclipse.graphiti.features.IResizeShapeFeature;
-import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.context.ICreateContext;
-import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
-import org.eclipse.graphiti.features.impl.Reason;
-import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
-import org.eclipse.graphiti.mm.algorithms.Image;
-import org.eclipse.graphiti.mm.algorithms.Rectangle;
-import org.eclipse.graphiti.mm.algorithms.RoundedRectangle;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
@@ -47,18 +30,11 @@ import org.eclipse.graphiti.util.IColorConstant;
  * @author rsoika
  *
  */
-public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
+public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 	// these values must match what's in the plugin.xml
 	public final static String PROCESSENTITY_TASK_ID = "org.imixs.workflow.bpmn.ProcessEntityTask";
-//	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(255, 204, 0);
-
-	// ok
-//	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
-
-
 	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
-//	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(166, 189, 224);
 
 	
 	/**
@@ -111,6 +87,7 @@ public class ImixsTaskFeatureContainer extends CustomShapeFeatureContainer {
 				return new AddTaskFeature(fp) {
 
 					
+					@SuppressWarnings("unused")
 					@Override
 					protected void decorateShape(IAddContext context, ContainerShape containerShape, Task businessObject) {
 						super.decorateShape(context, containerShape, businessObject);

@@ -4,7 +4,6 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -12,6 +11,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
  * Alternative implementation of the BPMN2 BooleanObjectEditor. This editors
@@ -29,9 +29,8 @@ public class BooleanEditor extends ObjectEditor {
 	 * @param businessObject
 	 * @param feature
 	 */
-	public BooleanEditor(AbstractDetailComposite parent, EObject obj,
-			EStructuralFeature feat) {
-		super(parent, obj, feat);
+	public BooleanEditor(AbstractDetailComposite parent, EObject obj) {
+		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 	}
 
 	protected Control createControl(Composite composite, String label, int style) {

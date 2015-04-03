@@ -7,6 +7,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
@@ -52,13 +53,13 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			Property metaData = getPropertyByName((BaseElement) be,
 					"txtworkflowsummary", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					METADATA_VALUE);
+					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Summary");
 
 			// Abstract
 			metaData = getPropertyByName((BaseElement) be,
 					"txtworkflowabstract", "CDATA", "");
-			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(this, "Abstract");

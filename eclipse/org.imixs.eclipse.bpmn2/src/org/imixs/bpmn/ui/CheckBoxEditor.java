@@ -6,7 +6,6 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -16,6 +15,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
  * This ObjectEditor creates a composite with a list of Check boxes based on a
@@ -36,8 +36,8 @@ public class CheckBoxEditor extends ObjectEditor {
 	 * @param feature
 	 */
 	public CheckBoxEditor(AbstractDetailComposite parent, EObject obj,
-			EStructuralFeature feat, List<String> aoptionList) {
-		super(parent, obj, feat);
+			 List<String> aoptionList) {
+		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 
 		Object v = getBusinessObjectDelegate().getValue(object, feature);
 		if (v == null)

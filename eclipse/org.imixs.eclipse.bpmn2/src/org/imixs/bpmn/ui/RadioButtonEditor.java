@@ -6,7 +6,6 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -16,6 +15,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
  * Implementation of Radio Button widget based on a option list.
@@ -46,8 +46,8 @@ public class RadioButtonEditor extends ObjectEditor {
 	 * @param feature
 	 */
 	public RadioButtonEditor(AbstractDetailComposite parent, EObject obj,
-			EStructuralFeature feat, List<String> aoptionList) {
-		super(parent, obj, feat);
+			 List<String> aoptionList) {
+		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 		optionList = aoptionList;
 	}
 

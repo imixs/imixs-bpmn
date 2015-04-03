@@ -4,7 +4,6 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -21,7 +20,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.imixs.bpmn.Activator;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
  * This ObjectEditor creates a composite with a list of editable values. This
@@ -45,9 +44,8 @@ public class ListEditor extends ObjectEditor {
 	 * @param businessObject
 	 * @param feature
 	 */
-	public ListEditor(AbstractDetailComposite parent, EObject obj,
-			EStructuralFeature feat) {
-		super(parent, obj, feat);
+	public ListEditor(AbstractDetailComposite parent, EObject obj) {
+		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 
 		Object v = getBusinessObjectDelegate().getValue(object, feature);
 		if (v == null)
