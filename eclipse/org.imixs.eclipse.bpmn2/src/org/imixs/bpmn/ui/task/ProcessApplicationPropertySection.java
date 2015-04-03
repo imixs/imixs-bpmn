@@ -18,8 +18,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  * @author rsoika
  *
  */
-public class ProcessApplicationPropertySection extends
-DefaultPropertySection {
+public class ProcessApplicationPropertySection extends DefaultPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -49,25 +48,24 @@ DefaultPropertySection {
 			}
 			setTitle("Application");
 
-			// create a new Property Tab section with a twistie
-			// Composite section = createSectionComposite(this, "Mail Body");
-
-			Property metaData = getPropertyByName((BaseElement) be, "txtForm",null,
-					"Some Form....");
+			// Input Form
+			Property metaData = getPropertyByName((BaseElement) be,
+					"txteditorid", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
-			valueEditor.createControl(this, "Subject2");
-			
-			
-			
-			this.bindAttribute(this,be, "name");
-			this.bindAttribute(this,be, "processid");
+			valueEditor.createControl(this, "Input Form");
 
-			//bindReference(be, "documentation");
-		//	bindList(be, "documentation"); //$NON-NLS-1$
-			//bindDescription(be);
-			
-			
+			// Image URL
+			metaData = getPropertyByName((BaseElement) be, "txtimageurl", null,
+					"");
+			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor.createControl(this, "Status Icon");
+
+			// Type
+			metaData = getPropertyByName((BaseElement) be, "txttype", null, "");
+			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor.createControl(this, "Workitem Tpye");
+
 		}
 
 	}

@@ -14,16 +14,19 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.imixs.bpmn.Activator;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.BooleanEditor;
 import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
-import org.imixs.bpmn.ui.PluginEditor;
+import org.imixs.bpmn.ui.ListEditor;
 
 /**
- * This PorpertySection provides the attributes for the main workflow configuration.
- * The property section is activated for process or Collaboration selections.
+ * This PorpertySection provides the attributes for the main workflow
+ * configuration. The property section is activated for process or Collaboration
+ * selections.
  * 
  * @author rsoika
  *
@@ -46,8 +49,8 @@ public class TestPropertySection extends DefaultPropertySection {
 	 * the diagram type and can not be configured by the type attribute of the
 	 * propertyTab extension point.
 	 * 
-	 * As we only want to set the properties once in a bpmn file with select
-	 * the definitions object here.
+	 * As we only want to set the properties once in a bpmn file with select the
+	 * definitions object here.
 	 * 
 	 */
 	@Override
@@ -80,53 +83,45 @@ public class TestPropertySection extends DefaultPropertySection {
 			setTitle("Imixs");
 
 			Property metaData = getPropertyByName((BaseElement) be,
-					"txtSubject",null, "Some Subject....");
+					"txtSubject", null, "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			// boolean test
-			metaData = getPropertyByName((BaseElement) be, "keyListe",null, "true");
+			metaData = getPropertyByName((BaseElement) be, "keyListe", null,
+					"true");
 			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData,
 					METADATA_VALUE);
 			aBooleanEditor.createControl(this, "Was1");
 
-			
-			
-			
 			// checkbox multi test
 			List<String> optionList = new ArrayList<String>();
 			optionList.add("Small|1");
 			optionList.add("Medium|2");
 			optionList.add("Large|3");
-			metaData = getPropertyByName((BaseElement) be, "keyMultiListe",null, "");
+			metaData = getPropertyByName((BaseElement) be, "keyMultiListe",
+					null, "");
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
 					METADATA_VALUE, optionList);
 			aEditor.createControl(this, "Priority");
-		
-			
-			
-			
-			
+
 			// boolean test 2
-			metaData = getPropertyByName((BaseElement) be, "keyListe2",null, "true");
-			 aBooleanEditor = new BooleanEditor(this, metaData,
-					METADATA_VALUE);
+			metaData = getPropertyByName((BaseElement) be, "keyListe2", null,
+					"true");
+			aBooleanEditor = new BooleanEditor(this, metaData, METADATA_VALUE);
 			aBooleanEditor.createControl(this, "Was2");
 
-		
-			
-			
 			// plugin editor
-			metaData = getPropertyByName((BaseElement) be, "keyPluginListe",null, "");
-			PluginEditor pluginEditor = new PluginEditor(this, metaData,
+			metaData = getPropertyByName((BaseElement) be, "keyPluginListe",
+					null, "");
+			ListEditor pluginEditor = new ListEditor(this, metaData,
 					METADATA_VALUE);
+			pluginEditor.setSortable(true);
+			pluginEditor.setImage(Activator.getDefault().getIcon(
+					"plugin_obj.gif"));
 			pluginEditor.createControl(this, "Plugins");
-			
-			
-		
-			
-		
+
 		}
 
 	}

@@ -19,7 +19,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  *
  */
 public class MailPropertySection extends DefaultPropertySection {
-	
+
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
 		return new MailDetailComposite(this);
@@ -47,31 +47,26 @@ public class MailPropertySection extends DefaultPropertySection {
 			setTitle("Mail Configuration");
 
 			// create a new Property Tab section with a twistie
-		//	Composite section = createSectionComposite(this, "Mail Body");
+			// Composite section = createSectionComposite(this, "Mail Body");
 
 			Property metaData = getPropertyByName((BaseElement) be,
-					"txtSubject",null, "Some Subject....");
+					"txtSubject", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
 			valueEditor.createControl(this, "Subject");
 
-			metaData = getPropertyByName((BaseElement) be,
-					"txtBody","CDATA", "Mail Body....");
 			
-			
-			
-			 valueEditor = new TextObjectEditor(this,
-					metaData, METADATA_VALUE);
-			 valueEditor.setMultiLine(true);
+			// Body
+			metaData = getPropertyByName((BaseElement) be, "txtBody", "CDATA",
+					"");
+			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor.setMultiLine(true);
 
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(this, "Body");
 
-				
-			
 		}
 
-	
 	}
 
 }

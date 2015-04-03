@@ -6,6 +6,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.model.Property;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
@@ -16,7 +17,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  * @author rsoika
  *
  */
-public class ProcessSummaryPropertySection extends DefaultPropertySection {
+public class ProcessWorkflowPropertySection extends DefaultPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -40,17 +41,25 @@ public class ProcessSummaryPropertySection extends DefaultPropertySection {
 
 		@Override
 		public void createBindings(EObject be) {
-			setTitle("Application");
+			setTitle("Workflow");
 
-			// create a new Property Tab section with a twistie
-			// Composite section = createSectionComposite(this, "Mail Body");
+			// ProcessID
+			this.bindAttribute(this,be, "processid");
 
-			Property metaData = getPropertyByName((BaseElement) be, "txtSummary",null,
-					"Summ Form....");
+			// Summary
+			Property metaData = getPropertyByName((BaseElement) be,
+					"txtworkflowsummary", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					METADATA_VALUE);
 			valueEditor.createControl(this, "Summary");
 
+			// Abstract
+			metaData = getPropertyByName((BaseElement) be,
+					"txtworkflowabstract", "CDATA", "");
+			valueEditor = new TextObjectEditor(this, metaData, METADATA_VALUE);
+			valueEditor.setMultiLine(true);
+			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
+			valueEditor.createControl(this, "Abstract");
 
 		}
 
