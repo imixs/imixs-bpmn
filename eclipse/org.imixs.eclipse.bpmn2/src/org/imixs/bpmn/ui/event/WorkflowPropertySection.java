@@ -7,7 +7,6 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
-import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
@@ -24,7 +23,7 @@ import org.imixs.bpmn.ui.RadioButtonEditor;
  * @author rsoika
  *
  */
-public class WorkflowPropertySection extends DefaultPropertySection {
+public class WorkflowPropertySection extends AbstractPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {

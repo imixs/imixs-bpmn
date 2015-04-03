@@ -4,9 +4,7 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
-import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
-import org.eclipse.bpmn2.modeler.core.preferences.Bpmn2Preferences;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.model.Property;
@@ -18,7 +16,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  * @author rsoika
  *
  */
-public class ProcessApplicationPropertySection extends DefaultPropertySection {
+public class ProcessApplicationPropertySection extends AbstractProcessPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -30,6 +28,7 @@ public class ProcessApplicationPropertySection extends DefaultPropertySection {
 		return new ApplicationDetailComposite(parent, style);
 	}
 
+	
 	public class ApplicationDetailComposite extends ImixsDetailComposite {
 
 		public ApplicationDetailComposite(AbstractBpmn2PropertySection section) {

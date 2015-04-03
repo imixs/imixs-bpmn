@@ -3,7 +3,6 @@ package org.imixs.bpmn.ui.task;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
-import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
@@ -17,7 +16,9 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
  * @author rsoika
  *
  */
-public class ProcessWorkflowPropertySection extends DefaultPropertySection {
+public class ProcessWorkflowPropertySection extends AbstractProcessPropertySection {
+
+	public final static String REPLACE_PROPERTY_TAB_ID = "org.eclipse.bpmn2.modeler.activity.io.tab";
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -29,6 +30,7 @@ public class ProcessWorkflowPropertySection extends DefaultPropertySection {
 		return new SummaryDetailComposite(parent, style);
 	}
 
+	
 	public class SummaryDetailComposite extends ImixsDetailComposite {
 
 		public SummaryDetailComposite(AbstractBpmn2PropertySection section) {
@@ -44,7 +46,7 @@ public class ProcessWorkflowPropertySection extends DefaultPropertySection {
 			setTitle("Workflow");
 
 			// ProcessID
-			this.bindAttribute(this,be, "processid");
+			this.bindAttribute(this, be, "processid");
 
 			// Summary
 			Property metaData = getPropertyByName((BaseElement) be,
