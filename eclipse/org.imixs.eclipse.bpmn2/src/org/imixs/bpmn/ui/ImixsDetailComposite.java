@@ -7,7 +7,6 @@ import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.modeler.core.adapters.InsertionAdapter;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.swt.widgets.Composite;
@@ -47,6 +46,13 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 	 */
 	protected Property getPropertyByName(BaseElement be, String itemName, String itemType,
 			String defaultValue) {
+		
+		if (itemName==null)
+			return null;
+		
+		// lowercase itemname
+		itemName=itemName.toLowerCase();
+		
 		Property property = (Property) findPropertyByName(be,
 				METADATA_FEATURE, itemName);
 		if (property == null) {
@@ -86,6 +92,9 @@ public abstract class ImixsDetailComposite  extends AbstractDetailComposite {
 	 */
 	private Property findPropertyByName(BaseElement be,
 			EStructuralFeature feature, String itemName) {
+		
+		itemName=itemName.toLowerCase();
+		
 		for (ExtensionAttributeValue eav : be.getExtensionValues()) {
 			// check all extensionAttribute values...
 			for (FeatureMap.Entry entry : eav.getValue()) {

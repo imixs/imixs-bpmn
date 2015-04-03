@@ -62,7 +62,7 @@ public class RadioButtonEditor extends ObjectEditor {
 		editorComposite = new Composite(composite, SWT.NONE);
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		editorComposite.setLayoutData(data);
-		editorComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
 
 		String sCurrentValue = getValue();
 

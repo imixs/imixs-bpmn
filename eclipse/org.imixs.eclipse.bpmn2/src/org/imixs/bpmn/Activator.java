@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -65,15 +66,25 @@ public class Activator extends AbstractUIPlugin {
 	 * @param name
 	 * @return
 	 */
-	public ImageDescriptor getIcon(String name) {
+	public Image getIcon(String name) {
+		
+		ImageDescriptor imd=null;
+		
+		
 		String iconPath = "icons/";
 		URL pluginUrl = getBundle().getEntry("/");
 		try {
-			return ImageDescriptor.createFromURL(new URL(pluginUrl, iconPath
+			imd= ImageDescriptor.createFromURL(new URL(pluginUrl, iconPath
 					+ name));
 		} catch (MalformedURLException e) {
-			return ImageDescriptor.getMissingImageDescriptor();
+			imd= ImageDescriptor.getMissingImageDescriptor();
 		}
+		
+		if (imd!=null)
+			return imd.createImage();
+		else
+			return null;
+		
 	}
 
 }
