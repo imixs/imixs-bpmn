@@ -53,7 +53,7 @@ public class HistoryPropertySection extends AbstractPropertySection {
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
-			valueEditor.createControl(this, "History");
+			valueEditor.createControl(attributesComposite, "History");
 
 		}
 

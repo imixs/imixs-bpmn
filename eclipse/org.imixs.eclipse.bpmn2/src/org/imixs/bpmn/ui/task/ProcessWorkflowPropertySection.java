@@ -47,14 +47,14 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			setTitle("Workflow");
 
 			// ProcessID
-			this.bindAttribute(this, be, "processid");
+			this.bindAttribute(attributesComposite, be, "processid");
 
 			// Summary
 			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtworkflowsummary", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Summary");
+			valueEditor.createControl(attributesComposite, "Summary");
 
 			// Abstract
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
@@ -62,7 +62,7 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
-			valueEditor.createControl(this, "Abstract");
+			valueEditor.createControl(attributesComposite, "Abstract");
 
 		}
 

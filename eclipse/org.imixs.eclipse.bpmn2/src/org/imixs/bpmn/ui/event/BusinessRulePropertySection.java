@@ -46,14 +46,11 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			}
 			setTitle("Business Rule");
 
-			// create a new Property Tab section with a twistie
-			// Composite section = createSectionComposite(this, "Mail Body");
-
 			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtBusinessRuleEngine", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Engine");
+			valueEditor.createControl(attributesComposite, "Engine");
 
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtBusinessRule",
 					"CDATA", "");
@@ -61,7 +58,7 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			valueEditor.setMultiLine(true);
 
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
-			valueEditor.createControl(this, "Rule");
+			valueEditor.createControl(attributesComposite, "Rule");
 
 		}
 

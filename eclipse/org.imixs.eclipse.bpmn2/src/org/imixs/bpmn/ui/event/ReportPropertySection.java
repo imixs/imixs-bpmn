@@ -57,23 +57,23 @@ public class ReportPropertySection extends AbstractPropertySection {
 					"txtReportTarget", null, "1");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
 					 optionList);
-			aEditor.createControl(this, "Target");
+			aEditor.createControl(attributesComposite, "Target");
 
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportName",
 					null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Name");
+			valueEditor.createControl(attributesComposite, "Name");
 
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportFilePath",
 					null, "");
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Filename");
+			valueEditor.createControl(attributesComposite, "Filename");
 
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportParams",
 					null, "");
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Parameter");
+			valueEditor.createControl(attributesComposite, "Parameter");
 
 		}
 

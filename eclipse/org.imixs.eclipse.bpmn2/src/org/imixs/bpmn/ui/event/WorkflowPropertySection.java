@@ -52,7 +52,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			setTitle("Basic");
 
 			// ProcessID
-			this.bindAttribute(this, be, "activityid", "ID");
+			this.bindAttribute(attributesComposite, be, "activityid", "ID");
 
 			// Result
 			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
@@ -61,7 +61,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
-			valueEditor.createControl(this, "Result");
+			valueEditor.createControl(attributesComposite, "Result");
 
 			// visibility and roles
 			List<String> optionList = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 					null, "1");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
 					optionList);
-			aEditor.createControl(this, "Visible");
+			aEditor.createControl(attributesComposite, "Visible");
 
 			// Roles
 
@@ -82,7 +82,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 
 			pluginEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"name_obj.gif"));
-			pluginEditor.createControl(this, "Roles");
+			pluginEditor.createControl(attributesComposite, "Roles");
 
 		}
 

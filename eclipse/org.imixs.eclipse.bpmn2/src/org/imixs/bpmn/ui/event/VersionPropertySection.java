@@ -57,13 +57,13 @@ public class VersionPropertySection extends AbstractPropertySection {
 					"keyVersion", null, "");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
 					optionList);
-			aEditor.createControl(this, "Action");
+			aEditor.createControl(attributesComposite, "Action");
 
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"numVersionActivityID", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Activity ID");
+			valueEditor.createControl(attributesComposite, "Activity ID");
 
 		}
 

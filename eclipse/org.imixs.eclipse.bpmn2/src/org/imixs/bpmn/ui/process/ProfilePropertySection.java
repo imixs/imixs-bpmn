@@ -85,7 +85,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 					(BaseElement) be, "txtWorkflowModelVersion", null, "0.0.1");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Model Version");
+			valueEditor.createControl(attributesComposite, "Model Version");
 
 			// Timer Mappings editor
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
@@ -94,7 +94,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"name_obj.gif"));
-			listEditor.createControl(this, "Actor Properties");
+			listEditor.createControl(attributesComposite, "Actor Properties");
 
 			// FieldMapping Actors editor
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
@@ -103,7 +103,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"time_obj.gif"));
-			listEditor.createControl(this, "Date Properties");
+			listEditor.createControl(attributesComposite, "Date Properties");
 
 			// plugin editor
 			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
@@ -112,7 +112,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"plugin_obj.gif"));
-			listEditor.createControl(this, "Plugins");
+			listEditor.createControl(attributesComposite, "Plugins");
 
 		}
 
