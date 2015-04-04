@@ -37,22 +37,26 @@
                label="ID"
                name="processid"
                type="EInt"
-               value="100">
+               value="0">
          </property>
       </customTask>
       
-      
+      <!-- org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version 
+      -->
        <customTask
              category="Imixs-Workflow"
              featureContainer="org.imixs.bpmn.ImixsFeatureContainerActivity"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Imixs Activity"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version"
+             propertyTabs="org.imixs.bpmn.propertytab.event.history"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
+           		description="Workflow Activity ID"
+                label="ID"
                 name="activityid"
-                type="EInt">
+                type="EInt"
+                value="0">
           </property>            
       </customTask>
       

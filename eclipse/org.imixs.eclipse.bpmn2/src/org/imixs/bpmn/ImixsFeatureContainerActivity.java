@@ -27,8 +27,8 @@ public class ImixsFeatureContainerActivity extends
 
 	IntermediateCatchEvent x;
 	// these values must match what's in the plugin.xml
-	public final static String ACTIVITYNTITY_TASK_ID = "org.imixs.workflow.bpmn.ActivityEntityEvent";
-	final static EStructuralFeature METADATA_FEATURE = ModelPackage.eINSTANCE.getDocumentRoot_Property();
+	public final static String ACTIVITYENTITY_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityEvent";
+	//final static EStructuralFeature METADATA_FEATURE = ModelPackage.eINSTANCE.getDocumentRoot_Property();
 
 	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
 
@@ -47,7 +47,7 @@ public class ImixsFeatureContainerActivity extends
 			if (ImixsRuntimeExtension.targetNamespace
 					.equals(((EAttributeImpl) feature).getExtendedMetaData()
 							.getNamespace())) {
-				return ACTIVITYNTITY_TASK_ID;
+				return ACTIVITYENTITY_EVENT_ID;
 			}
 		}
 
