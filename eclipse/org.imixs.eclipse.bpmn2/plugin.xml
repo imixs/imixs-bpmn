@@ -139,9 +139,9 @@
        
        <!-- WorkflowGroup Tab -->
        <propertyTab
-            class="org.imixs.bpmn.ui.process.TestPropertySection"
+            class="org.imixs.bpmn.ui.process.ProfilePropertySection"
             id="org.imixs.bpmn.propertytab.process.workflow"
-            label="WorkflowGroup"
+            label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration">
       </propertyTab>

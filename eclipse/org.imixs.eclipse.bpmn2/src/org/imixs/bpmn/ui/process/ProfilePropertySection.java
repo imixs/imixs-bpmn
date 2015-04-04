@@ -30,7 +30,7 @@ import org.imixs.bpmn.ui.ListEditor;
  * @author rsoika
  *
  */
-public class TestPropertySection extends DefaultPropertySection {
+public class ProfilePropertySection extends DefaultPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
@@ -79,45 +79,40 @@ public class TestPropertySection extends DefaultPropertySection {
 		@Override
 		public void createBindings(EObject be) {
 
-			setTitle("Imixs");
+			setTitle("Workflow Profile");
 
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"txtSubject", null, "Some Subject....");
+			Property metaData = ImixsBPMNPlugin.getPropertyByName(
+					(BaseElement) be, "txtWorkflowModelVersion", null, "0.0.1");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-			valueEditor.createControl(this, "Subject");
+			valueEditor.createControl(this, "Model Version");
 
-			// boolean test
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyListe", null,
-					"true");
-			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData);
-			aBooleanEditor.createControl(this, "Was1");
+			// Timer Mappings editor
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+					"txtFieldMapping", null, "");
+			ListEditor listEditor = new ListEditor(this, metaData);
+			listEditor.setSortable(true);
+			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
+					"name_obj.gif"));
+			listEditor.createControl(this, "Actor Properties");
 
-			// checkbox multi test
-			List<String> optionList = new ArrayList<String>();
-			optionList.add("Small|1");
-			optionList.add("Medium|2");
-			optionList.add("Large|3");
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyMultiListe",
-					null, "");
-			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
-					 optionList);
-			aEditor.createControl(this, "Priority");
-
-			// boolean test 2
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyListe2", null,
-					"true");
-			aBooleanEditor = new BooleanEditor(this, metaData);
-			aBooleanEditor.createControl(this, "Was2");
+			// FieldMapping Actors editor
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+					"txtTimeFieldMapping", null, "");
+			listEditor = new ListEditor(this, metaData);
+			listEditor.setSortable(true);
+			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
+					"time_obj.gif"));
+			listEditor.createControl(this, "Date Properties");
 
 			// plugin editor
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyPluginListe",
-					null, "");
-			ListEditor pluginEditor = new ListEditor(this, metaData);
-			pluginEditor.setSortable(true);
-			pluginEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+					"txtPlugins", null, "");
+			listEditor = new ListEditor(this, metaData);
+			listEditor.setSortable(true);
+			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"plugin_obj.gif"));
-			pluginEditor.createControl(this, "Plugins");
+			listEditor.createControl(this, "Plugins");
 
 		}
 

@@ -79,14 +79,16 @@ public class ListEditor extends ObjectEditor {
 			int style) {
 
 		// create a separate label to the LEFT of the checkbox set
-		Label labelWidget = getToolkit().createLabel(parentcomposite, label);
-		labelWidget.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
-				false, 1, 1));
-		updateLabelDecorator();
+		if (label!=null) {
+			Label labelWidget = getToolkit().createLabel(parentcomposite, label);
+			labelWidget.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
+					false, 1, 1));
+			updateLabelDecorator();
+		}
 
 		// == editor composite
 		editorComposite = new Composite(parentcomposite, SWT.NONE);
-		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 		editorComposite.setLayoutData(data);
 		editorComposite.setBackground(Display.getDefault().getSystemColor(
 				SWT.COLOR_LIST_BACKGROUND));

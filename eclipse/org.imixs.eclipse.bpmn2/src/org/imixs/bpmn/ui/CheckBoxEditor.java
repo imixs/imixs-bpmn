@@ -54,13 +54,14 @@ public class CheckBoxEditor extends ObjectEditor {
 	protected Control createControl(Composite composite, String label, int style) {
 
 		// create a separate label to the LEFT of the checkbox set
+		if (label!=null) {
 		Label labelWidget = getToolkit().createLabel(composite, label);
 		labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
 				false, 1, 1));
 		updateLabelDecorator();
-
+		}
 		editorComposite = new Composite(composite, SWT.NONE);
-		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 		editorComposite.setLayoutData(data);
 		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
 		
