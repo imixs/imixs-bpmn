@@ -47,7 +47,7 @@ public class HistoryPropertySection extends AbstractPropertySection {
 			setTitle("Process History");
 
 			// Body
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"rtfresultlog", "CDATA", "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);

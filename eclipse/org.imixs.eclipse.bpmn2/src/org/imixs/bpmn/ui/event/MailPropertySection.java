@@ -51,14 +51,14 @@ public class MailPropertySection extends AbstractPropertySection {
 			}
 			setTitle("Mail Configuration");
 
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtSubject", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			// Body
-			metaData = getPropertyByName((BaseElement) be, "txtBody", "CDATA",
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtBody", "CDATA",
 					"");
 			valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
@@ -82,7 +82,7 @@ public class MailPropertySection extends AbstractPropertySection {
 				optionList = adapter.getValueList();
 			}
 
-			metaData = getPropertyByName((BaseElement) be, "nammailreceiver",
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "nammailreceiver",
 					null, "");
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
 					optionList);

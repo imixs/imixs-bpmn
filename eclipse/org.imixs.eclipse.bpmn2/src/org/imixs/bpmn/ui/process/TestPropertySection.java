@@ -81,14 +81,14 @@ public class TestPropertySection extends DefaultPropertySection {
 
 			setTitle("Imixs");
 
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtSubject", null, "Some Subject....");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Subject");
 
 			// boolean test
-			metaData = getPropertyByName((BaseElement) be, "keyListe", null,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyListe", null,
 					"true");
 			BooleanEditor aBooleanEditor = new BooleanEditor(this, metaData);
 			aBooleanEditor.createControl(this, "Was1");
@@ -98,20 +98,20 @@ public class TestPropertySection extends DefaultPropertySection {
 			optionList.add("Small|1");
 			optionList.add("Medium|2");
 			optionList.add("Large|3");
-			metaData = getPropertyByName((BaseElement) be, "keyMultiListe",
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyMultiListe",
 					null, "");
 			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
 					 optionList);
 			aEditor.createControl(this, "Priority");
 
 			// boolean test 2
-			metaData = getPropertyByName((BaseElement) be, "keyListe2", null,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyListe2", null,
 					"true");
 			aBooleanEditor = new BooleanEditor(this, metaData);
 			aBooleanEditor.createControl(this, "Was2");
 
 			// plugin editor
-			metaData = getPropertyByName((BaseElement) be, "keyPluginListe",
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keyPluginListe",
 					null, "");
 			ListEditor pluginEditor = new ListEditor(this, metaData);
 			pluginEditor.setSortable(true);

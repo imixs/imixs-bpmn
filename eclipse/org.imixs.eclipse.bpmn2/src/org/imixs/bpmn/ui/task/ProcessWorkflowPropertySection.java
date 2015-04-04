@@ -50,14 +50,14 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			this.bindAttribute(this, be, "processid");
 
 			// Summary
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtworkflowsummary", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Summary");
 
 			// Abstract
-			metaData = getPropertyByName((BaseElement) be,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtworkflowabstract", "CDATA", "");
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.setMultiLine(true);

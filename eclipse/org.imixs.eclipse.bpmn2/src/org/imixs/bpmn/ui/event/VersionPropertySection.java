@@ -53,13 +53,13 @@ public class VersionPropertySection extends AbstractPropertySection {
 			optionList.add("no Version (default) |0");
 			optionList.add("create a new Version|1");
 			optionList.add("convert to Master Version |2");
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"keyVersion", null, "");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
 					optionList);
 			aEditor.createControl(this, "Action");
 
-			metaData = getPropertyByName((BaseElement) be,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"numVersionActivityID", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);

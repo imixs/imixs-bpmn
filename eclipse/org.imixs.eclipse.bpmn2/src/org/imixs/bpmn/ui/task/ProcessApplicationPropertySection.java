@@ -49,20 +49,20 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			setTitle("Application");
 
 			// Input Form
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txteditorid", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Input Form");
 
 			// Image URL
-			metaData = getPropertyByName((BaseElement) be, "txtimageurl", null,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtimageurl", null,
 					"");
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Status Icon");
 
 			// Type
-			metaData = getPropertyByName((BaseElement) be, "txttype", null, "");
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txttype", null, "");
 			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
 			valueEditor.createControl(this, "Workitem Tpye");
 

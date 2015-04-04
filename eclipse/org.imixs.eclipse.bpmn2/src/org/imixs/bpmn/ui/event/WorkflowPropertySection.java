@@ -55,7 +55,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			this.bindAttribute(this, be, "activityid", "ID");
 
 			// Result
-			Property metaData = getPropertyByName((BaseElement) be,
+			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
 					"txtactivityresult", "CDATA", "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
 					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
@@ -68,7 +68,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 
 			optionList.add("No | 0");
 			optionList.add("Yes | 1");
-			metaData = getPropertyByName((BaseElement) be, "keypublicresult",
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keypublicresult",
 					null, "1");
 			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
 					optionList);
@@ -76,7 +76,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 
 			// Roles
 
-			metaData = getPropertyByName((BaseElement) be, "$readaccess", null,
+			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "$readaccess", null,
 					"");
 			ListEditor pluginEditor = new ListEditor(this, metaData);
 
