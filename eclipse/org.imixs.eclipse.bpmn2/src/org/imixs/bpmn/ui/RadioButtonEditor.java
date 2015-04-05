@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Layout;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
@@ -40,6 +41,7 @@ public class RadioButtonEditor extends ObjectEditor {
 
 	protected Composite editorComposite;
 	protected List<String> optionList;
+	private Layout layout=null;
 
 	/**
 	 * @param businessObject
@@ -51,6 +53,10 @@ public class RadioButtonEditor extends ObjectEditor {
 		optionList = aoptionList;
 	}
 
+	public void setLayout(Layout layout) {
+		this.layout = layout;
+	}
+
 	protected Control createControl(Composite composite, String label, int style) {
 
 		// create a separate label to the LEFT of the checkbox set
@@ -60,9 +66,13 @@ public class RadioButtonEditor extends ObjectEditor {
 		updateLabelDecorator();
 
 		editorComposite = new Composite(composite, SWT.NONE);
-		GridData data = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
+		GridData data = new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1);
 		editorComposite.setLayoutData(data);
-		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
+		
+		if (layout!=null)
+			editorComposite.setLayout(layout);
+		else
+			editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
 
 		String sCurrentValue = getValue();
 

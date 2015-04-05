@@ -24,11 +24,11 @@
       -->
       <customTask
             category="Imixs-Workflow"
-            description="Imixs Process Entity"
+            description="A Workflow Task describes the process performed by a human user. The task is managed by the Imixs-Workflow Engine and provides properties which are describing the status of this task inside the Workflow Engine."
             featureContainer="org.imixs.bpmn.ImixsFeatureContainerTask"
             icon="process-bubble.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
-            name="Imixs Task"
+            name="Workflow Task"
             propertyTabs="org.imixs.bpmn.propertytab.task.workflow org.imixs.bpmn.propertytab.task.application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
@@ -41,14 +41,15 @@
          </property>
       </customTask>
       
-      <!-- org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version 
+      <!--  
       -->
        <customTask
              category="Imixs-Workflow"
+             description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
              featureContainer="org.imixs.bpmn.ImixsFeatureContainerActivity"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
-             name="Imixs Activity"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history"
+             name="Workflow Event"
+             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
@@ -107,6 +108,15 @@
             class="org.imixs.bpmn.ui.event.VersionPropertySection"
             id="org.imixs.bpmn.propertytab.event.version"
             label="Version"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
+      
+       <propertyTab
+            afterTab="org.imixs.bpmn.propertytab.event.version"
+            class="org.imixs.bpmn.ui.event.TimerPropertySection"
+            id="org.imixs.bpmn.propertytab.event.timer"
+            label="Timer"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
