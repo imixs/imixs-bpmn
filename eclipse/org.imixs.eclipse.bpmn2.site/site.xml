@@ -4,7 +4,7 @@
    <description name="Imixs Workflow" url="http://www.imixs.org/org.imixs.eclipse.updatesite/site.xml">
       The Imixs.org Updatesite provides tools for building workflowsystems and modeling business cases .
    </description>
-   <feature url="features/org.imixs.eclipse.bpmn2.feature_1.0.0.201504060004.jar" id="org.imixs.eclipse.bpmn2.feature" version="1.0.0.201504060004">
+   <feature url="features/org.imixs.eclipse.bpmn2.feature_1.0.0.201504071638.jar" id="org.imixs.eclipse.bpmn2.feature" version="1.0.0.201504071638">
       <category name="org.imixs.eclipse.bpmn2"/>
    </feature>
    <category-def name="org.imixs.eclipse.bpmn2" label="Imixs-Workflow BPMN2"/>

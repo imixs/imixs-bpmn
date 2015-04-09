@@ -117,11 +117,11 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 *   provide your own images for the tool palette by overriding getCreateImageId() and
 			 *   getCreateLargeImageId() in your Create Feature.
 			 */
-			@Override
-			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-				return new CreateTaskFeature(fp) {
-				};
-			}
+//			@Override
+//			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+//				return new CreateTaskFeature(fp) {
+//				};
+//			}
 
 
 			/**
