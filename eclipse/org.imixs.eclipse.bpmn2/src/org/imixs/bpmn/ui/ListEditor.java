@@ -1,9 +1,13 @@
 package org.imixs.bpmn.ui;
 
+import java.util.Collections;
+import java.util.Iterator;
+
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -21,6 +25,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.imixs.bpmn.ImixsBPMNPlugin;
+import org.imixs.bpmn.model.Item;
+import org.imixs.bpmn.model.ModelFactory;
+import org.imixs.bpmn.model.Value;
 
 /**
  * This ObjectEditor creates a composite with a list of editable values. This
@@ -33,10 +40,11 @@ import org.imixs.bpmn.ImixsBPMNPlugin;
  */
 public class ListEditor extends ObjectEditor {
 	protected Composite editorComposite;
-	protected ValueListAdapter valueListAdapter;
+	// protected ValueListAdapter valueListAdapter;
 	Image image;
 	boolean sortable = false;
 	Table table;
+	Item item = null;
 
 	/**
 	 * Initialize the default values...
@@ -44,13 +52,16 @@ public class ListEditor extends ObjectEditor {
 	 * @param businessObject
 	 * @param feature
 	 */
-	public ListEditor(AbstractDetailComposite parent, EObject obj) {
-		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+	public ListEditor(AbstractDetailComposite parent, Item item) {
+		super(parent, item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE);
 
-		Object v = getBusinessObjectDelegate().getValue(object, feature);
-		if (v == null)
-			v = "";
-		valueListAdapter = new ValueListAdapter(v.toString());
+		this.item = item;
+
+		// Object v = getBusinessObjectDelegate().getValue(object, feature);
+		// if (v == null)
+		// v = "";
+		// valueListAdapter = new ValueListAdapter(v.toString());
+		// valueListAdapter = new ValueListAdapter(item);
 
 	}
 
@@ -79,8 +90,9 @@ public class ListEditor extends ObjectEditor {
 			int style) {
 
 		// create a separate label to the LEFT of the checkbox set
-		if (label!=null) {
-			Label labelWidget = getToolkit().createLabel(parentcomposite, label);
+		if (label != null) {
+			Label labelWidget = getToolkit()
+					.createLabel(parentcomposite, label);
 			labelWidget.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
 					false, 1, 1));
 			updateLabelDecorator();
@@ -124,8 +136,7 @@ public class ListEditor extends ObjectEditor {
 				InputDialog inputDlg = new InputDialog(shell, "Add Entry",
 						"New value", "", null);
 				if (inputDlg.open() == InputDialog.OK) {
-					valueListAdapter.addValue(inputDlg.getValue());
-					setValue(valueListAdapter.getValue());
+					addValue(inputDlg.getValue());
 					updateTable();
 				}
 			}
@@ -138,8 +149,7 @@ public class ListEditor extends ObjectEditor {
 			public void widgetSelected(SelectionEvent e) {
 				int iCurrent = table.getSelectionIndex();
 				String sCurrent = table.getItems()[iCurrent].getText();
-				valueListAdapter.removeValue(sCurrent);
-				setValue(valueListAdapter.getValue());
+				removeValue(sCurrent);
 				updateTable();
 
 			}
@@ -156,9 +166,7 @@ public class ListEditor extends ObjectEditor {
 							"New value", sOldValue, null);
 					if (inputDlg.open() == InputDialog.OK) {
 						String sNewValue = inputDlg.getValue();
-
-						valueListAdapter.replaceValue(sOldValue, sNewValue);
-						setValue(valueListAdapter.getValue());
+						replaceValue(sOldValue, sNewValue);
 						updateTable();
 					}
 				}
@@ -173,8 +181,7 @@ public class ListEditor extends ObjectEditor {
 				public void widgetSelected(SelectionEvent e) {
 					int iCurrent = table.getSelectionIndex();
 					if (iCurrent > 0) {
-						valueListAdapter.moveUp(iCurrent);
-						setValue(valueListAdapter.getValue());
+						moveUp(iCurrent);
 						updateTable();
 						table.select(iCurrent - 1);
 					}
@@ -187,9 +194,9 @@ public class ListEditor extends ObjectEditor {
 			button.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					int iCurrent = table.getSelectionIndex();
-					if (iCurrent < valueListAdapter.valueList.size() - 1) {
-						valueListAdapter.moveDown(iCurrent);
-						setValue(valueListAdapter.getValue());
+					if (iCurrent < item.getValuelist().size() - 1) {
+						moveDown(iCurrent);
+
 						updateTable();
 						table.select(iCurrent + 1);
 					}
@@ -199,13 +206,118 @@ public class ListEditor extends ObjectEditor {
 		return editorComposite;
 	}
 
+	public void addValue(final String newvalue) {
+		TransactionalEditingDomain domain = getDiagramEditor()
+				.getEditingDomain();
+		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
+			protected void doExecute() {
+
+				// insert a new value element
+				Value value = ModelFactory.eINSTANCE.createValue();
+				value.setValue(newvalue);
+				item.getValuelist().add(value);
+
+			}
+		});
+	}
+
+	public void removeValue(final String sCurrent) {
+		TransactionalEditingDomain domain = getDiagramEditor()
+				.getEditingDomain();
+		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
+			protected void doExecute() {
+
+				// iterate over all item values
+				Iterator<Value> iter = item.getValuelist().iterator();
+				while (iter.hasNext()) {
+
+					Value val = iter.next();
+					if (sCurrent.equals(val.getValue())) {
+						item.getValuelist().remove(val);
+						break;
+					}
+				}
+			}
+		});
+	}
+
+	public void replaceValue(final String sold, final String snew) {
+		TransactionalEditingDomain domain = getDiagramEditor()
+				.getEditingDomain();
+		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
+			protected void doExecute() {
+
+				// find position
+				// iterate over all item values
+				Iterator<Value> iter = item.getValuelist().iterator();
+				while (iter.hasNext()) {
+					Value val = iter.next();
+					if (sold.equals(val.getValue())) {
+
+						val.setValue(snew);
+						// item.getValuelist().remove(val);
+						break;
+					}
+				}
+
+			}
+		});
+	}
+
+	/**
+	 * moves a given value up inside the value list
+	 * 
+	 * @param value
+	 */
+	public void moveUp(final int i) {
+		if (i < 1)
+			return;
+		TransactionalEditingDomain domain = getDiagramEditor()
+				.getEditingDomain();
+		domain.getCommandStack().execute(new RecordingCommand(domain) {
+			@Override
+			protected void doExecute() {
+				String value1 = item.getValuelist().get(i).getValue();
+				String value2 = item.getValuelist().get(i - 1).getValue();
+				item.getValuelist().get(i).setValue(value2);
+				item.getValuelist().get(i - 1).setValue(value1);
+			}
+		});
+
+	}
+
+	/**
+	 * moves a given value down inside the value list
+	 * 
+	 * @param value
+	 */
+	public void moveDown(final int i) {
+
+		if (i < item.getValuelist().size() - 1) {
+			TransactionalEditingDomain domain = getDiagramEditor()
+					.getEditingDomain();
+			domain.getCommandStack().execute(new RecordingCommand(domain) {
+				@Override
+				protected void doExecute() {
+					String value1 = item.getValuelist().get(i).getValue();
+					String value2 = item.getValuelist().get(i + 1).getValue();
+					item.getValuelist().get(i).setValue(value2);
+					item.getValuelist().get(i + 1).setValue(value1);
+				}
+			});
+		}
+	}
+
 	private void updateTable() {
 
 		table.removeAll();
 		// add current values
-		for (String avalue : valueListAdapter.valueList) {
+		for (Value avalue : item.getValuelist()) {
 			TableItem tabelItem = new TableItem(table, SWT.NONE);
-			tabelItem.setText(avalue);
+			tabelItem.setText(avalue.getValue());
 			if (image != null) {
 				tabelItem.setImage(image);
 			}
@@ -214,8 +326,8 @@ public class ListEditor extends ObjectEditor {
 	}
 
 	@Override
-	public String getValue() {
-		return valueListAdapter.getValue();
+	public Item getValue() {
+		return item;
 	}
 
 	@Override

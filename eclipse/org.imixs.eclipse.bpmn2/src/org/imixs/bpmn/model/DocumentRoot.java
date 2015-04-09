@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getItem <em>Item</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.DocumentRoot#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,30 +23,57 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DocumentRoot extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Property</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Item</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Item</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property</em>' containment reference.
-	 * @see #setProperty(Property)
-	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_Property()
+	 * @return the value of the '<em>Item</em>' containment reference.
+	 * @see #setItem(Item)
+	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_Item()
 	 * @model containment="true" upper="-2"
-	 *        extendedMetaData="name='property' kind='element' namespace='##targetNamespace'"
+	 *        extendedMetaData="name='item' kind='element' namespace='##targetNamespace'"
 	 * @generated
 	 */
-	Property getProperty();
+	Item getItem();
 
 	/**
-	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getProperty <em>Property</em>}' containment reference.
+	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getItem <em>Item</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Property</em>' containment reference.
-	 * @see #getProperty()
+	 * @param value the new value of the '<em>Item</em>' containment reference.
+	 * @see #getItem()
 	 * @generated
 	 */
-	void setProperty(Property value);
+	void setItem(Item value);
+
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(Value)
+	 * @see org.imixs.bpmn.model.ModelPackage#getDocumentRoot_Value()
+	 * @model containment="true" upper="-2"
+	 *        extendedMetaData="name='value' kind='element' namespace='##targetNamespace'"
+	 * @generated
+	 */
+	Value getValue();
+
+	/**
+	 * Sets the value of the '{@link org.imixs.bpmn.model.DocumentRoot#getValue <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(Value value);
 
 } // DocumentRoot

@@ -13,25 +13,41 @@ import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.modeler.core.adapters.InsertionAdapter;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.ModelFactory;
 import org.imixs.bpmn.model.ModelPackage;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.osgi.framework.BundleContext;
 
+/**
+ * The ImixsBPMNPlugin is the activator class for the BPMN2 extension.
+ * 
+ * The class provides convenience methods to create and manage the imixs EObject
+ * business object 'Item' to be used to store prperties into the BPMN extension
+ * element.
+ * 
+ * 
+ * @author rsoika
+ *
+ */
 public class ImixsBPMNPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.bpmn2.modeler.examples.customtask"; //$NON-NLS-1$
-	public final static EStructuralFeature IMIXS_PROPERTY_FEATURE = ModelPackage.eINSTANCE
-			.getDocumentRoot_Property();
-	public final static EStructuralFeature IMIXS_PROPERTY_VALUE = ModelPackage.eINSTANCE
-			.getProperty_Value();
+	public final static EStructuralFeature IMIXS_ITEM_FEATURE = ModelPackage.eINSTANCE
+			.getDocumentRoot_Item();
+	public final static EStructuralFeature IMIXS_ITEMLIST_FEATURE = ModelPackage.eINSTANCE
+			.getItem_Valuelist();
+
+	public final static EStructuralFeature IMIXS_ITEMVALUE = ModelPackage.eINSTANCE
+			.getValue_Value();
 
 	// The shared instance
 	private static ImixsBPMNPlugin plugin;
@@ -102,6 +118,122 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			return null;
 
 	}
+	
+	
+	/**
+	 * This method returns the an <imixs:item> entry  from a BaseElement.
+	 * 
+	 * The Item is identified by the given Name. If no Item with the requested
+	 * name yet exists, the method creates a new Item and adds it into the
+	 * ExtensionAttribute List of the BaseElement.
+	 * 
+	 * The method uses InsertionAdapter to add new Items.
+	 * 
+	 * @see https 
+	 *      ://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials/CustomPropertyTabs
+	 *      #The_mysterious_IllegalStateException
+	 * @param be
+	 * @return
+	 */
+	public static Item getItemByName(BaseElement be, String itemName,
+			String itemType) {
+
+		if (itemName == null)
+			return null;
+
+		// lowercase itemname
+		itemName = itemName.toLowerCase();
+
+		// first test if we still hav a Item with the given name...
+		Item item = (Item) ImixsBPMNPlugin.findItemByName(be,
+				ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, itemName);
+		if (item == null) {
+			// no Item with hat name exists. So we need to
+			// create the new Item and insert it into the
+			// BaseElement's extension elements container
+			item = ModelFactory.eINSTANCE.createItem();
+			item.setName(itemName);
+			if (itemType == null || "".equals(itemType))
+				item.setType("xs:string");
+			else
+				item.setType(itemType);
+
+			// reuse the <bpmn2:extensionElements> container if this
+			// BaseElement already has one
+			ExtensionAttributeValue extensionAttribute = null;
+			if (be.getExtensionValues().size() > 0) {
+				extensionAttribute = be.getExtensionValues().get(0);
+				// now add the new Item into the Extension
+				InsertionAdapter.add(extensionAttribute,
+						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
+			} else {
+				// we still have no <bpmn2:extensionElements> container. So we
+				// add a new ExtensionAttributeValue to the EObject...
+				extensionAttribute = Bpmn2Factory.eINSTANCE
+						.createExtensionAttributeValue();
+				// insert the item into the extension
+				InsertionAdapter.add(extensionAttribute,
+						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
+				// insert the extension into the base element
+				InsertionAdapter
+						.add(be, Bpmn2Package.eINSTANCE
+								.getBaseElement_ExtensionValues(),
+								extensionAttribute);
+			}
+		}
+
+		
+
+		return item;
+	}
+
+	
+
+	/**
+	 * This method returns the first Value entry of a Imixs BPMN Item EObject
+	 * from a BaseElement.
+	 * 
+	 * The Item is identified by the given Name. If no Item with the requested
+	 * name yet exists, the method creates a new Item and adds it into the
+	 * ExtensionAttribute List of the BaseElement.
+	 * 
+	 * The method uses InsertionAdapter to add new Items.
+	 * 
+	 * @see https 
+	 *      ://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials/CustomPropertyTabs
+	 *      #The_mysterious_IllegalStateException
+	 * @param be
+	 * @return
+	 */
+	public static Value getItemValueByName(BaseElement be, String itemName,
+			String itemType, String defaultValue) {
+
+		if (itemName == null)
+			return null;
+
+		// lowercase itemname
+		itemName = itemName.toLowerCase();
+
+		// first test if we still hav a Item with the given name...
+		Item item = getItemByName(be,itemName, itemType);
+		
+		Value value = null;
+		// now we test if the item contains a <imixs:value> container. If so we
+		// reuse the frist one.
+		EList<Value> valuelist = item.getValuelist();
+		if (valuelist != null && valuelist.size() > 0) {
+			value = item.getValuelist().get(0);
+		} else {
+			// insert a new value element
+			value = ModelFactory.eINSTANCE.createValue();
+			if (defaultValue!=null)
+				value.setValue(defaultValue);
+			InsertionAdapter.add(item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE,
+					value);
+		}
+
+		return value;
+	}
 
 	/**
 	 * Find the first entry in this BaseElement's extension elements container
@@ -114,7 +246,7 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * @return the value of the extension element or null if no ConfigItem with
 	 *         this name exists
 	 */
-	public static Property findPropertyByName(BaseElement be,
+	public static Item findItemByName(BaseElement be,
 			EStructuralFeature feature, String itemName) {
 
 		itemName = itemName.toLowerCase();
@@ -123,11 +255,11 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			// check all extensionAttribute values...
 			for (FeatureMap.Entry entry : eav.getValue()) {
 				if (entry.getEStructuralFeature() == feature) {
-					if (entry.getValue() instanceof Property) {
-						Property property = (Property) entry.getValue();
+					if (entry.getValue() instanceof Item) {
+						Item item = (Item) entry.getValue();
 						// compare the configitem name element....
-						if (property.getName().equals(itemName))
-							return property;
+						if (item.getName().equals(itemName))
+							return item;
 					}
 				}
 			}
@@ -144,9 +276,8 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * 
 	 * @return
 	 */
-	public static Property findDefinitionsPropertyByName(BaseElement be,
-			String itemName) {
-		Property property = null;
+	public static Item findDefinitionsItemByName(BaseElement be, String itemName) {
+		Item property = null;
 		EObject container = be.eContainer();
 		if (container == null)
 			return null;
@@ -165,69 +296,9 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 
 		if (defs != null) {
 			// we found the defs! Now try to get the property by name....
-			property = ImixsBPMNPlugin.findPropertyByName(defs,
-					IMIXS_PROPERTY_FEATURE, itemName);
+			property = ImixsBPMNPlugin.findItemByName(defs, IMIXS_ITEM_FEATURE,
+					itemName);
 		}
-		return property;
-	}
-
-	/**
-	 * This method returns a Imixs BPMN ConfigItem of a TaskElement by its name.
-	 * If no ConfigItem with the given Name yet exists, the method creates a new
-	 * ConfigItem and adds it into the ExtensionAttribute List of the Task
-	 * Element.
-	 * 
-	 * The method uses InsertionAdapter to add new properties.
-	 * 
-	 * @see https
-	 *      ://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials/CustomPropertyTabs
-	 *      #The_mysterious_IllegalStateException
-	 * @param be
-	 * @return
-	 */
-	public static Property getPropertyByName(BaseElement be, String itemName,
-			String itemType, String defaultValue) {
-
-		if (itemName == null)
-			return null;
-
-		// lowercase itemname
-		itemName = itemName.toLowerCase();
-
-		Property property = (Property) ImixsBPMNPlugin.findPropertyByName(be,
-				ImixsBPMNPlugin.IMIXS_PROPERTY_FEATURE, itemName);
-		if (property == null) {
-			// create the new MetaData and insert it into the
-			// BaseElement's extension elements container
-			property = ModelFactory.eINSTANCE.createProperty();
-			property.setValue(defaultValue);
-			property.setName(itemName);
-			if (itemType == null || "".equals(itemType))
-				property.setType("xs:string");
-			else
-				property.setType(itemType);
-
-			// test if we already have ExtensionValues. If so reuse the first
-			// one.
-			ExtensionAttributeValue eav = null;
-			if (be.getExtensionValues().size() > 0) {
-				// reuse the <bpmn2:extensionElements> container if this
-				// BaseElement already has one
-				eav = be.getExtensionValues().get(0);
-				// now add the new Property into the Extension
-				InsertionAdapter.add(eav,
-						ImixsBPMNPlugin.IMIXS_PROPERTY_FEATURE, property);
-			} else {
-				// add a new ExtensionAttributeValue to the EObject...
-				eav = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
-				InsertionAdapter.add(eav,
-						ImixsBPMNPlugin.IMIXS_PROPERTY_FEATURE, property);
-				InsertionAdapter
-						.add(be, Bpmn2Package.eINSTANCE
-								.getBaseElement_ExtensionValues(), eav);
-			}
-		}
-
 		return property;
 	}
 

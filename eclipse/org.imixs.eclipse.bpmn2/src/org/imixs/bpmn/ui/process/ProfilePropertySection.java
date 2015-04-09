@@ -1,8 +1,5 @@
 package org.imixs.bpmn.ui.process;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Participant;
@@ -10,15 +7,15 @@ import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
+import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.FeatureListObjectEditor;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
-import org.imixs.bpmn.ui.BooleanEditor;
-import org.imixs.bpmn.ui.CheckBoxEditor;
+import org.imixs.bpmn.model.Item;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
 
@@ -80,40 +77,51 @@ public class ProfilePropertySection extends DefaultPropertySection {
 		public void createBindings(EObject be) {
 
 			setTitle("Workflow Profile");
+			
+			
 
-			Property metaData = ImixsBPMNPlugin.getPropertyByName(
+			Value value = ImixsBPMNPlugin.getItemValueByName(
 					(BaseElement) be, "txtWorkflowModelVersion", null, "0.0.1");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Model Version");
 
-			// Timer Mappings editor
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"txtFieldMapping", null, "");
-			ListEditor listEditor = new ListEditor(this, metaData);
+			
+
+//			FeatureListObjectEditor listEditor= new FeatureListObjectEditor(this, item,  ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE);
+//			listEditor.createControl(attributesComposite, "xxx Version");
+			
+
+			
+			// Timer Mappings editor	
+			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"txtFieldMapping", null);
+			ListEditor listEditor = new ListEditor(this, item);
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"name_obj.gif"));
 			listEditor.createControl(attributesComposite, "Actor Properties");
 
+
+			
 			// FieldMapping Actors editor
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"txtTimeFieldMapping", null, "");
-			listEditor = new ListEditor(this, metaData);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"txtTimeFieldMapping", null);
+			listEditor = new ListEditor(this, item);
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"time_obj.gif"));
 			listEditor.createControl(attributesComposite, "Date Properties");
 
 			// plugin editor
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"txtPlugins", null, "");
-			listEditor = new ListEditor(this, metaData);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"txtPlugins", null);
+			listEditor = new ListEditor(this, item);
 			listEditor.setSortable(true);
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"plugin_obj.gif"));
 			listEditor.createControl(attributesComposite, "Plugins");
-
+			
 		}
 
 	}

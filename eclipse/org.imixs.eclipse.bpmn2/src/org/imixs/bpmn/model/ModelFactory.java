@@ -31,13 +31,22 @@ public interface ModelFactory extends EFactory {
 	DocumentRoot createDocumentRoot();
 
 	/**
-	 * Returns a new object of class '<em>Property</em>'.
+	 * Returns a new object of class '<em>Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property</em>'.
+	 * @return a new object of class '<em>Item</em>'.
 	 * @generated
 	 */
-	Property createProperty();
+	Item createItem();
+
+	/**
+	 * Returns a new object of class '<em>Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Value</em>'.
+	 * @generated
+	 */
+	Value createValue();
 
 	/**
 	 * Returns the package supported by this factory.

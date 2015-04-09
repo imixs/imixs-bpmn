@@ -9,8 +9,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.imixs.bpmn.model.DocumentRoot;
+import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.ModelPackage;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +20,8 @@ import org.imixs.bpmn.model.Property;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.imixs.bpmn.model.impl.DocumentRootImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.DocumentRootImpl#getItem <em>Item</em>}</li>
+ *   <li>{@link org.imixs.bpmn.model.impl.DocumentRootImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,15 +29,23 @@ import org.imixs.bpmn.model.Property;
  */
 public class DocumentRootImpl extends MinimalEObjectImpl.Container implements DocumentRoot {
 	/**
-	 * The cached value of the '{@link #getProperty() <em>Property</em>}' containment reference.
+	 * The cached value of the '{@link #getItem() <em>Item</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getProperty()
+	 * @see #getItem()
 	 * @generated
 	 * @ordered
 	 */
-	protected Property property;
-
+	protected Item item;
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Value value;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,8 +70,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property getProperty() {
-		return property;
+	public Item getItem() {
+		return item;
 	}
 
 	/**
@@ -69,11 +79,11 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetProperty(Property newProperty, NotificationChain msgs) {
-		Property oldProperty = property;
-		property = newProperty;
+	public NotificationChain basicSetItem(Item newItem, NotificationChain msgs) {
+		Item oldItem = item;
+		item = newItem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__PROPERTY, oldProperty, newProperty);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__ITEM, oldItem, newItem);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -84,18 +94,61 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProperty(Property newProperty) {
-		if (newProperty != property) {
+	public void setItem(Item newItem) {
+		if (newItem != item) {
 			NotificationChain msgs = null;
-			if (property != null)
-				msgs = ((InternalEObject)property).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__PROPERTY, null, msgs);
-			if (newProperty != null)
-				msgs = ((InternalEObject)newProperty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__PROPERTY, null, msgs);
-			msgs = basicSetProperty(newProperty, msgs);
+			if (item != null)
+				msgs = ((InternalEObject)item).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__ITEM, null, msgs);
+			if (newItem != null)
+				msgs = ((InternalEObject)newItem).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__ITEM, null, msgs);
+			msgs = basicSetItem(newItem, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__PROPERTY, newProperty, newProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__ITEM, newItem, newItem));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Value getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetValue(Value newValue, NotificationChain msgs) {
+		Value oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__VALUE, oldValue, newValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(Value newValue) {
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOCUMENT_ROOT__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOCUMENT_ROOT__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -106,8 +159,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.DOCUMENT_ROOT__PROPERTY:
-				return basicSetProperty(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__ITEM:
+				return basicSetItem(null, msgs);
+			case ModelPackage.DOCUMENT_ROOT__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -120,8 +175,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.DOCUMENT_ROOT__PROPERTY:
-				return getProperty();
+			case ModelPackage.DOCUMENT_ROOT__ITEM:
+				return getItem();
+			case ModelPackage.DOCUMENT_ROOT__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,8 +191,11 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.DOCUMENT_ROOT__PROPERTY:
-				setProperty((Property)newValue);
+			case ModelPackage.DOCUMENT_ROOT__ITEM:
+				setItem((Item)newValue);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__VALUE:
+				setValue((Value)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,8 +209,11 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.DOCUMENT_ROOT__PROPERTY:
-				setProperty((Property)null);
+			case ModelPackage.DOCUMENT_ROOT__ITEM:
+				setItem((Item)null);
+				return;
+			case ModelPackage.DOCUMENT_ROOT__VALUE:
+				setValue((Value)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -164,8 +227,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.DOCUMENT_ROOT__PROPERTY:
-				return property != null;
+			case ModelPackage.DOCUMENT_ROOT__ITEM:
+				return item != null;
+			case ModelPackage.DOCUMENT_ROOT__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}

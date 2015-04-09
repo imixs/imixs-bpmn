@@ -15,7 +15,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.Section;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;

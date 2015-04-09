@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
@@ -50,16 +50,16 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			this.bindAttribute(attributesComposite, be, "processid");
 
 			// Summary
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtworkflowsummary", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, itemValue,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Summary");
 
 			// Abstract
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtworkflowabstract", "CDATA", "");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "Abstract");

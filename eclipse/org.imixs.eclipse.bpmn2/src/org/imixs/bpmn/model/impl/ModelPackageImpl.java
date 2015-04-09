@@ -8,9 +8,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.imixs.bpmn.model.DocumentRoot;
+import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.ModelFactory;
 import org.imixs.bpmn.model.ModelPackage;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass propertyEClass = null;
+	private EClass itemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass valueEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -108,7 +116,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocumentRoot_Property() {
+	public EReference getDocumentRoot_Item() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -117,8 +125,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getProperty() {
-		return propertyEClass;
+	public EReference getDocumentRoot_Value() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -126,8 +134,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_Mixed() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
+	public EClass getItem() {
+		return itemEClass;
 	}
 
 	/**
@@ -135,8 +143,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_Name() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
+	public EReference getItem_Valuelist() {
+		return (EReference)itemEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -144,8 +152,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_Type() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
+	public EAttribute getItem_Name() {
+		return (EAttribute)itemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -153,8 +161,35 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getProperty_Value() {
-		return (EAttribute)propertyEClass.getEStructuralFeatures().get(3);
+	public EAttribute getItem_Type() {
+		return (EAttribute)itemEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getValue() {
+		return valueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getValue_Mixed() {
+		return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getValue_Value() {
+		return (EAttribute)valueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -186,13 +221,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Create classes and their features
 		documentRootEClass = createEClass(DOCUMENT_ROOT);
-		createEReference(documentRootEClass, DOCUMENT_ROOT__PROPERTY);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__ITEM);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__VALUE);
 
-		propertyEClass = createEClass(PROPERTY);
-		createEAttribute(propertyEClass, PROPERTY__MIXED);
-		createEAttribute(propertyEClass, PROPERTY__NAME);
-		createEAttribute(propertyEClass, PROPERTY__TYPE);
-		createEAttribute(propertyEClass, PROPERTY__VALUE);
+		itemEClass = createEClass(ITEM);
+		createEReference(itemEClass, ITEM__VALUELIST);
+		createEAttribute(itemEClass, ITEM__NAME);
+		createEAttribute(itemEClass, ITEM__TYPE);
+
+		valueEClass = createEClass(VALUE);
+		createEAttribute(valueEClass, VALUE__MIXED);
+		createEAttribute(valueEClass, VALUE__VALUE);
 	}
 
 	/**
@@ -226,13 +265,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDocumentRoot_Property(), this.getProperty(), null, "property", null, 0, -2, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Item(), this.getItem(), null, "item", null, 0, -2, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Value(), this.getValue(), null, "value", null, 0, -2, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getProperty_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_Name(), ecorePackage.getEString(), "name", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_Type(), ecorePackage.getEString(), "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getProperty_Value(), ecorePackage.getEString(), "value", null, 0, 1, Property.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
+		initEClass(itemEClass, Item.class, "Item", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getItem_Valuelist(), this.getValue(), null, "valuelist", null, 0, -1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getItem_Type(), ecorePackage.getEString(), "type", null, 0, 1, Item.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getValue_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, Value.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -258,22 +301,38 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "kind", "mixed"
 		   });	
 		addAnnotation
-		  (getDocumentRoot_Property(), 
+		  (getDocumentRoot_Item(), 
 		   source, 
 		   new String[] {
-			 "name", "property",
+			 "name", "item",
 			 "kind", "element",
 			 "namespace", "##targetNamespace"
 		   });	
 		addAnnotation
-		  (propertyEClass, 
+		  (getDocumentRoot_Value(), 
+		   source, 
+		   new String[] {
+			 "name", "value",
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });	
+		addAnnotation
+		  (getItem_Valuelist(), 
+		   source, 
+		   new String[] {
+			 "name", "value",
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });	
+		addAnnotation
+		  (valueEClass, 
 		   source, 
 		   new String[] {
 			 "kind", "mixed",
 			 "namespace", "##targetNamespace"
 		   });	
 		addAnnotation
-		  (getProperty_Mixed(), 
+		  (getValue_Mixed(), 
 		   source, 
 		   new String[] {
 			 "kind", "elementWildcard",

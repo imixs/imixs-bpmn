@@ -67,13 +67,22 @@ public interface ModelPackage extends EPackage {
 	int DOCUMENT_ROOT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Property</b></em>' containment reference.
+	 * The feature id for the '<em><b>Item</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__PROPERTY = 0;
+	int DOCUMENT_ROOT__ITEM = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
@@ -82,7 +91,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 1;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -94,23 +103,23 @@ public interface ModelPackage extends EPackage {
 	int DOCUMENT_ROOT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.imixs.bpmn.model.impl.PropertyImpl <em>Property</em>}' class.
+	 * The meta object id for the '{@link org.imixs.bpmn.model.impl.ItemImpl <em>Item</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.imixs.bpmn.model.impl.PropertyImpl
-	 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getProperty()
+	 * @see org.imixs.bpmn.model.impl.ItemImpl
+	 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getItem()
 	 * @generated
 	 */
-	int PROPERTY = 1;
+	int ITEM = 1;
 
 	/**
-	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * The feature id for the '<em><b>Valuelist</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__MIXED = 0;
+	int ITEM__VALUELIST = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -119,7 +128,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__NAME = 1;
+	int ITEM__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -128,7 +137,44 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__TYPE = 2;
+	int ITEM__TYPE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITEM_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.imixs.bpmn.model.impl.ValueImpl <em>Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.imixs.bpmn.model.impl.ValueImpl
+	 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getValue()
+	 * @generated
+	 */
+	int VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__MIXED = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -137,25 +183,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__VALUE = 3;
+	int VALUE__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Property</em>' class.
+	 * The number of structural features of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = 4;
+	int VALUE_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Property</em>' class.
+	 * The number of operations of the '<em>Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_OPERATION_COUNT = 0;
+	int VALUE_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.imixs.bpmn.model.DocumentRoot <em>Document Root</em>}'.
@@ -168,69 +214,101 @@ public interface ModelPackage extends EPackage {
 	EClass getDocumentRoot();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.imixs.bpmn.model.DocumentRoot#getProperty <em>Property</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.imixs.bpmn.model.DocumentRoot#getItem <em>Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Property</em>'.
-	 * @see org.imixs.bpmn.model.DocumentRoot#getProperty()
+	 * @return the meta object for the containment reference '<em>Item</em>'.
+	 * @see org.imixs.bpmn.model.DocumentRoot#getItem()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EReference getDocumentRoot_Property();
+	EReference getDocumentRoot_Item();
 
 	/**
-	 * Returns the meta object for class '{@link org.imixs.bpmn.model.Property <em>Property</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.imixs.bpmn.model.DocumentRoot#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property</em>'.
-	 * @see org.imixs.bpmn.model.Property
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.imixs.bpmn.model.DocumentRoot#getValue()
+	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EClass getProperty();
+	EReference getDocumentRoot_Value();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.imixs.bpmn.model.Property#getMixed <em>Mixed</em>}'.
+	 * Returns the meta object for class '{@link org.imixs.bpmn.model.Item <em>Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Mixed</em>'.
-	 * @see org.imixs.bpmn.model.Property#getMixed()
-	 * @see #getProperty()
+	 * @return the meta object for class '<em>Item</em>'.
+	 * @see org.imixs.bpmn.model.Item
 	 * @generated
 	 */
-	EAttribute getProperty_Mixed();
+	EClass getItem();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Property#getName <em>Name</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.imixs.bpmn.model.Item#getValuelist <em>Valuelist</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Valuelist</em>'.
+	 * @see org.imixs.bpmn.model.Item#getValuelist()
+	 * @see #getItem()
+	 * @generated
+	 */
+	EReference getItem_Valuelist();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Item#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.imixs.bpmn.model.Property#getName()
-	 * @see #getProperty()
+	 * @see org.imixs.bpmn.model.Item#getName()
+	 * @see #getItem()
 	 * @generated
 	 */
-	EAttribute getProperty_Name();
+	EAttribute getItem_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Property#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Item#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.imixs.bpmn.model.Property#getType()
-	 * @see #getProperty()
+	 * @see org.imixs.bpmn.model.Item#getType()
+	 * @see #getItem()
 	 * @generated
 	 */
-	EAttribute getProperty_Type();
+	EAttribute getItem_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Property#getValue <em>Value</em>}'.
+	 * Returns the meta object for class '{@link org.imixs.bpmn.model.Value <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Value</em>'.
+	 * @see org.imixs.bpmn.model.Value
+	 * @generated
+	 */
+	EClass getValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.imixs.bpmn.model.Value#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.imixs.bpmn.model.Value#getMixed()
+	 * @see #getValue()
+	 * @generated
+	 */
+	EAttribute getValue_Mixed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.imixs.bpmn.model.Value#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.imixs.bpmn.model.Property#getValue()
-	 * @see #getProperty()
+	 * @see org.imixs.bpmn.model.Value#getValue()
+	 * @see #getValue()
 	 * @generated
 	 */
-	EAttribute getProperty_Value();
+	EAttribute getValue_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -266,30 +344,38 @@ public interface ModelPackage extends EPackage {
 		EClass DOCUMENT_ROOT = eINSTANCE.getDocumentRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Item</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT_ROOT__PROPERTY = eINSTANCE.getDocumentRoot_Property();
+		EReference DOCUMENT_ROOT__ITEM = eINSTANCE.getDocumentRoot_Item();
 
 		/**
-		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.PropertyImpl <em>Property</em>}' class.
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.imixs.bpmn.model.impl.PropertyImpl
-		 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getProperty()
 		 * @generated
 		 */
-		EClass PROPERTY = eINSTANCE.getProperty();
+		EReference DOCUMENT_ROOT__VALUE = eINSTANCE.getDocumentRoot_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.ItemImpl <em>Item</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imixs.bpmn.model.impl.ItemImpl
+		 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getItem()
+		 * @generated
+		 */
+		EClass ITEM = eINSTANCE.getItem();
+
+		/**
+		 * The meta object literal for the '<em><b>Valuelist</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROPERTY__MIXED = eINSTANCE.getProperty_Mixed();
+		EReference ITEM__VALUELIST = eINSTANCE.getItem_Valuelist();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -297,7 +383,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
+		EAttribute ITEM__NAME = eINSTANCE.getItem_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -305,7 +391,25 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROPERTY__TYPE = eINSTANCE.getProperty_Type();
+		EAttribute ITEM__TYPE = eINSTANCE.getItem_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.imixs.bpmn.model.impl.ValueImpl <em>Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.imixs.bpmn.model.impl.ValueImpl
+		 * @see org.imixs.bpmn.model.impl.ModelPackageImpl#getValue()
+		 * @generated
+		 */
+		EClass VALUE = eINSTANCE.getValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VALUE__MIXED = eINSTANCE.getValue_Mixed();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -313,7 +417,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROPERTY__VALUE = eINSTANCE.getProperty_Value();
+		EAttribute VALUE__VALUE = eINSTANCE.getValue_Value();
 
 	}
 

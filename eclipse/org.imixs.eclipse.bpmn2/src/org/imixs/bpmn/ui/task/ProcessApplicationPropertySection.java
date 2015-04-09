@@ -8,7 +8,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
@@ -49,21 +49,21 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			setTitle("Application");
 
 			// Input Form
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txteditorid", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, itemValue,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Input Form");
 
 			// Image URL
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtimageurl", null,
+			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtimageurl", null,
 					"");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Status Icon");
 
 			// Type
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txttype", null, "");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txttype", null, "");
+			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Workitem Tpye");
 
 		}

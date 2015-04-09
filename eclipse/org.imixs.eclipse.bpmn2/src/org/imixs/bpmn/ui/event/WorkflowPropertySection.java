@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
 import org.imixs.bpmn.ui.RadioButtonEditor;
