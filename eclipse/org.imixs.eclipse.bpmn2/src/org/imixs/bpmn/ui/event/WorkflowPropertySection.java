@@ -1,7 +1,7 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
 import org.imixs.bpmn.ui.RadioButtonEditor;
@@ -55,30 +56,28 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			this.bindAttribute(attributesComposite, be, "activityid", "ID");
 
 			// Result
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtactivityresult", "CDATA", "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "Result");
 
 			// visibility and roles
-			List<String> optionList = new ArrayList<String>();
+			Map<String,String> optionList = new HashMap<String,String>();
 
-			optionList.add("No | 0");
-			optionList.add("Yes | 1");
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "keypublicresult",
+			optionList.put("0","No");
+			optionList.put("1","Yes");
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "keypublicresult",
 					null, "1");
-			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
+			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
 					optionList);
 			aEditor.createControl(attributesComposite, "Visible");
 
 			// Roles
-
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "$readaccess", null,
-					"");
-			ListEditor pluginEditor = new ListEditor(this, metaData);
+			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be, "$readaccess", null);
+			ListEditor pluginEditor = new ListEditor(this, item);
 
 			pluginEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"name_obj.gif"));

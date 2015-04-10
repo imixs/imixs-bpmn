@@ -1,5 +1,8 @@
 package org.imixs.bpmn.ui.process;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Participant;
@@ -7,7 +10,6 @@ import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
-import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.FeatureListObjectEditor;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -16,8 +18,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
+import org.imixs.bpmn.ui.BooleanEditor;
+import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
+import org.imixs.bpmn.ui.RadioButtonEditor;
 
 /**
  * This PorpertySection provides the attributes for the main workflow
@@ -79,6 +84,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			setTitle("Workflow Profile");
 			
 			
+			
 
 			Value value = ImixsBPMNPlugin.getItemValueByName(
 					(BaseElement) be, "txtWorkflowModelVersion", null, "0.0.1");
@@ -87,6 +93,40 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			valueEditor.createControl(attributesComposite, "Model Version");
 
 			
+			
+			
+			
+			 value = ImixsBPMNPlugin.getItemValueByName(
+					(BaseElement) be, "keyBooleanTest", "xs:boolean", "false");
+			BooleanEditor bEditor = new BooleanEditor(this, value);
+			bEditor.createControl(attributesComposite, "Boolean test");
+
+			
+			
+			// test checkbox...
+			Map<String,String> options=new HashMap<String,String>();
+			options.put("namcreator", "Ersteller");
+			options.put("namteam", "Team");
+			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"keyOptionTest", null);
+			
+			CheckBoxEditor cEditor = new CheckBoxEditor(this, item,options);
+			cEditor.createControl(attributesComposite, "Option test");
+
+			
+			
+			// test radiobutton...
+		
+			 value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
+					"keyRadioTest","", null);
+			
+			 RadioButtonEditor rEditor = new RadioButtonEditor(this, value,options);
+			rEditor.createControl(attributesComposite, "Radio test");
+
+			
+			
+			
+			
 
 //			FeatureListObjectEditor listEditor= new FeatureListObjectEditor(this, item,  ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE);
 //			listEditor.createControl(attributesComposite, "xxx Version");
@@ -94,7 +134,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 
 			
 			// Timer Mappings editor	
-			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+			 item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
 					"txtFieldMapping", null);
 			ListEditor listEditor = new ListEditor(this, item);
 			listEditor.setSortable(true);

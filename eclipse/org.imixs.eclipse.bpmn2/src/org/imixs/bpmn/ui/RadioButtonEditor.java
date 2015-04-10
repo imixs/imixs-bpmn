@@ -1,11 +1,10 @@
 package org.imixs.bpmn.ui;
 
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -17,6 +16,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.imixs.bpmn.ImixsBPMNPlugin;
+import org.imixs.bpmn.model.Value;
 
 /**
  * Implementation of Radio Button widget based on a option list.
@@ -40,17 +40,20 @@ import org.imixs.bpmn.ImixsBPMNPlugin;
 public class RadioButtonEditor extends ObjectEditor {
 
 	protected Composite editorComposite;
-	protected List<String> optionList;
-	private Layout layout=null;
+	protected Map<String, String> optionMap;
+	private Layout layout = null;
 
 	/**
-	 * @param businessObject
-	 * @param feature
+	 * Initializes a new ChackBox Editor with a given Option List containing
+	 * Keys and Lable Strings
+	 * 
+	 * @param Item
+	 * @param OptionMap
 	 */
-	public RadioButtonEditor(AbstractDetailComposite parent, EObject obj,
-			 List<String> aoptionList) {
-		super(parent, obj, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
-		optionList = aoptionList;
+	public RadioButtonEditor(AbstractDetailComposite parent, Value obj,
+			Map<String, String> optionMap) {
+		super(parent, obj, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
+		this.optionMap = optionMap;
 	}
 
 	public void setLayout(Layout layout) {
@@ -59,7 +62,7 @@ public class RadioButtonEditor extends ObjectEditor {
 
 	protected Control createControl(Composite composite, String label, int style) {
 
-		// create a separate label to the LEFT of the checkbox set
+		// create a separate label to the LEFT of the radioBox set
 		Label labelWidget = getToolkit().createLabel(composite, label);
 		labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
 				1, 1));
@@ -68,32 +71,23 @@ public class RadioButtonEditor extends ObjectEditor {
 		editorComposite = new Composite(composite, SWT.NONE);
 		GridData data = new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1);
 		editorComposite.setLayoutData(data);
-		
-		if (layout!=null)
+
+		if (layout != null)
 			editorComposite.setLayout(layout);
 		else
 			editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
 
 		String sCurrentValue = getValue();
 
-		// create a checkbox for each entry from the OptionList
-		for (String aOption : optionList) {
-
-			String aLabel = null;
-			String aValue = null;
-			int ipos = aOption.indexOf("|");
-			if (ipos > -1) {
-				aLabel = aOption.substring(0, ipos).trim();
-				aValue = aOption.substring(ipos + 1).trim();
-			} else {
-				aLabel = aOption;
-				aValue = aOption;
-			}
+		// create a radiobutton for each entry from the OptionList
+		for (Map.Entry<String, String> entry : optionMap.entrySet()) {
+			final String aKey = entry.getKey();
+			final String aLabel = entry.getValue();
 
 			Button button = getToolkit().createButton(editorComposite, aLabel,
 					SWT.RADIO);
-			button.setSelection(aValue.equals(sCurrentValue));
-			button.setData(aValue);
+			button.setSelection(aKey.equals(sCurrentValue));
+			button.setData(aKey);
 			button.addSelectionListener(new SelectionListener() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
@@ -121,8 +115,10 @@ public class RadioButtonEditor extends ObjectEditor {
 	@Override
 	public String getValue() {
 		Object v = getBusinessObjectDelegate().getValue(object, feature);
-
-		return v.toString();
+		if (v == null)
+			return null;
+		else
+			return v.toString();
 
 	}
 

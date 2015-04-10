@@ -1,6 +1,5 @@
 package org.imixs.bpmn.ui;
 
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
@@ -56,13 +55,6 @@ public class ListEditor extends ObjectEditor {
 		super(parent, item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE);
 
 		this.item = item;
-
-		// Object v = getBusinessObjectDelegate().getValue(object, feature);
-		// if (v == null)
-		// v = "";
-		// valueListAdapter = new ValueListAdapter(v.toString());
-		// valueListAdapter = new ValueListAdapter(item);
-
 	}
 
 	public Image getImage() {

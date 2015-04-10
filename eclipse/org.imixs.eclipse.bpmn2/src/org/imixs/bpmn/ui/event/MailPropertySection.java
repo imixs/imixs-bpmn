@@ -1,7 +1,8 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
@@ -16,10 +17,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.Section;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
-import org.imixs.bpmn.ui.ValueListAdapter;
 
 /**
  * This PorpertySection provides the attributes for Mail config.
@@ -54,34 +55,42 @@ public class MailPropertySection extends AbstractPropertySection {
 				return;
 			}
 			setTitle("Message");
-			
-			//ding=this.propertySection;
 
-			Property metaData = ImixsBPMNPlugin.getPropertyByName(
-					(BaseElement) be, "txtSubject", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
+					"txtSubject", null, "");
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Subject");
 
 			// Body
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtBody", "CDATA", "");
-			valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "Body");
 
 			// get Name Fields...
-			List<String> optionList = new ArrayList<String>();
-			Property nameFieldsData = ImixsBPMNPlugin
-					.findDefinitionsPropertyByName((BaseElement) be,
-							"txtFieldMapping");
-			if (nameFieldsData != null) {
-				ValueListAdapter adapter = new ValueListAdapter(
-						nameFieldsData.getValue());
-				optionList = adapter.getValueList();
+			Map<String, String> optionList = new HashMap<String, String>();
+			Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(
+					(BaseElement) be, "txtFieldMapping");
+			if (iteNameField != null) {
+				// iterate over all item values and extract "key|value" pairs
+				Iterator<Value> iter = iteNameField.getValuelist().iterator();
+				while (iter.hasNext()) {
+					Value val = iter.next();
+					// split '|'
+					String key = val.getValue();
+					String label = key;
+					int i = key.indexOf('|');
+					if (i > -1) {
+						key = key.substring(0, i);
+						label = label.substring(i + 1);
+					}
+					optionList.put(key, label);
+				}
 			}
 
 			// send to
@@ -92,15 +101,14 @@ public class MailPropertySection extends AbstractPropertySection {
 			section.setClient(sectionSendTo);
 			sectionSendTo.setLayout(new GridLayout(4, true));
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"keyMailReceiverFields", null, "");
-			CheckBoxEditor aEditor = new CheckBoxEditor(this, metaData,
-					optionList);
+			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"keyMailReceiverFields", null);
+			CheckBoxEditor aEditor = new CheckBoxEditor(this, item, optionList);
 			aEditor.createControl(sectionSendTo, null);
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"nammailreceiver", null, "");
-			ListEditor aListEditor = new ListEditor(this, metaData);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"nammailreceiver", null);
+			ListEditor aListEditor = new ListEditor(this, item);
 			aListEditor.createControl(sectionSendTo, null);
 
 			// send CC
@@ -111,17 +119,16 @@ public class MailPropertySection extends AbstractPropertySection {
 			section.setClient(sectionSendTo);
 			sectionSendTo.setLayout(new GridLayout(4, true));
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"keyMailReceiverFieldsCC", null, "");
-			aEditor = new CheckBoxEditor(this, metaData, optionList);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"keyMailReceiverFieldsCC", null);
+			aEditor = new CheckBoxEditor(this, item, optionList);
 			aEditor.createControl(sectionSendTo, null);
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"namMailReceiverCC", null, "");
-			aListEditor = new ListEditor(this, metaData);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"namMailReceiverCC", null);
+			aListEditor = new ListEditor(this, item);
 			aListEditor.createControl(sectionSendTo, null);
-			
-			
+
 			// send CC
 			section = createSection(this, "BCC", false);
 			section.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true,
@@ -130,16 +137,16 @@ public class MailPropertySection extends AbstractPropertySection {
 			section.setClient(sectionSendTo);
 			sectionSendTo.setLayout(new GridLayout(4, true));
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"keyMailReceiverFieldsBCC", null, "");
-			aEditor = new CheckBoxEditor(this, metaData, optionList);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"keyMailReceiverFieldsBCC", null);
+			aEditor = new CheckBoxEditor(this, item, optionList);
 			aEditor.createControl(sectionSendTo, null);
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
-					"namMailReceiverBCC", null, "");
-			aListEditor = new ListEditor(this, metaData);
+			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
+					"namMailReceiverBCC", null);
+			aListEditor = new ListEditor(this, item);
 			aListEditor.createControl(sectionSendTo, null);
-			
+
 		}
 
 	}

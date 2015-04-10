@@ -1,7 +1,7 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
@@ -10,13 +10,12 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
@@ -54,21 +53,21 @@ public class TimerPropertySection extends AbstractPropertySection {
 			}
 			setTitle("Timer Configuration");
 
-			List<String> optionList = new ArrayList<String>();
-			optionList.add("No|0");
-			optionList.add("Yes|1");
+			Map<String,String> optionList = new HashMap<String,String>();
+			optionList.put("0","No");
+			optionList.put("1","Yes");
 
-			Property metaData = ImixsBPMNPlugin.getPropertyByName(
+			Value value = ImixsBPMNPlugin.getItemValueByName(
 					(BaseElement) be, "keyScheduledActivity", null, "0");
-			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
+			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
 					optionList);
 
 			aEditor.createControl(attributesComposite, "Enabled");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtScheduledView", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setStyle(SWT.NONE);
 
 			valueEditor.createControl(attributesComposite, "Selection");
@@ -86,35 +85,35 @@ public class TimerPropertySection extends AbstractPropertySection {
 			compositeTimeGrid.setLayoutData(data);
 			compositeTimeGrid.setLayout(new GridLayout(6, false));
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"numActivityDelay", null, "");
-			valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 
 			valueEditor.createControl(compositeTimeGrid, null);
 
-			optionList = new ArrayList<String>();
-			optionList.add("min|1");
-			optionList.add("hours|2");
-			optionList.add("days|3");
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			optionList = new HashMap<String,String>();
+			optionList.put("1","min");
+			optionList.put("2","hours");
+			optionList.put("3","days");
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"keyActivityDelayUnit", null, "");
-			aEditor = new RadioButtonEditor(this, metaData, optionList);
+			aEditor = new RadioButtonEditor(this, value, optionList);
 
 			GridLayout gridlayout = new GridLayout(3, false);
 
 			aEditor.setLayout(gridlayout);
 			aEditor.createControl(compositeTimeGrid, null);
 
-			optionList = new ArrayList<String>();
-			optionList.add("creation | 3");
-			optionList.add("last process |1");
-			optionList.add("last modification|2");
-			optionList.add("managed| 4");
+			optionList = new HashMap<String,String>();
+			optionList.put("3","creation");
+			optionList.put("1","last process");
+			optionList.put("2","last modification");
+			optionList.put("4","managed");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"keyScheduledBaseObject", null, "");
-			aEditor = new RadioButtonEditor(this, metaData, optionList);
+			aEditor = new RadioButtonEditor(this, value, optionList);
 			aEditor.createControl(attributesComposite, "Time");
 
 		}

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
@@ -47,10 +47,10 @@ public class HistoryPropertySection extends AbstractPropertySection {
 			setTitle("Process History");
 
 			// Body
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"rtfresultlog", "CDATA", "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "History");

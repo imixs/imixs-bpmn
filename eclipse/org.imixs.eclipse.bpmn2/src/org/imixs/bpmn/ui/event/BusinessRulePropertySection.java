@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
@@ -46,15 +46,15 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			}
 			setTitle("Business Rule");
 
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtBusinessRuleEngine", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Engine");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtBusinessRule",
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtBusinessRule",
 					"CDATA", "");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, value, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 
 			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);

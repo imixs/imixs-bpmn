@@ -1,7 +1,7 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
@@ -11,7 +11,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
@@ -49,30 +49,30 @@ public class ReportPropertySection extends AbstractPropertySection {
 			}
 			setTitle("Report Configuration");
 
-			List<String> optionList = new ArrayList<String>();
-			optionList.add("attach to Workitem|0");
-			optionList.add("attach to LOB Workitem|1");
-			optionList.add("save to disk|2");
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Map<String,String> optionList = new HashMap<String,String>();
+			optionList.put("0","attach to Workitem");
+			optionList.put("1","attach to LOB Workitem");
+			optionList.put("2","save to disk");
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtReportTarget", null, "1");
-			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
+			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
 					 optionList);
 			aEditor.createControl(attributesComposite, "Target");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportName",
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportName",
 					null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Name");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportFilePath",
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportFilePath",
 					null, "");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, value, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Filename");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be, "txtReportParams",
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportParams",
 					null, "");
-			valueEditor = new TextObjectEditor(this, metaData, ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			valueEditor = new TextObjectEditor(this, value, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Parameter");
 
 		}

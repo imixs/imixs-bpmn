@@ -1,7 +1,7 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
@@ -11,7 +11,7 @@ import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
-import org.imixs.bpmn.model.Property;
+import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
@@ -49,20 +49,20 @@ public class VersionPropertySection extends AbstractPropertySection {
 			}
 			setTitle("Version-Management");
 
-			List<String> optionList = new ArrayList<String>();
-			optionList.add("no Version (default) |0");
-			optionList.add("create a new Version|1");
-			optionList.add("convert to Master Version |2");
-			Property metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			Map<String,String> optionList = new HashMap<String,String>();
+			optionList.put("0","no Version (default)");
+			optionList.put("1","create a new Version");
+			optionList.put("2", "convert to Master Version");
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"keyVersion", null, "");
-			RadioButtonEditor aEditor = new RadioButtonEditor(this, metaData,
+			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
 					optionList);
 			aEditor.createControl(attributesComposite, "Action");
 
-			metaData = ImixsBPMNPlugin.getPropertyByName((BaseElement) be,
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"numVersionActivityID", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, metaData,
-					ImixsBPMNPlugin.IMIXS_PROPERTY_VALUE);
+			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
+					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Activity ID");
 
 		}

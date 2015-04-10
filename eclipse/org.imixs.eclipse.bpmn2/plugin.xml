@@ -43,11 +43,8 @@
          </property>
       </customTask>
      
-      
-      
-      <!--  
-   
-       <customTask
+     
+      <customTask
              category="Imixs-Workflow"
              description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
              featureContainer="org.imixs.bpmn.ImixsFeatureContainerActivity"
@@ -64,10 +61,10 @@
                 value="0">
           </property>            
       </customTask>
-         -->
+        
       
       
-      <!-- Activity Tabs
+      <!-- Activity Tabs -->
 	  <propertyTab
             class="org.imixs.bpmn.ui.event.WorkflowPropertySection"
             id="org.imixs.bpmn.propertytab.event.workflow"
@@ -124,7 +121,7 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
- -->
+
       
       <!-- Process Tabs -->
       <propertyTab
