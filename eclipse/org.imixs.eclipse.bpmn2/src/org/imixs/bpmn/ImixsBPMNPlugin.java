@@ -175,12 +175,19 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 						.add(be, Bpmn2Package.eINSTANCE
 								.getBaseElement_ExtensionValues(),
 								extensionAttribute);
+				
+				// we need to execute to avoid the generation of empty
+				// extensionElements
+				InsertionAdapter.executeIfNeeded(extensionAttribute);
+				
 				// insert the item into the extension
 				InsertionAdapter.add(extensionAttribute,
 						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
 
 			}
 		}
+		
+		
 
 		return item;
 	}
@@ -228,9 +235,7 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			InsertionAdapter.add(item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE,
 					value);
 
-			// we need to execute to avoid the generation of empty
-			// extensionElements
-			InsertionAdapter.executeIfNeeded(value);
+			
 		}
 
 		return value;
