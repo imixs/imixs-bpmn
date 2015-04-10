@@ -109,11 +109,19 @@ public class ValueImpl extends MinimalEObjectImpl.Container implements Value {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * The content of a Value EObject will be wrapped into a CDATA element,
-	 * except the type of the containing Item is set to 'xs:boolean'
+	 * except the type of the containing Item is set to 'xs:boolean'.
+	 * 
+	 * A null value is not allowed and will be transformed into an empty string
 	 * 
 	 * @generated NOT
 	 */
 	public void setValue(String newValue) {
+		
+		// do not allow null values!
+		if (newValue==null) {
+			newValue="";
+		}
+		
 		getMixed().clear();
 
 		FeatureMap.Entry cdata = null;

@@ -140,9 +140,11 @@ public class ListEditor extends ObjectEditor {
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				int iCurrent = table.getSelectionIndex();
-				String sCurrent = table.getItems()[iCurrent].getText();
-				removeValue(sCurrent);
-				updateTable();
+				if (iCurrent >= 0) {
+					String sCurrent = table.getItems()[iCurrent].getText();
+					removeValue(sCurrent);
+					updateTable();
+				}
 
 			}
 		});

@@ -118,10 +118,9 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			return null;
 
 	}
-	
-	
+
 	/**
-	 * This method returns the an <imixs:item> entry  from a BaseElement.
+	 * This method returns the an <imixs:item> entry from a BaseElement.
 	 * 
 	 * The Item is identified by the given Name. If no Item with the requested
 	 * name yet exists, the method creates a new Item and adds it into the
@@ -144,7 +143,7 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		// lowercase itemname
 		itemName = itemName.toLowerCase();
 
-		// first test if we still hav a Item with the given name...
+		// first test if a item with the given name exits...
 		Item item = (Item) ImixsBPMNPlugin.findItemByName(be,
 				ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, itemName);
 		if (item == null) {
@@ -171,23 +170,20 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 				// add a new ExtensionAttributeValue to the EObject...
 				extensionAttribute = Bpmn2Factory.eINSTANCE
 						.createExtensionAttributeValue();
-				// insert the item into the extension
-				InsertionAdapter.add(extensionAttribute,
-						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
 				// insert the extension into the base element
 				InsertionAdapter
 						.add(be, Bpmn2Package.eINSTANCE
 								.getBaseElement_ExtensionValues(),
 								extensionAttribute);
+				// insert the item into the extension
+				InsertionAdapter.add(extensionAttribute,
+						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
+
 			}
 		}
 
-		
-
 		return item;
 	}
-
-	
 
 	/**
 	 * This method returns the first Value entry of a Imixs BPMN Item EObject
@@ -198,6 +194,7 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * ExtensionAttribute List of the BaseElement.
 	 * 
 	 * The method uses InsertionAdapter to add new Items.
+	 * 
 	 * 
 	 * @see https 
 	 *      ://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials/CustomPropertyTabs
@@ -215,8 +212,8 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		itemName = itemName.toLowerCase();
 
 		// first test if we still hav a Item with the given name...
-		Item item = getItemByName(be,itemName, itemType);
-		
+		Item item = getItemByName(be, itemName, itemType);
+
 		Value value = null;
 		// now we test if the item contains a <imixs:value> container. If so we
 		// reuse the frist one.
@@ -226,10 +223,14 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		} else {
 			// insert a new value element
 			value = ModelFactory.eINSTANCE.createValue();
-			if (defaultValue!=null)
+			if (defaultValue != null)
 				value.setValue(defaultValue);
 			InsertionAdapter.add(item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE,
 					value);
+
+			// we need to execute to avoid the generation of empty
+			// extensionElements
+			InsertionAdapter.executeIfNeeded(value);
 		}
 
 		return value;

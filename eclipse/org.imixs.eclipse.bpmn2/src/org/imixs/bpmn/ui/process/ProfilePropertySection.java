@@ -1,8 +1,5 @@
 package org.imixs.bpmn.ui.process;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Participant;
@@ -18,11 +15,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
-import org.imixs.bpmn.ui.BooleanEditor;
-import org.imixs.bpmn.ui.CheckBoxEditor;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
-import org.imixs.bpmn.ui.RadioButtonEditor;
 
 /**
  * This PorpertySection provides the attributes for the main workflow
@@ -82,59 +76,15 @@ public class ProfilePropertySection extends DefaultPropertySection {
 		public void createBindings(EObject be) {
 
 			setTitle("Workflow Profile");
-			
-			
-			
 
-			Value value = ImixsBPMNPlugin.getItemValueByName(
-					(BaseElement) be, "txtWorkflowModelVersion", null, "0.0.1");
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
+					"txtWorkflowModelVersion", null, "0.0.1");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Model Version");
 
-			
-			
-			
-			
-			 value = ImixsBPMNPlugin.getItemValueByName(
-					(BaseElement) be, "keyBooleanTest", "xs:boolean", "false");
-			BooleanEditor bEditor = new BooleanEditor(this, value);
-			bEditor.createControl(attributesComposite, "Boolean test");
-
-			
-			
-			// test checkbox...
-			Map<String,String> options=new HashMap<String,String>();
-			options.put("namcreator", "Ersteller");
-			options.put("namteam", "Team");
+			// Timer Mappings editor
 			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
-					"keyOptionTest", null);
-			
-			CheckBoxEditor cEditor = new CheckBoxEditor(this, item,options);
-			cEditor.createControl(attributesComposite, "Option test");
-
-			
-			
-			// test radiobutton...
-		
-			 value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
-					"keyRadioTest","", null);
-			
-			 RadioButtonEditor rEditor = new RadioButtonEditor(this, value,options);
-			rEditor.createControl(attributesComposite, "Radio test");
-
-			
-			
-			
-			
-
-//			FeatureListObjectEditor listEditor= new FeatureListObjectEditor(this, item,  ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE);
-//			listEditor.createControl(attributesComposite, "xxx Version");
-			
-
-			
-			// Timer Mappings editor	
-			 item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
 					"txtFieldMapping", null);
 			ListEditor listEditor = new ListEditor(this, item);
 			listEditor.setSortable(true);
@@ -142,8 +92,6 @@ public class ProfilePropertySection extends DefaultPropertySection {
 					"name_obj.gif"));
 			listEditor.createControl(attributesComposite, "Actor Properties");
 
-
-			
 			// FieldMapping Actors editor
 			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,
 					"txtTimeFieldMapping", null);
@@ -161,7 +109,7 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"plugin_obj.gif"));
 			listEditor.createControl(attributesComposite, "Plugins");
-			
+
 		}
 
 	}
