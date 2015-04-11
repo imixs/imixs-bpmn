@@ -1,7 +1,5 @@
 package org.imixs.bpmn.ui.event;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
@@ -73,25 +71,9 @@ public class MailPropertySection extends AbstractPropertySection {
 			valueEditor.createControl(attributesComposite, "Body");
 
 			// get Name Fields...
-			Map<String, String> optionList = new HashMap<String, String>();
-			Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(
-					(BaseElement) be, "txtFieldMapping");
-			if (iteNameField != null) {
-				// iterate over all item values and extract "key|value" pairs
-				Iterator<Value> iter = iteNameField.getValuelist().iterator();
-				while (iter.hasNext()) {
-					Value val = iter.next();
-					// split '|'
-					String key = val.getValue();
-					String label = key;
-					int i = key.indexOf('|');
-					if (i > -1) {
-						key = key.substring(0, i);
-						label = label.substring(i + 1);
-					}
-					optionList.put(key, label);
-				}
-			}
+			Map<String, String> optionList = ImixsBPMNPlugin
+					.getOptionListFromDefinition((BaseElement) be,
+							"txtFieldMapping");
 
 			// send to
 			Section section = createSection(this, "To", false);

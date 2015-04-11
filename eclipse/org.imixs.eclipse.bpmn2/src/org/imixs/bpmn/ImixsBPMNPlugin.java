@@ -2,6 +2,9 @@ package org.imixs.bpmn;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
@@ -307,5 +310,34 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		}
 		return property;
 	}
-
+	
+	
+	/**
+	 * returns a HashMap with the options from the process definiton element
+	 * @param be
+	 * @return
+	 */
+	public static Map<String,String> getOptionListFromDefinition(BaseElement be, String fieldName) {
+		// get Name Fields...
+		Map<String, String> optionList = new HashMap<String, String>();
+		Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(
+				be, fieldName);
+		if (iteNameField != null) {
+			// iterate over all item values and extract "key|value" pairs
+			Iterator<Value> iter = iteNameField.getValuelist().iterator();
+			while (iter.hasNext()) {
+				Value val = iter.next();
+				// split '|'
+				String key = val.getValue().trim();
+				String label = key;
+				int i = key.indexOf('|');
+				if (i > -1) {
+					label = key.substring(0, i).trim();
+					key = key.substring(i + 1).trim();
+				}
+				optionList.put(key, label);
+			}
+		}
+		return optionList;
+	}
 }

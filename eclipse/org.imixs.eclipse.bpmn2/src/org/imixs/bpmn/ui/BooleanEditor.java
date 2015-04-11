@@ -39,6 +39,10 @@ public class BooleanEditor extends ObjectEditor {
 		super(parent, obj, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 	}
 
+	public void addSelectionListener(SelectionListener sl) {
+		button.addSelectionListener(sl);
+	}
+
 	protected Control createControl(Composite composite, String label, int style) {
 
 		// create a separate label to the LEFT of the checkbox, otherwise the

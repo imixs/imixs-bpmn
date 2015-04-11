@@ -47,10 +47,10 @@
       <customTask
              category="Imixs-Workflow"
              description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
-             featureContainer="org.imixs.bpmn.ImixsFeatureContainerActivity"
+             featureContainer="org.imixs.bpmn.ImixsFeatureContainerEvent"
              id="org.imixs.workflow.bpmn.ActivityEntityEvent"
              name="Workflow Event"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
+             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.acl org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
@@ -68,55 +68,70 @@
 	  <propertyTab
             class="org.imixs.bpmn.ui.event.WorkflowPropertySection"
             id="org.imixs.bpmn.propertytab.event.workflow"
-            label="Workflow"
             replaceTab="org.eclipse.bpmn2.modeler.commonEvent.tab"
+            label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
-            afterTab="org.imixs.bpmn.propertytab.event.history"
-            class="org.imixs.bpmn.ui.event.MailPropertySection"
-            id="org.imixs.bpmn.propertytab.event.mail"
-            label="Mail"
+            class="org.imixs.bpmn.ui.event.ACLPropertySection"
+            id="org.imixs.bpmn.propertytab.event.acl"
+       		afterTab="org.imixs.bpmn.propertytab.event.workflow"
+            label="ACL"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
+      
       <propertyTab
             class="org.imixs.bpmn.ui.event.HistoryPropertySection"
             id="org.imixs.bpmn.propertytab.event.history"
+            afterTab="org.imixs.bpmn.propertytab.event.acl"
             label="History"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
+      
+      <propertyTab
+            class="org.imixs.bpmn.ui.event.MailPropertySection"
+            id="org.imixs.bpmn.propertytab.event.mail"
+            afterTab="org.imixs.bpmn.propertytab.event.history"
+            label="Mail"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.CatchEvent">
+      </propertyTab>
+         
       <propertyTab
             class="org.imixs.bpmn.ui.event.BusinessRulePropertySection"
             id="org.imixs.bpmn.propertytab.event.businessrule"
+            afterTab="org.imixs.bpmn.propertytab.event.mail"
             label="Rule"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
+      
       <propertyTab
-            afterTab="org.imixs.bpmn.propertytab.event.mail"
             class="org.imixs.bpmn.ui.event.ReportPropertySection"
             id="org.imixs.bpmn.propertytab.event.report"
+            afterTab="org.imixs.bpmn.propertytab.event.businessrule"
             label="Report"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
+      
       <propertyTab
-            afterTab="org.imixs.bpmn.propertytab.event.report"
             class="org.imixs.bpmn.ui.event.VersionPropertySection"
             id="org.imixs.bpmn.propertytab.event.version"
+            afterTab="org.imixs.bpmn.propertytab.event.report"
             label="Version"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
        <propertyTab
-            afterTab="org.imixs.bpmn.propertytab.event.version"
             class="org.imixs.bpmn.ui.event.TimerPropertySection"
             id="org.imixs.bpmn.propertytab.event.timer"
+            afterTab="org.imixs.bpmn.propertytab.event.version"
             label="Timer"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">

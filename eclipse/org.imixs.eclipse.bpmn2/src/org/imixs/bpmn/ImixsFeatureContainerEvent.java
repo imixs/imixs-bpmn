@@ -1,12 +1,16 @@
 package org.imixs.bpmn;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
+import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
+import org.eclipse.bpmn2.modeler.core.features.label.UpdateLabelFeature;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
+import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer.UpdateIntermediateCatchEventFeature;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -14,14 +18,16 @@ import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 
-public class ImixsFeatureContainerActivity extends CustomShapeFeatureContainer {
+public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 
 	// these values must match what's in the plugin.xml
 	public final static String ACTIVITYENTITY_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityEvent";
@@ -57,16 +63,24 @@ public class ImixsFeatureContainerActivity extends CustomShapeFeatureContainer {
 		return b1 || b2;
 	}
 
+	
+	
+	
+
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
 		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		return super.getCustomFeatures(fp);
 	}
 
+	
+	
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(
 			IFeatureProvider fp) {
 		return new IntermediateCatchEventFeatureContainer() {
+
+		
 
 			/**
 			 * override the Add Feature from the chosen Feature Container base
