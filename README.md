@@ -3,6 +3,8 @@
 Imixs-BPMN is a free modelling tool which takes the full advantage of all the capabilities of the BPMN standard and complements them with the features of a powerful workflow engine.
 Imixs-BPMN enhances the Eclipse BPMN2 Modelling Framework with the aspects of a human based workflow model executeabe on the Imxis-Workflow Engine. With Imixs-BPMN you have a maximium in flexibility to describe, model and executing your business processes. 
 
+![Imixs BPMN Modeler](screen_001.png)
+
 Learn more about Imixs-Workflow on http:///www.imixs.org
 
 ## Installation 
