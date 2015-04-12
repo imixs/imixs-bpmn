@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
@@ -15,10 +16,13 @@ import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.modeler.core.adapters.InsertionAdapter;
+import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
@@ -51,6 +55,12 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 
 	public final static EStructuralFeature IMIXS_ITEMVALUE = ModelPackage.eINSTANCE
 			.getValue_Value();
+
+	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class
+			.getName());
+
+	public final static Map<String, Integer> processIdCache = new HashMap<String, Integer>();
+	public final static int DEFAULT_PROCESS_ID = 1000;
 
 	// The shared instance
 	private static ImixsBPMNPlugin plugin;
@@ -178,19 +188,17 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 						.add(be, Bpmn2Package.eINSTANCE
 								.getBaseElement_ExtensionValues(),
 								extensionAttribute);
-				
+
 				// we need to execute to avoid the generation of empty
 				// extensionElements
 				InsertionAdapter.executeIfNeeded(extensionAttribute);
-				
+
 				// insert the item into the extension
 				InsertionAdapter.add(extensionAttribute,
 						ImixsBPMNPlugin.IMIXS_ITEM_FEATURE, item);
 
 			}
 		}
-		
-		
 
 		return item;
 	}
@@ -212,8 +220,8 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * @param be
 	 * @return
 	 */
-	public static Value getItemValueByName(BaseElement be, String itemName,
-			String itemType, String defaultValue) {
+	public static Value getItemValueByName(BaseElement businessObject,
+			String itemName, String itemType, String defaultValue) {
 
 		if (itemName == null)
 			return null;
@@ -222,7 +230,7 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		itemName = itemName.toLowerCase();
 
 		// first test if we still hav a Item with the given name...
-		Item item = getItemByName(be, itemName, itemType);
+		Item item = getItemByName(businessObject, itemName, itemType);
 
 		Value value = null;
 		// now we test if the item contains a <imixs:value> container. If so we
@@ -238,7 +246,6 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			InsertionAdapter.add(item, ImixsBPMNPlugin.IMIXS_ITEMLIST_FEATURE,
 					value);
 
-			
 		}
 
 		return value;
@@ -255,12 +262,12 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * @return the value of the extension element or null if no ConfigItem with
 	 *         this name exists
 	 */
-	public static Item findItemByName(BaseElement be,
+	public static Item findItemByName(BaseElement businessObject,
 			EStructuralFeature feature, String itemName) {
 
 		itemName = itemName.toLowerCase();
 
-		for (ExtensionAttributeValue eav : be.getExtensionValues()) {
+		for (ExtensionAttributeValue eav : businessObject.getExtensionValues()) {
 			// check all extensionAttribute values...
 			for (FeatureMap.Entry entry : eav.getValue()) {
 				if (entry.getEStructuralFeature() == feature) {
@@ -277,17 +284,14 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * This method returns the property by Name of the Definitions form the
-	 * given EObject (Task or Event)
+	 * This Method finds the definition object for a busiensElement
 	 * 
-	 * The method id not create the value!
-	 * 
-	 * 
+	 * @param be
+	 * @param itemName
 	 * @return
 	 */
-	public static Item findDefinitionsItemByName(BaseElement be, String itemName) {
-		Item property = null;
-		EObject container = be.eContainer();
+	public static Definitions findDefinitions(BaseElement businessObject) {
+		EObject container = businessObject.eContainer();
 		if (container == null)
 			return null;
 
@@ -300,28 +304,51 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 			container = ((Participant) container).getProcessRef();
 		if (container instanceof Process || container instanceof Collaboration) {
 			// includes also Choreography
-			defs = ModelUtil.getDefinitions(be);
+			defs = ModelUtil.getDefinitions(businessObject);
 		}
 
-		if (defs != null) {
-			// we found the defs! Now try to get the property by name....
-			property = ImixsBPMNPlugin.findItemByName(defs, IMIXS_ITEM_FEATURE,
-					itemName);
-		}
+		return defs;
+	}
+
+	/**
+	 * This method returns the property by Name of the Definitions form the
+	 * given EObject (Task or Event)
+	 * 
+	 * The method id not create the value!
+	 * 
+	 * 
+	 * @return
+	 */
+	public static Item findDefinitionsItemByName(BaseElement businessObject,
+			String itemName) {
+		Item property = null;
+
+		/*
+		 * Here we extract the parent Definitions element from the selection
+		 * container which can be a process or a collaboration selection.
+		 */
+		Definitions defs = findDefinitions(businessObject);
+		if (defs == null)
+			return null;
+
+		// we found the defs! Now try to get the property by name....
+		property = ImixsBPMNPlugin.findItemByName(defs, IMIXS_ITEM_FEATURE,
+				itemName);
 		return property;
 	}
-	
-	
+
 	/**
 	 * returns a HashMap with the options from the process definiton element
+	 * 
 	 * @param be
 	 * @return
 	 */
-	public static Map<String,String> getOptionListFromDefinition(BaseElement be, String fieldName) {
+	public static Map<String, String> getOptionListFromDefinition(
+			BaseElement be, String fieldName) {
 		// get Name Fields...
 		Map<String, String> optionList = new HashMap<String, String>();
-		Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(
-				be, fieldName);
+		Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(be,
+				fieldName);
 		if (iteNameField != null) {
 			// iterate over all item values and extract "key|value" pairs
 			Iterator<Value> iter = iteNameField.getValuelist().iterator();
@@ -340,4 +367,101 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		}
 		return optionList;
 	}
+
+	/**
+	 * This method suggest the next free processID for a Task Element. The
+	 * method is called when a ImixsFeatureContainerTask is added.
+	 * 
+	 * The method test if the businessObject is contained in a pool. The
+	 * processID must be unique for all imixs task elements in the same pool.
+	 * Otherwise the definitions ID will be the container identifier.
+	 * 
+	 * @param be
+	 * @return
+	 */
+	public static void suggestNextProcessId(BaseElement businessObject) {
+		int containerID = 0;
+		Integer result = 10;
+
+		// test for the processid feature
+		EStructuralFeature feature = ModelDecorator.getAnyAttribute(
+				businessObject, "processid");
+		if (feature != null && feature instanceof EAttribute) {
+			if (ImixsRuntimeExtension.targetNamespace
+					.equals(((EAttributeImpl) feature).getExtendedMetaData()
+							.getNamespace())) {
+
+				/*
+				 * Find the container. We extract either the Participant parent
+				 * or Definitions element.
+				 */
+				EObject container = businessObject.eContainer();
+				if (container == null)
+					return;
+				// test if we have a pool
+				if (container instanceof Participant) {
+					container = ((Participant) container).getProcessRef();
+					containerID = ((Participant) container).hashCode();// .getId();
+				} else {
+					Definitions defs = ModelUtil.getDefinitions(businessObject);
+					containerID = defs.hashCode();
+
+				}
+
+				// get ID
+				Integer currentProcessID = (Integer) businessObject
+						.eGet(feature);
+				String id = containerID + ":" + businessObject.getId();
+				// did we already verified the ProcessID?
+				result = processIdCache.get(id);
+				if (result == null) {
+
+					// if processID>0 verify if the id is still unique in the
+					// current container
+					if (currentProcessID > 0) {
+						for (Map.Entry<String, Integer> entry : processIdCache
+								.entrySet()) {
+							String aontainerID = entry.getKey();
+							int aprocessid = entry.getValue();
+							if (aontainerID.startsWith(containerID + ":")
+									&& currentProcessID == aprocessid) {
+								// Not a uni1ue processID!!
+								currentProcessID = 0;
+								break;
+							}
+						}
+					}
+
+					// if the processID==0 we compute the next best ID
+					if (currentProcessID <= 0) {
+						// get highest ProcesID
+						int bestProcessID = -1;
+						for (Map.Entry<String, Integer> entry : processIdCache
+								.entrySet()) {
+							String aontainerID = entry.getKey();
+							int aprocessid = entry.getValue();
+							if (aontainerID.startsWith(containerID + ":")
+									&& bestProcessID < aprocessid) {
+								bestProcessID = aprocessid;
+							}
+						}
+						// update ID
+						if (bestProcessID <= 0)
+							currentProcessID = DEFAULT_PROCESS_ID;
+						else
+							currentProcessID = bestProcessID + 100;
+
+						// suggest a new ProcessID...
+						logger.fine(id + "=" + currentProcessID);
+						businessObject.eSet(feature, currentProcessID);
+					}
+					// store the id into the cache
+					processIdCache.put(id, currentProcessID);
+					return;
+				}
+			}
+		}
+
+	}
+
 }

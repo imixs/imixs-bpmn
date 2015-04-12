@@ -105,6 +105,8 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 						setFillColor(containerShape);
 						
 
+						// suggest next free processID
+						ImixsBPMNPlugin.suggestNextProcessId(businessObject);
 					}
 				};
 			}
