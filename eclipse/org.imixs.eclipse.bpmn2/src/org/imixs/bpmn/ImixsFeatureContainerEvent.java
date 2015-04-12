@@ -1,16 +1,12 @@
 package org.imixs.bpmn;
 
-import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
-import org.eclipse.bpmn2.modeler.core.features.label.UpdateLabelFeature;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
-import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer.UpdateIntermediateCatchEventFeature;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -18,9 +14,7 @@ import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.context.IContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -101,6 +95,9 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 
 						setFillColor(containerShape);
 
+						// add a notifyChangeAdapter to validate the ActiviytID
+					    businessObject.eAdapters().add(new ImixsEventAdapter());
+					    
 					}
 				};
 			}
