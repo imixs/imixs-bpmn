@@ -1,15 +1,11 @@
 package org.imixs.bpmn.ui.event;
 
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
-import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
-import org.imixs.bpmn.ImixsRuntimeExtension;
+import org.imixs.bpmn.ImixsBPMNPlugin;
 
 /**
  * The AbstractProcessPropertySection is the basic class for all Imixs property
@@ -35,14 +31,9 @@ public class AbstractPropertySection extends DefaultPropertySection {
 		EObject businessObject = BusinessObjectUtil
 				.getBusinessObjectForSelection(selection);
 
-		EStructuralFeature feature = ModelDecorator.getAnyAttribute(
-				businessObject, "activityid");
-		if (feature != null && feature instanceof EAttribute) {
-			if (ImixsRuntimeExtension.targetNamespace
-					.equals(((EAttributeImpl) feature).getExtendedMetaData()
-							.getNamespace())) {
+		
+		if (ImixsBPMNPlugin.isImixsEvent(businessObject)){
 				return true;
-			}
 		}
 
 		return false;

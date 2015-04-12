@@ -6,7 +6,6 @@ import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
-import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -79,7 +78,7 @@ public class ACLPropertySection extends AbstractPropertySection {
 
 				@Override
 				public void widgetDefaultSelected(SelectionEvent arg0) {
-					// TODO Auto-generated method stub
+					// no op
 				}
 
 			});

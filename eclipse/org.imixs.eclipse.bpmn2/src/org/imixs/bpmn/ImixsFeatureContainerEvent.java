@@ -2,15 +2,11 @@ package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -36,16 +32,9 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 	 */
 	@Override
 	public String getId(EObject object) {
-		EStructuralFeature feature = ModelDecorator.getAnyAttribute(object,
-				"activityid");
-		if (feature != null && feature instanceof EAttribute) {
-			if (ImixsRuntimeExtension.targetNamespace
-					.equals(((EAttributeImpl) feature).getExtendedMetaData()
-							.getNamespace())) {
+		if (ImixsBPMNPlugin.isImixsEvent(object)) {
 				return ACTIVITYENTITY_EVENT_ID;
-			}
 		}
-
 		return null;
 	}
 

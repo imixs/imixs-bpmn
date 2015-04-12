@@ -13,8 +13,10 @@ import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
+import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.adapters.InsertionAdapter;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
@@ -386,82 +388,124 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 		// test for the processid feature
 		EStructuralFeature feature = ModelDecorator.getAnyAttribute(
 				businessObject, "processid");
-		if (feature != null && feature instanceof EAttribute) {
-			if (ImixsRuntimeExtension.targetNamespace
-					.equals(((EAttributeImpl) feature).getExtendedMetaData()
-							.getNamespace())) {
+		if (feature != null && isImixsTask(businessObject)) {
 
-				/*
-				 * Find the container. We extract either the Participant parent
-				 * or Definitions element.
-				 */
-				EObject container = businessObject.eContainer();
-				if (container == null)
-					return;
-				// test if we have a pool
-				if (container instanceof Participant) {
-					container = ((Participant) container).getProcessRef();
-					containerID = ((Participant) container).hashCode();// .getId();
-				} else {
-					Definitions defs = ModelUtil.getDefinitions(businessObject);
-					containerID = defs.hashCode();
+			/*
+			 * Find the container. We extract either the Participant parent or
+			 * Definitions element.
+			 */
+			EObject container = businessObject.eContainer();
+			if (container == null)
+				return;
+			// test if we have a pool
+			if (container instanceof Participant) {
+				container = ((Participant) container).getProcessRef();
+				containerID = ((Participant) container).hashCode();// .getId();
+			} else {
+				Definitions defs = ModelUtil.getDefinitions(businessObject);
+				containerID = defs.hashCode();
 
-				}
-
-				// get ID
-				Integer currentProcessID = (Integer) businessObject
-						.eGet(feature);
-				String id = containerID + ":" + businessObject.getId();
-				// did we already verified the ProcessID?
-				result = processIdCache.get(id);
-				if (result == null) {
-
-					// if processID>0 verify if the id is still unique in the
-					// current container
-					if (currentProcessID > 0) {
-						for (Map.Entry<String, Integer> entry : processIdCache
-								.entrySet()) {
-							String aontainerID = entry.getKey();
-							int aprocessid = entry.getValue();
-							if (aontainerID.startsWith(containerID + ":")
-									&& currentProcessID == aprocessid) {
-								// Not a uni1ue processID!!
-								currentProcessID = 0;
-								break;
-							}
-						}
-					}
-
-					// if the processID==0 we compute the next best ID
-					if (currentProcessID <= 0) {
-						// get highest ProcesID
-						int bestProcessID = -1;
-						for (Map.Entry<String, Integer> entry : processIdCache
-								.entrySet()) {
-							String aontainerID = entry.getKey();
-							int aprocessid = entry.getValue();
-							if (aontainerID.startsWith(containerID + ":")
-									&& bestProcessID < aprocessid) {
-								bestProcessID = aprocessid;
-							}
-						}
-						// update ID
-						if (bestProcessID <= 0)
-							currentProcessID = DEFAULT_PROCESS_ID;
-						else
-							currentProcessID = bestProcessID + 100;
-
-						// suggest a new ProcessID...
-						logger.fine(id + "=" + currentProcessID);
-						businessObject.eSet(feature, currentProcessID);
-					}
-					// store the id into the cache
-					processIdCache.put(id, currentProcessID);
-					return;
-				}
 			}
+
+			// get ID
+			Integer currentProcessID = (Integer) businessObject.eGet(feature);
+			String id = containerID + ":" + businessObject.getId();
+			// did we already verified the ProcessID?
+			result = processIdCache.get(id);
+			if (result == null) {
+
+				// if processID>0 verify if the id is still unique in the
+				// current container
+				if (currentProcessID > 0) {
+					for (Map.Entry<String, Integer> entry : processIdCache
+							.entrySet()) {
+						String aontainerID = entry.getKey();
+						int aprocessid = entry.getValue();
+						if (aontainerID.startsWith(containerID + ":")
+								&& currentProcessID == aprocessid) {
+							// Not a uni1ue processID!!
+							currentProcessID = 0;
+							break;
+						}
+					}
+				}
+
+				// if the processID==0 we compute the next best ID
+				if (currentProcessID <= 0) {
+					// get highest ProcesID
+					int bestProcessID = -1;
+					for (Map.Entry<String, Integer> entry : processIdCache
+							.entrySet()) {
+						String aontainerID = entry.getKey();
+						int aprocessid = entry.getValue();
+						if (aontainerID.startsWith(containerID + ":")
+								&& bestProcessID < aprocessid) {
+							bestProcessID = aprocessid;
+						}
+					}
+					// update ID
+					if (bestProcessID <= 0)
+						currentProcessID = DEFAULT_PROCESS_ID;
+					else
+						currentProcessID = bestProcessID + 100;
+
+					// suggest a new ProcessID...
+					logger.fine(id + "=" + currentProcessID);
+					businessObject.eSet(feature, currentProcessID);
+				}
+				// store the id into the cache
+				processIdCache.put(id, currentProcessID);
+				return;
+			}
+
 		}
 
 	}
 
+	/**
+	 * This Method verifies if a given object is an instance of a Imixs
+	 * IntermediateCatchEvent
+	 * 
+	 * @param businessObject
+	 * @return true if the object is a IntermediateCatchEvent and assigned to
+	 *         the Imixs TargetNamespace
+	 */
+	public static boolean isImixsEvent(Object businessObject) {
+		if (businessObject instanceof IntermediateCatchEvent) {
+			EStructuralFeature feature = ModelDecorator.getAnyAttribute(
+					(IntermediateCatchEvent) businessObject, "activityid");
+			if (feature != null && feature instanceof EAttribute) {
+				if (ImixsRuntimeExtension.targetNamespace
+						.equals(((EAttributeImpl) feature)
+								.getExtendedMetaData().getNamespace())) {
+					return true;
+				}
+			}
+
+		}
+		return false;
+	}
+
+	/**
+	 * This Method verifies if a given object is an instance of a Imixs Task.
+	 * 
+	 * @param businessObject
+	 * @return true if the object is a Task element and assigned to the Imixs
+	 *         TargetNamespace
+	 */
+	public static boolean isImixsTask(Object businessObject) {
+		if (businessObject instanceof Task) {
+			EStructuralFeature feature = ModelDecorator.getAnyAttribute(
+					(Task) businessObject, "processid");
+			if (feature != null && feature instanceof EAttribute) {
+				if (ImixsRuntimeExtension.targetNamespace
+						.equals(((EAttributeImpl) feature)
+								.getExtendedMetaData().getNamespace())) {
+					return true;
+				}
+			}
+
+		}
+		return false;
+	}
 }
