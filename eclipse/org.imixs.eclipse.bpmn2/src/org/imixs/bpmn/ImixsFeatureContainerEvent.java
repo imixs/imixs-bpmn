@@ -11,6 +11,9 @@ import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer.UpdateIntermediateCatchEventFeature;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -51,6 +54,7 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 				return ACTIVITYENTITY_EVENT_ID;
 			}
 		}
+		IntermediateCatchEvent g;
 
 		return null;
 	}
@@ -98,9 +102,18 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 							IntermediateCatchEvent businessObject) {
 						super.decorateShape(context, containerShape,
 								businessObject);
-
 						setFillColor(containerShape);
 
+						
+
+					    Adapter adapter = new AdapterImpl() {
+					      public void notifyChanged(Notification notification) {
+					        System.out
+					            .println("Notfication received from the data model. Data model has changed!!!");
+					      }
+					    };
+					    businessObject.eAdapters().add(adapter);
+					    
 					}
 				};
 			}

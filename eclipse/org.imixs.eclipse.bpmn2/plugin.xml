@@ -190,12 +190,68 @@
          -->
       </modelEnablement>
       
-      
-      <!-- -->
-     
-     
-     
    </extension>
+   
+   
+   
+   
+     <!-- Validator -->
+    <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="Imixs Constraints"
+            id="org.eclipse.bpmn2.modeler.validators"/>
+      <constraintProvider cache="false">
+     
+     <!-- http://www.omg.org/spec/BPMN/20100524/DI -->
+         <package namespaceUri="http://www.imixs.org/bpmn2"/>
+      
+         <constraints categories="org.eclipse.bpmn2.modeler.validators">
+            <constraint
+                  lang="Java"
+                  class="org.imixs.bpmn.ImixsValidator"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="Non-Empty Names"
+                  id="org.eclipse.bpmn2.modeler.validators.IDValidator"
+                  statusCode="1">
+               <description>
+                  All items in a library model should have some unique identifier or name.
+               </description>
+               <message>
+                  A {0} has been found to have no unique identifier (name or title).
+               </message>
+               <!-- Item  IntermediateCatchEvent -->
+               <target class="Item"/>
+               
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+   
+   <!-- -->
+   <extension
+         point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext
+            default="false"
+            id="org.eclipse.bpmn2.modeler.validators.libraryContext">
+         <selector class="org.imixs.bpmn.ValidationDelegateClientSelector"/>
+      </clientContext>
+      <binding
+            context="org.eclipse.bpmn2.modeler.validators.libraryContext"
+            category="org.eclipse.bpmn2.modeler.validators"/>
+   </extension> 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated imixs -->
       <package
