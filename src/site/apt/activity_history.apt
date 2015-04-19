@@ -1,0 +1,44 @@
+ 
+History
+~~~~~~~~~~~~~~~~~~~~
+
+ The History Activity defines the history information added to a Workitem during a process step. 
+ You can define a optional Date- and Time format which will be inserted before a Record Text.  
+ In each process step the Workflow Manager will add a new line into the Workitem History. 
+ 
+[images/screenshot_111.png] 
+ 
+ So the history will result in a process enduser documentation like this example:
+
+*--------------------------------------------------------------------------+
+|   02.10.2006 13:36:47 : Document saved by Ralph Soika/IMIXS .  |
+*--------------------------------------------------------------------------+
+|   02.10.2006 13:46:37 : Document assigened by Ralph Soika/IMIXS .  |
+*--------------------------------------------------------------------------+
+|   02.10.2006 13:36:47 : Document saved by Ralph Soika/IMIXS.  |
+*--------------------------------------------------------------------------+
+ 
+ 
+
+*Date- and Timeformat
+~~~~~~~~~~~~~~~~~~~~
+ You can define different Date and Time Formates the workflow manager should use to gernerate 
+ the DateTime Information in fornt of a history entry
+
+ The following formats are allowed:
+
+    * SHORT is completely numeric, such as 12.13.52 or 3:30pm
+
+    * MEDIUM is longer, such as Jan 12, 1952
+
+    * LONG is longer, such as January 12, 1952 or 3:30:32pm
+
+    * FULL is pretty completely specified, such as Tuesday, April 12, 1952 AD or 3:30:42pm PST.
+
+
+*Entry
+~~~~~~~~~~~~~~~~~~~~
+ An Entry defines an optional WorkItem abstract which will be displayed by Workflow Clients 
+ to give the user a short overview for the process.   
+ 
+ 

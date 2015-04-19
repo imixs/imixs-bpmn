@@ -1,0 +1,137 @@
+ 
+Create a Imixs Workflow Model
+~~~~~~~~~~~~~~~~~~~~
+
+ The following section explains how a Imixs Workflow Model can be created by using the Imixs Workflow
+ Modeler.
+ A Model is represented by a Imixs Workflow File with the file file-name extension  '.ixm' (e.g. my_model.ixm).
+ The Model file must be embedded in an Eclipse Project. You can use any kind of Eclipse Project
+ to manage Imixs Workflow Files. If you have not yet created a Eclipse Project choose
+ 
+ File > New > Project...
+ 
+ and choose the Project type 'General > Project'  to create an new empty Eclipse Project.
+ 
+ 
+ 
+*The "Imixs Workflow Assistant"
+~~~~~~~~~~~~~~~~~~~~
+
+ The "Imixs Workflow Assistant" can be used to create a new Workflow Model File in an existing
+ Eclipse Project of the  Workbench. 
+ When you have created a Eclipse Project or open an existing project you find the assistant under 
+ 
+ File > new > Other
+ 
+ or the by shortcut [ctl+N]
+ 
+ select the Option
+ 
+ Imixs Workflow -> new Imixs Workflow Model
+  
+ Make sure that you have selected a location or folder inside your project where the Model File should be 
+ created in by the assistant.
+ 
+[images/screenshot_116.png] 
+ 
+ 
+ Click the button "Next >" and choose a file-name for the Model File to be created....
+ 
+[images/screenshot_117.png] 
+ 
+ Again click the button "Next >" and choose a name for your first Process to be created by
+ the assistant...
+ 
+[images/screenshot_118.png] 
+ 
+ Finally click the button "Finish" to create the Model file.
+ 
+ After you created a new workflow model file you can, in case you haven't done it already, 
+ activate the Imixs Workflow perspective. See the {{{eclipse_workbench.html}Eclipse Workbench section}}.
+ 
+ 
+Modeling a Workflow Process Group
+~~~~~~~~~~~~~~~~~~~~
+
+ After you have opened the Imixs Model file you can choose the Process Group created before.
+ In the example below you can open the existing Process Group "Ticket"
+ 
+ 
+[images/screenshot_105.png] 
+ 
+ If you have no existing Process Group or you whant to create a new one choose 
+ 
+ "create New Process Group" 
+ 
+ 
+*A Workflow Process Group
+~~~~~~~~~~~~~~~~~~~~
+
+ A Workflow Process Group is a single Business Process contained by a Imixs Workflow Model file.
+ Each Imixs Workflow Model can exist of many different Process Groups.
+ Each Process Group defines "Process Entities" and "Process Activities".
+ 
+ 
+[images/screenshot_119.png] 
+ 
+ 
+ The "Process Entity" defines the current status inside a business process ('open' or 'in progress')
+ and the "Process Activities" are defining the transition from one "Process Entity" into another 
+ "Process Entity".
+ Each "Process Entity" can be assigned to one ore many "Process Activities"
+ 
+ 
+*The graphical editor
+~~~~~~~~~~~~~~~~~~~~
+
+ In the left-hand section of the "Process Groups" of the Wokflow editor, you see 
+ existing process groups listed.  
+ By clicking on the process group, you can directly open the graphical editor. 
+ 
+[images/screenshot_122.png] 
+
+ If you open a new created Process Group the graphical editor does not yet have any 
+ contents as no Process Entities and Activity Entities have been created. 
+ The graphical editor has a tool bar at its right-hand margin (palette) that you can open 
+ with the mouse and lock in its position by clicking on the arrow icon. 
+ You can also use the mouse to move the palelte to a different position of your 
+ graphical editor. Eclipse stores these settings automatically.
+ 
+**Creating a Process Entity
+~~~~~~~~~~~~~~~~~~~~
+
+ To create the first Process Entity, select the Process icon and click into the free 
+ area of the editor. This automatically places a new Process Entity in the editor. 
+ The layout of the elements within the graphical editor is automatically adopted by 
+ the Imixs Workflow Modeler. This is performed to ensure that the elements are displayed 
+ in an orderly layout.
+
+[images/screenshot_123.png]  
+
+ You can now assign the name of the process. Select the element in the graphical editor 
+ and change the name through the properties in the lower property dialog box.
+
+**Creating an Activity Entity
+~~~~~~~~~~~~~~~~~~~~
+
+ After you have added a Process Entity into the modeling area of the graphical editor you can
+ assign Activity Entities.
+ To accomplish this, select the corresponding Process Entity with the mouse and create 
+ an activity by selecting the Activity icon and placing it in the editor. 
+ The activity will automatically be assigned to the previously selected process. After 
+ you have created a new activity, you can change its name and define other properties 
+ by using the property dialog box.
+
+
+[images/screenshot_124.png]  
+ 
+ An activity is automatically assigned to the previously selected Process Entity. 
+ In the graphical editor, an arrow line between the process and the activity is displayed. 
+ This assignment cannot be changed. The activity is in turn connected with the process 
+ through an arrow line to indicate that the WorkItem should maintain the same status 
+ after the activity is executed by the Imixs Workflow Manager. 
+ This assignment can be changed. To accomplish this, highlight the arrow line connected 
+ to the activity with the mouse and drag it to another process. This establishes a new 
+ connection of the activity. If the activity is later executed by the WorkflowManager, 
+ the status of the WorkItem is automatically set to the new process.
+ 

@@ -1,0 +1,105 @@
+ 
+The Workflow Process Entities
+~~~~~~~~~~~~~~~~~~~~
+
+ Workflow Process Entities describing the different stages of a Bussines Process.  
+ Each Process represents a status that can be adopted by a workitem during its 
+ course of events in a workflow model
+ 
+[images/screenshot_125.png] 
+
+ When a Process Entity is selected in the graphical interface of the Imixs Workflow Editor
+ the properties of a Process Entity can be edited through the Eclipse View 'Properties'.
+ The Properties of a Process Entity is divided into three different sections: 
+ 
+*Basic Process Settings
+~~~~~~~~~~~~~~~~~~~~
+
+ The Basic Tab defines basic informations for a Process Entity. 
+
+[images/screenshot_127.png] 
+
+
+**Process ID 
+~~~~~~~~~~~~~~~~~~~~
+
+ Every Process Entity has an unambiguously ID. The Process ID is used by the Workfow Manager
+ to assign a Workitem to a Process Entity.
+
+
+**Name & Description
+~~~~~~~~~~~~~~~~~~~~
+
+ The name and description fields are for basic informations to be displayed to the user inside a 
+ Workflow Client. The Name of an Process Entity should describe the status of a workitem in a
+ bussiness model. e.g. "open" or "in approval" "closed".
+
+ 
+  
+*Abstract
+~~~~~~~~~~~~~~~~~~~~
+
+ The Tab 'Abstract' of a Process Entity defines textual informations describing the status of a 
+ workitem. The textual informations can be combined with attributes of a workitem. The Imixs
+ Workflow Manager uses the informations as a kind of template to generate workitem specific 
+ informations. 
+
+[images/screenshot_128.png] 
+
+
+**Workflow Summary 
+~~~~~~~~~~~~~~~~~~~~
+
+ The Workflow Summary is a short description which can be displayed by a Workflow Application.
+ Therefore properties of the workitem can be mixed into the workflow summary using the field tag.
+ The following example generates the workflow summary out from the workitem property 'txtsubject' 
+ which is a text imput field controlled by the user.
+ 
++----------------------------------------------+
+ <itemValue>txtsubject<itemValue>
++----------------------------------------------+
+ 
+ 
+**Workflow Abstract 
+~~~~~~~~~~~~~~~~~~~~
+
+ The Workflow Abstract can be used as a long description for a workitem. The Abstract is simmilar to 
+ the workflow Summary. The abstract is typical used to be displayed by a Workflow Application.
+ The following example shows how the abstract can be used with HTML markup language to generate 
+ a web friendly format.
+ 
++----------------------------------------------+
+ Ticket opened by <itemValue>namcreator<itemValue>
+ <br />
+ Ticket No.: <itemValue>number</itemValue>
+ <hr />
++----------------------------------------------+
+ 
+ 
+ 
+*Display
+~~~~~~~~~~~~~~~~~~~~
+
+ The Tab 'Display' of a Process Entity defines application specify informations which 
+ are typlical used by a Imixs Workflow Application to control the user UI for a workitem depending
+ on its workflow status.
+
+
+[images/screenshot_129.png] 
+
+
+**Form Name 
+~~~~~~~~~~~~~~~~~~~~
+
+ The form name can be used to control which form should be displayed when a user opens a workitem 
+ assigend to this Process Entity. This allows the model to control the behavior of the application
+ in more general.
+ 
+ 
+**Image URL 
+~~~~~~~~~~~~~~~~~~~~
+
+ The Image URL can be used to visualize the current workflow status of a workitem in the application UI.
+ 
+ 
+ 

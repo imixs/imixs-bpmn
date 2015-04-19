@@ -64,7 +64,9 @@
         
       
       
-      <!-- Activity Tabs -->
+      <!-- Activity Tabs 
+             
+      -->
 	  <propertyTab
             class="org.imixs.bpmn.ui.event.WorkflowPropertySection"
             id="org.imixs.bpmn.propertytab.event.workflow"

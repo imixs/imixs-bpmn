@@ -1,0 +1,44 @@
+
+Installation
+~~~~~~~~~~~~~~
+
+ For installation of the Imixs-BPMN Modeler, you will need an executable Eclipse installation (version 4.x) 
+ or any other Eclipse based IDE (e.g. Oracle, SAP, IBM). If you do not have an Eclipse installation 
+ yet, you can download Eclipse from the {{{http://www.eclipse.org/}Eclipse website}}.
+ 
+ Imixs-BPMN is installed the same way as any other Eclipse plug-in. Imixs-BPMN consists of 
+ two plug-ins. To install the plug-ins select from the Eclipse Workbench
+ main menu:  Help -> Install New Software. 
+ 
+ Enter the update site URLs as explained in the following sections:
+ 
+ 
+*Installation of the Eclipse BPMN2 Modeler plug-in
+~~~~~~~~~~~~~~
+ 
+ First you need to install the Eclipse BPMN2 Modeler which is the foundation of Imixs-BPMN. 
+ In the Eclipse Install Dialog enter the update site for version 1.1.3 of the Eclipse BPMN2 Modeler plug-in.
+ 
+**Update-Site: {{http://download.eclipse.org/bpmn2-modeler/updates/luna/1.1.3}}
+~~~~~~~~~~~~~~ 
+  \  
+ 
+[images/bpmn_screen_01.png]
+
+
+*Installation of the Imixs-BPMN plug-in
+~~~~~~~~~~~~~~
+  
+ Next you can install the Imixs-BPMN plug-in from the following update site in the latest version.
+ 
+**Update-Site: {{http://www.imixs.org/org.imixs.eclipse.bpmn2.updatesite/}}
+~~~~~~~~~~~~~~ 
+  \  
+ 
+[images/bpmn_screen_02.png]
+
+
+
+ Finally you have to restart your Eclipse IDE.
+ 
+ 

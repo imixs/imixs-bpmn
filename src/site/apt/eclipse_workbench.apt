@@ -1,0 +1,117 @@
+
+The Eclipse Workbench
+~~~~~~~~~~~~~~
+
+ The term "workbench" indicates programming environment of the Eclipse desktop. Through the workbench, 
+ seamless tool integration and controlled openness can be achieved by defining a generic paradigm for creation, 
+ administration, and navigation of resources. Each workbench window contains one or more perspectives. 
+ Perspectives contain views and editors, and control the elements that are displayed in certain menus and 
+ symbol bars. Several workbench windows can be opened at the same time. 
+ 
+ The Imixs Workflow Modeler integrates seamlessly into the Eclipse Workbench and provides you with all 
+ required tools for creating and managing of WorkflowModels.
+ 
+[images/screenshot_104.png]
+
+
+*Imixs Workflow Perspective
+~~~~~~~~~~~~~~
+
+ Perspectives define the group and the original layout of the views in the workbench window. 
+ The Imixs Workflow perspective provides several functions that are optimized for modeling and 
+ working with models.
+
+ You can open a new perspective as described below:
+
+   1. Click on the "Open perspective" button in the direct-call bar at the left-hand side of the workbench window. (This is similar to the function of menu Window > Open perspective in the menu bar.)
+
+   2. Choose option "others" from the drop-down menu to display a complete list of perspectives.
+
+   3. Select the IX Workflow perspective. 
+
+
+[images/screenshot_106.png]
+
+ After opening the perspective, the title bar of the window in which it is contained is changed to 
+ display the name of the perspective. Furthermore, an icon is added to the direct-call bar with 
+ which you can switch back from other perspectives in the same window.
+
+ Normally, a perspective is opened in the same window. If you wish that the perspective be opened 
+ in a new window, modify the settings in Window > User settings > Workbench > Perspectives.
+
+**Resetting of Perspectives
+~~~~~~~~~~~~~~
+
+ You can reset the layout of the perspective as follows:
+
+   1. Click on Window > User settings.
+
+   2. Expand the Workbench and choose the perspectives.
+
+   3. Select the perspectives from the list Available perspectives that should be reset to their original layouts.
+
+   4. Click on Restore.
+
+   5. Click on OK.
+
+
+*The Model Tree View
+~~~~~~~~~~~~~~
+
+ Views support editors and provide alternative representations or navigations for the information 
+ in your workbench. The "WorkflowModel" view is used to display the WorkflowModel 
+ (opened in the main editor) in a tree structure.
+ 
+[images/screenshot_107.png]
+
+ Views contain two menus. The first one used to access the tab of the view by clicking with the 
+ right mouse button allows to edit the view, similarly to the menu assigned to the workbench window.
+ 
+**The Filter Function
+~~~~~~~~~~~~~~
+
+ The view contains its own menu, the so-called "pull-down menu of the view". Access is 
+ performed by clicking on the downward arrow. The pull-down menu of the view contains operations 
+ that are applied to the entire contents of the view but not on an individual element displayed 
+ in the view. The pull-down of the view contains a filter operation that allows you to hide the 
+ environment entries of the model from the model tree. 
+ 
+ 
+ 
+**Displaying the Model View
+~~~~~~~~~~~~~~
+
+ If you have inadvertently closed the model view, you can redisplay this view by selecting 
+ option Window > Display view. A perspective defines which views may be required, and displays 
+ them in the submenu Display view. Additional views are available after selecting option Others... 
+ at the end of submenu Display view.
+
+ Alternatively, you can reset the perspective through menu Window > Reset perspective. 
+ The Imixs Workflow Modeler perspective is then redrawn.
+ 
+ 
+**Creating and Deleting Entries
+~~~~~~~~~~~~~~
+
+ Using the two items below the pull-down menu of the view, you can add or remove entries to or 
+ from the model tree.
+ Initially, select a ProcessTree or a process and click on the icon to insert a new process or a 
+ new activity. Using the icon, you can remove the current element.  
+ 
+ 
+
+*The Preferences
+~~~~~~~~~~~~~~~~~~~~
+ With preferences special settings will be done, which affect the complete performance of the workflow modeler.  
+ Call it with  Window > Preferences... . 
+ Choose then the section Imixs "IX Workflowmodeler" to change the current settings 
+  
+ 
+[images/screenshot_100.png]
+ 
+**Graphical Editor Style
+~~~~~~~~~~~~~~~~~~~~
+ With the Graphical Editor Style the design of the IX Graphical Editor will be changed. 
+ A style defines the display of the several elements of the graphical interface. 
+ 
+ 

@@ -1,0 +1,170 @@
+ 
+The Workflow Editor
+~~~~~~~~~~~~~~~~~~~~
+ The Workflow Editor of the Imixs Modeler openes in the editor area of your Eclipse IDE
+ when you open a file with the file-name extension ".ixm". 
+ 
+ The illustration below shows an open Workflow Editor with the file "ticket.ixm" opened.
+
+[images/screenshot_105.png] 
+
+ The name of the model file is displayed on the editor tab. If an asterisk (*) is displayed at the 
+ left-hand side of the tab, this indicates that changes made within the editor have not yet been 
+ saved. If you attempt to quit the editor or the workbench while changes have not yet been saved, 
+ you are alerted to store the changes.
+
+ You can open several main editors in the editor area simultaneously. These editors are then 
+ displayed as a stack. You can activate an individual editor by clicking on its tab. You can 
+ also arrange editors within the editor area side by side to display its contents simultaneously.
+
+ You can move between editors by clicking on arrows labeled "Next" and "Back" in the symbol bar or 
+ by pressing "ctrl+F6". You can navigate through the menu options by clicking on the arrow buttons. 
+ This may cause several locations in a file to be touched before switching to another file. 
+ By pressing "ctrl+F6", a list with all currently opened editors is displayed with the editor 
+ highlighted that was selected before the current editor. 
+ 
+ To quit the editor, choose one of the following options:
+
+    * Click on the "Close" button ("X") on the editor tab.
+    
+    * From the menu bar, select option File > Close.
+    
+ 
+ The main Editor is devided into different section (tabs) which can be switched at the bottom
+ of the editor to control different settings of a workflow model.
+ 
+ The following section describes the different tabs.
+ 
+ 
+The Workflow overview
+~~~~~~~~~~~~~~~~~~~~  
+ 
+[images/screenshot_101.png] 
+ 
+
+ 
+
+ 
+ 
+ 
+*Model Version  
+~~~~~~~~~~~~~~~~~~~~
+ In the Section 'General Information' you can see and edit the Version number of the Model.
+ The Version number is used by the Imixs Workflow Engine to process a workitem depending
+ on a specific version number. You can change the version number if you would like to 
+ provide a similar model with a new version. The new version is typical used by the
+ Imixs Workflow System to process new created workitems. 
+ So the version number enables you to control different behaviors of the same process model
+ in one workflow server instance.
+ 
+ 
+*Process Groups
+~~~~~~~~~~~~~~~~~~~~
+ Through section "ProcessGroups", you can open and edit the process groups created 
+ in your model. If your model does not yet have a process group available, you can 
+ create a new group by clicking on link "Create new process group". 
+ If you have an application server and download a model from it, the process groups 
+ are also included in this section. Through the "Refresh" icon in the upper right 
+ corner, you can update the display of the process groups. This may become necessary 
+ after downloading model data from an application server.
+
+
+The Workflow Profile
+~~~~~~~~~~~~~~~~~~~~  
+ The workflow profile is a unique section in the Imixs Editor that you can open by clicking 
+ on the "Profile" tab.
+
+[images/screenshot_102.png] 
+
+
+ Through the profile, the information is configured that is both required for executing 
+ the model in a WorkflowManager and for configuring the workflow activities.
+
+*General Information
+~~~~~~~~~~~~~~~~~~~~  
+
+ In section "General Information", you can define the debugging level as well as the error result.
+ The debugging level defines the debugging configuration of the workflow manager on the server.
+ This setting is required to check the behavior of the process execution on the application 
+ server side. The following settings are possible:
+
+    * Debug off - no information is output
+    
+    * Warnings - only information is output that results in an error or in abortion of process execution.
+    
+    * Verbose - all information concerning process execution is logged.
+
+
+ Switch the debugging level to "Verbose" to write all information generated during process 
+ execution into the server log. The default setting is "Debug off". Please note that the settings 
+ must be transferred to the application server using the upload function before the settings become
+  effective.
+
+*Plug-Ins
+~~~~~~~~~~~~~~~~~~~~  
+ In this section, the plug-ins used by the workflow manager as well as their order are defined. 
+ The configuration is normally determined by the workflow system being used. Only plug-ins can 
+ be configured that are known to the application server being used. If you have questions with 
+ respect to the required plug-ins, please contact your system administrator.
+
+*Actors
+~~~~~~~~~~~~~~~~~~~~ 
+ Actor definitions are used to display the role and group names within an activity. Actors always 
+ refer to the WorkItem to be processed. During process execution, the WorkflowManager uses this 
+ information to compare the information of the workflow model with the information stored in the 
+ WorkItem.
+ If your workflow application contains a field named "namDelegate" in which the delegate of a 
+ task is stored, you should enter "Delegate | namDelegate" as the NameObject. This allows you to 
+ use the "delegate" role during the configuration of activities. During process execution by the workflow manager or the plug-in, the information contained in the "namDelegate" field of the WorkItem is used to perform the action.
+
+*Timers
+~~~~~~~~~~~~~~~~~~~~ 
+ Timers perform a similar function as Actors. They are used to map attributes of the 
+ WorkItem of type "Date" in an object of workflow modeling.
+ If your workflow application contains a field named "datFrom" that defines a specific point of 
+ time after which an action should be launched, you can enter "Begin | datFrom" as the Timer. 
+ During modeling, you can then work in the activities with the "Begin" time value. This is 
+ especially useful for schedule activities.
+ 
+ 
+ 
+ 
+Synchronize a Model
+~~~~~~~~~~~~~~~~~~~~  
+
+ Models can be stored locally in the file system of the eclipse Workbench inside a Eclipse Project.
+ But to use the Workflow Model in an Imixs Workflow Management System you need to synchronize the
+ Workflow Model with an Server Instance.
+ The Imixs Workflow Modeler offers several possibilities to synchronize a Workflow Model
+ with an Imixs Workflow Server instance. 
+ Switch to the "Synchronize" Tab to start the synchronization. 
+
+[images/screenshot_103.png] 
+
+ Depending of the Imixs Workflow Server configuration you can either choose the SOAP based Web Service Interface 
+ or the REST Services. 
+
+ To transfer a local WorkflowModel via a web Service to an Imixs Workflow Instance, 
+ you can enter the Web Service Enpoint URL into the field 'Location'. 
+ 
+ For a REST Service Interface this URL typical looks like this:
+ 
++----------------------------------------------+
+  http://localhost:8080/workflow-rest/model
++----------------------------------------------+
+ 
+ Replace 'localhost' with your servers host name. The URL part 'workflow-rest' indicates the REST Service 
+ interface. The part '/model' finds the Imixs Model service. 
+ Read more about using the Imixs Restservice in the {{{http://www.imixs.org/xml/restservice.html}Rest Service description}}.
+ 
+ For a SOAP Web Service Interface lookup the Web Service Endpoint URL in your application Server. 
+ Details about using SOAP Services can be found in the {{{http://www.imixs.org/xml/}XML and Web Service description}}.
+ 
+ Click the "Synchronize Model" link below the Service Selection to start the upload of a Model definition 
+ to the Workflow Server.
+ You need to authenticate against the Workflow Server Instance with your username and password.
+ 
+ 
+      [Note:] You can simply test your Web Service interface provided by the Imixs Worklow Server if 
+      you put the Web Service endpoint URL into your Webbrowser. You will see an XML Output indicating 
+      that your Service is up and running.
