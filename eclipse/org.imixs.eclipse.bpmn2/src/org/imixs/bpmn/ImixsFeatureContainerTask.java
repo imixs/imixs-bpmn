@@ -1,7 +1,10 @@
 package org.imixs.bpmn;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Task;
+import org.eclipse.bpmn2.modeler.core.features.AbstractUpdateBaseElementFeature;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
+import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
@@ -10,7 +13,9 @@ import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -98,6 +103,39 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 				};
 			}
 
+			
+			/*
+			 * NOTE: this is just a trail. We can not be sure if this implementation works correct.
+			 * If problems occur remove this method!
+			 * 
+			 * 
+			 * (non-Javadoc)
+			 * @see org.eclipse.bpmn2.modeler.ui.features.activity.AbstractActivityFeatureContainer#getUpdateFeature(org.eclipse.graphiti.features.IFeatureProvider)
+			 */
+			@Override
+			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+				//UpdateEventDefinitionFeature
+				MultiUpdateFeature multiUpdate =(MultiUpdateFeature) super.getUpdateFeature(fp);// new MultiUpdateFeature(fp);
+				multiUpdate.addFeature(new AbstractUpdateBaseElementFeature<BaseElement>(
+						fp) { 
+					@Override
+					public boolean update(IUpdateContext context) {
+						//super.update(context);
+						setFillColor((ContainerShape) context
+								.getPictogramElement());
+						return true;
+					}
+
+					
+				});
+
+				
+				return multiUpdate;
+			}
+
+			
+			
+			
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
 			 * to your business object (bpmn2 element) - see the code example
