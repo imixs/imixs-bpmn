@@ -67,7 +67,6 @@ public class MailPropertySection extends AbstractPropertySection {
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
 
-			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "Body");
 
 			// get Name Fields...

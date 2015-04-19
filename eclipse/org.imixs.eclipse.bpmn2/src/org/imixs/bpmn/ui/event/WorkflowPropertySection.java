@@ -9,7 +9,6 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
@@ -61,7 +60,6 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
-			valueEditor.setStyle(SWT.MULTI | SWT.V_SCROLL);
 			valueEditor.createControl(attributesComposite, "Result");
 
 			// visibility and roles

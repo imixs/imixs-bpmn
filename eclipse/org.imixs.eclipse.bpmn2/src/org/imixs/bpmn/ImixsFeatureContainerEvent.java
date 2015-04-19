@@ -1,7 +1,11 @@
 package org.imixs.bpmn;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
+import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
+import org.eclipse.bpmn2.modeler.core.features.label.Messages;
+import org.eclipse.bpmn2.modeler.core.features.label.UpdateLabelFeature;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
@@ -10,8 +14,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IReason;
+import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
+import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -33,7 +41,7 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 	@Override
 	public String getId(EObject object) {
 		if (ImixsBPMNPlugin.isImixsEvent(object)) {
-				return ACTIVITYENTITY_EVENT_ID;
+			return ACTIVITYENTITY_EVENT_ID;
 		}
 		return null;
 	}
@@ -46,24 +54,16 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 		return b1 || b2;
 	}
 
-	
-	
-	
-
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
 		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		return super.getCustomFeatures(fp);
 	}
 
-	
-	
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(
 			IFeatureProvider fp) {
 		return new IntermediateCatchEventFeatureContainer() {
-
-		
 
 			/**
 			 * override the Add Feature from the chosen Feature Container base
@@ -85,10 +85,49 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 						setFillColor(containerShape);
 
 						// add a notifyChangeAdapter to validate the ActiviytID
-					    businessObject.eAdapters().add(new ImixsEventAdapter());
-					    
+						businessObject.eAdapters().add(new ImixsEventAdapter());
+
 					}
 				};
+			}
+
+			@Override
+			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+
+				MultiUpdateFeature multiUpdate = new MultiUpdateFeature(fp);
+				multiUpdate.addFeature(new UpdateIntermediateCatchEventFeature(
+						fp) {
+					@Override
+					public boolean update(IUpdateContext context) {
+						super.update(context);
+						setFillColor((ContainerShape) context
+								.getPictogramElement());
+						return true;
+					}
+				});
+
+				multiUpdate.addFeature(new UpdateLabelFeature(fp) {
+
+					@Override
+					protected String getLabelString(BaseElement element) {
+						String l = super.getLabelString(element);
+						return l ;
+					}
+					
+
+					// @Override
+					// protected void updatePictogramElement(PictogramElement
+					// pe) {
+					// GraphicsAlgorithm sowas = pe.getGraphicsAlgorithm();
+					// sowas.setForeground(manageColor(ACTIVITYENTITY_BACKGROUND));
+					// pe.setGraphicsAlgorithm(sowas);
+					// super.updatePictogramElement(pe);
+					//
+					// }
+
+				});
+
+				return multiUpdate;
 			}
 
 			/**
@@ -118,10 +157,11 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 								IntermediateCatchEvent.class);
 				if (ta != null) {
 					Shape shape = containerShape.getChildren().get(0);
-					ShapeStyle ss = new ShapeStyle();
+					ShapeStyle shapeStyle = new ShapeStyle();
 
-					ss.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, ss);
+					shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
+					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta,
+							shapeStyle);
 				}
 			}
 

@@ -2,6 +2,7 @@ package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.modeler.core.IBpmn2RuntimeExtension;
 import org.eclipse.bpmn2.modeler.core.LifecycleEvent;
+import org.eclipse.bpmn2.modeler.core.LifecycleEvent.EventType;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil.Bpmn2DiagramType;
 import org.eclipse.bpmn2.modeler.ui.DefaultBpmn2RuntimeExtension.RootElementParser;
 import org.eclipse.bpmn2.modeler.ui.wizards.FileService;
@@ -35,12 +36,22 @@ public class ImixsRuntimeExtension implements IBpmn2RuntimeExtension {
 		return parser.getResult();
 	}
 
-	
+	/**
+	 * Add notification adapters here.
+	 * 
+	 */
 	@Override
 	public void notify(LifecycleEvent event) {
-//		if (event.eventType == EventType.EDITOR_INITIALIZED)
-//			SampleImageProvider.registerAvailableImages();
 
+		// as we can not identify the the Imixs Event here we do add a event adapter
+		// see: https://www.eclipse.org/forums/index.php/t/1065614/
+		if (event.eventType == EventType.BUSINESSOBJECT_CREATED) {
+			// EObject object = (EObject) event.target;
+			// if (object instanceof IntermediateCatchEvent) {
+			// object.eAdapters().add(new ImixsEventAdapter());
+			// }
+
+		}
 	}
 
 }
