@@ -1,12 +1,12 @@
  
-The Workflow Process Entities
+The Workflow Task Properties
 ~~~~~~~~~~~~~~~~~~~~
 
  Workflow Process Entities describing the different stages of a Bussines Process.  
  Each Process represents a status that can be adopted by a workitem during its 
  course of events in a workflow model
  
-[images/screenshot_125.png] 
+[images/bpmn_screen_04.png]
 
  When a Process Entity is selected in the graphical interface of the Imixs Workflow Editor
  the properties of a Process Entity can be edited through the Eclipse View 'Properties'.

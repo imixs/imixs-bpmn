@@ -38,44 +38,6 @@ The Eclipse Workbench
  canvas, it is highlighted in the Outline View. Conversely when an item in the Outline is selected, it is
  also highlighted on the Drawing Canvas.
 
-*Property View
-~~~~~~~~~~~~~~
- The Property View is used to edit the attributes of the currently selected element. This view is also
- synchronized with the Outline View such that when a tree element is selected in the Outline, its
- attributes are displayed in the Property View.
-
-
-*Create a new BPMN2 file
-~~~~~~~~~~~~~~
- The Eclipse New File wizard is used to create a new BPMN2 file. From the Main Menu, click File -> New
- -> Other… which opens the New File Wizard Dialog box. Navigate to the BPMN2 category and you will
- see several entries as shown here:
-
-[images/bpmn_screen_06.png]
-
- The second entry in the BPMN2 category, Generic BPMN 2.0 Diagram, is contributed by the BPMN2
- Modeler plug-in, and can be used to create a new, properly initialized Diagram file. This wizard creates
- a file that is not intended for deployment to any particular BPM process engine (see Target Runtime
- Extensions for a detailed discussion). Selecting this entry displays the first page of the wizard, as shown
- here:
-
-[images/bpmn_screen_07.png]
-
-
- This allows you to select the type of diagram you wish to create. This page contains a brief description
- of each of the diagram types; pick one by clicking the image next to the description and then click the
- Next > button. See the Appendix for a more detailed discussion of diagram types.
-
-
- The next page of the wizard asks for a location, file name and a target namespace. These fields are
- already filled in with reasonable defaults, but you may want to change them as necessary.
-
-[images/bpmn_screen_08.png]
-
- The target namespace "http://www.imixs.org/bmpn2" links the Imxs BPMN model elements with the 
- modeler. 
- Click the Finish button to create a template for the selected Diagram type and open the BPMN2
- Modeler.
 
 
 *Profiles
@@ -84,26 +46,38 @@ The Eclipse Workbench
  The Tool Palette supports the concept of “Profiles” which customizes the tools available based 
  on the task to be accomplished. Imixs-BPMN provides three differnt profiles:
  
- 
- 
- SCREEN
+[images/bpmn_screen_11.png]
  
  The profile 'Imixs-Workflow' provides the core elmements needed to create a BPMN model executeable
  on the Imixs-Workflow engine.
  The profile 'Analytic' extends the Tool Palette with common BPMN elements needed to create analytic 
  models
  The profile 'Full' provides all kind of BPMN elements. 
- 
+
+ The Imixs-BPMN elements are shown in the section 'Imixs-Workflow' category:
+
+[images/bpmn_screen_12.png] 
  
  
 *Property View
 ~~~~~~~~~~~~~~
- The Property View is used to edit all parameters for the currently selected BPMN2 element. The BPMN2
- Modeler uses tabbed property sheets to group different kinds of properties.
+ The Property View is used to edit all parameters for the currently selected BPMN2 element. 
+ This view is synchronized with the selected BPMN element in the Drawing Canvas.
+ The BPMN2 Modeler uses tabbed property sheets to group different kinds of properties.
  Although the number of tabs and their contents depends on which BPMN2 element is selected, 
  Imixs-BPMN defines custom properties for the Process Definition, the Workflow Task element and 
  the Workflow Event element. 
  
+[images/bpmn_screen_13.png] 
 
- Seite 9!
+
+ Read the following sections to learn more about:
+ 
+  * {{{./main_editor.html}Process Properties}}
+
+  * {{{./process.html}Task Properties}}
+
+  * {{{./event.html}Event Properties}}
+
+
  

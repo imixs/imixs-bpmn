@@ -26,10 +26,10 @@
       <item name="Overview" href="overview.html"/>         
       <item name="Installation" href="install.html"/>
       <item name="Eclipse Workbench" href="eclipse_workbench.html"/>
-      <item name="Workflow Editor" href="main_editor.html"/>
       <item name="Creating a Model" href="create_model.html"/>
-      <item name="Process Entities" href="process.html" />
-      <item name="Activities" href="activities.html">
+      <item name="Proces Poperties" href="main_editor.html"/>
+      <item name="Task Properties" href="process.html" />
+      <item name="Event Prperties" href="activities.html">
   	    <item name="ACL settings" href="activity_security.html"/>
   	    <item name="Process documentation" href="activity_history.html"/>
   	    <item name="Email Notification" href="activity_mail.html"/>
