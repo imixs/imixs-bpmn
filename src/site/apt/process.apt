@@ -1,42 +1,39 @@
  
 The Workflow Task Properties
 ~~~~~~~~~~~~~~~~~~~~
-
- Workflow Process Entities describing the different stages of a Bussines Process.  
- Each Process represents a status that can be adopted by a workitem during its 
- course of events in a workflow model
+ 
+ When a Imixs BPMN Task Element is selected in the Drawing canvas, different settings can be
+ configured from the tabbed property sheets displayed in the Property View.
  
 [images/bpmn_screen_04.png]
 
- When a Process Entity is selected in the graphical interface of the Imixs Workflow Editor
- the properties of a Process Entity can be edited through the Eclipse View 'Properties'.
- The Properties of a Process Entity is divided into three different sections: 
+ The property settings are grouped in different sections.
  
-*Basic Process Settings
+ 
+*General Settings
 ~~~~~~~~~~~~~~~~~~~~
 
- The Basic Tab defines basic informations for a Process Entity. 
+ The property tab 'Genereal' defines basic informations for a Imixs BPMN Task. 
 
-[images/screenshot_127.png] 
+[images/bpmn_screen_16.png]
 
 
-**Process ID 
+**Name 
 ~~~~~~~~~~~~~~~~~~~~
 
- Every Process Entity has an unambiguously ID. The Process ID is used by the Workfow Manager
- to assign a Workitem to a Process Entity.
+ The name of the Task element is used to identify the status of a process instance.
+ The Name should describe the status of a workitem in a bussiness model. e.g. "open" or "in approval" "closed".
 
-
-**Name & Description
+**Description
 ~~~~~~~~~~~~~~~~~~~~
 
- The name and description fields are for basic informations to be displayed to the user inside a 
- Workflow Client. The Name of an Process Entity should describe the status of a workitem in a
- bussiness model. e.g. "open" or "in approval" "closed".
-
+ The description of the Task element is used by the Imixs Workflow System to provide the user
+ with additional information about the task. Typically a description can provide information
+ how the task should be performed or which information need to be entered into a application.
+ 
  
   
-*Abstract
+*Workflow Settings
 ~~~~~~~~~~~~~~~~~~~~
 
  The Tab 'Abstract' of a Process Entity defines textual informations describing the status of a 
@@ -44,7 +41,14 @@ The Workflow Task Properties
  Workflow Manager uses the informations as a kind of template to generate workitem specific 
  informations. 
 
-[images/screenshot_128.png] 
+[images/bpmn_screen_17.png]
+
+
+**Process ID 
+~~~~~~~~~~~~~~~~~~~~
+
+ Every Process Entity has an unambiguously ID. The Process ID is used by the Workfow Manager
+ to assign a Workitem to a Process Entity.
 
 
 **Workflow Summary 
@@ -77,7 +81,7 @@ The Workflow Task Properties
  
  
  
-*Display
+*Application Settings
 ~~~~~~~~~~~~~~~~~~~~
 
  The Tab 'Display' of a Process Entity defines application specify informations which 
@@ -85,7 +89,7 @@ The Workflow Task Properties
  on its workflow status.
 
 
-[images/screenshot_129.png] 
+[images/bpmn_screen_18.png]
 
 
 **Form Name 

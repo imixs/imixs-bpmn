@@ -1,68 +1,42 @@
  
-The Workflow Activities
+The Workflow Event Properties
 ~~~~~~~~~~~~~~~~~~~~
 
- Workflow Activities are the most important model objects inside a workflow model. 
- A Workflow Activity defines what will happen after a worfklow process is started.
-
-[images/screenshot_126.png] 
-
- Each Workflow Activity is assigned to one Process Entity. The Activity describes the
- transition from one Process into another. 
-
+ When a Imixs BPMN Event Element is selected in the Drawing canvas, different settings can be
+ configured from the tabbed property sheets displayed in the Property View.
  
-*Basic Activity Settings
+[images/bpmn_screen_05.png]
+
+ The property settings are grouped in different sections.
+ 
+*General Settings
 ~~~~~~~~~~~~~~~~~~~~
 
- The Basic Tab defines basic informations for an Activity Entity. This activity setting stores 
- the flow information as also access information for the activity himself. The Imixs Workflow Manager 
- needs this information to determine the next process step as also informations about the activity 
- like the name or a short description. 
+ The property tab 'Genereal' defines basic informations for a Imixs BPMN Task. 
 
-[images/screenshot_108.png] 
+[images/bpmn_screen_19.png]
 
 
-**Activity ID 
+**Name 
 ~~~~~~~~~~~~~~~~~~~~
 
- Every Activity ID is unambiguously assigned to one Process Entity. 
- Every Activity has an unique ID inside the Process Step. 
- So the Activty ID exists of two informations. The Process ID and the Activity ID - e.g.: 10.10
+ The name of the Task element is used to identify the status of a process instance.
+ The Name should describe the status of a workitem in a bussiness model. e.g. "open" or "in approval" "closed".
 
-**The Follow UP ID
+**Description
 ~~~~~~~~~~~~~~~~~~~~
 
- Every Activity will result in a new process or activity status. So you can define the workitem flow 
- with configuring the FollowUp ID. There are these different options allowed:
+ The description of the Event element is used by the Imixs Workflow System to provide the user
+ with additional information about the event. Typically a description can provide information
+ how the event will change the current status of the workflow instance.
  
  
-*------------------+----------------------------------------------------------+
-| Option           | Description                                              |
-*------------------*----------------------------------------------------------+
-| none             | If this option is selected, the Activity will not result in any status change. |
-|                  | The Workflowmanager stop processing the workitem if no FollowUp ID is defined. |
-|                  | The workitem will stay in the current process status.  	  |
-*------------------*----------------------------------------------------------+
-| Activity         | This option defines the next Activity inside the current Process Entity |
-|                  | the Workflow Manager should continue to process. So you can define more then |
-|                  | one activity to be processed in one Process step.        |
-*------------------*----------------------------------------------------------+
-| Process           | This Option is the default option and defines the next Process                                              |
-|                  | Entity the Workitem will belong to. After the Workflowmanager finished         |
-|                  | processing the activity he will change the ProcessID ($processid) of the    |
-|                  |workitem and stops processing. 	               |
-*------------------*----------------------------------------------------------+
-
  
- 
-**Name & Description
+*Workflow Properties
 ~~~~~~~~~~~~~~~~~~~~
-
- The name and description fields are for basic informations to be displayed to the user inside a 
- Workflow Client. The Name of an activity should describe the action the user has to perform. e.g. 
- "aprove" or "assign".
- The Informations are typically used by an application UI to display an action button.
-
+[images/bpmn_screen_20.png]  
+  
+ 
  
 **Access Management
 ~~~~~~~~~~~~~~~~~~~~
@@ -75,47 +49,121 @@ The Workflow Activities
  an access control for the activity. So only if a user has the read permissions he will see the
  permissions in his Workflow Client working on a current WorkItem.
 
+   
   
-  
-*Replacing static Strings with workitem properties
+*ACL Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_21.png]  
+
+ The ACL Tab defines the Access Control List for a workitem processed by the Imixs Workflow. An 
+ ACL defines the read- and write access a user will be granted for after the workitem was successful 
+ processed. This is one of the most important features of the Imixs Workflow System.
+ 
+ The ACL can be defined in a static and a dynamic way. To activate the feature the option 
+ 'Change ACL Settings' has to be checked.
+
+**Static ACL
 ~~~~~~~~~~~~~~~~~~~~
 
- Ativities and Process Entities often offer the possibility to configure text blocks. 
- These static text blocks can be replaced with properties provided by the 
- processed workitem. This is useful if you need a string constant to be updated with values from your workitem.
- For example if you look at the Mail Activity which sends messages, the properties 'Subject' and 'Body' 
- provides the mail message subject and text. This static message text can be automatically 
- replaced with the values ​​from the current wokitem if the tag <itemvalue> is used.
- 
- For example the message text
- 
-+------------------------+
- The invoice was generated by <itemValue>namcreator</itemValue> at <itemValue format="EEE, MMM d, yyyy">$created</itemvalue>
-+------------------------+
- 
- will be replaced with the workitem properties 'namcreator' and '$created' into:
- 
-+------------------------+
- The invoice was generated by Ralph at Wed, Jul 4, 2010
-+------------------------+
+ In the field 'Other' Roles or UserIDs can be defined in a static way. This means Roles and/or 
+ User IDs are added statically into the ACL of the workitem which is currently processed by the 
+ Imixs Workflow Manager. A UserID have to match the login name of a user. Names of roles have to 
+ match the security roles defined by the application. The Imixs standard roles which can be used 
+ here are
 
 
- The attribute 'format' can be used to format a date/time value.
- 
- If a workitem value contains multivalues you can also use the attribute 'separator' to separate single values.
- 
- 
- For example the message text
- 
-+------------------------+
- The following item has been ordered: <itemValue separator=", ">_parts</itemValue>
-+------------------------+
- 
- will be replaced with:
- 
-+------------------------+
- The following item has been ordered: pants, shirt, jacket
-+------------------------+
-	
-  
+ * org.imixs.ACCESSLEVEL.READACCESS
+ * org.imixs.ACCESSLEVEL.AUTHORACCESS
+ * org.imixs.ACCESSLEVEL.EDITORACCESS
+ * org.imixs.ACCESSLEVEL.MANAGERACCESS
+
+**Actors - dynamic ACL
+~~~~~~~~~~~~~~~~~~~~
+
+ The other way of managing the ACL on a workitem is the definition of dynamic computed actors. 
+ Actors play an essential role in a user-centric workflow system. The actors are users who actively 
+ interfere with the data of a workitem during a process. For example, protagonists launch actions 
+ or perform individual tasks. On the other hand, actors can also be passively involved in a workflow.
+  - for instance, as recipients of an e-mail notification. An actor is always an abstract role 
+  defined in a workflow model. The UserIDs behind the actor can not be named during the modeling 
+  phase, because they depend on the workitem data to be processed in a single workflow step.
+
+ In the Imixs Workflow Modeler, actors can be defined in the workflow profile section for each 
+ model. The actors are computed from properties of the workitem being processed. The corresponding 
+ property contains the real Roles or UserIDs to be added into the ACL of a workitem.
+
+ The actors used for dynamic ACL settings can be defined in the 'Profile' section of the Imixs 
+ Modeller.
+
+
+ Click on button "Add" and enter the display name and a property name to be used for dynamic ACL definition. The display name and the property name are separated by a | character. E.g: "Team | namTeamList".
+
+ Example:
+
++----+
+Creator | namCreator
+Last Editor | namCurrentEditor
+Team | namTeam
+Delegate | namDelegate 
++----+
+
+
+**Changing the ACL
+~~~~~~~~~~~~~~~~~~~~
+ To change the ACL settings for a workitem being processed the option 'Change ACL Settings' has 
+ to be checked. The read- and write-access for a workitem can be changed by checking the actors 
+ previously defined. Any existing ACL settings of a workitem will be cleared and replaced with 
+ the new definition.
+
+
+*History Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_22.png]  
+
+ The History Activity defines the history information added to a Workitem during a process step. 
+ You can define a optional Date- and Time format which will be inserted before a Record Text. 
+ In each process step the Workflow Manager will add a new line into the Workitem History.
+
+ So the history will result in a process enduser documentation like this example:
+
++-------------+
+02.10.2006 13:36:47 : Document saved by Ralph Soika/IMIXS .
+02.10.2006 13:46:37 : Document assigened by Ralph Soika/IMIXS .
+02.10.2006 13:36:47 : Document saved by Ralph Soika/IMIXS.
++-------------+
+
+
+
+*Mail Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_23.png]  
+
+ The Mail Activity defines information for mail messaging during a process step.
+
+ Your can define different Mail Receivers by the SendTo and CopyTo input fields. The Workflow 
+ manager will send the information to all receivers defined in this section
+
+ In the Mail section you can enter information for the mail subject and mail body. Both fields 
+ support the workitem attribute mapping explained before.
+
+
+*Rule Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_24.png]
+
+
+*Report Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_25.png]  
+
+
+*Version Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_26.png]  
+
+*Timer Properties
+~~~~~~~~~~~~~~~~~~~~
+[images/bpmn_screen_27.png]  
+
+
   

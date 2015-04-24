@@ -43,7 +43,7 @@ The Eclipse Workbench
 *Profiles
 ~~~~~~~~~~~~~~
 
- The Tool Palette supports the concept of “Profiles” which customizes the tools available based 
+ The Tool Palette supports the concept of "Profiles" which customizes the tools available based 
  on the task to be accomplished. Imixs-BPMN provides three differnt profiles:
  
 [images/bpmn_screen_11.png]

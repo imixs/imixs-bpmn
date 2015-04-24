@@ -29,15 +29,11 @@
       <item name="Creating a Model" href="create_model.html"/>
       <item name="Proces Poperties" href="main_editor.html"/>
       <item name="Task Properties" href="process.html" />
-      <item name="Event Prperties" href="activities.html">
-  	    <item name="ACL settings" href="activity_security.html"/>
-  	    <item name="Process documentation" href="activity_history.html"/>
-  	    <item name="Email Notification" href="activity_mail.html"/>
-      </item>
+      <item name="Event Prperties" href="activities.html"/>
+      <item name="Text Replacement" href="textreplacement.html" />
       
       <item name="Report Plugin" href="report_plugin.html"/>
      
-      <item name="Development" href="development/development.html" />         
     </menu>
 
  	<menu name="Project Information">
