@@ -2,18 +2,18 @@
 The Workflow Task Properties
 ~~~~~~~~~~~~~~~~~~~~
  
- When a Imixs BPMN Task Element is selected in the Drawing canvas, different settings can be
+ When a Imixs BPMN Task Element is selected in the Drawing Canvas, different settings can be
  configured from the tabbed property sheets displayed in the Property View.
  
 [images/bpmn_screen_04.png]
 
- The property settings are grouped in different sections.
+ The property settings are grouped into different sections.
  
  
-*General Settings
+*General Properties
 ~~~~~~~~~~~~~~~~~~~~
 
- The property tab 'Genereal' defines basic informations for a Imixs BPMN Task. 
+ The property tab 'General' defines basic information for an Imixs BPMN Task element. 
 
 [images/bpmn_screen_16.png]
 
@@ -33,77 +33,80 @@ The Workflow Task Properties
  
  
   
-*Workflow Settings
+*Workflow Properties
 ~~~~~~~~~~~~~~~~~~~~
 
- The Tab 'Abstract' of a Process Entity defines textual informations describing the status of a 
- workitem. The textual informations can be combined with attributes of a workitem. The Imixs
- Workflow Manager uses the informations as a kind of template to generate workitem specific 
- informations. 
-
+ The Tab 'Workflow' contains Processing Information of a Task element. These information will be
+ updated after a WorkItem was processed by the Worklfow Engine.
+ 
 [images/bpmn_screen_17.png]
 
 
-**Process ID 
+**ID 
 ~~~~~~~~~~~~~~~~~~~~
 
- Every Process Entity has an unambiguously ID. The Process ID is used by the Workfow Manager
- to assign a Workitem to a Process Entity.
-
+ Every Workflow Task has an unambiguously ID. The Process ID is assigned by the Workfow Engine
+ after a WorkItem was processed. The Process ID is used to identify the status of a WorkItem controlled
+ by the Workflow Engine.
+ 
 
 **Workflow Summary 
 ~~~~~~~~~~~~~~~~~~~~
 
- The Workflow Summary is a short description which can be displayed by a Workflow Application.
- Therefore properties of the workitem can be mixed into the workflow summary using the field tag.
- The following example generates the workflow summary out from the workitem property 'txtsubject' 
- which is a text imput field controlled by the user.
+ The Workflow Summary is a short description describing the status of a WorkItem.
+ A Workflow Summary can be a text message containing also processing information.
+ The following example generates the Workflow Summary out from the WorkItem property 'ticket_number'.
  
 +----------------------------------------------+
- <itemValue>txtsubject<itemValue>
+ Open Ticket: <itemValue>ticket_number<itemValue>
 +----------------------------------------------+
  
  
 **Workflow Abstract 
 ~~~~~~~~~~~~~~~~~~~~
 
- The Workflow Abstract can be used as a long description for a workitem. The Abstract is simmilar to 
- the workflow Summary. The abstract is typical used to be displayed by a Workflow Application.
- The following example shows how the abstract can be used with HTML markup language to generate 
- a web friendly format.
+ The Workflow Abstract can be used as a long description describing the status of a WorkItem. 
+ The Abstract is similar to the Workflow Summary and can also be dynamically computed from WorkItem 
+ properties. 
+ The following example shows how the abstract can be computed from WorkItem properties using the
+ HTML markup language:
  
 +----------------------------------------------+
  Ticket opened by <itemValue>namcreator<itemValue>
  <br />
- Ticket No.: <itemValue>number</itemValue>
+ Ticket No.: <itemValue>ticket_number</itemValue>
  <hr />
 +----------------------------------------------+
  
+ See the {{{./textreplacement.html}Text Replacement feature}} how to insert WorkItem Values into a message text. 
  
- 
-*Application Settings
+*Application Properties
 ~~~~~~~~~~~~~~~~~~~~
 
- The Tab 'Display' of a Process Entity defines application specify informations which 
- are typlical used by a Imixs Workflow Application to control the user UI for a workitem depending
- on its workflow status.
-
+ The Property Tab 'Application' defines information used to controll the behavior of a WorkItem in the
+ workflow application. 
 
 [images/bpmn_screen_18.png]
 
 
-**Form Name 
+**Input Form 
 ~~~~~~~~~~~~~~~~~~~~
 
- The form name can be used to control which form should be displayed when a user opens a workitem 
- assigend to this Process Entity. This allows the model to control the behavior of the application
- in more general.
+ The 'Input Form' can be used to control how a WorkItem in a specific status 
+ is displayed or how it can be edited inside the workflow application. 
+ This allows the model to control the behavior of the application in a specific way.
+
  
- 
-**Image URL 
+**Status Icon 
 ~~~~~~~~~~~~~~~~~~~~
 
- The Image URL can be used to visualize the current workflow status of a workitem in the application UI.
+ A 'Status Icon' can be a Image URL to visualize the current status of a WorkItem.
  
+**WorkItem Type 
+~~~~~~~~~~~~~~~~~~~~
+
+ The 'WorkItem Type' is a category assigned to the WorkItem by the Workflow Engine 
+ when the WorkItem was processed. 
  
+  
  

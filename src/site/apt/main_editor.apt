@@ -24,15 +24,27 @@ The Process Property Editor
  
 **The Actor Properties
 ~~~~~~~~~~~~~~~~~~~~
- Actor definitions are used to display the role and group names within an activity. Actors always 
- refer to the WorkItem to be processed. During process execution, the WorkflowManager uses this 
- information to compare the information of the workflow model with the information stored in the 
- WorkItem. If your workflow application contains a field named "namDelegate" in which the delegate 
- of a task is stored, you should enter "Delegate | namDelegate" as the NameObject. This allows you 
- to use the "delegate" role during the configuration of activities. During process execution by the 
- workflow manager or the plug-in, the information contained in the "namDelegate" field of the 
- WorkItem is used to perform the action.
-
+ Actors play an essential role in a user-centric workflow system. The actors are users who actively 
+ interact with a workflow application.  
+ For example, actors can start a new process instance to create a Workitem or trigger actions on an 
+ existing WorkItem. Actors can also be passively involved into a workflow, for instance, as recipients 
+ of an e-mail notification. 
+ 
+ An actor is defined as an abstract role in a workflow model. The application specific user names (UserIDs) 
+ behind the actor are computed dynamically by the Imixs-Workflow engine. 
+ The Workflow engine maps the actor to the corresponding property of the WorkItem during runtime.
+ 
+ An Actor definition is used within the property sections of an Imixs BPMN Event element. 
+ For example if the workflow application provides a WorkItem property 'namDelegate' the actor definition 
+ can be added as 
+ 
++--------+ 
+ Delegate | namDelegate
++--------+ 
+ 
+ The first part is the name of the actor displayed in the property sections of an Imixs BPMN Event element.
+ The last part is the WorkItem property evaluated by the workflow engine.
+ 
 
 
 **The Date Properties

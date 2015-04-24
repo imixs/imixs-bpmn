@@ -64,7 +64,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			// Type
 			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txttype", null, "");
 			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
-			valueEditor.createControl(attributesComposite, "Workitem Tpye");
+			valueEditor.createControl(attributesComposite, "Workitem Type");
 
 		}
 

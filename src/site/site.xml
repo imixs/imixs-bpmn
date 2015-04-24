@@ -27,9 +27,9 @@
       <item name="Installation" href="install.html"/>
       <item name="Eclipse Workbench" href="eclipse_workbench.html"/>
       <item name="Creating a Model" href="create_model.html"/>
-      <item name="Proces Poperties" href="main_editor.html"/>
+      <item name="Process Properties" href="main_editor.html"/>
       <item name="Task Properties" href="process.html" />
-      <item name="Event Prperties" href="activities.html"/>
+      <item name="Event Properties" href="activities.html"/>
       <item name="Text Replacement" href="textreplacement.html" />
       
       <item name="Report Plugin" href="report_plugin.html"/>
