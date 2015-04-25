@@ -31,8 +31,8 @@
       <item name="Task Properties" href="process.html" />
       <item name="Event Properties" href="activities.html"/>
       <item name="Text Replacement" href="textreplacement.html" />
-      
-      <item name="Report Plugin" href="report_plugin.html"/>
+      <item name="Reports" href="report_plugin.html"/>
+      <item name="Deployment" href="deployment.html"/>
      
     </menu>
 
