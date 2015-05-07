@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
@@ -48,9 +47,10 @@ public class TimerPropertySection extends AbstractPropertySection {
 
 		@Override
 		public void createBindings(final EObject be) {
-			if (be == null || !(be instanceof IntermediateCatchEvent)) {
-				return;
+			if (!ImixsBPMNPlugin.isImixsEvent(businessObject)){
+				return ;
 			}
+
 			setTitle("Timer Configuration");
 
 			Map<String,String> optionList = new HashMap<String,String>();

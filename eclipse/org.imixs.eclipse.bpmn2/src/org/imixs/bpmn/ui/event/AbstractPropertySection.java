@@ -19,10 +19,10 @@ import org.imixs.bpmn.ImixsBPMNPlugin;
  */
 public class AbstractPropertySection extends DefaultPropertySection {
 
-
 	/**
 	 * This method inspects the object to determine if the namespace matches the
-	 * imixs targetNamespace. Only in this case the given property tab will be replaced.
+	 * imixs targetNamespace. Only in this case the given property tab will be
+	 * replaced.
 	 */
 	@Override
 	public boolean doReplaceTab(String id, IWorkbenchPart part,
@@ -31,13 +31,10 @@ public class AbstractPropertySection extends DefaultPropertySection {
 		EObject businessObject = BusinessObjectUtil
 				.getBusinessObjectForSelection(selection);
 
-		
-		if (ImixsBPMNPlugin.isImixsEvent(businessObject)){
-				return true;
+		if (ImixsBPMNPlugin.isImixsEvent(businessObject)) {
+			return true;
 		}
-
 		return false;
 	}
-	
 
 }

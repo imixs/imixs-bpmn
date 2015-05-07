@@ -46,9 +46,10 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 
 		@Override
 		public void createBindings(final EObject be) {
-			if (be == null || !(be instanceof IntermediateCatchEvent)) {
-				return;
+			if (!ImixsBPMNPlugin.isImixsEvent(businessObject)){
+				return ;
 			}
+
 			setTitle("Basic");
 
 			// ProcessID

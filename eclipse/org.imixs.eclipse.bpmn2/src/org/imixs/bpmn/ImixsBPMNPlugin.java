@@ -14,6 +14,7 @@ import org.eclipse.bpmn2.Collaboration;
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
+import org.eclipse.bpmn2.IntermediateThrowEvent;
 import org.eclipse.bpmn2.Participant;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.Task;
@@ -470,7 +471,9 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 * @return true if the object is a IntermediateCatchEvent and assigned to
 	 *         the Imixs TargetNamespace
 	 */
-	public static boolean isImixsEvent(Object businessObject) {
+	public static boolean isImixsCatchEvent(Object businessObject) {
+		if (businessObject == null)
+			return false;
 		if (businessObject instanceof IntermediateCatchEvent) {
 			EStructuralFeature feature = ModelDecorator.getAnyAttribute(
 					(IntermediateCatchEvent) businessObject, "activityid");
@@ -482,8 +485,43 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 				}
 			}
 
+		}		
+		return false;
+	}
+
+	/**
+	 * This Method verifies if a given object is an instance of a Imixs
+	 * IntermediateThrowEvent
+	 * 
+	 * @param businessObject
+	 * @return true if the object is a IntermediateThrowEvent and assigned to
+	 *         the Imixs TargetNamespace
+	 */
+	public static boolean isImixsThrowEvent(Object businessObject) {
+		if (businessObject == null)
+			return false;
+
+		if (businessObject instanceof IntermediateThrowEvent) {
+			EStructuralFeature feature = ModelDecorator.getAnyAttribute(
+					(IntermediateThrowEvent) businessObject, "activityid");
+			if (feature != null && feature instanceof EAttribute) {
+				if (ImixsRuntimeExtension.targetNamespace
+						.equals(((EAttributeImpl) feature)
+								.getExtendedMetaData().getNamespace())) {
+					return true;
+				}
+			}
+
 		}
 		return false;
+	}
+
+	public static boolean isImixsEvent(Object businessObject) {
+		if (isImixsCatchEvent(businessObject)
+				|| isImixsThrowEvent(businessObject))
+			return true;
+		else
+			return false;
 	}
 
 	/**

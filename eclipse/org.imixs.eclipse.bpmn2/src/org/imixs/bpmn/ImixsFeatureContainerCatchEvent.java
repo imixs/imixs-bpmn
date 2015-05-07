@@ -22,10 +22,10 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 
-public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
+public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer {
 
 	// these values must match what's in the plugin.xml
-	public final static String ACTIVITYENTITY_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityEvent";
+	public final static String ACTIVITYENTITY_CATCH_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityCatchEvent";
 	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(
 			255, 217, 64);
 
@@ -37,9 +37,11 @@ public class ImixsFeatureContainerEvent extends CustomShapeFeatureContainer {
 	 */
 	@Override
 	public String getId(EObject object) {
-		if (ImixsBPMNPlugin.isImixsEvent(object)) {
-			return ACTIVITYENTITY_EVENT_ID;
+		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
+			return ACTIVITYENTITY_CATCH_EVENT_ID;
 		}
+		
+	
 		return null;
 	}
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.eclipse.bpmn2.Event;
 import org.eclipse.bpmn2.FlowNode;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
+import org.eclipse.bpmn2.IntermediateThrowEvent;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
@@ -29,19 +31,24 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *
  */
 public class ImixsEventAdapter extends AdapterImpl {
-	public final static int DEFAULT_ACTIVITY_ID=10;
+	public final static int DEFAULT_ACTIVITY_ID = 10;
 
 	private List<FlowNode> loopFlowCache = null;
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class
 			.getName());
 
-	
 	public void notifyChanged(Notification notification) {
 
-		IntermediateCatchEvent imixsEvent = null;
+		Event imixsEvent = null;
 
-		if (ImixsBPMNPlugin.isImixsEvent(notification.getNotifier())) {
+		if (ImixsBPMNPlugin.isImixsCatchEvent(notification.getNotifier())) {
 			imixsEvent = (IntermediateCatchEvent) notification.getNotifier();
+		}
+		if (ImixsBPMNPlugin.isImixsThrowEvent(notification.getNotifier())) {
+			imixsEvent = (IntermediateThrowEvent) notification.getNotifier();
+		}
+
+		if (imixsEvent != null) {
 
 			int type = notification.getEventType();
 			if (type == Notification.ADD) {
@@ -119,10 +126,10 @@ public class ImixsEventAdapter extends AdapterImpl {
 	 * 
 	 */
 	private void findImixsTargetEvents(FlowNode sourceRef,
-			List<IntermediateCatchEvent> resultList) {
+			List<Event> resultList) {
 
 		if (resultList == null)
-			resultList = new ArrayList<IntermediateCatchEvent>();
+			resultList = new ArrayList<Event>();
 
 		if (sourceRef == null) {
 			return;
@@ -154,7 +161,7 @@ public class ImixsEventAdapter extends AdapterImpl {
 			if (ImixsBPMNPlugin.isImixsEvent(targetRef)) {
 				// add to list
 				if (!resultList.contains(targetRef)) {
-					resultList.add((IntermediateCatchEvent) targetRef);
+					resultList.add((Event) targetRef);
 				}
 			}
 
@@ -176,8 +183,7 @@ public class ImixsEventAdapter extends AdapterImpl {
 	 * @param be
 	 * @return
 	 */
-	private void suggestNextActivityId(IntermediateCatchEvent currentEvent,
-			Task sourceTask) {
+	private void suggestNextActivityId(Event currentEvent, Task sourceTask) {
 		// now test if the id is valid or suggest a new one...
 		EStructuralFeature feature = ModelDecorator.getAnyAttribute(
 				currentEvent, "activityid");
@@ -186,44 +192,41 @@ public class ImixsEventAdapter extends AdapterImpl {
 			// first find all Imixs Events already connected with
 			// that source Task element!
 			loopFlowCache = new ArrayList<FlowNode>();
-			List<IntermediateCatchEvent> imixsEvents = new ArrayList<>();
+			List<Event> imixsEvents = new ArrayList<>();
 			findImixsTargetEvents(sourceTask, imixsEvents);
 
-			logger.fine("found " + imixsEvents.size()
-					+ " Imxis Events");
+			logger.fine("found " + imixsEvents.size() + " Imxis Events");
 
 			Integer currentActivityID = (Integer) currentEvent.eGet(feature);
 			int bestID = -1;
-			boolean duplicateID=false;
-			for (IntermediateCatchEvent aEvent : imixsEvents) {
+			boolean duplicateID = false;
+			for (Event aEvent : imixsEvents) {
 
-				if (aEvent==currentEvent) 
+				if (aEvent == currentEvent)
 					continue;
-				
-				int aID=(Integer) aEvent.eGet(feature);
-				if (aID>bestID)
-					bestID=aID;
-				
+
+				int aID = (Integer) aEvent.eGet(feature);
+				if (aID > bestID)
+					bestID = aID;
+
 				// test for dupplicates!
-				if (aID==currentActivityID) {
-					duplicateID=true;
+				if (aID == currentActivityID) {
+					duplicateID = true;
 				}
-				
+
 			}
-			
-			// if dupicate or currentID<=0 suggest a new one!
-			if (duplicateID || currentActivityID<=0) {
+
+			// if duplicate or currentID<=0 suggest a new one!
+			if (duplicateID || currentActivityID <= 0) {
 				if (bestID <= 0)
 					currentActivityID = DEFAULT_ACTIVITY_ID;
 				else
 					currentActivityID = bestID + 10;
-
-				// suggest a new ProcessID...
-				logger.fine("ActiviytID=" + currentActivityID);
-				currentEvent.eSet(feature, currentActivityID);
 			}
-			
-			
+			// suggest a new ProcessID...
+			logger.fine("ActiviytID=" + currentActivityID);
+			currentEvent.eSet(feature, currentActivityID);
+
 		}
 	}
 }
