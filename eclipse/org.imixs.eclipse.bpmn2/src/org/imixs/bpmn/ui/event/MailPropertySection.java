@@ -55,14 +55,14 @@ public class MailPropertySection extends AbstractPropertySection {
 			setTitle("Message");
 
 			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
-					"txtSubject", null, "");
+					"txtMailSubject", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Subject");
 
 			// Body
 			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
-					"txtBody", "CDATA", "");
+					"rtfMailBody", "CDATA", "");
 			valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
