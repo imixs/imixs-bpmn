@@ -99,6 +99,10 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 						// suggest next free processID
 						ImixsBPMNPlugin.suggestNextProcessId(businessObject);
+						
+						// add a notifyChangeAdapter to validate the ActiviytID
+						businessObject.eAdapters().add(new ImixsTaskAdapter());
+
 					}
 				};
 			}

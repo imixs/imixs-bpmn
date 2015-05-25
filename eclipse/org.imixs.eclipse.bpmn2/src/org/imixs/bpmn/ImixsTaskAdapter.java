@@ -5,15 +5,13 @@ import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.Event;
 import org.eclipse.bpmn2.FlowNode;
-import org.eclipse.bpmn2.IntermediateCatchEvent;
-import org.eclipse.bpmn2.IntermediateThrowEvent;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.emf.common.notify.Notification;
 
 /**
- * The ImixsEventAdapter verifies outgoing SequenceFlows for a Imixs Event
- * object and suggest the next ActivityID.
+ * The ImixsEventAdapter verifies incoming SequenceFlows for a ImixsTask
+ * object and suggest the next ActivityID if the source is a ImixsEvent.
  * 
  * Therefore the adapter searches the source Imixs Task Element in a recurse
  * way. When a Imixs task element was found the adapter searches all existing
@@ -22,26 +20,27 @@ import org.eclipse.emf.common.notify.Notification;
  * The Adapter uses a internal cache (loopFlowCache) to determine loops in the
  * model.
  * 
- * @version 1.0
+ 
+ * 
+ * @version 2.0
  * @author rsoika
  *
  */
-public class ImixsEventAdapter extends AbstractImixsAdapter {
+public class ImixsTaskAdapter extends AbstractImixsAdapter {
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class
 			.getName());
 
 	public void notifyChanged(Notification notification) {
 
 		Event imixsEvent = null;
+		Task imixsTask =null;
 
-		if (ImixsBPMNPlugin.isImixsCatchEvent(notification.getNotifier())) {
-			imixsEvent = (IntermediateCatchEvent) notification.getNotifier();
+		if (ImixsBPMNPlugin.isImixsTask(notification.getNotifier())) {
+			imixsTask = (Task) notification.getNotifier();
 		}
-		if (ImixsBPMNPlugin.isImixsThrowEvent(notification.getNotifier())) {
-			imixsEvent = (IntermediateThrowEvent) notification.getNotifier();
-		}
+		
 
-		if (imixsEvent != null) {
+		if (imixsTask != null) {
 
 			int type = notification.getEventType();
 			if (type == Notification.ADD) {
@@ -51,17 +50,19 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 							.getNewValue();
 
 					if (seqFlow != null) {
-						logger.fine("check sourceTask...");
+						logger.fine("check sourceEvent...");
 						// new incoming sequence flow! Search for the source
-						// Task
+						// Event
 
 						// clear the flowNodeCache first!
 						loopFlowCache = new ArrayList<FlowNode>();
-						Task imixsTask = findImixsSourceTask(seqFlow);
-						if (imixsTask != null) {
+						imixsEvent = findImixsSourceEvent(seqFlow);
+						if (imixsEvent != null) {
 							// Source task found ! suggest next ActivityID....
-							suggestNextActivityId(imixsEvent, imixsTask);
+							suggestNextActivityId(imixsEvent, imixsTask);							
 						}
+						
+						
 					}
 
 				}
