@@ -1,10 +1,8 @@
 package org.imixs.bpmn;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.Event;
-import org.eclipse.bpmn2.FlowNode;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.emf.common.notify.Notification;
@@ -49,14 +47,13 @@ public class ImixsTaskAdapter extends AbstractImixsAdapter {
 					SequenceFlow seqFlow = (SequenceFlow) notification
 							.getNewValue();
 
-					if (seqFlow != null) {
-						logger.fine("check sourceEvent...");
+					if (seqFlow != null &&
+							ImixsBPMNPlugin.isImixsCatchEvent(seqFlow.getSourceRef())
+							 ) {
+						logger.fine("check source CatchEvent...");
 						// new incoming sequence flow! Search for the source
 						// Event
-
-						// clear the flowNodeCache first!
-						loopFlowCache = new ArrayList<FlowNode>();
-						imixsEvent = findImixsSourceEvent(seqFlow);
+						imixsEvent = new Tracer().findImixsSourceEvent(seqFlow);
 						if (imixsEvent != null) {
 							// Source task found ! suggest next ActivityID....
 							suggestNextActivityId(imixsEvent, imixsTask);							

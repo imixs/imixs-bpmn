@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
@@ -53,7 +52,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			setTitle("Basic");
 
 			// ProcessID
-			this.bindAttribute(attributesComposite, be, "activityid", "ID");
+			this.bindAttribute(attributesComposite, be, "activityid");
 
 			// Result
 			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
