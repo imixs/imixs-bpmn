@@ -2,6 +2,7 @@ package org.imixs.bpmn.ui;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.ObjectEditor;
@@ -75,7 +76,10 @@ public class CheckBoxEditor extends ObjectEditor {
 		editorComposite.setLayout(new FillLayout(SWT.VERTICAL));
 
 		// create a checkbox for each entry from the OptionList
-		for (Map.Entry<String, String> entry : optionMap.entrySet()) {
+		Iterator<Entry<String, String>> iter=optionMap.entrySet().iterator();
+		//for (Map.Entry<String, String> entry : optionMap.entrySet()) {
+		while (iter.hasNext()) {
+			Map.Entry<String, String>  entry = iter.next();
 			final String aKey = entry.getKey();
 			final String aLabel = entry.getValue();
 

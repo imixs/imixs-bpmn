@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -348,22 +349,23 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 	 */
 	public static Map<String, String> getOptionListFromDefinition(
 			BaseElement be, String fieldName) {
-		// get Name Fields...
-		Map<String, String> optionList = new HashMap<String, String>();
+		// get Name Fields... user LInkedHashMap to prevent the order of the entries
+		Map<String, String> optionList = new LinkedHashMap<String, String>();
 		Item iteNameField = ImixsBPMNPlugin.findDefinitionsItemByName(be,
 				fieldName);
 		if (iteNameField != null) {
 			// iterate over all item values and extract "key|value" pairs
+			// we iterate from last to first to order the map entries
 			Iterator<Value> iter = iteNameField.getValuelist().iterator();
 			while (iter.hasNext()) {
 				Value val = iter.next();
 				// split '|'
 				String key = val.getValue().trim();
 				String label = key;
-				int i = key.indexOf('|');
-				if (i > -1) {
-					label = key.substring(0, i).trim();
-					key = key.substring(i + 1).trim();
+				int ipos = key.indexOf('|');
+				if (ipos > -1) {
+					label = key.substring(0, ipos).trim();
+					key = key.substring(ipos + 1).trim();
 				}
 				optionList.put(key, label);
 			}
