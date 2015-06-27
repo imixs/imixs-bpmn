@@ -16,7 +16,6 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -53,11 +52,17 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 		return b1 || b2;
 	}
 
-	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-		return super.getCustomFeatures(fp);
-	}
+	/**
+	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
+	 */
+//	@Override
+//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+//		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+//		//return super.getCustomFeatures(fp);
+//	}
+
 
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(

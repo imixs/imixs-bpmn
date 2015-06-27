@@ -37,8 +37,6 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 	 */
 	@Override
 	public String getId(EObject object) {
-	
-		
 		if (ImixsBPMNPlugin.isImixsThrowEvent(object)) {
 			return ACTIVITYENTITY_THROW_EVENT_ID;
 		}
@@ -53,11 +51,16 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 		return b1 || b2;
 	}
 
-	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-		return super.getCustomFeatures(fp);
-	}
+	/**
+	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
+	 */
+//	@Override
+//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+//		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+//		//return super.getCustomFeatures(fp);
+//	}
 
 	@Override
 	protected IntermediateThrowEventFeatureContainer createFeatureContainer(

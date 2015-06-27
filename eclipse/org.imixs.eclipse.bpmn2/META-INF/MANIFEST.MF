@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.junit,
  org.eclipse.swt
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.imixs.bpmn.model,
  org.imixs.bpmn.model.impl,
  org.imixs.bpmn.model.util

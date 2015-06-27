@@ -16,7 +16,6 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
-import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -32,13 +31,14 @@ import org.eclipse.graphiti.util.IColorConstant;
  *
  */
 public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
-
+ 
 	// these values must match what's in the plugin.xml
 	public final static String PROCESSENTITY_TASK_ID = "org.imixs.workflow.bpmn.ProcessEntityTask";
 	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(
 			144, 176, 224);
-
+  
 	/**
+	 * 
 	 * This method inspects the object to determine what its custom task ID
 	 * should be. In this case, we check the namespace of the "type" attribute.
 	 * If the namespace matches the imixs targetNamespace, return the
@@ -56,12 +56,14 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 	/**
 	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
 	 */
-	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-		return super.getCustomFeatures(fp);
-	}
+//	@Override
+//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+//		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+//		//return super.getCustomFeatures(fp);
+//	}
 
 	@Override
 	protected TaskFeatureContainer createFeatureContainer(IFeatureProvider fp) {
@@ -72,7 +74,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * class . Typically you will want to override the decorateShape()
 			 * method which allows you to customize the graphical representation
 			 * of this Custom Task figure.
-			 */
+			 */ 
 			@Override
 			public IAddFeature getAddFeature(IFeatureProvider fp) {
 				return new AddTaskFeature(fp) {
