@@ -2,7 +2,7 @@
 <feature
       id="org.imixs.eclipse.bpmn2.feature"
       label="Imixs Workflow BPMN2"
-      version="1.1.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="Imixs Software Solutions GmbH">
    <install-handler/>
 
@@ -507,7 +507,7 @@ Public License instead of this License.
          id="org.imixs.eclipse.bpmn2"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.2.0.qualifier"
          unpack="false"/>
 
 </feature>

@@ -118,6 +118,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * (non-Javadoc)
 			 * @see org.eclipse.bpmn2.modeler.ui.features.activity.AbstractActivityFeatureContainer#getUpdateFeature(org.eclipse.graphiti.features.IFeatureProvider)
 			 */
+		/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 				//UpdateEventDefinitionFeature
@@ -140,7 +141,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			}
 
 			
-			
+			*/
 			
 			/**
 			 * this MUST be overridden if you intend to add extension attributes

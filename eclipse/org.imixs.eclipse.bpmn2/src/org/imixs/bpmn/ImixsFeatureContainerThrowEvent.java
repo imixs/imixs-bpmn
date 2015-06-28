@@ -92,7 +92,7 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 					}
 				};
 			}
-
+/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 
@@ -131,7 +131,7 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 
 				return multiUpdate;
 			}
-
+*/
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
 			 * to your business object (bpmn2 element) - see the code example

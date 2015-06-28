@@ -94,7 +94,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 					}
 				};
 			}
-
+/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 
@@ -133,7 +133,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 
 				return multiUpdate;
 			}
-
+*/
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
 			 * to your business object (bpmn2 element) - see the code example
@@ -141,12 +141,13 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 			 * palette by overriding getCreateImageId() and
 			 * getCreateLargeImageId() in your Create Feature.
 			 */
+			/*
 			@Override
 			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
 				return new CreateIntermediateCatchEventFeature(fp) {
 				};
 			}
-
+*/
 			/**
 			 * Common method used to set the fill color for Imixs CustomTask
 			 * figure. This method is called by both the CreateFeature and the
