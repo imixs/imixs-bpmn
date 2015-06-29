@@ -56,11 +56,11 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 	 * 
 	 * Breaks plugin !!!
 	 */
-//	@Override
-//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-//		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-//		//return super.getCustomFeatures(fp);
-//	}
+	@Override
+	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		return super.getCustomFeatures(fp);
+	}
 
 	@Override
 	protected IntermediateThrowEventFeatureContainer createFeatureContainer(

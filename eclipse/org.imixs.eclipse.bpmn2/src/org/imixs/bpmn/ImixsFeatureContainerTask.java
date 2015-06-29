@@ -1,10 +1,8 @@
 package org.imixs.bpmn;
 
-import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Task;
-import org.eclipse.bpmn2.modeler.core.features.AbstractUpdateBaseElementFeature;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
+import org.eclipse.bpmn2.modeler.core.features.ShowPropertiesFeature;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
@@ -12,10 +10,10 @@ import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
@@ -59,12 +57,12 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 	 * 
 	 * Breaks plugin !!!
 	 */
-//	@Override
-//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-//		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-//		//return super.getCustomFeatures(fp);
-//	}
-
+	@Override
+	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return super.getCustomFeatures(fp);
+	}
+ 
 	@Override
 	protected TaskFeatureContainer createFeatureContainer(IFeatureProvider fp) {
 		return new TaskFeatureContainer() {
@@ -150,11 +148,11 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * palette by overriding getCreateImageId() and
 			 * getCreateLargeImageId() in your Create Feature.
 			 */
-			// @Override
-			// public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-			// return new CreateTaskFeature(fp) {
-			// };
-			// }
+			 @Override
+			 public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+				 return new CreateTaskFeature(fp) {
+				 };
+			 }
 
 			/**
 			 * Common method used to set the fill color for Imixs CustomTask
