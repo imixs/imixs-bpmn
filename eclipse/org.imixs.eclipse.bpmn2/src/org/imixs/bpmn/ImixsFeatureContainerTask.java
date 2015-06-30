@@ -59,8 +59,11 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		//return super.getCustomFeatures(fp);
+		
+		//test
+		return getFeatureContainer(fp).getCustomFeatures(fp);
 	}
  
 	@Override

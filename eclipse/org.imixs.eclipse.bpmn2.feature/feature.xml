@@ -479,7 +479,8 @@ Public License instead of this License.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.bpmn2.editor" version="0.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.bpmn2.modeler.core" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.bpmn2.modeler.ui" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
