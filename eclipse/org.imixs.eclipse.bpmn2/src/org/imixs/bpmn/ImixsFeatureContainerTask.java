@@ -1,10 +1,8 @@
 package org.imixs.bpmn;
 
-import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Task;
-import org.eclipse.bpmn2.modeler.core.features.AbstractUpdateBaseElementFeature;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
+import org.eclipse.bpmn2.modeler.core.features.ShowPropertiesFeature;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
@@ -12,10 +10,9 @@ import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -32,13 +29,14 @@ import org.eclipse.graphiti.util.IColorConstant;
  *
  */
 public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
-
+ 
 	// these values must match what's in the plugin.xml
 	public final static String PROCESSENTITY_TASK_ID = "org.imixs.workflow.bpmn.ProcessEntityTask";
 	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(
 			144, 176, 224);
-
+  
 	/**
+	 * 
 	 * This method inspects the object to determine what its custom task ID
 	 * should be. In this case, we check the namespace of the "type" attribute.
 	 * If the namespace matches the imixs targetNamespace, return the
@@ -56,13 +54,18 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 	/**
 	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
 	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-		return super.getCustomFeatures(fp);
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return super.getCustomFeatures(fp);
+		
+		//test
+		return getFeatureContainer(fp).getCustomFeatures(fp);
 	}
-
+ 
 	@Override
 	protected TaskFeatureContainer createFeatureContainer(IFeatureProvider fp) {
 		return new TaskFeatureContainer() {
@@ -72,7 +75,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * class . Typically you will want to override the decorateShape()
 			 * method which allows you to customize the graphical representation
 			 * of this Custom Task figure.
-			 */
+			 */ 
 			@Override
 			public IAddFeature getAddFeature(IFeatureProvider fp) {
 				return new AddTaskFeature(fp) {
@@ -116,6 +119,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * (non-Javadoc)
 			 * @see org.eclipse.bpmn2.modeler.ui.features.activity.AbstractActivityFeatureContainer#getUpdateFeature(org.eclipse.graphiti.features.IFeatureProvider)
 			 */
+		/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 				//UpdateEventDefinitionFeature
@@ -138,7 +142,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			}
 
 			
-			
+			*/
 			
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
@@ -147,11 +151,11 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 * palette by overriding getCreateImageId() and
 			 * getCreateLargeImageId() in your Create Feature.
 			 */
-			// @Override
-			// public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-			// return new CreateTaskFeature(fp) {
-			// };
-			// }
+			 @Override
+			 public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+				 return new CreateTaskFeature(fp) {
+				 };
+			 }
 
 			/**
 			 * Common method used to set the fill color for Imixs CustomTask

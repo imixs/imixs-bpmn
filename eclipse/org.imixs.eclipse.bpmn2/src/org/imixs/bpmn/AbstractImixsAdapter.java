@@ -51,7 +51,7 @@ abstract public class AbstractImixsAdapter extends AdapterImpl {
 
 			// first find all Imixs Events already connected with
 			// that source Task element!
-			List<Event> imixsEvents = new ArrayList<>();
+			List<Event> imixsEvents = new ArrayList<Event>();
 			new Tracer().findImixsTargetEvents(task, imixsEvents);
 			// next find all Imixs CatchEvents connected with that task
 			new Tracer().findImixsStartEvents(task, imixsEvents);

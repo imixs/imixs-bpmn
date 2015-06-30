@@ -8,8 +8,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-Activator: org.imixs.bpmn.ImixsBPMNPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
  org.eclipse.graphiti,
  org.eclipse.graphiti.ui,
  org.eclipse.gef,
@@ -30,7 +30,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.core,
  org.junit,
  org.eclipse.swt
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.imixs.bpmn.model,
  org.imixs.bpmn.model.impl,
  org.imixs.bpmn.model.util

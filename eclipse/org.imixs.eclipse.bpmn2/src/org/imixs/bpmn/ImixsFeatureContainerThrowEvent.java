@@ -37,8 +37,6 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 	 */
 	@Override
 	public String getId(EObject object) {
-	
-		
 		if (ImixsBPMNPlugin.isImixsThrowEvent(object)) {
 			return ACTIVITYENTITY_THROW_EVENT_ID;
 		}
@@ -53,9 +51,14 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 		return b1 || b2;
 	}
 
+	/**
+	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
+	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		return super.getCustomFeatures(fp);
 	}
 
@@ -89,7 +92,7 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 					}
 				};
 			}
-
+/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 
@@ -128,7 +131,7 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 
 				return multiUpdate;
 			}
-
+*/
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
 			 * to your business object (bpmn2 element) - see the code example

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site
-      mirrorsURL="http://www.imixs.org/org.imixs.eclipse.updatesite/site.xml">
-   <description name="Imixs Workflow" url="http://www.imixs.org/org.imixs.eclipse.updatesite/site.xml">
+      mirrorsURL="http://www.imixs.org/org.imixs.eclipse.bpmn2.updatesite/site.xml">
+   <description name="Imixs Workflow" url="http://www.imixs.org/org.imixs.eclipse.bpmn2.updatesite/site.xml">
       The Imixs.org Updatesite provides tools for building workflowsystems and modeling business cases .
    </description>
    <feature url="features/org.imixs.eclipse.bpmn2.feature_1.2.0.qualifier.jar" id="org.imixs.eclipse.bpmn2.feature" version="1.2.0.qualifier">

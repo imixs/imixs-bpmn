@@ -1,21 +1,15 @@
 package org.imixs.bpmn;
 
-import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
-import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
-import org.eclipse.bpmn2.modeler.core.features.label.UpdateLabelFeature;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
-import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
-import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
@@ -53,11 +47,17 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 		return b1 || b2;
 	}
 
+	/**
+	 * overwrite task features displayed during mouse over
+	 * 
+	 * Breaks plugin !!!
+	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		return super.getCustomFeatures(fp);
 	}
+
 
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(
@@ -89,7 +89,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 					}
 				};
 			}
-
+/*
 			@Override
 			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 
@@ -128,7 +128,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 
 				return multiUpdate;
 			}
-
+*/
 			/**
 			 * this MUST be overridden if you intend to add extension attributes
 			 * to your business object (bpmn2 element) - see the code example
@@ -136,12 +136,13 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 			 * palette by overriding getCreateImageId() and
 			 * getCreateLargeImageId() in your Create Feature.
 			 */
+			/*
 			@Override
 			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
 				return new CreateIntermediateCatchEventFeature(fp) {
 				};
 			}
-
+*/
 			/**
 			 * Common method used to set the fill color for Imixs CustomTask
 			 * figure. This method is called by both the CreateFeature and the
