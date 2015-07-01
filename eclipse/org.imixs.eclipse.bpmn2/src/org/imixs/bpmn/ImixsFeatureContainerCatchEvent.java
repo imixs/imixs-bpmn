@@ -31,6 +31,8 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 	 */
 	@Override
 	public String getId(EObject object) {
+		
+		//System.out.println("DEBUG ImixsFeatureContainerCatchEvent");
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
 			return ACTIVITYENTITY_CATCH_EVENT_ID;
 		}

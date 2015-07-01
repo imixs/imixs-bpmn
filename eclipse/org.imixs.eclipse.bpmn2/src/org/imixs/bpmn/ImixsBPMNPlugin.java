@@ -51,7 +51,7 @@ import org.osgi.framework.BundleContext;
 public class ImixsBPMNPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.bpmn2.modeler.examples.customtask"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.imixs.workflow.bpmn.runtime"; //$NON-NLS-1$
 	public final static EStructuralFeature IMIXS_ITEM_FEATURE = ModelPackage.eINSTANCE
 			.getDocumentRoot_Item();
 	public final static EStructuralFeature IMIXS_ITEMLIST_FEATURE = ModelPackage.eINSTANCE
