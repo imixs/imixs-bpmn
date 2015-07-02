@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Value;
-import org.imixs.bpmn.ui.ImixsDetailComposite;
+
 
 /**
  * This PorpertySection provides the attributes for Mail config.
@@ -24,7 +24,7 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 	protected AbstractDetailComposite createSectionRoot() {
 		return new SummaryDetailComposite(this);
 	}
-
+ 
 	@Override
 	public AbstractDetailComposite createSectionRoot(Composite parent, int style) {
 		return new SummaryDetailComposite(parent, style);

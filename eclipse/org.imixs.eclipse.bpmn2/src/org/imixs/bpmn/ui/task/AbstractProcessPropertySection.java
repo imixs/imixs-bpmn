@@ -7,6 +7,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 
+
+
 /**
  * The AbstractProcessPropertySection is the basic class for all Imixs property
  * Sections. The class overwrite the doReplaceTab method to verify if a specific
