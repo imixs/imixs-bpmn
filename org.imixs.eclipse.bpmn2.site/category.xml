@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <description url="http://eclipse.org/bpmn2-modeler">
-      Eclipse BPMN2 Modeler.
+      Imixs Workflow BPMN2 Modeler
    </description>
-   <category-def name="org.mixs.eclipse.bpmn2" label="Imixs BPMN Modeler">
+   <category-def name="org.mixs.eclipse.bpmn2" label="Imixs-BPMN Modeler">
       <description>
-         Imixs BPMN Modeler
+         Imixs Workflow BPMN2 Modeler
       </description>
    </category-def>
    
-   <category-def name="org.mixs.eclipse.bpmn2.source" label="Imixs BPMN Modeler Sources">
+   <category-def name="org.mixs.eclipse.bpmn2.source" label="Imixs-BPMN Modeler Sources">
       <description>
-         Imixs BPMN Modeler Sources
+         Imixs Workflow BPMN2 Modeler Sources
       </description>
    </category-def>
 
