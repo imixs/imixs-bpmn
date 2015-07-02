@@ -18,12 +18,11 @@
 		<groupId>org.imixs.eclipse</groupId>
 		<artifactId>org.imixs.eclipse.bpmn2</artifactId>
 		<version>1.2.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
+		<!-- <relativePath>../pom.xml</relativePath> -->
 	</parent>
 
-	<groupId>org.imixs.eclipse</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
-	<name>Imixs BPMN Modeler Features: Main</name>
-	<description>Main feature for Imixs BPMN Modeler</description>
+	<name>Imixs-BPMN Modeler: Feature</name>
+	<description>Main feature for Imixs-BPMN Modeler</description>
 </project>

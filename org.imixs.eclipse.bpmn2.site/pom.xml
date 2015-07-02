@@ -18,14 +18,15 @@
 		<groupId>org.imixs.eclipse</groupId>
 		<artifactId>org.imixs.eclipse.bpmn2</artifactId>
 		<version>1.2.0-SNAPSHOT</version>
+		<!-- 
 		<relativePath>../pom.xml</relativePath>
+		 -->
 	</parent>
 
-	<groupId>org.imixs.eclipse</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2.updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
-	<name>Imixs BPMN Modeler Features: Update Site</name>
-	<description>Update Site feature for Imixs BPMN Modeler</description>
+	<name>Imixs-BPMN Modeler: Update Site</name>
+	<description>Update Site feature for Imixs-BPMN Modeler</description>
 
 	<properties>
 		<maven.antrun.plugin.version>1.3</maven.antrun.plugin.version>
