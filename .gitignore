@@ -10,12 +10,7 @@ target/
 
 # ignore eclipse directories and project files
 .settings/
-.project
-.classpath
 
-# ignore eclipse update site folders
-eclipse/org.imixs.eclipse.updatesite/features/
-eclipse/org.imixs.eclipse.updatesite/plugins/
-eclipse/org.imixs.eclipse.updatesite/artifacts.jar
-eclipse/org.imixs.eclipse.updatesite/content.jar
-eclipse/org.imixs.eclipse.updatesite/logs.zip
+# let's keep the .project and .classpath files - it makes it a lot easier to import these as "existing projects" using the git import wizard in eclipse
+# .project
+# .classpath
