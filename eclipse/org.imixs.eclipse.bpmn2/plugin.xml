@@ -43,7 +43,7 @@
          </property>
       </customTask>
      
-     
+     <!--
       <customTask
              category="Imixs-Workflow"
              description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
@@ -82,7 +82,7 @@
           </property>            
       </customTask>
         
-      
+      -->
       
       <!-- Activity Tabs 
              
