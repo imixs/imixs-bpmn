@@ -14,7 +14,6 @@
 	<groupId>org.imixs.eclipse.bpmn2.plugins</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2.plugins.parent</artifactId>
 	<name>Imixs BPMN Modeler: Plugins Parent</name>
-	<version>1.2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
