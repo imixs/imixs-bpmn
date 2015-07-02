@@ -472,22 +472,22 @@ library.  If this is what you want to do, use the GNU Lesser
 General
 Public License instead of this License.
    </license>
-
+<!--
    <url>
       <update label="Imixs update site" url="http://www.imixs.org/org.imixs.eclipse.bpmn2.updatesite"/>
       <discovery label="Imixs Workflow" url="http://www.imixs.org/org.imixs.eclipse.updatesite"/>
    </url>
-
+-->
    <requires>
-      <import plugin="org.eclipse.bpmn2.modeler.core" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.bpmn2.modeler.ui" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.bpmn2.modeler.core"/>
+      <import plugin="org.eclipse.bpmn2.modeler.ui"/>
    </requires>
 
    <plugin
          id="org.imixs.eclipse.bpmn2"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

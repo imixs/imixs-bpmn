@@ -1,0 +1,136 @@
+<!--
+  Copyright (c) 2011, 2012, 2013, 2014 Red Hat, Inc.
+  All rights reserved.
+  This program is made available under the terms of the
+  Eclipse Public License v1.0 which accompanies this distribution,
+  and is available at http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors:
+  	Red Hat, Inc. - initial API and implementation
+-->
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.imixs.eclipse</groupId>
+		<artifactId>org.imixs.eclipse.parent</artifactId>
+		<version>1.2.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>org.imixs.eclipse.bpmn2.features</groupId>
+	<artifactId>org.imixs.eclipse.bpmn2.updatesite</artifactId>
+	<packaging>eclipse-repository</packaging>
+	<name>Imixs BPMN Modeler Features: Update Site</name>
+	<description>Update Site feature for Imixs BPMN Modeler</description>
+
+	<properties>
+		<maven.antrun.plugin.version>1.3</maven.antrun.plugin.version>
+	  <update.site.name>Imixs BPMN Modeler</update.site.name>
+	  <update.site.description>Imixs BPMN Modeler Release build</update.site.description>
+	  <target.eclipse.version>4.5 (Mars)</target.eclipse.version>
+	  <siteTemplateFolder>siteTemplateFolder</siteTemplateFolder>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'v'yyyyMMdd-HHmm</format>
+					<archiveSite>true</archiveSite>
+					<environments>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${maven.antrun.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<configuration>
+							<quiet>true</quiet>
+							<tasks>
+								<ant antfile="build.xml">
+									<property
+										name="platform-version-name"
+										value="${platform-version-name}" />
+								</ant>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>commons-net</groupId>
+						<artifactId>commons-net</artifactId>
+						<version>1.4.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-nodeps</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-trax</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-commons-net</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.ant</groupId>
+						<artifactId>ant-apache-regexp</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency>
+						<groupId>ant-contrib</groupId>
+						<artifactId>ant-contrib</artifactId>
+						<version>1.0b3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			-->
+		</plugins>
+	</build>
+</project>

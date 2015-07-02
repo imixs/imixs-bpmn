@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://eclipse.org/bpmn2-modeler">
+      Eclipse BPMN2 Modeler.
+   </description>
+   <category-def name="org.mixs.eclipse.bpmn2" label="Imixs BPMN Modeler">
+      <description>
+         Imixs BPMN Modeler
+      </description>
+   </category-def>
+   
+   <category-def name="org.mixs.eclipse.bpmn2.source" label="Imixs BPMN Modeler Sources">
+      <description>
+         Imixs BPMN Modeler Sources
+      </description>
+   </category-def>
+
+   <feature url="features/org.imixs.eclipse.bpmn2.feature_0.0.0.jar" id="org.imixs.eclipse.bpmn2.feature" version="0.0.0">
+      <category name="org.mixs.eclipse.bpmn2"/>
+   </feature>
+   
+   <feature url="features/org.imixs.eclipse.bpmn2.source.feature_0.0.0.jar" id="org.imixs.eclipse.bpmn2.feature" version="0.0.0">
+      <category name="org.mixs.eclipse.bpmn2.source"/>
+   </feature>
+</site>

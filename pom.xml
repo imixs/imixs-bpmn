@@ -120,5 +120,8 @@
 
 	</build>
 
+	<modules>
+		<module>eclipse</module>
+	</modules>
 
 </project>
