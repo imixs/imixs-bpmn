@@ -1,3 +1,13 @@
+<!--
+  Copyright (c) 2011, 2012, 2013, 2014 Imixs Softwae Solutions GmbH
+  All rights reserved.
+  This program is made available under the terms of the
+  General Public License v2.0 which accompanies this distribution,
+  and is available at http://www.gnu.org/licenses/gpl.txt
+  
+  Contributors:
+  	ralph.soika@imixs.com - initial API and implementation
+-->
 <project
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
