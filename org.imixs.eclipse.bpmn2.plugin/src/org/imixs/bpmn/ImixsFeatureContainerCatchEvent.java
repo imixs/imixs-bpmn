@@ -20,8 +20,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 
 	// these values must match what's in the plugin.xml
 	public final static String ACTIVITYENTITY_CATCH_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityCatchEvent";
-	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(
-			255, 217, 64);
+	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
 
 	/**
 	 * This method inspects the object to determine what its custom task ID
@@ -34,16 +33,14 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
 			return ACTIVITYENTITY_CATCH_EVENT_ID;
 		}
-		
-	
+
 		return null;
 	}
 
 	@Override
 	public boolean canApplyTo(Object o) {
 		boolean b1 = o instanceof IntermediateCatchEvent;
-		boolean b2 = o.getClass()
-				.isAssignableFrom(IntermediateCatchEvent.class);
+		boolean b2 = o.getClass().isAssignableFrom(IntermediateCatchEvent.class);
 		return b1 || b2;
 	}
 
@@ -54,14 +51,12 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 	 */
 	@Override
 	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
 		return super.getCustomFeatures(fp);
 	}
 
-
 	@Override
-	protected IntermediateCatchEventFeatureContainer createFeatureContainer(
-			IFeatureProvider fp) {
+	protected IntermediateCatchEventFeatureContainer createFeatureContainer(IFeatureProvider fp) {
 		return new IntermediateCatchEventFeatureContainer() {
 
 			/**
@@ -75,11 +70,9 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 				return new AddIntermediateCatchEventFeature(fp) {
 
 					@Override
-					protected void decorateShape(IAddContext context,
-							ContainerShape containerShape,
+					protected void decorateShape(IAddContext context, ContainerShape containerShape,
 							IntermediateCatchEvent businessObject) {
-						super.decorateShape(context, containerShape,
-								businessObject);
+						super.decorateShape(context, containerShape, businessObject);
 
 						setFillColor(containerShape);
 
@@ -89,60 +82,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 					}
 				};
 			}
-/*
-			@Override
-			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
 
-				MultiUpdateFeature multiUpdate = new MultiUpdateFeature(fp);
-				multiUpdate.addFeature(new UpdateIntermediateCatchEventFeature(
-						fp) {
-					@Override
-					public boolean update(IUpdateContext context) {
-						super.update(context);
-						setFillColor((ContainerShape) context
-								.getPictogramElement());
-						return true;
-					}
-				});
-
-				multiUpdate.addFeature(new UpdateLabelFeature(fp) {
-
-					@Override
-					protected String getLabelString(BaseElement element) {
-						String l = super.getLabelString(element);
-						return l ;
-					}
-					
-
-					// @Override
-					// protected void updatePictogramElement(PictogramElement
-					// pe) {
-					// GraphicsAlgorithm sowas = pe.getGraphicsAlgorithm();
-					// sowas.setForeground(manageColor(ACTIVITYENTITY_BACKGROUND));
-					// pe.setGraphicsAlgorithm(sowas);
-					// super.updatePictogramElement(pe);
-					//
-					// }
-
-				});
-
-				return multiUpdate;
-			}
-*/
-			/**
-			 * this MUST be overridden if you intend to add extension attributes
-			 * to your business object (bpmn2 element) - see the code example
-			 * below. You will also want to provide your own images for the tool
-			 * palette by overriding getCreateImageId() and
-			 * getCreateLargeImageId() in your Create Feature.
-			 */
-			/*
-			@Override
-			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-				return new CreateIntermediateCatchEventFeature(fp) {
-				};
-			}
-*/
 			/**
 			 * Common method used to set the fill color for Imixs CustomTask
 			 * figure. This method is called by both the CreateFeature and the
@@ -152,16 +92,14 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 			 *            - the ContainerShape that corresponds to the Task.
 			 */
 			private void setFillColor(ContainerShape containerShape) {
-				IntermediateCatchEvent ta = BusinessObjectUtil
-						.getFirstElementOfType(containerShape,
-								IntermediateCatchEvent.class);
+				IntermediateCatchEvent ta = BusinessObjectUtil.getFirstElementOfType(containerShape,
+						IntermediateCatchEvent.class);
 				if (ta != null) {
 					Shape shape = containerShape.getChildren().get(0);
 					ShapeStyle shapeStyle = new ShapeStyle();
 
 					shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta,
-							shapeStyle);
+					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
 				}
 			}
 
