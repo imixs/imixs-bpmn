@@ -5,7 +5,10 @@ import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
@@ -55,7 +58,22 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 					"CDATA", "");
 			valueEditor = new TextObjectEditor(this, value, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
-			valueEditor.createControl(attributesComposite, "Rule");
+			Control editorControl=valueEditor.createControl(attributesComposite, "Rule");
+			
+			// set height
+			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+			data.heightHint =200;
+			
+			data.grabExcessHorizontalSpace = true;
+			data.horizontalAlignment = SWT.FILL;
+			
+			data.grabExcessVerticalSpace= true;
+			data.verticalAlignment= SWT.FILL;
+			
+			editorControl.setLayoutData(data);
+			
+			
+			
 		}
 	}
 
