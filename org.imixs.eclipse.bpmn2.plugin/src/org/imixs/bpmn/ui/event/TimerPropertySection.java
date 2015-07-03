@@ -114,8 +114,20 @@ public class TimerPropertySection extends AbstractPropertySection {
 			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"keyScheduledBaseObject", null, "");
 			aEditor = new RadioButtonEditor(this, value, optionList);
-			aEditor.createControl(attributesComposite, "Time");
+			aEditor.createControl(attributesComposite, "From");
 
+			
+			
+			// date field selecton
+			optionList = ImixsBPMNPlugin
+					.getOptionListFromDefinition((BaseElement) be,
+							"txtTimeFieldMapping");
+			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
+					"keyTimeCompareField", null, "");
+			aEditor = new RadioButtonEditor(this, value, optionList);
+			aEditor.createControl(attributesComposite, "Attribute");
+
+			
 		}
 
 	}
