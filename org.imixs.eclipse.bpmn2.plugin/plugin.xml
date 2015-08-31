@@ -179,6 +179,17 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
+      
+      
+       
+      <propertyTab
+       		afterTab="org.imixs.bpmn.propertytab.task.application"
+            class="org.imixs.bpmn.ui.task.ACLPropertySection"
+            id="org.imixs.bpmn.propertytab.task.acl"
+            label="ACL"
+            runtimeId="org.imixs.workflow.bpmn.runtime"
+            type="org.eclipse.bpmn2.Task">
+      </propertyTab>
        
 	 
        
