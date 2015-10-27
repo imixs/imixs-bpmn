@@ -1,5 +1,11 @@
 Create a new BPMN2 file
 ~~~~~~~~~~~~~~
+ Before starting modeling with the Imixs-BPMN Plugin make sure that your current eclipse project is 
+ assigned to the Imixs-BPMN runtime.
+ 
+[images/bpmn_screen_29.png] 
+ 
+ 
  The Eclipse New File wizard is used to create a new BPMN2 file. From the Main Menu, click File -> New
  -> Other… which opens the New File Wizard Dialog box. Navigate to the BPMN2 category and you will
  see several entries as shown here:
