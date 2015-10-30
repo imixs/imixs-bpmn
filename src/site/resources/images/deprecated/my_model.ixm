@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Imixs IX XML Model  -  www.imixs.com-->
-<model>
-  <configuration>
-    <environments/>
-  </configuration>
-  <processgroup name="Ticket"/>
-</model>
