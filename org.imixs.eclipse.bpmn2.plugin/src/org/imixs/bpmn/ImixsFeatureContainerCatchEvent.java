@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.IAddContext;
-import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
@@ -48,12 +47,16 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 	 * overwrite task features displayed during mouse over
 	 * 
 	 * Breaks plugin !!!
+	 * 
+	 * @see: https://bugs.eclipse.org/bugs/show_bug.cgi?id=471219
 	 */
-	@Override
-	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-		// return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-		return super.getCustomFeatures(fp);
-	}
+//	@Override
+//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
+//		
+//		// test if it now works...
+//		 return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
+//		//return super.getCustomFeatures(fp);
+//	}
 
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(IFeatureProvider fp) {
