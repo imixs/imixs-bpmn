@@ -20,8 +20,7 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 
 	// these values must match what's in the plugin.xml
 	public final static String ACTIVITYENTITY_THROW_EVENT_ID = "org.imixs.workflow.bpmn.ActivityEntityThrowEvent";
-	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(
-			255, 217, 64);
+	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
 
 	/**
 	 * This method inspects the object to determine what its custom task ID
@@ -40,31 +39,12 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 	@Override
 	public boolean canApplyTo(Object o) {
 		boolean b1 = o instanceof IntermediateThrowEvent;
-		boolean b2 = o.getClass()
-				.isAssignableFrom(IntermediateThrowEvent.class);
+		boolean b2 = o.getClass().isAssignableFrom(IntermediateThrowEvent.class);
 		return b1 || b2;
 	}
 
-	/**
-	 * overwrite task features displayed during mouse over
-	 * 
-	 * Breaks plugin !!!
-	 * 
-	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=471219
-	 */
-//	@Override
-//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-//		// test if it now works...
-//		 return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-//		//return super.getCustomFeatures(fp);
-//		 		
-//		//return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-//		//return super.getCustomFeatures(fp);
-//	}
-
 	@Override
-	protected IntermediateThrowEventFeatureContainer createFeatureContainer(
-			IFeatureProvider fp) {
+	protected IntermediateThrowEventFeatureContainer createFeatureContainer(IFeatureProvider fp) {
 		return new IntermediateThrowEventFeatureContainer() {
 
 			/**
@@ -78,11 +58,9 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 				return new AddIntermediateThrowEventFeature(fp) {
 
 					@Override
-					protected void decorateShape(IAddContext context,
-							ContainerShape containerShape,
+					protected void decorateShape(IAddContext context, ContainerShape containerShape,
 							IntermediateThrowEvent businessObject) {
-						super.decorateShape(context, containerShape,
-								businessObject);
+						super.decorateShape(context, containerShape, businessObject);
 
 						setFillColor(containerShape);
 
@@ -94,11 +72,11 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 			}
 
 			/**
-			 * this MUST be overridden if you intend to add extension attributes
-			 * to your business object (bpmn2 element) - see the code example
-			 * below. You will also want to provide your own images for the tool
-			 * palette by overriding getCreateImageId() and
-			 * getCreateLargeImageId() in your Create Feature.
+			 * This method MUST be overridden if we intend to add extension
+			 * attributes to your business object (bpmn2 element) - see the
+			 * BPMN2 tutorials for details:
+			 * https://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials
+			 * 
 			 */
 			@Override
 			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
@@ -115,16 +93,14 @@ public class ImixsFeatureContainerThrowEvent extends CustomShapeFeatureContainer
 			 *            - the ContainerShape that corresponds to the Task.
 			 */
 			private void setFillColor(ContainerShape containerShape) {
-				IntermediateThrowEvent ta = BusinessObjectUtil
-						.getFirstElementOfType(containerShape,
-								IntermediateThrowEvent.class);
+				IntermediateThrowEvent ta = BusinessObjectUtil.getFirstElementOfType(containerShape,
+						IntermediateThrowEvent.class);
 				if (ta != null) {
 					Shape shape = containerShape.getChildren().get(0);
 					ShapeStyle shapeStyle = new ShapeStyle();
 
 					shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta,
-							shapeStyle);
+					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
 				}
 			}
 

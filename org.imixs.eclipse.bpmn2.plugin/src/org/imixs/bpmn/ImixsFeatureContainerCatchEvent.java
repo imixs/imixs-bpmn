@@ -8,6 +8,7 @@ import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.event.IntermediateCatchEventFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
+import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
@@ -43,21 +44,6 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 		return b1 || b2;
 	}
 
-	/**
-	 * overwrite task features displayed during mouse over
-	 * 
-	 * Breaks plugin !!!
-	 * 
-	 * @see: https://bugs.eclipse.org/bugs/show_bug.cgi?id=471219
-	 */
-//	@Override
-//	public ICustomFeature[] getCustomFeatures(IFeatureProvider fp) {
-//		
-//		// test if it now works...
-//		 return new ICustomFeature[] { new ShowPropertiesFeature(fp) };
-//		//return super.getCustomFeatures(fp);
-//	}
-
 	@Override
 	protected IntermediateCatchEventFeatureContainer createFeatureContainer(IFeatureProvider fp) {
 		return new IntermediateCatchEventFeatureContainer() {
@@ -83,6 +69,19 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 						businessObject.eAdapters().add(new ImixsEventAdapter());
 
 					}
+				};
+			}
+
+			/**
+			 * This method MUST be overridden if we intend to add extension
+			 * attributes to your business object (bpmn2 element) - see the
+			 * BPMN2 tutorials for details:
+			 * https://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials
+			 * 
+			 */
+			@Override
+			public ICreateFeature getCreateFeature(IFeatureProvider fp) {
+				return new CreateIntermediateCatchEventFeature(fp) {
 				};
 			}
 
