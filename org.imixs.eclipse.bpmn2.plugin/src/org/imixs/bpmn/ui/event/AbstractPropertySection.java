@@ -31,7 +31,7 @@ public class AbstractPropertySection extends DefaultPropertySection {
 		EObject businessObject = BusinessObjectUtil
 				.getBusinessObjectForSelection(selection);
 
-		if (ImixsBPMNPlugin.isImixsEvent(businessObject)) {
+		if (ImixsBPMNPlugin.isImixsCatchEvent(businessObject)) {
 			return true;
 		}
 		return false;

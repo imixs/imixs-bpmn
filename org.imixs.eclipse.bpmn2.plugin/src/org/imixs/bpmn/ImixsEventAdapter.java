@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.Event;
 import org.eclipse.bpmn2.IntermediateCatchEvent;
-import org.eclipse.bpmn2.IntermediateThrowEvent;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.emf.common.notify.Notification;
@@ -34,9 +33,6 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 
 		if (ImixsBPMNPlugin.isImixsCatchEvent(notification.getNotifier())) {
 			imixsEvent = (IntermediateCatchEvent) notification.getNotifier();
-		}
-		if (ImixsBPMNPlugin.isImixsThrowEvent(notification.getNotifier())) {
-			imixsEvent = (IntermediateThrowEvent) notification.getNotifier();
 		}
 
 		if (imixsEvent != null) {

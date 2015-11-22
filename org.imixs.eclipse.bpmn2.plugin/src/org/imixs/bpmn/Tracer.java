@@ -139,7 +139,7 @@ public class Tracer {
 				// again a Imixs task - so we can stop ....
 				return;
 			}
-			if (ImixsBPMNPlugin.isImixsEvent(targetRef)) {
+			if (ImixsBPMNPlugin.isImixsCatchEvent(targetRef)) {
 				// add to list
 				if (!resultList.contains(targetRef)) {
 					resultList.add((Event) targetRef);

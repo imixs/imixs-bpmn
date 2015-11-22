@@ -43,7 +43,7 @@ public class ReportPropertySection extends AbstractPropertySection {
 
 		@Override
 		public void createBindings(final EObject be) {
-			if (!ImixsBPMNPlugin.isImixsEvent(businessObject)){
+			if (!ImixsBPMNPlugin.isImixsCatchEvent(businessObject)){
 				return ;
 			}
 

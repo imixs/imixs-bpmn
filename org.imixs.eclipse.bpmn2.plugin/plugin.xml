@@ -49,37 +49,18 @@
              description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
              featureContainer="org.imixs.bpmn.ImixsFeatureContainerCatchEvent"
              id="org.imixs.workflow.bpmn.ActivityEntityCatchEvent"
-             name="Workflow Catch Event"
+             name="Workflow Event"
              propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.acl org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
            		description="Workflow Activity ID"
-                label="ID-Catch"
+                label="ID"
                 name="activityid"
                 type="EInt"
                 value="0">
           </property>            
       </customTask>
-        <customTask
-             category="Imixs-Workflow"
-             description="The Workflow Event describes the activities to be processed by the Imixs-Workflow Engine when this event is triggered. A Workflow Event can be triggered by a human user or an external event like a timer event."
-             featureContainer="org.imixs.bpmn.ImixsFeatureContainerThrowEvent"
-             id="org.imixs.workflow.bpmn.ActivityEntityThrowEvent"
-             name="Workflow Throw Event"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.acl org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
-             runtimeId="org.imixs.workflow.bpmn.runtime"
-             type="IntermediateThrowEvent">
-          <property
-           		description="Workflow Activity ID"
-                label="ID-Throw"
-                name="activityid"
-                type="EInt"
-                value="0">
-          </property>            
-      </customTask>
-        
-      
       
       <!-- Activity Tabs 
       -->
@@ -89,7 +70,7 @@
             replaceTab="org.eclipse.bpmn2.modeler.commonEvent.tab"
             label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
@@ -98,7 +79,7 @@
        		afterTab="org.imixs.bpmn.propertytab.event.workflow"
             label="ACL"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
@@ -107,7 +88,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.acl"
             label="History"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
@@ -116,7 +97,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.history"
             label="Mail"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
          
       <propertyTab
@@ -125,7 +106,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.mail"
             label="Rule"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
@@ -134,7 +115,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.businessrule"
             label="Report"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
       <propertyTab
@@ -143,7 +124,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.report"
             label="Version"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
       
        <propertyTab
@@ -152,7 +133,7 @@
             afterTab="org.imixs.bpmn.propertytab.event.version"
             label="Timer"
             runtimeId="org.imixs.workflow.bpmn.runtime"
-            type="org.eclipse.bpmn2.CatchEvent org.eclipse.bpmn2.ThrowEvent">
+            type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
 
       
