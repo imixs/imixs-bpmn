@@ -140,7 +140,11 @@
 
 		<repository>
 			<id>eclipse-bpmn2</id>
+			
+			<!-- 
 			<url>http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/</url>
+			 -->
+			<url>http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>
