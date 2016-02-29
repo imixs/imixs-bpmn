@@ -19,7 +19,7 @@
 
 	<groupId>org.imixs.eclipse</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2</artifactId>
-	<version>1.4.1-SNAPSHOT</version>
+	<version>1.4.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Imixs-BPMN Modeler</name>
 
