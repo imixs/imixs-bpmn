@@ -80,7 +80,7 @@ public class TimerPropertySection extends AbstractPropertySection {
 			// updateLabelDecorator();
 
 			Composite compositeTimeGrid = new Composite(attributesComposite,
-					SWT.BORDER);
+					SWT.NONE);
 			GridData data = new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1);
 			compositeTimeGrid.setLayoutData(data);
 			compositeTimeGrid.setLayout(new GridLayout(6, false));
@@ -96,11 +96,12 @@ public class TimerPropertySection extends AbstractPropertySection {
 			optionList.put("1","min");
 			optionList.put("2","hours");
 			optionList.put("3","days");
+			optionList.put("4","workdays");
 			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"keyActivityDelayUnit", null, "");
 			aEditor = new RadioButtonEditor(this, value, optionList);
 
-			GridLayout gridlayout = new GridLayout(3, false);
+			GridLayout gridlayout = new GridLayout(4, false);
 
 			aEditor.setLayout(gridlayout);
 			aEditor.createControl(compositeTimeGrid, null);
