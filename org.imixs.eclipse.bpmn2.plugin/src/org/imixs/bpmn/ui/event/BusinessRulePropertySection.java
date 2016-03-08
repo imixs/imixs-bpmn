@@ -62,7 +62,7 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			
 			// set height
 			GridData data = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
-			data.heightHint =200;
+			data.heightHint =300;
 			
 			data.grabExcessHorizontalSpace = true;
 			data.horizontalAlignment = SWT.FILL;
@@ -72,8 +72,9 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			
 			editorControl.setLayoutData(data);
 			
-			//this.getParent().layout();
-			
+			// next line can be removed after next release of bpmn2 1.2.4
+			// see:https://bugs.eclipse.org/bugs/show_bug.cgi?id=488717
+			this.getParent().layout();
 		}
 	}
 
