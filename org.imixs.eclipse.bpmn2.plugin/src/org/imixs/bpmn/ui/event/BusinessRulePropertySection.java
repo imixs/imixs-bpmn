@@ -72,7 +72,7 @@ public class BusinessRulePropertySection extends AbstractPropertySection {
 			
 			editorControl.setLayoutData(data);
 			
-			
+			//this.getParent().layout();
 			
 		}
 	}
