@@ -31,7 +31,7 @@
             icon="process-bubble.png"
             id="org.imixs.workflow.bpmn.ProcessEntityTask"
             name="Workflow Task"
-            propertyTabs="org.imixs.bpmn.propertytab.task.workflow org.imixs.bpmn.propertytab.task.application"
+            propertyTabs="org.imixs.bpmn.propertytab.task.workflow org.imixs.bpmn.propertytab.task.application org.imixs.bpmn.propertytab.task.acl"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="Task">
          <property
@@ -156,8 +156,6 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
-      
-      
        
       <propertyTab
        		afterTab="org.imixs.bpmn.propertytab.task.application"
@@ -177,37 +175,22 @@
        <propertyTab
             class="org.imixs.bpmn.ui.process.ProfilePropertySection"
             id="org.imixs.bpmn.propertytab.process.workflow"
+  			replaceTab="org.eclipse.bpmn2.modeler.definitions.tab"
             label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration">
       </propertyTab>
     
     
-
-      <!--
-      <modelEnablement
-            id="Imixs-BPMN2.modelEnablement2"
-            profile="Full"
-            ref="org.eclipse.bpmn2.modeler.runtime.none:Full"
-            runtimeId="org.imixs.workflow.bpmn.runtime">
-         <enable
-               object="Property">
-         </enable>
-      </modelEnablement>
-      -->
-      
-      
-      
      	
 		<modelEnablement
 				runtimeId="org.imixs.workflow.bpmn.runtime"
 				id="org.imixs.workflow.bpmn.profile.workflow"
 				profile="Workflow"
-				
 				description="Imixs-Workflow Process Modeling">
-				
+
+			<enable object="Definitions"/>
 			<enable object="Collaboration"/>
-			<enable object="Process"/>
 			<enable object="Correlation"/>
 			<enable object="CorrelationProperty"/>
 			<enable object="CorrelationPropertyBinding"/>
@@ -225,20 +208,15 @@
 			<enable object="UserTask" feature="name"/>
 			<enable object="ServiceTask" feature="name"/>
 			
-
 			<enable object="TextAnnotation" feature="text"/>
 			<enable object="Association" feature="name"/>
 			<enable object="Association" feature="associationDirection"/>
-			<enable object="DataInputAssociation"/>
-			<enable object="DataOutputAssociation"/>
 			<enable object="StartEvent" feature="name"/>
 			<enable object="EndEvent" feature="name"/>
 			<enable object="MessageEventDefinition"/>
-			<enable object="TimerEventDefinition"/>
 			<enable object="Documentation"/>
 			<enable object="Group"/>
 			<enable object="Message"/>
-			
 			<enable object="SequenceFlow" feature="conditionExpression"/>
 			<enable object="ExclusiveGateway" feature="default"/>
 			<enable object="InclusiveGateway" feature="name"/>
@@ -256,21 +234,20 @@
 			<enable object="Escalation"/>
 			<enable object="ErrorEventDefinition"/>
 			<enable object="Error"/>
+			<enable object="LinkEventDefinition"/>
+			
 			<enable object="ConditionalEventDefinition"/>
 			<enable object="IntermediateCatchEvent"/>
 			<enable object="IntermediateThrowEvent"/>
-		
 		</modelEnablement>
 		
     
-
 		<modelEnablement
 				runtimeId="org.imixs.workflow.bpmn.runtime"
 				id="org.imixs.workflow.bpmn.profile.analytic"
 				ref="org.imixs.workflow.bpmn.runtime:Workflow"
 				profile="Analytic"
 				description="Analytic Process Modeling Conformance">
-			
 		
 			<enable object="SubProcess" feature="name"/>
 			<enable object="CallActivity" feature="name"/>
@@ -283,14 +260,9 @@
 			<enable object="DataStoreReference" feature="dataStoreRef"/>
 			<enable object="Category"/>
 			<enable object="CategoryValue"/>
-			
-		
-		
 			<enable object="BoundaryEvent"/>
 		</modelEnablement>
 		
-		<!-- -->
-	
    
    		<modelEnablement
       		    runtimeId="org.imixs.workflow.bpmn.runtime"
@@ -300,7 +272,8 @@
 			<enable object="all"/>
 		</modelEnablement>
 		
-	
+		
+		
    </extension>
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated imixs -->
