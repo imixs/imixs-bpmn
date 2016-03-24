@@ -154,9 +154,6 @@ public class ACLPropertySection extends AbstractPropertySection {
 			// hide section if no update...
 			aclComposite.setVisible("true".equals(valueUpdateACL.getValue()));
 			
-			// next line can be removed after next release of bpmn2 1.2.4
-			// see:https://bugs.eclipse.org/bugs/show_bug.cgi?id=488717
-			this.getParent().layout();
 		}
 
 	}

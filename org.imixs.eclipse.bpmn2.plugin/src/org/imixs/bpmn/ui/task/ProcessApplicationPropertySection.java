@@ -66,9 +66,6 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Workitem Type");
 
-			// next line can be removed after next release of bpmn2 1.2.4
-			// see:https://bugs.eclipse.org/bugs/show_bug.cgi?id=488717
-			this.getParent().layout();
 		}
 
 	}
