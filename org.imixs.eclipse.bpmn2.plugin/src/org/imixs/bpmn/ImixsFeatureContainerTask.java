@@ -201,7 +201,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 					// Add 1. custom Image
 					if (newLayoutStatus.contains("keyupdateacl=true")) {
-						Image img = loadCustomTaskIcon("user_group.gif", shape.getGraphicsAlgorithm());
+						Image img = loadCustomTaskIcon("acl.gif", shape.getGraphicsAlgorithm());
 						Graphiti.getGaService().setLocation(img, xPos, 2);
 						xPos = xPos - 20;
 					}
