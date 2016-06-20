@@ -279,8 +279,8 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 				}
 
 				// evaluate element width
-				int width = pe.getGraphicsAlgorithm().getWidth();
-				result += "width=" + width + ";";
+				result += "width=" + pe.getGraphicsAlgorithm().getWidth() + ";";
+				result += "height=" + pe.getGraphicsAlgorithm().getHeight() + ";";
 
 				return result;
 			}
