@@ -125,7 +125,8 @@
 			</activation>
 			<properties>
 				<eclipse-site>http://download.eclipse.org/releases/mars</eclipse-site>
-				<platform-version>[4.4,5.0]</platform-version>
+				<!-- [4.4,5.0] -->
+				<platform-version>[4.5,5.0]</platform-version>
 				<platform-version-name>mars</platform-version-name>
 			</properties>
 		</profile>
@@ -142,9 +143,10 @@
 			<id>eclipse-bpmn2</id>
 			
 			<!-- 
-			<url>http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/</url>
+			<url>http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/
+			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/</url>
 			 -->
-			<url>http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/</url>
+			<url>http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>

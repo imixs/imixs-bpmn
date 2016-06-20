@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EAttributeImpl;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.graphiti.mm.PropertyContainer;
+import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -514,5 +516,25 @@ public class ImixsBPMNPlugin extends AbstractUIPlugin {
 
 		}
 		return false;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * This method is  part of the next release of the BMPN plugin provided by the class FeatureSuppor
+	 * @param propertyContainer
+	 * @param key
+	 * @param value
+	 */
+	public static void setPropertyValue(PropertyContainer propertyContainer, String key, String value) {
+		while (Graphiti.getPeService().getPropertyValue(propertyContainer, key)!=null)
+			Graphiti.getPeService().removeProperty(propertyContainer, key);
+		if (value!=null)
+			Graphiti.getPeService().setPropertyValue(propertyContainer, key, value);
+	}
+	public static String getPropertyValue(PropertyContainer propertyContainer, String key) {
+		return Graphiti.getPeService().getPropertyValue(propertyContainer, key);
 	}
 }

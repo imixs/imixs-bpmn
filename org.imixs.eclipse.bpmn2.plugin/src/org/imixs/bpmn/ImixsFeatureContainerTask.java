@@ -15,7 +15,6 @@ import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.runtime.CustomTaskImageProvider;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
-import org.eclipse.bpmn2.modeler.core.utils.FeatureSupport;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
@@ -230,7 +229,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
 					// finally we update the new property value stored in the
-					FeatureSupport.setPropertyValue(containerShape, "layoutstatus.property", newLayoutStatus);
+					ImixsBPMNPlugin.setPropertyValue(containerShape, "layoutstatus.property", newLayoutStatus);
 				}
 
 			}
@@ -246,7 +245,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 			 */
 			private String getLastLayoutStatus(IUpdateContext context) {
 				PictogramElement pe = context.getPictogramElement();
-				String layoutStatus = FeatureSupport.getPropertyValue(pe, "layoutstatus.property");
+				String layoutStatus = ImixsBPMNPlugin.getPropertyValue(pe, "layoutstatus.property");
 				if (layoutStatus == null || layoutStatus.isEmpty()) {
 					System.out.println("layoutstatus.property not yet created...");
 					layoutStatus = "";
@@ -318,4 +317,10 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 		return img;
 	}
+
+
+
+
+	
+
 }
