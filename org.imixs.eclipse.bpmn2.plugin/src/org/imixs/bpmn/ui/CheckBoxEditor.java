@@ -66,7 +66,7 @@ public class CheckBoxEditor extends ObjectEditor {
 		// create a separate label to the LEFT of the checkbox set
 		if (label != null) {
 			Label labelWidget = getToolkit().createLabel(composite, label);
-			labelWidget.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
+			labelWidget.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
 					false, 1, 1));
 			updateLabelDecorator();
 		}
