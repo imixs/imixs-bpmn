@@ -72,7 +72,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 
 			Composite sectionVisibility = toolkit.createComposite(section);
 			section.setClient(sectionVisibility);
-			sectionVisibility.setLayout(new GridLayout(3, true));
+			sectionVisibility.setLayout(new GridLayout(3, false));
 
 			Map<String, String> yesnooptionList = new HashMap<String, String>();
 
@@ -89,7 +89,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 			Item item = ImixsBPMNPlugin.getItemByName((BaseElement) be, "keyRestrictedVisibility", null);
 			CheckBoxEditor checkboxEditor = new CheckBoxEditor(this, item, optionList);
 			checkboxEditor.createControl(sectionVisibility, "Restrict to");
-
+			
 			// Read Access
 			item = ImixsBPMNPlugin.getItemByName((BaseElement) be, "$readaccess", null);
 			ListEditor pluginEditor = new ListEditor(this, item);
