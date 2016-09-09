@@ -1,7 +1,10 @@
 package org.imixs.bpmn.ui.task;
 
+import java.util.List;
+
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Task;
+import org.eclipse.bpmn2.modeler.core.di.DIUtils;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
@@ -11,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Value;
@@ -45,7 +49,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 		}
 
 		@Override
-		public void createBindings(EObject be) {
+		public void createBindings(final EObject be) {
 
 			if (be == null || !(be instanceof Task)) {
 				return;
@@ -64,6 +68,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			 * (https://www.eclipse.org/forums/index.php/t/1077944/)
 			 */
 			itemValue.eAdapters().add(new AdapterImpl() {
+				
 				public void notifyChanged(Notification notification) {
 					int type = notification.getEventType();
 					if (type == Notification.SET) {
@@ -72,9 +77,10 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 							// System.out.println("notify type=SET value=" +
 							// newValue);
 							PictogramElement pe = null;
-							PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
-							if (pictogramElementList != null && pictogramElementList.length > 0) {
-								pe = pictogramElementList[0];
+							//PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
+							List<PictogramElement> pictogramElementList = Graphiti.getLinkService().getPictogramElements(DIUtils.getDiagram((BaseElement)be), be);
+							if (pictogramElementList != null && pictogramElementList.size() > 0) {
+								pe = pictogramElementList.get(0);//[0];
 								UpdateContext updateContext = new UpdateContext(pe);
 								IUpdateFeature iUpdateFeature = getDiagramEditor().getDiagramTypeProvider()
 										.getFeatureProvider().getUpdateFeature(updateContext);

@@ -1,8 +1,10 @@
 package org.imixs.bpmn.ui.task;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.modeler.core.di.DIUtils;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.emf.common.notify.Notification;
@@ -12,6 +14,7 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -89,12 +92,13 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 					if (type == Notification.SET) {
 						Object newValue = notification.getNewValue();
 						if (newValue != null) {
-							// System.out.println("notify type=SET value=" +
-							// newValue);
+							//System.out.println("notify type=SET value=" +newValue);
 							PictogramElement pe = null;
-							PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
-							if (pictogramElementList != null && pictogramElementList.length > 0) {
-								pe = pictogramElementList[0];
+							//PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
+							//List<PictogramElement> pictogramElementList = Graphiti.getLinkService().getPictogramElements(getDiagramEditor().getDiagramBehavior().getDiagramTypeProvider().getDiagram(), be);
+							List<PictogramElement> pictogramElementList = Graphiti.getLinkService().getPictogramElements(DIUtils.getDiagram((BaseElement)be), be);
+							if (pictogramElementList != null && pictogramElementList.size() > 0) {
+								pe = pictogramElementList.get(0);//[0];
 								UpdateContext updateContext = new UpdateContext(pe);
 								IUpdateFeature iUpdateFeature = getDiagramEditor().getDiagramTypeProvider()
 										.getFeatureProvider().getUpdateFeature(updateContext);
