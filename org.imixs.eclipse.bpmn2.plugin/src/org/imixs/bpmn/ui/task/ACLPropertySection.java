@@ -3,20 +3,15 @@ package org.imixs.bpmn.ui.task;
 import java.util.Map;
 
 import org.eclipse.bpmn2.BaseElement;
-import org.eclipse.bpmn2.modeler.core.adapters.AbstractAdapter;
-import org.eclipse.bpmn2.modeler.core.di.DIUtils;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
-import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -26,7 +21,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.imixs.bpmn.AbstractImixsAdapter;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
@@ -82,7 +76,12 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 			Value valueUpdateACL = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "keyUpdateACL", "xs:boolean",
 					"false");
 
-		/*	*/
+			/*
+			 * the following code forces an update of the task element if the
+			 * value change. Bob means this code is unnecessary but I can not
+			 * solve it in other way
+			 * (https://www.eclipse.org/forums/index.php/t/1077944/)
+			 */
 			valueUpdateACL.eAdapters().add(new AdapterImpl() {
 				public void notifyChanged(Notification notification) {
 					int type = notification.getEventType();
@@ -90,8 +89,8 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 					if (type == Notification.SET) {
 						Object newValue = notification.getNewValue();
 						if (newValue != null) {
-							System.out.println("notify type=SET   value=" + newValue);
-
+							// System.out.println("notify type=SET value=" +
+							// newValue);
 							PictogramElement pe = null;
 							PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
 							if (pictogramElementList != null && pictogramElementList.length > 0) {
@@ -107,8 +106,7 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 					}
 				}
 			});
-			
-			
+
 			BooleanEditor bEditor = new BooleanEditor(this, valueUpdateACL);
 			bEditor.createControl(attributesComposite, "Update ACL");
 			bEditor.addSelectionListener(new SelectionListener() {

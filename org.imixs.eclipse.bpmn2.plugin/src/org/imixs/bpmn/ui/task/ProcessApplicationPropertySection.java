@@ -5,7 +5,12 @@ import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.dialogs.TextObjectEditor;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.graphiti.features.IUpdateFeature;
+import org.eclipse.graphiti.features.context.impl.UpdateContext;
+import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
 import org.imixs.bpmn.model.Value;
@@ -29,7 +34,6 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 		return new ApplicationDetailComposite(parent, style);
 	}
 
-	
 	public class ApplicationDetailComposite extends ImixsDetailComposite {
 
 		public ApplicationDetailComposite(AbstractBpmn2PropertySection section) {
@@ -49,15 +53,42 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			setTitle("Application");
 
 			// Input Form
-			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
-					"txteditorid", null, "");
-			TextObjectEditor valueEditor = new TextObjectEditor(this, itemValue,
-					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
+			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txteditorid", null, "");
+			TextObjectEditor valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Input Form");
 
+			/*
+			 * the following code forces an update of the task element if the
+			 * value change. Bob means this code is unnecessary but I can not
+			 * solve it in other way
+			 * (https://www.eclipse.org/forums/index.php/t/1077944/)
+			 */
+			itemValue.eAdapters().add(new AdapterImpl() {
+				public void notifyChanged(Notification notification) {
+					int type = notification.getEventType();
+					if (type == Notification.SET) {
+						Object newValue = notification.getNewValue();
+						if (newValue != null) {
+							// System.out.println("notify type=SET value=" +
+							// newValue);
+							PictogramElement pe = null;
+							PictogramElement[] pictogramElementList = getDiagramEditor().getSelectedPictogramElements();
+							if (pictogramElementList != null && pictogramElementList.length > 0) {
+								pe = pictogramElementList[0];
+								UpdateContext updateContext = new UpdateContext(pe);
+								IUpdateFeature iUpdateFeature = getDiagramEditor().getDiagramTypeProvider()
+										.getFeatureProvider().getUpdateFeature(updateContext);
+								if (iUpdateFeature.canUpdate(updateContext))
+									iUpdateFeature.update(updateContext);
+							}
+
+						}
+					}
+				}
+			});
+
 			// Image URL
-			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtimageurl", null,
-					"");
+			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtimageurl", null, "");
 			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.createControl(attributesComposite, "Status Icon");
 

@@ -148,7 +148,6 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 						// update is needed if the property has changed....
 						if (!oldLayoutStatus.equals(newLayoutStatus)) {
-
 							//System.out.println("newLayoutStatus=" + newLayoutStatus);
 							return Reason.createTrueReason("layoutstatus.property changed");
 
@@ -229,6 +228,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
 					// finally we update the new property value stored in the
+					//System.out.println("store newLayoutStatus=" + newLayoutStatus);
 					ImixsBPMNPlugin.setPropertyValue(containerShape, "layoutstatus.property", newLayoutStatus);
 				}
 
@@ -247,7 +247,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 				PictogramElement pe = context.getPictogramElement();
 				String layoutStatus = ImixsBPMNPlugin.getPropertyValue(pe, "layoutstatus.property");
 				if (layoutStatus == null || layoutStatus.isEmpty()) {
-					System.out.println("layoutstatus.property not yet created...");
+					//System.out.println("layoutstatus.property not yet created...");
 					layoutStatus = "";
 				}
 
