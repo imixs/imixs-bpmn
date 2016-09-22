@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.imixs.eclipse.workflowmodeler" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="org.imixs.eclipse.workflowmodeler" id="editorpages" name="Workflow Main Editor Pages"/>
+      </appinfo>
+      <documentation>
+         Extension Point ot register additional Editor Pages.
+The ixeditorpage Extension could be used to define own Pages to be added inside the IXXMLEditor. 
+Each Page that should be added to IXXMLEditor must subclass &apos;org.imixs.eclipse.workflowmodeler.ui.editors.IXEditorPage&apos; 
+Subclasses should override method &apos;createFormContent(ManagedForm)&apos; to fill the form with  content. The method &apos;initializeWorkflowModel(WorkflowModel)&apos; is called by the IXXMLEditor to signal the page that a
+WorkflowModel is set or reloaded. Note that page itself can be loaded lazily (on first open). Consequently, the call to create the form content can come after the editor has been opened for a while (in fact, it is possible to open and close the editor and never create the form because no attempt has been made to show the page).
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="page" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="page">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         1.0.0
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiInfo"/>
+      </appinfo>
+      <documentation>
+         A Page have to extend the IXEditorPage class.
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Imixs Software Solutions GmbH
+Author: Ralph Soika
+      </documentation>
+   </annotation>
+
+</schema>

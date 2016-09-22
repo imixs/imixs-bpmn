@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+     
+       <extension-point id="ixeditorpages" name="IXXMLEditor Query Pages" schema="schema/ixeditorpages.exsd"/>
+     
+     
+     <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Imixs Report Editor"
+            extensions="ixr"
+            icon="icons/editor/workflowquery.gif"
+            class="org.imixs.eclipse.workflowreports.ui.editors.IXXMLEditor"
+            
+            id="org.imixs.eclipse.workflowreport.IXXMLEditor">
+            
+               
+      </editor>
+   </extension>
+     <extension
+           point="org.imixs.eclipse.workflowreports.ixeditorpages">
+        <page
+              class="org.imixs.eclipse.workflowreports.ui.editors.OverviewPage"
+              name="Overview">
+        </page>
+             
+        <page
+              class="org.imixs.eclipse.workflowreports.ui.editors.XSLPage"
+              name="XSL">
+        </page>
+     </extension>
+    
+     
+     <extension
+         id="newReportWizard"
+         name="Imixs new Report"
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Imixs Workflow"
+            id="org.imixs.eclipse.workflowmodeler.wizard.category">
+      </category>
+      <wizard
+            category="org.imixs.eclipse.workflowmodeler.wizard.category"
+            class="org.imixs.eclipse.workflowreports.wizards.NewReport"
+            icon="icons/editor/workflowquery.gif"
+            id="org.imixs.eclipse.workflowreports.wizards.newmodel"
+            name="new Imixs Workflow Report"
+            preferredPerspectives="org.imixs.eclipse.workflowmodeler.ui.perspective.ModelerPerspective"
+            project="false">
+         <description>
+            Create a new Imixs Workflow Report file.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

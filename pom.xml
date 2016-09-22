@@ -415,6 +415,8 @@
 	<modules>
 		<module>org.imixs.eclipse.bpmn2.plugin</module>
 		<module>org.imixs.eclipse.bpmn2.feature</module>
+		<module>org.imixs.eclipse.report.plugin</module>
+		<module>org.imixs.eclipse.report.feature</module>
 		<module>org.imixs.eclipse.bpmn2.site</module>
 	</modules>
 
