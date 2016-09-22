@@ -5,7 +5,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.imixs.eclipse.workflowreports.WorkflowReportPlugin;
 import org.imixs.eclipse.workflowreports.model.ReportObject;
 
