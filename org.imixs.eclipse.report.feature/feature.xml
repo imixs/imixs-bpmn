@@ -477,23 +477,4 @@ Public License instead of this License.
       <discovery label="Imixs Workflow" url="http://www.imixs.org/org.imixs.eclipse.updatesite"/>
    </url>
 
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.imixs.eclipse.workflow.lib"/>
-      <import plugin="org.eclipse.gef"/>
-   </requires>
-
-   <plugin
-         id="org.imixs.eclipse.workflowreports"
-         download-size="100"
-         install-size="100"
-         version="1.1.0.v201010061200"
-         unpack="false"/>
-
 </feature>
