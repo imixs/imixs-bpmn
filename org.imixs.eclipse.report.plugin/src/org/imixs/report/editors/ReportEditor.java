@@ -19,7 +19,6 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import org.eclipse.ui.part.EditorPart;
 import org.imixs.report.ImixsReportPlugin;
-import org.imixs.workflow.ItemCollection;
 
 public class ReportEditor extends EditorPart {
 
@@ -27,29 +26,26 @@ public class ReportEditor extends EditorPart {
 
 	private FormToolkit toolkit;
 	private ScrolledForm form;
-	private boolean isdirty = false;
 	private Report report;
-	private ReportEditorInput input;
-	
-	private IEditorInput originEditorInput; 
+	private ReportEditorInput reportEditorInput;
 
-	// Will be called before createPartControl
+	/**
+	 * This method will be called before createPartControl
+	 */
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-
-		originEditorInput=input;
-		
-		// TODO the report object need to be created from the input file object
-		report = new Report(42);
-
-		this.input = new ReportEditorInput(report.getId());
+		// Create an instance of the ReportEditorInput from the given FileInpurt
+		this.reportEditorInput = new ReportEditorInput(input);
+		// load Report Model Object
+		this.report = reportEditorInput.getReport();
 
 		setSite(site);
-		setInput(this.input);
-		setPartName("Todo ID: " + report.getId());
+		setInput(this.reportEditorInput);
+		setPartName(reportEditorInput.getName());
 
 		report.addPropertyChangeListener((PropertyChangeEvent event) -> {
-			isdirty = true;
+			// isdirty = true;
+			this.reportEditorInput.setDirtyFlag();
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 		});
 	}
@@ -59,22 +55,21 @@ public class ReportEditor extends EditorPart {
 		toolkit = new FormToolkit(parent.getDisplay());
 		form = toolkit.createScrolledForm(parent);
 		form.setText("Imixs-Report Definition");
-//		form.setBackgroundImage(ImixsReportPlugin.getImageDescriptor("icons/form_banner.gif").createImage());
+		// form.setBackgroundImage(ImixsReportPlugin.getImageDescriptor("icons/form_banner.gif").createImage());
 
 		form.setBackgroundImage(ImixsReportPlugin.getDefault().getIcon("form_banner.gif").createImage());
 		form.setImage(ImixsReportPlugin.getDefault().getIcon("report-definition.gif").createImage());
-		
+
 		TableWrapLayout layout = new TableWrapLayout();
 		layout.numColumns = 2;
 		form.getBody().setLayout(layout);
 
 		Section section = toolkit.createSection(form.getBody(),
-				Section.DESCRIPTION | Section.TITLE_BAR |  Section.EXPANDED);
+				Section.DESCRIPTION | Section.TITLE_BAR | Section.EXPANDED);
 		TableWrapData td = new TableWrapData(TableWrapData.FILL_GRAB);
-		//td.colspan = 2;
+		// td.colspan = 2;
 		section.setLayoutData(td);
-		
-	
+
 		section.setText("General Information");
 		section.setDescription("This is the description that goes  below the title");
 		Composite sectionClient = toolkit.createComposite(section);
@@ -94,25 +89,18 @@ public class ReportEditor extends EditorPart {
 
 		section.setClient(sectionClient);
 
-		
-		
-		
-		
-		
-		
-		
-		 section = toolkit.createSection(form.getBody(),Section.DESCRIPTION | Section.TITLE_BAR | Section.EXPANDED);
+		section = toolkit.createSection(form.getBody(), Section.DESCRIPTION | Section.TITLE_BAR | Section.EXPANDED);
 		td = new TableWrapData(TableWrapData.FILL_GRAB);
-		//td.colspan = 2;
+		// td.colspan = 2;
 		section.setLayoutData(td);
-		
+
 		section.setText("Section2 title");
 		section.setDescription("This is the 2nd description that goes  below the title");
-		 sectionClient = toolkit.createComposite(section);
-		 glayout = new GridLayout();
+		sectionClient = toolkit.createComposite(section);
+		glayout = new GridLayout();
 		glayout.numColumns = 2;
 		sectionClient.setLayout(glayout);
-		
+
 		toolkit.createLabel(sectionClient, "Summary2:");
 		text = toolkit.createText(sectionClient, report.getStringValue("summary2"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
@@ -120,28 +108,20 @@ public class ReportEditor extends EditorPart {
 
 		section.setClient(sectionClient);
 
-		
-		
-		
-		
-		
-		
-		
 		// Supersection
-		
-		
-		 section = toolkit.createSection(form.getBody(),Section.DESCRIPTION | Section.TITLE_BAR |  Section.EXPANDED);
+
+		section = toolkit.createSection(form.getBody(), Section.DESCRIPTION | Section.TITLE_BAR | Section.EXPANDED);
 		td = new TableWrapData(TableWrapData.FILL_GRAB);
 		td.colspan = 2;
 		section.setLayoutData(td);
-		
+
 		section.setText("Super Section3 title");
 		section.setDescription("This is the 2nd description that goes  below the title");
-		 sectionClient = toolkit.createComposite(section);
-		 glayout = new GridLayout();
+		sectionClient = toolkit.createComposite(section);
+		glayout = new GridLayout();
 		glayout.numColumns = 2;
 		sectionClient.setLayout(glayout);
-		
+
 		toolkit.createLabel(sectionClient, "Summary3:");
 		text = toolkit.createText(sectionClient, report.getStringValue("summary3"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
@@ -149,31 +129,27 @@ public class ReportEditor extends EditorPart {
 
 		section.setClient(sectionClient);
 
-		
-		
-		
-	}
-
-	@Override
-	public void doSave(IProgressMonitor monitor) {
-		
-		ImixsReportPlugin.getDefault().saveReport(originEditorInput,report,monitor);
-    	firePropertyChange(IEditorPart.PROP_DIRTY);
-    	
-	}
-
-	@Override
-	public void doSaveAs() {
 	}
 
 	@Override
 	public boolean isDirty() {
-		return isdirty;
+		return reportEditorInput.isDirty();
+	}
+
+	@Override
+	public void doSave(IProgressMonitor monitor) {
+		ImixsReportPlugin.getDefault().saveReport(reportEditorInput, report, monitor);
+		firePropertyChange(IEditorPart.PROP_DIRTY);
 	}
 
 	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
+	}
+
+	@Override
+	public void doSaveAs() {
+		// no implementation needed
 	}
 
 	@Override

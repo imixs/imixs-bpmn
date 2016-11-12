@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -17,6 +18,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.imixs.report.editors.Report;
+import org.imixs.report.editors.ReportEditorInput;
+import org.imixs.workflow.ItemCollection;
 import org.imixs.workflow.xml.XMLItemCollection;
 import org.imixs.workflow.xml.XMLItemCollectionAdapter;
 import org.osgi.framework.BundleContext;
@@ -95,16 +98,19 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 	 * This Method save a Model Object into a IFile The Method uses the
 	 * XMLItemCollectionAdapter Class
 	 * 
-	 * @param fileInput - IEditorInput
-	 * @param report - report object
-	 * @param monitor - progress monitor
+	 * @param fileInput
+	 *            - IEditorInput
+	 * @param report
+	 *            - report object
+	 * @param monitor
+	 *            - progress monitor
 	 * 
-	 * @see org.imixs.eclipse.workflowmodeler.XMLModelParser
+	 * @see org.imixs.workflow.xml.XMLItemCollectionAdapter
 	 * 
 	 */
-	public void saveReport(IEditorInput fileInput, Report report, IProgressMonitor monitor) {
+	public void saveReport(ReportEditorInput reportInput, Report report, IProgressMonitor monitor) {
 		try {
-
+			IEditorInput fileInput=reportInput.getFileInput();
 			IFile file = fileInput.getAdapter(IFile.class);
 			if (file == null)
 				throw new FileNotFoundException();
@@ -121,10 +127,44 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			InputStream stream = new ByteArrayInputStream(writer.toString().getBytes(StandardCharsets.UTF_8));
 
 			file.setContents(stream, true, true, monitor);
+			
+			reportInput.clearDirtyFlag();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			// editorSaving = false;
+		}
+	}
+
+	/**
+	 * This Method loads the file content form an EditorInput and creates a new
+	 * Instance of a Report Model Object.
+	 * 
+	 * @param fileInput
+	 *            - IEditorInput
+	 * @return report - report object
+	 * 
+	 * @see org.imixs.workflow.xml.XMLItemCollectionAdapter
+	 * 
+	 */
+	public ItemCollection loadReportData(IEditorInput fileInput) {
+		try {
+
+			IFile file = fileInput.getAdapter(IFile.class);
+			if (file == null)
+				throw new FileNotFoundException();
+
+			ItemCollection itemCollection;
+			// extract item collections from request stream.....
+			JAXBContext context = JAXBContext.newInstance(XMLItemCollection.class);
+			Unmarshaller u = context.createUnmarshaller();
+			XMLItemCollection ecol = (XMLItemCollection) u.unmarshal(file.getContents());
+
+			itemCollection = XMLItemCollectionAdapter.getItemCollection(ecol);
+			return itemCollection;
+		} catch (Exception e) {
+			// unable to read file
+			return null;
 		}
 	}
 
