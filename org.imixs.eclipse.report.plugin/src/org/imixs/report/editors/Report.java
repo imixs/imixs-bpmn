@@ -4,23 +4,29 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.imixs.workflow.ItemCollection;
 
 /**
- * This class represents the Report Data Object.
- * All properties of an report are stored into a HashMap.
+ * This class represents the Report Data Object. All properties of an report are
+ * stored in a Imixs ItemCollection. The ItemCollection is converted into a XML
+ * file during the save method.
+ * 
+ * In addtion the Report Object holds a transient field to locate an external
+ * XSL file resource.
  * 
  * 
- *  
+ * 
  * @author rsoika
  *
  */
 public class Report {
 	private PropertyChangeSupport changes = new PropertyChangeSupport(this);
 
-	private  Map<String,List<String>> itemCollection=new HashMap<String,List<String>>();
+	//private Map<String, List<String>> itemCxollection = new HashMap<String, List<String>>();
+
+	private ItemCollection itemCollection;
 	
 	public static final String FIELD_ID = "id";
 	public static final String FIELD_SUMMARY = "summary";
@@ -30,47 +36,39 @@ public class Report {
 	public static final String FIELD_DEPENDENTS = "dependents";
 
 	private long id;
-	private String summary;
-	private String description;
 	private boolean done;
 	private Date dueDate;
 	private List<Long> dependents = new ArrayList<>();
 
 	public Report(long i) {
+		itemCollection=new ItemCollection();
 		id = i;
 	}
 
-	public Report(long i, String summary, String description, boolean b, Date date) {
-		this.id = i;
-		this.summary = summary;
-		this.description = description;
-		this.done = b;
-		this.dueDate = date;
-	}
 
 	public long getId() {
 		return id;
 	}
 
+	public ItemCollection getItemCollection() {
+		return itemCollection;
+	}
 
-	public String getItem(String key) {
-		//return description;
-		List<String> values= itemCollection.get(key);
-		if (values==null ||  itemCollection.get(key).size()==0) {
+
+	public String getStringValue(String key) {
+		// return description;
+		List<String> values = itemCollection.getItemValue(key);
+		if (values == null || values.size() == 0) {
 			return "";
 		} else {
 			return values.get(0);
 		}
 	}
 
-	public void setItem(String key,String value) {
-		String oldValue=getItem(key);
-		List valueList=new ArrayList<String>();
-		valueList.add(value);
-		itemCollection.put(key, valueList);
-		
-		
-		changes.firePropertyChange(FIELD_DESCRIPTION, oldValue,  value);
+	public void setItemValue(String key, Object value) {
+		Object oldValue = itemCollection.getItemValue(key);
+		itemCollection.replaceItemValue(key, value);
+		changes.firePropertyChange(FIELD_DESCRIPTION, oldValue, value);
 	}
 
 	public boolean isDone() {
@@ -99,10 +97,7 @@ public class Report {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+		return itemCollection.hashCode();
 	}
 
 	@Override
@@ -114,19 +109,11 @@ public class Report {
 		if (getClass() != obj.getClass())
 			return false;
 		Report other = (Report) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		
+		return this.itemCollection.equals(other.itemCollection);
 	}
 
-	@Override
-	public String toString() {
-		return "Todo [id=" + id + ", summary=" + summary + "]";
-	}
-
-	public Report copy() {
-		return new Report(id, summary, description, done, dueDate);
-	}
+	
 
 	public void addPropertyChangeListener(PropertyChangeListener l) {
 		changes.addPropertyChangeListener(l);

@@ -8,7 +8,7 @@
                 class="org.imixs.report.editors.ReportEditor"
                 default="false"
                 extensions="imixs-report"
-                icon="icons/sample.gif"
+                icon="icons/imixs-report.gif"
                 id="org.imixs.report.editors.reporteditor"
                 name="Imixs Report Editor">
           </editor>

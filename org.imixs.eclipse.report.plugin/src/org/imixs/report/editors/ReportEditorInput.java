@@ -7,6 +7,7 @@ import org.eclipse.ui.IPersistableElement;
  * 
  * 
  * http://www.vogella.com/tutorials/EclipseEditors/article.html
+ * https://www.eclipse.org/articles/Article-Forms/article.html
  * 
  * @author rsoika
  *
