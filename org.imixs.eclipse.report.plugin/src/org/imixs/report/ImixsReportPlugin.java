@@ -166,6 +166,12 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			XMLItemCollection ecol = (XMLItemCollection) u.unmarshal(file.getContents());
 
 			itemCollection = XMLItemCollectionAdapter.getItemCollection(ecol);
+			
+			// set default data
+			if (itemCollection.getItemValueString("txtquery").isEmpty()) {
+				itemCollection.replaceItemValue("txtquery", "(type:\"workitem\")");
+			}
+			
 			return itemCollection;
 		} catch (Exception e) {
 			// unable to read file

@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.IEditorInput;
@@ -119,6 +120,7 @@ public class ReportEditor extends EditorPart {
 		// section.setDescription("This is the description that goes below the
 		// title");
 		Composite sectionClient = toolkit.createComposite(section);
+		//createSectionIcon(section, "query.gif");
 		GridLayout glayout = new GridLayout();
 		glayout.numColumns = 2;
 		sectionClient.setLayout(glayout);
@@ -129,54 +131,54 @@ public class ReportEditor extends EditorPart {
 		text.addModifyListener(event -> report.setItemValue("txtname", ((Text) event.widget).getText()));
 
 		
+		
+
+		Label description = toolkit.createLabel(sectionClient, "Specify the search term to query the result-set:");
+		GridData gd = new GridData();
+		gd.horizontalSpan=2;
+		description.setLayoutData(gd);
 			
-		Composite seppi = toolkit.createCompositeSeparator(sectionClient);
-		GridData gds = new GridData();
-		gds.heightHint = 2;
-		gds.horizontalSpan=2;
-		gds.grabExcessHorizontalSpace = true;
-		gds.verticalAlignment = GridData.BEGINNING;
-		gds.horizontalAlignment = GridData.FILL;
-	seppi.setLayoutData(gds);
+		// Query
+		text = toolkit.createText(sectionClient, report.getStringValue("txtquery"),
+				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
+		text.addModifyListener(event -> report.setItemValue("txtquery", ((Text) event.widget).getText()));
+
+		 gd = new GridData();
+		gd.horizontalSpan=2;
+		gd.heightHint = 135;
+		gd.widthHint= 350;
+		gd.grabExcessHorizontalSpace = true;
+		gd.verticalAlignment = GridData.BEGINNING;
+		gd.horizontalAlignment = GridData.FILL;
+		text.setLayoutData(gd);
 		
 		
-		toolkit.createLabel(sectionClient, "XSL:");
-	
-//		Composite client = toolkit.createComposite(sectionClient,SWT.BORDER);
-//		toolkit.createLabel(sectionClient, "A:");
-//		toolkit.createLabel(sectionClient, "B:");
+		section.setClient(sectionClient);
 
 		
+		
+		
+		/*******************************************************
+		 * 
+		 * XSL Section
+		 */
+
+		section = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.DESCRIPTION | Section.EXPANDED);
+		td = new TableWrapData(TableWrapData.FILL_GRAB);
+		section.setLayoutData(td);
+
+		section.setText("XSL");
+		 section.setDescription("A report may define a XSL template to transform the output.");
+		sectionClient = toolkit.createComposite(section);
+		createSectionIcon(section, "xslt.gif");
+
+		glayout = new GridLayout();
+		glayout.numColumns = 2;
+		sectionClient.setLayout(glayout);
+
+		
+		toolkit.createLabel(sectionClient, "XSL:");
 		createResourceSelectionControl(sectionClient,"xsl");
-		
-		//ResourceSelectionWidget rsw=new ResourceSelectionWidget(sectionClient, SWT.NONE, toolkit, report, project);
-		
-		
-		//	ResourceSelectionWidget rsw=new ResourceSelectionWidget(sectionClient, SWT.NONE, toolkit, report, project);
-	/*	
-
-		toolkit.createLabel(sectionClient, "XSL:");
-		final Text xsltext = toolkit.createText(sectionClient, report.getStringValue("txtxsl"), SWT.BORDER);
-		xsltext.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		xsltext.addModifyListener(event -> report.setItemValue("txtxsl", ((Text) event.widget).getText()));
-		Button button = toolkit.createButton(sectionClient, "Browse", SWT.NONE);
-		final Shell shell = parent.getShell();
-		button.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				
-				IFile result = selectResource(shell, "Select XSL Resource", "xsl");
-				if (result!=null) {
-					
-					System.out.println(result.getName());
-					System.out.println(result.getLocation());
-					xsltext.setText(result.getFullPath().toString());
-					//report.setItemValue("txtxsl",result.getFullPath().toString());
-				}
-			}
-		});
-		
-		*/
-		
 		
 		toolkit.createLabel(sectionClient, "Encoding:");
 		text = toolkit.createText(sectionClient, report.getStringValue("txtencoding"), SWT.BORDER);
@@ -188,43 +190,12 @@ public class ReportEditor extends EditorPart {
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		text.addModifyListener(event -> report.setItemValue("txtcontenttype", ((Text) event.widget).getText()));
 
+
+		section.setClient(sectionClient);
+
 		
-
-		section.setClient(sectionClient);
-
-		/*******************************************************
-		 * 
-		 * Query Section
-		 */
-
-		section = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.EXPANDED);
-		td = new TableWrapData(TableWrapData.FILL_GRAB);
-		// td.colspan = 2;
-		section.setLayoutData(td);
-
-		section.setText("Query");
-		// section.setDescription("This is the 2nd description that goes below
-		// the title");
-		sectionClient = toolkit.createComposite(section);
-		createSectionIcon(section, "query.gif");
-
-		glayout = new GridLayout();
-		glayout.numColumns = 1;
-		sectionClient.setLayout(glayout);
-
-		text = toolkit.createText(sectionClient, report.getStringValue("txtquery"),
-				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		text.addModifyListener(event -> report.setItemValue("txtquery", ((Text) event.widget).getText()));
-
-		GridData gd = new GridData();
-		gd.heightHint = 135;
-		gd.grabExcessHorizontalSpace = true;
-		gd.verticalAlignment = GridData.BEGINNING;
-		gd.horizontalAlignment = GridData.FILL;
-		text.setLayoutData(gd);
-
-		section.setClient(sectionClient);
-
+		
+		
 		/*******************************************************
 		 * 
 		 * Attribute Section
@@ -318,14 +289,9 @@ public class ReportEditor extends EditorPart {
 		final Shell shell = parent.getShell();
 		button.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
-
 				IFile result = ImixsReportPlugin.selectResource(shell, project, "Select XSL Resource", fileExtension);
 				if (result != null) {
-
-					System.out.println(result.getName());
-					System.out.println(result.getLocation());
 					xsltext.setText(result.getFullPath().toString());
-					// report.setItemValue("txtxsl",result.getFullPath().toString());
 				}
 			}
 		});
