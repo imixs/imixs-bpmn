@@ -13,9 +13,14 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.imixs.report.editors.Report;
 import org.imixs.report.editors.ReportEditorInput;
@@ -167,5 +172,52 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			return null;
 		}
 	}
+	
+	
+	/**
+	 * This method shows a resource selection dialog to select a file resource
+	 * out of the current project (which is containing the current report file)
+	 * 
+	 * @param shell
+	 * @param description
+	 * @param fileExtension
+	 *            - filters the file selection to the given extension
+	 * @return
+	 */
+	public static IFile selectResource(Shell shell, IProject aproject, String description, final String fileExtension) {
+		ResourceListSelectionDialog fsd = new ResourceListSelectionDialog(shell, aproject, IResource.FILE) {
+
+			protected String adjustPattern() {
+				String s = super.adjustPattern();
+				if (s.equals("") && fileExtension != null) { //$NON-NLS-1$
+					s = "*." + fileExtension; //$NON-NLS-1$
+				}
+				return s;
+			}
+
+			public void create() {
+				super.create();
+				refresh(true);
+			}
+
+			protected void updateOKState(boolean state) {
+				super.updateOKState(true); // allow to select nothing
+			}
+		};
+
+		IFile selected = null;
+		fsd.setTitle(description);
+		fsd.setAllowUserToToggleDerived(true);
+		if (fsd.open() == Window.OK) {
+			Object[] result = fsd.getResult();
+			if (result != null && result.length > 0 && result[0] instanceof IFile) {
+				selected = (IFile) result[0];
+			} else {
+				selected = null;
+			}
+		}
+		return selected;
+	}
+
 
 }
