@@ -218,10 +218,10 @@ public class ReportEditor extends EditorPart {
 
 		text = toolkit.createText(sectionClient, "List of attributes, converters and agregators", SWT.NONE);
 
-		toolkit.createLabel(sectionClient, "Summary3:");
-		text = toolkit.createText(sectionClient, report.getStringValue("summary3"), SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		text.addModifyListener(event -> report.setItemValue("summary3", ((Text) event.widget).getText()));
+		
+		
+		AttributesTableView attributesTable = new AttributesTableView();
+		attributesTable.create(sectionClient);
 
 		section.setClient(sectionClient);
 
