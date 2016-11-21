@@ -2,38 +2,23 @@ package org.imixs.report.editors;
 
 import java.beans.PropertyChangeEvent;
 
-import javax.swing.event.HyperlinkEvent.EventType;
-
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ToolBarManager;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
-import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
@@ -42,9 +27,6 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import org.eclipse.ui.part.EditorPart;
 import org.imixs.report.ImixsReportPlugin;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 
 public class ReportEditor extends EditorPart {
 
@@ -80,6 +62,20 @@ public class ReportEditor extends EditorPart {
 		});
 
 	}
+
+	
+	
+	public FormToolkit getToolkit() {
+		return toolkit;
+	}
+
+
+
+	public Report getReport() {
+		return report;
+	}
+
+
 
 	/**
 	 * Creats the editor sections
@@ -217,13 +213,55 @@ public class ReportEditor extends EditorPart {
 		sectionClient.setLayout(glayout);
 
 		text = toolkit.createText(sectionClient, "List of attributes, converters and agregators", SWT.NONE);
-
 		
-		
-		AttributesTableView attributesTable = new AttributesTableView();
-		attributesTable.create(sectionClient);
+		AttributeView attributesTable = new AttributeView();
+		attributesTable.create(sectionClient,this);
 
 		section.setClient(sectionClient);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*******************************************************
+		 * 
+		 * Description Section
+		 */
+
+		section = toolkit.createSection(form.getBody(), Section.TITLE_BAR | Section.EXPANDED);
+		td = new TableWrapData(TableWrapData.FILL_GRAB);
+		td.colspan = 2;
+		section.setLayoutData(td);
+		section.setText("Description");
+		createSectionIcon(section, "description.gif"); 
+
+		sectionClient = toolkit.createComposite(section);
+		glayout = new GridLayout();
+		glayout.numColumns = 1;
+		sectionClient.setLayout(glayout);
+
+		// txtdescription
+		text = toolkit.createText(sectionClient, report.getStringValue("txtdescription"),
+				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
+		text.addModifyListener(event -> report.setItemValue("txtdescription", ((Text) event.widget).getText()));
+
+		 gd = new GridData();
+		gd.horizontalSpan=2;
+		gd.heightHint = 95;
+		gd.widthHint= 350;
+		gd.grabExcessHorizontalSpace = true;
+		gd.verticalAlignment = GridData.BEGINNING;
+		gd.horizontalAlignment = GridData.FILL;
+		text.setLayoutData(gd);
+		
+
+		section.setClient(sectionClient);
+
 
 	}
 
