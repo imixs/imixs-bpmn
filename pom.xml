@@ -125,9 +125,22 @@
 			</activation>
 			<properties>
 				<eclipse-site>http://download.eclipse.org/releases/mars</eclipse-site>
-				<!-- [4.4,5.0] -->
 				<platform-version>[4.5,5.0]</platform-version>
 				<platform-version-name>mars</platform-version-name>
+			</properties>
+		</profile>
+		<profile>
+			<id>platform-neon</id>
+			<activation>
+				<property>
+					<name>platform-version-name</name>
+					<value>neon</value>
+				</property>
+			</activation>
+			<properties>
+				<eclipse-site>http://download.eclipse.org/releases/neon</eclipse-site>
+				<platform-version>[4.6,5.0)</platform-version>
+				<platform-version-name>neon</platform-version-name>
 			</properties>
 		</profile>
 	</profiles>

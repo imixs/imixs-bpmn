@@ -22,4 +22,15 @@
    <feature url="features/org.imixs.eclipse.bpmn2.source.feature_0.0.0.jar" id="org.imixs.eclipse.bpmn2.feature" version="0.0.0">
       <category name="org.mixs.eclipse.bpmn2.source"/>
    </feature>
+
+
+   <feature url="features/org.imixs.eclipse.report.feature_0.0.0.jar" id="org.imixs.eclipse.report.feature" version="0.0.0">
+      <category name="org.mixs.eclipse.bpmn2"/>
+   </feature>
+   
+   <feature url="features/org.imixs.eclipse.report.source.feature_0.0.0.jar" id="org.imixs.eclipse.report.feature" version="0.0.0">
+      <category name="org.mixs.eclipse.bpmn2.source"/>
+   </feature>
+
+
 </site>
