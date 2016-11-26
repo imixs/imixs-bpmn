@@ -115,7 +115,7 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 	 */
 	public void saveReport(ReportEditorInput reportInput, Report report, IProgressMonitor monitor) {
 		try {
-			IEditorInput fileInput=reportInput.getFileInput();
+			IEditorInput fileInput = reportInput.getFileInput();
 			IFile file = fileInput.getAdapter(IFile.class);
 			if (file == null)
 				throw new FileNotFoundException();
@@ -132,7 +132,7 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			InputStream stream = new ByteArrayInputStream(writer.toString().getBytes(StandardCharsets.UTF_8));
 
 			file.setContents(stream, true, true, monitor);
-			
+
 			reportInput.clearDirtyFlag();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,32 +154,23 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 	 */
 	public ItemCollection loadReportData(IEditorInput fileInput) {
 		try {
-
 			IFile file = fileInput.getAdapter(IFile.class);
 			if (file == null)
 				throw new FileNotFoundException();
 
-			ItemCollection itemCollection;
+			ItemCollection itemCollection = null;
 			// extract item collections from request stream.....
 			JAXBContext context = JAXBContext.newInstance(XMLItemCollection.class);
 			Unmarshaller u = context.createUnmarshaller();
 			XMLItemCollection ecol = (XMLItemCollection) u.unmarshal(file.getContents());
-
 			itemCollection = XMLItemCollectionAdapter.getItemCollection(ecol);
-			
-			// set default data
-			if (itemCollection.getItemValueString("txtquery").isEmpty()) {
-				itemCollection.replaceItemValue("txtquery", "(type:\"workitem\")");
-			}
-			
 			return itemCollection;
 		} catch (Exception e) {
-			// unable to read file
+			// unable to read file - return null!
 			return null;
 		}
 	}
-	
-	
+
 	/**
 	 * This method shows a resource selection dialog to select a file resource
 	 * out of the current project (which is containing the current report file)
@@ -224,6 +215,5 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 		}
 		return selected;
 	}
-
 
 }

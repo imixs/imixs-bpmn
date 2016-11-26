@@ -63,19 +63,13 @@ public class ReportEditor extends EditorPart {
 
 	}
 
-	
-	
 	public FormToolkit getToolkit() {
 		return toolkit;
 	}
 
-
-
 	public Report getReport() {
 		return report;
 	}
-
-
 
 	/**
 	 * Creats the editor sections
@@ -116,44 +110,37 @@ public class ReportEditor extends EditorPart {
 		// section.setDescription("This is the description that goes below the
 		// title");
 		Composite sectionClient = toolkit.createComposite(section);
-		//createSectionIcon(section, "query.gif");
+		// createSectionIcon(section, "query.gif");
 		GridLayout glayout = new GridLayout();
 		glayout.numColumns = 2;
 		sectionClient.setLayout(glayout);
 
 		toolkit.createLabel(sectionClient, "Name:");
-		 Text text = toolkit.createText(sectionClient, report.getStringValue("txtname"), SWT.BORDER);
+		Text text = toolkit.createText(sectionClient, report.getStringValue("txtname"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		text.addModifyListener(event -> report.setItemValue("txtname", ((Text) event.widget).getText()));
 
-		
-		
-
 		Label description = toolkit.createLabel(sectionClient, "Specify the search term to query the result-set:");
 		GridData gd = new GridData();
-		gd.horizontalSpan=2;
+		gd.horizontalSpan = 2;
 		description.setLayoutData(gd);
-			
+
 		// Query
 		text = toolkit.createText(sectionClient, report.getStringValue("txtquery"),
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
 		text.addModifyListener(event -> report.setItemValue("txtquery", ((Text) event.widget).getText()));
 
-		 gd = new GridData();
-		gd.horizontalSpan=2;
+		gd = new GridData();
+		gd.horizontalSpan = 2;
 		gd.heightHint = 135;
-		gd.widthHint= 350;
+		gd.widthHint = 350;
 		gd.grabExcessHorizontalSpace = true;
 		gd.verticalAlignment = GridData.BEGINNING;
 		gd.horizontalAlignment = GridData.FILL;
 		text.setLayoutData(gd);
-		
-		
+
 		section.setClient(sectionClient);
 
-		
-		
-		
 		/*******************************************************
 		 * 
 		 * XSL Section
@@ -164,7 +151,7 @@ public class ReportEditor extends EditorPart {
 		section.setLayoutData(td);
 
 		section.setText("XSL");
-		 section.setDescription("A report may define a XSL template to transform the output.");
+		section.setDescription("A report may define a XSL template to transform the output.");
 		sectionClient = toolkit.createComposite(section);
 		createSectionIcon(section, "xslt.gif");
 
@@ -172,10 +159,9 @@ public class ReportEditor extends EditorPart {
 		glayout.numColumns = 2;
 		sectionClient.setLayout(glayout);
 
-		
 		toolkit.createLabel(sectionClient, "XSL:");
-		createResourceSelectionControl(sectionClient,"xsl");
-		
+		createResourceSelectionControl(sectionClient, "xsl");
+
 		toolkit.createLabel(sectionClient, "Encoding:");
 		text = toolkit.createText(sectionClient, report.getStringValue("txtencoding"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
@@ -186,12 +172,8 @@ public class ReportEditor extends EditorPart {
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		text.addModifyListener(event -> report.setItemValue("txtcontenttype", ((Text) event.widget).getText()));
 
-
 		section.setClient(sectionClient);
 
-		
-		
-		
 		/*******************************************************
 		 * 
 		 * Attribute Section
@@ -213,21 +195,12 @@ public class ReportEditor extends EditorPart {
 		sectionClient.setLayout(glayout);
 
 		text = toolkit.createText(sectionClient, "List of attributes, converters and agregators", SWT.NONE);
-		
+
 		AttributeView attributesTable = new AttributeView();
-		attributesTable.create(sectionClient,this);
+		attributesTable.create(sectionClient, this);
 
 		section.setClient(sectionClient);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		/*******************************************************
 		 * 
 		 * Description Section
@@ -238,7 +211,7 @@ public class ReportEditor extends EditorPart {
 		td.colspan = 2;
 		section.setLayoutData(td);
 		section.setText("Description");
-		createSectionIcon(section, "description.gif"); 
+		createSectionIcon(section, "description.gif");
 
 		sectionClient = toolkit.createComposite(section);
 		glayout = new GridLayout();
@@ -250,18 +223,16 @@ public class ReportEditor extends EditorPart {
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
 		text.addModifyListener(event -> report.setItemValue("txtdescription", ((Text) event.widget).getText()));
 
-		 gd = new GridData();
-		gd.horizontalSpan=2;
+		gd = new GridData();
+		gd.horizontalSpan = 2;
 		gd.heightHint = 95;
-		gd.widthHint= 350;
+		gd.widthHint = 350;
 		gd.grabExcessHorizontalSpace = true;
 		gd.verticalAlignment = GridData.BEGINNING;
 		gd.horizontalAlignment = GridData.FILL;
 		text.setLayoutData(gd);
-		
 
 		section.setClient(sectionClient);
-
 
 	}
 
@@ -301,16 +272,11 @@ public class ReportEditor extends EditorPart {
 	@Override
 	public void setFocus() {
 	}
-	
-	
-	
-	
-	
-	
-	public void createResourceSelectionControl(Composite parent,String fileExtension) {
+
+	public void createResourceSelectionControl(Composite parent, String fileExtension) {
 
 		Composite client = toolkit.createComposite(parent, SWT.NONE);
-		
+
 		GridLayout layout = new GridLayout();
 		layout.marginWidth = 0;
 		layout.marginHeight = 0;
@@ -319,7 +285,7 @@ public class ReportEditor extends EditorPart {
 		layout.numColumns = 2;
 		client.setLayout(layout);
 		client.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
+
 		final Text xsltext = toolkit.createText(client, report.getStringValue("txtxsl"), SWT.BORDER);
 		xsltext.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		xsltext.addModifyListener(event -> report.setItemValue("txtxsl", ((Text) event.widget).getText()));
@@ -333,8 +299,7 @@ public class ReportEditor extends EditorPart {
 				}
 			}
 		});
-		
-		
+
 	}
 
 }

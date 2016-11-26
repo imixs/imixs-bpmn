@@ -35,12 +35,20 @@ public class ReportEditorInput implements IEditorInput {
 
 	/**
 	 * This method loads the file content and creates an instance of a report
-	 * model object
+	 * model object. If the file contains no report data, the method creates a
+	 * new empty report with default values
+	 * 
 	 * 
 	 * @return
 	 */
 	public Report getReport() {
 		ItemCollection itemCol = ImixsReportPlugin.getDefault().loadReportData(fileInput);
+		if (itemCol == null) {
+			// create a empty report with default values
+			itemCol = new ItemCollection();
+			itemCol.replaceItemValue("txtquery", "(type:\"workitem\")");
+			setDirtyFlag();
+		}
 		return new Report(itemCol);
 	}
 
