@@ -58,8 +58,9 @@ public class AttributeView {
 		// create for each element in an attribute row a editable column
 		createEditableColumn("Item", 150, 0);
 		createEditableColumn("Label", 150, 1);
-		createEditableColumn("Converter", 250, 2);
-		createEditableColumn("Aggregator", 250, 3);
+		createEditableColumn("convert", 100, 2);
+		createEditableColumn("format", 300, 3);
+		createEditableColumn("aggregate", 50, 4);
 
 		GridData tableLayoutData = new GridData(SWT.FILL, SWT.BEGINNING, true, false);
 		tableLayoutData.heightHint = 160;

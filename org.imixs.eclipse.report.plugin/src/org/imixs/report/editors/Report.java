@@ -121,6 +121,7 @@ public class Report {
 		values.add("");
 		values.add("");
 		values.add("");
+		values.add("");
 		attributes.add(values);
 		setItemValue("attributes", attributes);
 
