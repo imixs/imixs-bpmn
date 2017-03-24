@@ -2,7 +2,7 @@
 <feature
       id="org.imixs.eclipse.bpmn2.feature"
       label="Imixs-BPMN Modeler"
-      version="1.4.5.qualifier"
+      version="1.4.6.qualifier"
       provider-name="Imixs Software Solutions GmbH">
    <install-handler/>
 

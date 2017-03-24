@@ -19,7 +19,7 @@
 
 	<groupId>org.imixs.eclipse</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2</artifactId>
-	<version>1.4.5-SNAPSHOT</version>
+	<version>1.4.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Imixs-BPMN Modeler</name>
 
@@ -91,11 +91,11 @@
 		</license>
 	</licenses>
 
-
+	<!-- default to Eclipse neon release -->
 	<properties>
-		<eclipse-site>http://download.eclipse.org/releases/mars</eclipse-site>
-		<platform-version>[4.4,5.0]</platform-version>
-		<platform-version-name>mars</platform-version-name>
+		<eclipse-site>http://download.eclipse.org/releases/neon</eclipse-site>
+		<platform-version>[4.6,5.0)</platform-version>
+		<platform-version-name>neon</platform-version-name>
 		<tycho-version>0.21.0</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 	</properties>
