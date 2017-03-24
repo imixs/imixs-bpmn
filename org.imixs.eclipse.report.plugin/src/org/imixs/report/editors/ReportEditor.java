@@ -286,9 +286,9 @@ public class ReportEditor extends EditorPart {
 		client.setLayout(layout);
 		client.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		final Text xsltext = toolkit.createText(client, report.getStringValue("txtxsl"), SWT.BORDER);
+		final Text xsltext = toolkit.createText(client, report.getStringValue("txtxslresource"), SWT.BORDER);
 		xsltext.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		xsltext.addModifyListener(event -> report.setItemValue("txtxsl", ((Text) event.widget).getText()));
+		xsltext.addModifyListener(event -> report.setItemValue("txtxslresource", ((Text) event.widget).getText()));
 		Button button = toolkit.createButton(client, "Browse", SWT.NONE);
 		final Shell shell = parent.getShell();
 		button.addListener(SWT.Selection, new Listener() {

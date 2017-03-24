@@ -1,8 +1,10 @@
 package org.imixs.report;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,7 +17,9 @@ import javax.xml.bind.Unmarshaller;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -120,6 +124,23 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			if (file == null)
 				throw new FileNotFoundException();
 
+			
+			// load the content of the XSL Resource file, if defined...
+			String sXSLResource=report.getStringValue("txtxslresource");
+			if (sXSLResource!=null && !sXSLResource.isEmpty()) {
+				// load the XSL resource from the workspace...
+				IFile xslFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(sXSLResource));
+				InputStream is = xslFile.getContents();
+				StringBuilder xslContent=new StringBuilder();
+				BufferedReader br = new BufferedReader(new InputStreamReader(is));
+				String read;
+				while((read=br.readLine()) != null) {
+					xslContent.append(read);   
+				}
+				br.close();			
+				report.setItemValue("txtxsl",xslContent.toString());
+			}
+			
 			// convert the ItemCollection into a XMLItemcollection...
 			XMLItemCollection xmlItemCollection = XMLItemCollectionAdapter
 					.putItemCollection(report.getItemCollection());
