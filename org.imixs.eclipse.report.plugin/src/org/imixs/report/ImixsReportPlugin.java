@@ -124,23 +124,22 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			if (file == null)
 				throw new FileNotFoundException();
 
-			
 			// load the content of the XSL Resource file, if defined...
-			String sXSLResource=report.getStringValue("txtxslresource");
-			if (sXSLResource!=null && !sXSLResource.isEmpty()) {
+			String sXSLResource = report.getStringValue("xslresource");
+			if (sXSLResource != null && !sXSLResource.isEmpty()) {
 				// load the XSL resource from the workspace...
 				IFile xslFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(sXSLResource));
 				InputStream is = xslFile.getContents();
-				StringBuilder xslContent=new StringBuilder();
+				StringBuilder xslContent = new StringBuilder();
 				BufferedReader br = new BufferedReader(new InputStreamReader(is));
 				String read;
-				while((read=br.readLine()) != null) {
-					xslContent.append(read);   
+				while ((read = br.readLine()) != null) {
+					xslContent.append(read);
 				}
-				br.close();			
-				report.setItemValue("txtxsl",xslContent.toString());
+				br.close();
+				report.setItemValue("xsl", xslContent.toString());
 			}
-			
+
 			// convert the ItemCollection into a XMLItemcollection...
 			XMLItemCollection xmlItemCollection = XMLItemCollectionAdapter
 					.putItemCollection(report.getItemCollection());
@@ -185,11 +184,54 @@ public class ImixsReportPlugin extends AbstractUIPlugin {
 			Unmarshaller u = context.createUnmarshaller();
 			XMLItemCollection ecol = (XMLItemCollection) u.unmarshal(file.getContents());
 			itemCollection = XMLItemCollectionAdapter.getItemCollection(ecol);
+
+			// migration deprecated fields....
+			migrateDeprecatedFields(itemCollection);
+
 			return itemCollection;
 		} catch (Exception e) {
 			// unable to read file - return null!
 			return null;
 		}
+	}
+
+	/**
+	 * This method is used to migrate deprecated item filed names
+	 * 
+	 * @param itemCollection
+	 */
+	private void migrateDeprecatedFields(ItemCollection itemCollection) {
+		if (itemCollection.hasItem("txtcontenttype")) {
+			itemCollection.replaceItemValue("contenttype", itemCollection.getItemValue("txtcontenttype"));
+			itemCollection.removeItem("txtcontenttype");
+		}
+
+		if (itemCollection.hasItem("txtencoding")) {
+			itemCollection.replaceItemValue("encoding", itemCollection.getItemValue("txtencoding"));
+			itemCollection.removeItem("txtencoding");
+		}
+
+		if (itemCollection.hasItem("txtdescription")) {
+			itemCollection.replaceItemValue("description", itemCollection.getItemValue("txtdescription"));
+			itemCollection.removeItem("txtdescription");
+		}
+
+		if (itemCollection.hasItem("txtxslresource")) {
+			itemCollection.replaceItemValue("xslresource", itemCollection.getItemValue("txtxslresource"));
+			itemCollection.removeItem("txtxslresource");
+		}
+
+		if (itemCollection.hasItem("txtname")) {
+			itemCollection.replaceItemValue("name", itemCollection.getItemValue("txtname"));
+			itemCollection.removeItem("txtname");
+		}
+
+		if (itemCollection.hasItem("txtquery")) {
+			itemCollection.replaceItemValue("query", itemCollection.getItemValue("txtquery"));
+			itemCollection.removeItem("txtquery");
+		}
+		
+		itemCollection.removeItem("txtxsl");
 	}
 
 	/**

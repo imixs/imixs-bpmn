@@ -75,9 +75,11 @@ public class ReportEditor extends EditorPart {
 	 * Creats the editor sections
 	 * 
 	 * 
-	 * Query Statement txtquery Name txtname
+	 * Query Statement query Name name
 	 * 
-	 * txtcontenttype txtencoding txtxsl Attributes txtattributelist
+	 * contenttype encoding xsl 
+	 * 
+	 * Attributes attributelist
 	 * 
 	 * XSL
 	 * 
@@ -116,9 +118,9 @@ public class ReportEditor extends EditorPart {
 		sectionClient.setLayout(glayout);
 
 		toolkit.createLabel(sectionClient, "Name:");
-		Text text = toolkit.createText(sectionClient, report.getStringValue("txtname"), SWT.BORDER);
+		Text text = toolkit.createText(sectionClient, report.getStringValue("name"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		text.addModifyListener(event -> report.setItemValue("txtname", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("name", ((Text) event.widget).getText()));
 
 		Label description = toolkit.createLabel(sectionClient, "Specify the search term to query the result-set:");
 		GridData gd = new GridData();
@@ -126,9 +128,9 @@ public class ReportEditor extends EditorPart {
 		description.setLayoutData(gd);
 
 		// Query
-		text = toolkit.createText(sectionClient, report.getStringValue("txtquery"),
+		text = toolkit.createText(sectionClient, report.getStringValue("query"),
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		text.addModifyListener(event -> report.setItemValue("txtquery", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("query", ((Text) event.widget).getText()));
 
 		gd = new GridData();
 		gd.horizontalSpan = 2;
@@ -163,14 +165,14 @@ public class ReportEditor extends EditorPart {
 		createResourceSelectionControl(sectionClient, "xsl");
 
 		toolkit.createLabel(sectionClient, "Encoding:");
-		text = toolkit.createText(sectionClient, report.getStringValue("txtencoding"), SWT.BORDER);
+		text = toolkit.createText(sectionClient, report.getStringValue("encoding"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		text.addModifyListener(event -> report.setItemValue("txtencoding", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("encoding", ((Text) event.widget).getText()));
 
 		toolkit.createLabel(sectionClient, "Content Type:");
-		text = toolkit.createText(sectionClient, report.getStringValue("txtcontenttype"), SWT.BORDER);
+		text = toolkit.createText(sectionClient, report.getStringValue("contenttype"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		text.addModifyListener(event -> report.setItemValue("txtcontenttype", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("contenttype", ((Text) event.widget).getText()));
 
 		section.setClient(sectionClient);
 
@@ -218,10 +220,10 @@ public class ReportEditor extends EditorPart {
 		glayout.numColumns = 1;
 		sectionClient.setLayout(glayout);
 
-		// txtdescription
-		text = toolkit.createText(sectionClient, report.getStringValue("txtdescription"),
+		// description
+		text = toolkit.createText(sectionClient, report.getStringValue("description"),
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		text.addModifyListener(event -> report.setItemValue("txtdescription", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("description", ((Text) event.widget).getText()));
 
 		gd = new GridData();
 		gd.horizontalSpan = 2;
@@ -286,9 +288,9 @@ public class ReportEditor extends EditorPart {
 		client.setLayout(layout);
 		client.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		final Text xsltext = toolkit.createText(client, report.getStringValue("txtxslresource"), SWT.BORDER);
+		final Text xsltext = toolkit.createText(client, report.getStringValue("xslresource"), SWT.BORDER);
 		xsltext.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		xsltext.addModifyListener(event -> report.setItemValue("txtxslresource", ((Text) event.widget).getText()));
+		xsltext.addModifyListener(event -> report.setItemValue("xslresource", ((Text) event.widget).getText()));
 		Button button = toolkit.createButton(client, "Browse", SWT.NONE);
 		final Shell shell = parent.getShell();
 		button.addListener(SWT.Selection, new Listener() {
