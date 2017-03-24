@@ -118,9 +118,9 @@ public class ReportEditor extends EditorPart {
 		sectionClient.setLayout(glayout);
 
 		toolkit.createLabel(sectionClient, "Name:");
-		Text text = toolkit.createText(sectionClient, report.getStringValue("name"), SWT.BORDER);
+		Text text = toolkit.createText(sectionClient, report.getStringValue("txtname"), SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-		text.addModifyListener(event -> report.setItemValue("name", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("txtname", ((Text) event.widget).getText()));
 
 		Label description = toolkit.createLabel(sectionClient, "Specify the search term to query the result-set:");
 		GridData gd = new GridData();
@@ -128,9 +128,9 @@ public class ReportEditor extends EditorPart {
 		description.setLayoutData(gd);
 
 		// Query
-		text = toolkit.createText(sectionClient, report.getStringValue("query"),
+		text = toolkit.createText(sectionClient, report.getStringValue("txtquery"),
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		text.addModifyListener(event -> report.setItemValue("query", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("txtquery", ((Text) event.widget).getText()));
 
 		gd = new GridData();
 		gd.horizontalSpan = 2;
@@ -221,9 +221,9 @@ public class ReportEditor extends EditorPart {
 		sectionClient.setLayout(glayout);
 
 		// description
-		text = toolkit.createText(sectionClient, report.getStringValue("description"),
+		text = toolkit.createText(sectionClient, report.getStringValue("txtdescription"),
 				SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		text.addModifyListener(event -> report.setItemValue("description", ((Text) event.widget).getText()));
+		text.addModifyListener(event -> report.setItemValue("txtdescription", ((Text) event.widget).getText()));
 
 		gd = new GridData();
 		gd.horizontalSpan = 2;
