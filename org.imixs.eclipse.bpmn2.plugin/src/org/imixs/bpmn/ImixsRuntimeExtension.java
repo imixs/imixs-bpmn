@@ -27,10 +27,8 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	 */
 	@Override
 	public boolean isContentForRuntime(IEditorInput input) {
-		InputSource source = new InputSource(
-				FileService.getInputContents(input));
-		RootElementParser parser = new RootElementParser(
-				"http://www.imixs.org/bpmn2");
+		InputSource source = new InputSource(FileService.getInputContents(input));
+		RootElementParser parser = new RootElementParser(targetNamespace);
 		parser.parse(source);
 		return parser.getResult();
 	}
@@ -42,7 +40,8 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	@Override
 	public void notify(LifecycleEvent event) {
 
-		// as we can not identify the the Imixs Event here we do add a event adapter
+		// as we can not identify the the Imixs Event here we do add a event
+		// adapter
 		// see: https://www.eclipse.org/forums/index.php/t/1065614/
 		if (event.eventType == EventType.BUSINESSOBJECT_CREATED) {
 			// EObject object = (EObject) event.target;
