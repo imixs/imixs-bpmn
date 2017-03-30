@@ -251,8 +251,15 @@ replaceTab="org.eclipse.bpmn2.modeler.definitions.tab"
 			<enable object="SendTask" feature="name"/>
 			<enable object="SendTask" feature="name"/>
 			<enable object="ReceiveTask" feature="name"/>
-			<enable object="StandardLoopCharacteristics"/>
-			<enable object="MultiInstanceLoopCharacteristics"/>
+			<!-- 
+			 reduce task features
+			-->
+			<disable object="Task" feature="isForCompensation"/>
+			<disable object="Task" feature="StandardLoopCharacteristics"/>
+			<disable object="Task" feature="MultiInstanceLoopCharacteristics"/>
+			<enable object="StandardLoopCharacteristics" feature="loopMaximum"/>
+
+
 			<enable object="SignalEventDefinition"/>
 			<enable object="Signal"/>
 			<enable object="EscalationEventDefinition"/>
