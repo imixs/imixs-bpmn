@@ -40,7 +40,7 @@
                name="processid"
                type="EInt"
                value="0">
-         </property>
+         </property>         
       </customTask>
      
      
@@ -62,12 +62,11 @@
           </property>            
       </customTask>
       
-      <!-- Activity Tabs 
-      -->
+      <!-- Custom Event Tabs  -->
 	  <propertyTab
             class="org.imixs.bpmn.ui.event.WorkflowPropertySection"
             id="org.imixs.bpmn.propertytab.event.workflow"
-            replaceTab="org.eclipse.bpmn2.modeler.commonEvent.tab"
+            afterTab="org.eclipse.bpmn2.modeler.commonEvent.tab"
             label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
@@ -142,26 +141,25 @@
          class="org.imixs.bpmn.ui.task.ProcessWorkflowPropertySection"
          id="org.imixs.bpmn.propertytab.task.workflow"
          label="Workflow"
-         replaceTab="org.eclipse.bpmn2.modeler.task.tab"
+         afterTab="org.eclipse.bpmn2.modeler.task.tab"
          runtimeId="org.imixs.workflow.bpmn.runtime"
          type="org.eclipse.bpmn2.Task">
       </propertyTab>
       
       <propertyTab
-            afterTab="org.imixs.bpmn.propertytab.task.workflow"
             class="org.imixs.bpmn.ui.task.ProcessApplicationPropertySection"
             id="org.imixs.bpmn.propertytab.task.application"
             label="Application"
-            replaceTab="org.eclipse.bpmn2.modeler.activity.io.tab"
+            afterTab="org.imixs.bpmn.propertytab.task.workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
        
       <propertyTab
-       		afterTab="org.imixs.bpmn.propertytab.task.application"
             class="org.imixs.bpmn.ui.task.ACLPropertySection"
             id="org.imixs.bpmn.propertytab.task.acl"
             label="ACL"
+       		afterTab="org.imixs.bpmn.propertytab.task.application"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.Task">
       </propertyTab>
@@ -175,55 +173,82 @@
        <propertyTab
             class="org.imixs.bpmn.ui.process.ProfilePropertySection"
             id="org.imixs.bpmn.propertytab.process.workflow"
-  			replaceTab="org.eclipse.bpmn2.modeler.definitions.tab"
             label="Workflow"
             runtimeId="org.imixs.workflow.bpmn.runtime"
+            
+            afterTab="org.eclipse.bpmn2.modeler.definitions.tab"
             type="org.eclipse.bpmn2.Definitions org.eclipse.bpmn2.Process org.eclipse.bpmn2.Collaboration">
       </propertyTab>
     
+<!--   			
+      afterTab="org.eclipse.bpmn2.modeler.process.diagram.tab"
+ afterTab="org.eclipse.bpmn2.modeler.description.tab"
+replaceTab="org.eclipse.bpmn2.modeler.definitions.tab"
+ -->    
     
-     	
+    
+    
+		<!-- ======================================== -->
+		<!-- ===  Model Enablements and Profiles ==== -->
+		<!-- ======================================== -->
+
+		<modelEnablement
+	   	        runtimeId="org.imixs.workflow.bpmn.runtime"
+				id="org.imixs.workflow.bpmn.profile.Full"
+				profile="Full"
+				description="All BPMN2 elements and attributes">
+			<enable object="all"/>
+		</modelEnablement>
+
+
+	
+
 		<modelEnablement
 				runtimeId="org.imixs.workflow.bpmn.runtime"
 				id="org.imixs.workflow.bpmn.profile.workflow"
 				profile="Workflow"
-				description="Imixs-Workflow Process Modeling">
-
+				description="Imixs-Workflow Process Modeling Conformance">
 			<enable object="Definitions"/>
 			<enable object="Collaboration"/>
-			<enable object="Correlation"/>
-			<enable object="CorrelationProperty"/>
-			<enable object="CorrelationPropertyBinding"/>
-			<enable object="CorrelationPropertyRetrievalExpression"/>
-			<enable object="CorrelationSubsciption"/>
 			<enable object="Process"/>
+
 			<enable object="Participant" feature="name"/>
 			<enable object="Participant" feature="processRef"/>
 			<enable object="Lane" feature="name"/>
+
 			<enable object="SequenceFlow" feature="name"/>
 			<enable object="MessageFlow" feature="name"/>
-			<enable object="ExclusiveGateway" feature="name"/>
-			<enable object="ParallelGateway" feature="name"/>
-			<enable object="Task" feature="name"/>
+
+			<enable object="Task" />
 			<enable object="UserTask" feature="name"/>
+			<enable object="ScriptTask" feature="name"/>
 			<enable object="ServiceTask" feature="name"/>
-			
+			<enable object="DataObject" feature="name"/>
+			<enable object="DataInput"/>
+			<enable object="DataOutput"/>
 			<enable object="TextAnnotation" feature="text"/>
 			<enable object="Association" feature="name"/>
 			<enable object="Association" feature="associationDirection"/>
+			<enable object="DataStore" feature="name"/>
 			<enable object="StartEvent" feature="name"/>
 			<enable object="EndEvent" feature="name"/>
 			<enable object="MessageEventDefinition"/>
+			<enable object="TimerEventDefinition"/>
 			<enable object="Documentation"/>
 			<enable object="Group"/>
+			<enable object="Category"/>
+			<enable object="CategoryValue"/>
 			<enable object="Message"/>
-			<enable object="SequenceFlow" feature="conditionExpression"/>
-			<enable object="ExclusiveGateway" feature="default"/>
-			<enable object="InclusiveGateway" feature="name"/>
-			<enable object="InclusiveGateway" feature="default"/>
-			<enable object="InclusiveGateway" feature="eventGatewayType"/>
-			<enable object="EventBasedGateway" feature="name"/>
-			<enable object="EventBasedGateway" feature="eventGatewayType"/>
+			
+			<enable object="ExclusiveGateway" />
+			<enable object="InclusiveGateway" />
+			<enable object="EventBasedGateway" />
+			<enable object="ParallelGateway" />
+			<enable object="ComplexGateway"/>
+			
+			<enable object="ManualTask"/>
+			<enable object="BusinessRuleTask"/>
+			<enable object="SendTask" feature="name"/>
 			<enable object="SendTask" feature="name"/>
 			<enable object="ReceiveTask" feature="name"/>
 			<enable object="StandardLoopCharacteristics"/>
@@ -235,46 +260,18 @@
 			<enable object="ErrorEventDefinition"/>
 			<enable object="Error"/>
 			<enable object="LinkEventDefinition"/>
-			
+			<enable object="CancelEventDefinition"/>
+			<enable object="TerminateEventDefinition"/>
 			<enable object="ConditionalEventDefinition"/>
 			<enable object="IntermediateCatchEvent"/>
 			<enable object="IntermediateThrowEvent"/>
+			
+			<enable object="ResourceRole"/>
+			
+				
 		</modelEnablement>
-		
-    
-		<modelEnablement
-				runtimeId="org.imixs.workflow.bpmn.runtime"
-				id="org.imixs.workflow.bpmn.profile.analytic"
-				ref="org.imixs.workflow.bpmn.runtime:Workflow"
-				profile="Analytic"
-				description="Analytic Process Modeling Conformance">
-		
-			<enable object="SubProcess" feature="name"/>
-			<enable object="CallActivity" feature="name"/>
-			<enable object="CallActivity" feature="calledElementRef"/>
-			<enable object="CallableElement"/>
-			<enable object="DataObject" feature="name"/>
-			<enable object="CallActivity" feature="name"/>
-			<enable object="DataStore" feature="name"/>
-			<enable object="DataStoreReference" feature="name"/>
-			<enable object="DataStoreReference" feature="dataStoreRef"/>
-			<enable object="Category"/>
-			<enable object="CategoryValue"/>
-			<enable object="BoundaryEvent"/>
-		</modelEnablement>
-		
-   
-   		<modelEnablement
-      		    runtimeId="org.imixs.workflow.bpmn.runtime"
-				id="org.imixs.workflow.bpmn.profile.Full"
-				profile="Full"
-				description="All BPMN2 elements and attributes">
-			<enable object="all"/>
-		</modelEnablement>
-		
-		
-		
    </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated imixs -->
       <package

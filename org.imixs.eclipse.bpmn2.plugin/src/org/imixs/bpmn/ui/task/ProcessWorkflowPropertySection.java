@@ -46,7 +46,7 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 			setTitle("Workflow");
 
 			// ProcessID
-			this.bindAttribute(attributesComposite, be, "processid");
+		//	this.bindAttribute(attributesComposite, be, "processid");
 
 			// Summary
 			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
