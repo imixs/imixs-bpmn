@@ -49,21 +49,12 @@ public class ReportPropertySection extends AbstractPropertySection {
 
 			setTitle("Report Configuration");
 
-			Map<String,String> optionList = new HashMap<String,String>();
-			optionList.put("0","attach to Workitem");
-			optionList.put("1","attach to LOB Workitem");
-			optionList.put("2","save to disk");
-			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
-					"txtReportTarget", null, "1");
-			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
-					 optionList);
-			aEditor.createControl(attributesComposite, "Target");
-
-			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportName",
+			
+			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportName",
 					null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
-			valueEditor.createControl(attributesComposite, "Name");
+			valueEditor.createControl(attributesComposite, "Report-Name");
 
 			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportFilePath",
 					null, "");
@@ -73,8 +64,19 @@ public class ReportPropertySection extends AbstractPropertySection {
 			value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtReportParams",
 					null, "");
 			valueEditor = new TextObjectEditor(this, value, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
-			valueEditor.createControl(attributesComposite, "Parameter");
+			valueEditor.createControl(attributesComposite, "Parameters");
 
+			
+			Map<String,String> optionList = new HashMap<String,String>();
+			optionList.put("0","Attach to Workitem");
+			optionList.put("2","Save to filesystem");
+			 value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
+					"txtReportTarget", null, "0");
+			RadioButtonEditor aEditor = new RadioButtonEditor(this, value,
+					 optionList);
+			aEditor.createControl(attributesComposite, "Target");
+
+			
 		}
 
 	}
