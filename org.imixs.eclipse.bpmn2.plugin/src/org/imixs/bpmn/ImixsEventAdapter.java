@@ -1,5 +1,7 @@
 package org.imixs.bpmn;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.Event;
@@ -7,7 +9,6 @@ import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
-import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -16,7 +17,6 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
-import org.imixs.bpmn.model.Value;
 
 /**
  * The ImixsEventAdapter verifies outgoing SequenceFlows for a Imixs Event
@@ -37,11 +37,9 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
 	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
+	private static final IColorConstant ACTIVITYENTITY_BACKGROUND_ACL = new ColorConstant(249, 222, 150);
 
-	//private static final IColorConstant ACTIVITYENTITY_BACKGROUND_ACL = new ColorConstant(255,249,140);
-	private static final IColorConstant ACTIVITYENTITY_BACKGROUND_ACL = new ColorConstant(249,222,150);
-	
-	private String sPublicResult;
+	private Map<String, String> propertyCache;
 	Event imixsEvent = null;
 	ContainerShape containerShape = null;
 
@@ -62,13 +60,6 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 
 	@Override
 	public void notifyChanged(Notification notification) {
-
-		//
-		// if (ImixsBPMNPlugin.isImixsCatchEvent(notification.getNotifier())) {
-		// imixsEvent = (IntermediateCatchEvent) notification.getNotifier();
-		// }
-
-		// if (imixsEvent != null) {
 
 		int type = notification.getEventType();
 		if (type == Notification.ADD) {
@@ -92,24 +83,18 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 		}
 
 		if (type == Notification.SET) {
-
 			EStructuralFeature feature = (notification.getFeature() instanceof EStructuralFeature
 					? (EStructuralFeature) notification.getFeature()
 					: null);
 
 			if ("cDATA".equals(feature.getName())) {
-				// TODO we are still not able to determine the name of the changed attrebute here. 
-				setFillColor();
-				
+				// TODO we are still not able to determine the name of the changed attrebute
+				// here.
+				if (propertyChanged("keypublicresult")) {
+					setFillColor();
+				}
 			}
-
-			
-			
-
 		}
-
-		// }
-
 		super.notifyChanged(notification);
 	}
 
@@ -122,29 +107,45 @@ public class ImixsEventAdapter extends AbstractImixsAdapter {
 	 */
 	private void setFillColor() {
 
-		long l=System.currentTimeMillis();
-		IntermediateCatchEvent ta = BusinessObjectUtil.getFirstElementOfType(containerShape,
-				IntermediateCatchEvent.class);
+		if (imixsEvent != null) {
+			Shape shape = containerShape.getChildren().get(0);
+			ShapeStyle shapeStyle = new ShapeStyle();
+			String sPublicResult = ImixsBPMNPlugin.getItemValueByName(imixsEvent, "keypublicresult", null, "1").getValue();
 
-		Value value = ImixsBPMNPlugin.getItemValueByName(ta, "keypublicresult", null, "1");
-		
-		String sNewPublicResult=value.getValue();
-		
-		if ((sNewPublicResult!=null && !sNewPublicResult.isEmpty())  && (sPublicResult==null || !sPublicResult.equals(sNewPublicResult))) {
-			sPublicResult=sNewPublicResult;
-			System.out.println("compute new status value in " + (System.currentTimeMillis()-l)  + " ms");
-			if (ta != null) {
-				Shape shape = containerShape.getChildren().get(0);
-				ShapeStyle shapeStyle = new ShapeStyle();
-	
-				if ("1".equals(sPublicResult))
-					shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-				else
-					shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND_ACL);
-				StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
-			}
-		
+			if ("1".equals(sPublicResult))
+				shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
+			else
+				shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND_ACL);
+			StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), imixsEvent, shapeStyle);
+
 		}
+	}
+
+	/**
+	 * Verifies if the value has changed. The method uses the internal propertyCache
+	 * to store existing values
+	 * 
+	 * @param propertyName
+	 * @return
+	 */
+	private boolean propertyChanged(String propertyName) {
+
+		if (propertyCache == null) {
+			propertyCache = new HashMap<String, String>();
+		}
+
+		if (imixsEvent != null) {
+			String oldValue = propertyCache.get(propertyName);
+			String sNewValue = ImixsBPMNPlugin.getItemValueByName(imixsEvent, propertyName, null, null).getValue();
+
+			if ((sNewValue != null && !sNewValue.isEmpty()) && (oldValue == null || !oldValue.equals(sNewValue))) {
+				propertyCache.put(propertyName, sNewValue);
+				return true;
+			}
+		}
+
+		return false;
+
 	}
 
 }
