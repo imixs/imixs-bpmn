@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import org.eclipse.bpmn2.Event;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 
 /**
  * The ImixsEventAdapter verifies incoming SequenceFlows for a ImixsTask object
@@ -27,10 +27,11 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  * @author rsoika
  *
  */
-abstract public class AbstractImixsAdapter extends AdapterImpl {
+abstract public class AbstractImixsAdapter extends EContentAdapter { // AdapterImpl
 	public final static int DEFAULT_ACTIVITY_ID = 10;
 
 	static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
+
 
 	/**
 	 * This method suggest the next free activiytID for the given current Event
