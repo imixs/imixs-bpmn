@@ -67,6 +67,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			 * solve it in other way
 			 * (https://www.eclipse.org/forums/index.php/t/1077944/)
 			 */
+			/*
 			itemValue.eAdapters().add(new AdapterImpl() {
 				
 				public void notifyChanged(Notification notification) {
@@ -92,6 +93,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 					}
 				}
 			});
+			*/
 
 			// Image URL
 			itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txtimageurl", null, "");

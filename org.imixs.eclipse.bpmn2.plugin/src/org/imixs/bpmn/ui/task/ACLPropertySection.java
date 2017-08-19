@@ -85,6 +85,7 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 			 * solve it in other way
 			 * (https://www.eclipse.org/forums/index.php/t/1077944/)
 			 */
+			/*
 			valueUpdateACL.eAdapters().add(new AdapterImpl() {
 				public void notifyChanged(Notification notification) {
 					int type = notification.getEventType();
@@ -109,7 +110,7 @@ public class ACLPropertySection extends AbstractProcessPropertySection {
 						}
 					}
 				}
-			});
+			});*/
 
 			BooleanEditor bEditor = new BooleanEditor(this, valueUpdateACL);
 			bEditor.createControl(attributesComposite, "Update ACL");

@@ -26,7 +26,6 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
 			return ACTIVITYENTITY_CATCH_EVENT_ID;
 		}
-
 		return null;
 	}
 
@@ -50,15 +49,13 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 			@Override
 			public IAddFeature getAddFeature(IFeatureProvider fp) {
 				return new AddIntermediateCatchEventFeature(fp) {
-
 					@Override
 					protected void decorateShape(IAddContext context, ContainerShape containerShape,
 							IntermediateCatchEvent businessObject) {
 						super.decorateShape(context, containerShape, businessObject);
 
-						//setFillColor(containerShape);
-
 						// add a notifyChangeAdapter to validate the ActiviytID
+						businessObject.eAdapters().add(new ImixsIdAdapter());
 						businessObject.eAdapters().add(new ImixsEventAdapter(containerShape));
 					}
 				};

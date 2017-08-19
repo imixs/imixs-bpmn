@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Event;
+import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
 /**
- * The ImixsEventAdapter verifies incoming SequenceFlows for a ImixsTask object
- * and suggest the next ActivityID if the source is a ImixsEvent.
+ * The ImixsIdAdapter verifies in and outgoing SequenceFlows for a ImixsTask and
+ * ImixsEvent objects. The adapter computes the next ActivityID if the source or
+ * target is a ImixsEvent.
  * 
  * Therefore the adapter searches the source Imixs Task Element in a recurse
  * way. When a Imixs task element was found the adapter searches all existing
@@ -27,11 +32,72 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
  * @author rsoika
  *
  */
-abstract public class AbstractImixsAdapter extends EContentAdapter { // AdapterImpl
+public class ImixsIdAdapter extends EContentAdapter { // AdapterImpl
 	public final static int DEFAULT_ACTIVITY_ID = 10;
 
 	static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
+	BaseElement imixsElement = null;
+
+	/**
+	 * This method verifies if the target element is of Type ImixsEvent or
+	 * ImixsType.
+	 */
+	@Override
+	public void setTarget(Notifier newTarget) {
+		if (ImixsBPMNPlugin.isImixsCatchEvent(newTarget) || ImixsBPMNPlugin.isImixsTask(newTarget)) {
+			imixsElement = (BaseElement) newTarget;
+		}
+		super.setTarget(newTarget);
+	}
+
+	public void notifyChanged(Notification notification) {
+
+		int type = notification.getEventType();
+		if (imixsElement != null && type == Notification.ADD) {
+			// add notification - test if this is a SequenceFlow...
+			if (notification.getNewValue() instanceof SequenceFlow) {
+
+				// is Task Element?
+				if (ImixsBPMNPlugin.isImixsTask(imixsElement)) {
+
+					SequenceFlow seqFlow = (SequenceFlow) notification.getNewValue();
+
+					if (seqFlow != null && ImixsBPMNPlugin.isImixsCatchEvent(seqFlow.getSourceRef())) {
+						logger.fine("check source CatchEvent...");
+						// new incoming sequence flow! Search for the source
+						// Event
+						Event imixsEvent = new Tracer().findImixsSourceEvent(seqFlow);
+						if (imixsEvent != null) {
+							// Source task found ! suggest next ActivityID....
+							suggestNextActivityId(imixsEvent, (Task) imixsElement);
+						}
+					}
+				}
+
+				// is CatchEvent Element
+				if (ImixsBPMNPlugin.isImixsCatchEvent(imixsElement)) {
+
+					// add notification - test if this is a SequenceFlow...
+
+					SequenceFlow seqFlow = (SequenceFlow) notification.getNewValue();
+
+					if (seqFlow != null) {
+						logger.fine("check sourceTask...");
+						// new incoming sequence flow! Search for the source
+						// Task
+						Task imixsTask = new Tracer().findImixsSourceTask(seqFlow);
+						if (imixsTask != null) {
+							// Source task found ! suggest next ActivityID....
+							suggestNextActivityId((Event) imixsElement, imixsTask);
+						}
+					}
+
+				}
+			}
+		}
+
+	}
 
 	/**
 	 * This method suggest the next free activiytID for the given current Event
@@ -46,8 +112,7 @@ abstract public class AbstractImixsAdapter extends EContentAdapter { // AdapterI
 	 */
 	void suggestNextActivityId(Event currentEvent, Task task) {
 		// now test if the id is valid or suggest a new one...
-		EStructuralFeature feature = ModelDecorator.getAnyAttribute(
-				currentEvent, "activityid");
+		EStructuralFeature feature = ModelDecorator.getAnyAttribute(currentEvent, "activityid");
 		if (feature != null) {
 
 			// first find all Imixs Events already connected with
@@ -91,4 +156,5 @@ abstract public class AbstractImixsAdapter extends EContentAdapter { // AdapterI
 
 		}
 	}
+
 }

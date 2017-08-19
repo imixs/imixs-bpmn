@@ -29,7 +29,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.jdt.core,
  org.junit,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.eclipse.wst.validation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.imixs.bpmn.model,
  org.imixs.bpmn.model.impl,
