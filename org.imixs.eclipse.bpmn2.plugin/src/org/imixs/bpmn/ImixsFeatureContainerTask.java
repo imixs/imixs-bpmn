@@ -61,7 +61,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 						// add a notifyChangeAdapter to validate the ActiviytID
 						businessObject.eAdapters().add(new ImixsIdAdapter());
-						businessObject.eAdapters().add(new ImixsTaskAdapter(containerShape));
+						businessObject.eAdapters().add(new ImixsLayoutTaskAdapter(containerShape));
 					}
 				};
 			}

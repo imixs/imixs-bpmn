@@ -56,7 +56,7 @@ public class ImixsFeatureContainerCatchEvent extends CustomShapeFeatureContainer
 
 						// add a notifyChangeAdapter to validate the ActiviytID
 						businessObject.eAdapters().add(new ImixsIdAdapter());
-						businessObject.eAdapters().add(new ImixsEventAdapter(containerShape));
+						businessObject.eAdapters().add(new ImixsLayoutEventAdapter(containerShape));
 					}
 				};
 			}

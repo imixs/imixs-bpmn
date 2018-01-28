@@ -1,12 +1,16 @@
 package org.imixs.bpmn;
 
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
+import org.eclipse.graphiti.mm.algorithms.Image;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.imixs.bpmn.model.Item;
@@ -28,14 +32,13 @@ import org.imixs.bpmn.model.impl.ValueImpl;
  * @author rsoika
  *
  */
-public class ImixsEventAdapter extends ImixsLayoutAdapter {
+public class ImixsLayoutEventAdapter extends ImixsLayoutAdapter {
 
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
 	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
-	private static final IColorConstant ACTIVITYENTITY_BACKGROUND_ACL = new ColorConstant(249, 222, 150);
 
-	public ImixsEventAdapter(ContainerShape containerShape) {
+	public ImixsLayoutEventAdapter(ContainerShape containerShape) {
 		super(containerShape);
 	}
 
@@ -45,11 +48,22 @@ public class ImixsEventAdapter extends ImixsLayoutAdapter {
 		int type = notification.getEventType();
 
 		if (type == Notification.SET) {
+
 			// test if we have a change of a Imixs Item keypublicresult
 			if (notification.getNotifier() instanceof Value) {
+				boolean blayout = false;
 				ValueImpl value = (ValueImpl) notification.getNotifier();
 				String itemName = ((Item) value.eContainer()).getName();
-				if ("keypublicresult".equalsIgnoreCase(itemName)) {
+				// acl change
+				if ("keyupdateacl".equalsIgnoreCase(itemName)) {
+					blayout = true;
+				}
+				// business rule
+				if ("txtbusinessrule".equalsIgnoreCase(itemName)) {
+					blayout = true;
+				}
+
+				if (blayout) {
 					layoutImixsElement();
 				}
 			}
@@ -70,14 +84,33 @@ public class ImixsEventAdapter extends ImixsLayoutAdapter {
 		if (imixsElement != null) {
 			logger.fine("update layout...");
 			Shape shape = containerShape.getChildren().get(0);
-			ShapeStyle shapeStyle = new ShapeStyle();
-			String sPublicResult = ImixsBPMNPlugin.getItemValueByName(imixsElement, "keypublicresult", null, "1")
-					.getValue();
 
-			if ("1".equals(sPublicResult))
-				shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-			else
-				shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND_ACL);
+			// here we remove all images added by our event adapter class before...
+			Predicate<GraphicsAlgorithm> customImages = p -> (p instanceof Image);
+			shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().removeIf(customImages);
+
+			// now layout the shape...
+			ShapeStyle shapeStyle = new ShapeStyle();
+			shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
+
+			// Add 1. keyupdateacl custom Image
+			Value valueBusinessRule = ImixsBPMNPlugin.getItemValueByName(imixsElement, "txtbusinessrule", null, "");
+			if (!valueBusinessRule.getValue().isEmpty()) {
+				int width = containerShape.getGraphicsAlgorithm().getWidth();
+				Image img = loadCustomTaskIcon("conditions.png", shape.getGraphicsAlgorithm());
+				Graphiti.getGaService().setLocation(img, width - 14, 0);
+			}
+
+			// 2. Add acl custom Image
+			Value valueUpdateACL = ImixsBPMNPlugin.getItemValueByName(imixsElement, "keyupdateacl", "xs:boolean",
+					"false");
+			if ("true".equals(valueUpdateACL.getValue())) {
+				int width = containerShape.getGraphicsAlgorithm().getWidth();
+				Image img2 = loadCustomTaskIcon("acl-event.gif", shape.getGraphicsAlgorithm());
+				Graphiti.getGaService().setLocation(img2, width - 12, 20);
+			}
+
+			// apply new layout...
 			StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), imixsElement, shapeStyle);
 
 		}

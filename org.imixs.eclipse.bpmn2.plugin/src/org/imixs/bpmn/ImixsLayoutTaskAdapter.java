@@ -30,12 +30,12 @@ import org.imixs.bpmn.model.impl.ValueImpl;
  * @author rsoika
  *
  */
-public class ImixsTaskAdapter extends ImixsLayoutAdapter {
+public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
 	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
 
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
-	public ImixsTaskAdapter(ContainerShape containerShape) {
+	public ImixsLayoutTaskAdapter(ContainerShape containerShape) {
 		super(containerShape);
 	}
 
@@ -95,7 +95,7 @@ public class ImixsTaskAdapter extends ImixsLayoutAdapter {
 			Graphiti.getGaService().setLocationAndSize(imga, 2, 2, 24, 24);
 
 			// Add 1. keyupdateacl custom Image
-			Value valueUpdateACL = ImixsBPMNPlugin.getItemValueByName((Task) imixsElement, "keyUpdateACL", "xs:boolean",
+			Value valueUpdateACL = ImixsBPMNPlugin.getItemValueByName(imixsElement, "keyUpdateACL", "xs:boolean",
 					"false");
 
 			if ("true".equals(valueUpdateACL.getValue())) {
@@ -111,7 +111,8 @@ public class ImixsTaskAdapter extends ImixsLayoutAdapter {
 				Image img = loadCustomTaskIcon("form.gif", shape.getGraphicsAlgorithm());
 				Graphiti.getGaService().setLocation(img, xPos, 2);
 			}
-
+			
+			
 			// we take the second shape to add the text
 			EStructuralFeature feature = ModelDecorator.getAnyAttribute(imixsElement, "processid");
 			Integer currentProcessID = (Integer) imixsElement.eGet(feature);
