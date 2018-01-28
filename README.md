@@ -9,6 +9,8 @@ The Imixs-BPMN enhances the [Eclipse BPMN2 Modelling Framework](https://www.ecli
 
 Learn more about Imixs-Workflow on the [Imixs-Workflow project site](http:///www.imixs.org). 
 
+[![Build Status](https://travis-ci.org/imixs/imixs-bpmn.svg?branch=master)](https://travis-ci.org/imixs/imixs-bpmn)
+
 ## Installation 
 
 Imixs-BPMN provides an Eclipse Plugin based on the Eclipse BPMN2 Modelling Framework. Before you install Imixs-BPMN make sure that you have already installed the Eclipse BPMN2 Plugin in version 1.2.4 or higher from the updatesite: 
