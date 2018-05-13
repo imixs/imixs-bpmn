@@ -21,7 +21,7 @@
 	<artifactId>org.imixs.eclipse.bpmn2</artifactId>
 	<version>1.4.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Imixs-BPMN Modeler</name>
+	<name>Imixs-BPMN</name>
 
 	<description>
 		Imixs-BPMN is a free modelling tool which takes the full advantage of all the capabilities of the 
@@ -157,9 +157,11 @@
 			
 			<!-- 
 			<url>http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/
-			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/</url>
+			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/
+			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/
+			</url>
 			 -->
-			<url>http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/</url>
+			<url>http://download.eclipse.org/bpmn2-modeler/updates/oxygen/1.4.3/</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>

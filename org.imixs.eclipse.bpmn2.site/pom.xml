@@ -25,7 +25,7 @@
 
 	<artifactId>org.imixs.eclipse.bpmn2.updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
-	<name>Imixs-BPMN Modeler: Update Site</name>
+	<name>Imixs-BPMN Update Site</name>
 	<description>Update Site feature for Imixs-BPMN Modeler</description>
 
 	<properties>

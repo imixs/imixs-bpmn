@@ -23,6 +23,6 @@
 
 	<artifactId>org.imixs.eclipse.report.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
-	<name>Imixs-BPMN Modeler: Feature</name>
+	<name>Imixs-BPMN Report: Feature</name>
 	<description>Reporting plugin for Imixs-BPMN Modeler is used to extract, sort and summarize Imixs-Workflow data</description>
 </project>
