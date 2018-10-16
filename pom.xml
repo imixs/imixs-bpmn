@@ -93,7 +93,7 @@
 
 	<!-- default to Eclipse neon release -->
 	<properties>
-		<eclipse-site>http://download.eclipse.org/releases/oxygen</eclipse-site>
+		<eclipse-site>http://download.eclipse.org/releases/photon</eclipse-site>
 		<platform-version>[4.8,5.0)</platform-version>
 		<platform-version-name>photon</platform-version-name>
 		<tycho-version>0.21.0</tycho-version>
@@ -160,8 +160,9 @@
 			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/
 			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/
 			</url>
-			 -->
 			<url>http://download.eclipse.org/bpmn2-modeler/updates/oxygen/1.4.3/</url>
+			 -->
+			<url>http://download.eclipse.org/bpmn2-modeler/updates/photon/1.5.0/</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>
