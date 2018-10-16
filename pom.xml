@@ -94,8 +94,8 @@
 	<!-- default to Eclipse neon release -->
 	<properties>
 		<eclipse-site>http://download.eclipse.org/releases/oxygen</eclipse-site>
-		<platform-version>[4.7,5.0)</platform-version>
-		<platform-version-name>oxygen</platform-version-name>
+		<platform-version>[4.8,5.0)</platform-version>
+		<platform-version-name>photon</platform-version-name>
 		<tycho-version>0.21.0</tycho-version>
 		<tycho-extras-version>${tycho-version}</tycho-extras-version>
 	</properties>
