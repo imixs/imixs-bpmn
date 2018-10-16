@@ -1,5 +1,6 @@
 package org.imixs.bpmn;
 
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import org.eclipse.bpmn2.Task;
@@ -9,6 +10,7 @@ import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
 import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Image;
 import org.eclipse.graphiti.mm.algorithms.Text;
 import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
@@ -83,6 +85,11 @@ public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
 			int xPos = width - 20;
 
 			Shape shape = containerShape.getChildren().get(0);
+			
+			// here we remove all images added by our event adapter class before...
+			Predicate<GraphicsAlgorithm> customImages = p -> (p instanceof Image);
+			shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().removeIf(customImages);
+
 			// now we need to clear all existing children of that shape...
 			shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
 
@@ -124,8 +131,7 @@ public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
 			text.setVerticalAlignment(Orientation.ALIGNMENT_BOTTOM);
 			text.setFont(Graphiti.getGaService().manageDefaultFont(DIUtils.getDiagram(imixsElement), false, false));
 			Graphiti.getGaService().setLocationAndSize(text, width - 105, height - 20, 100, 20);
-			// TODO we are not sure if it is correct to change the
-			// active mode of an existing shape!
+			// we set the active mode to false to avoid that the text element is clickable
 			textShape.setActive(false);
 
 			StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), imixsElement, shapeStyle);
