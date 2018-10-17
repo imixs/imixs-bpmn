@@ -1,15 +1,23 @@
 package org.imixs.bpmn;
 
 import org.eclipse.bpmn2.Task;
+import org.eclipse.bpmn2.modeler.core.features.AbstractUpdateBaseElementFeature;
 import org.eclipse.bpmn2.modeler.core.features.CustomShapeFeatureContainer;
+import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
+import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
+import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
+import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Shape;
 
 /**
  * Imixs ProcessEntity task container
@@ -21,7 +29,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 	// these values must match what's in the plugin.xml
 	public final static String PROCESSENTITY_TASK_ID = "org.imixs.workflow.bpmn.ProcessEntityTask";
-
+	
 	/**
 	 * 
 	 * This method inspects the object to determine what its custom task ID should
@@ -77,6 +85,46 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 				return new CreateTaskFeature(fp) {
 				};
 			}
+			
+			
+			
+			/**
+			 * This method updates the background color
+			 */
+			@Override
+			public IUpdateFeature getUpdateFeature(IFeatureProvider fp) {
+				MultiUpdateFeature multiUpdate = (MultiUpdateFeature) super.getUpdateFeature(fp);
+				multiUpdate.addFeature(new AbstractUpdateBaseElementFeature<Task>(fp) {
+
+					@Override
+					public boolean update(IUpdateContext context) {
+						// force update of background color
+						updateShapeStyle((ContainerShape) context.getPictogramElement());
+						return true;
+					}
+				});
+
+				return multiUpdate;
+			}
+			
+			
+			/**
+			 * set new background color
+			 * 
+			 * @param containerShape
+			 *            - the ContainerShape that corresponds to the Task.
+			 */
+			private void updateShapeStyle(ContainerShape containerShape) {
+				Task ta = BusinessObjectUtil.getFirstElementOfType(containerShape, Task.class);
+				if (ta != null) {
+					// set background color
+					ShapeStyle shapeStyle = new ShapeStyle();
+					shapeStyle.setDefaultColors(ImixsLayoutTaskAdapter.PROCESSENTITY_BACKGROUND);
+					Shape shape = containerShape.getChildren().get(0);
+					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
+				}
+			}
+
 
 		};
 	}

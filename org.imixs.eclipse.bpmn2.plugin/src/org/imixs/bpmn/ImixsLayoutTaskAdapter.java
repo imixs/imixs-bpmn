@@ -33,7 +33,7 @@ import org.imixs.bpmn.model.impl.ValueImpl;
  *
  */
 public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
-	private static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
+	public static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
 
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
