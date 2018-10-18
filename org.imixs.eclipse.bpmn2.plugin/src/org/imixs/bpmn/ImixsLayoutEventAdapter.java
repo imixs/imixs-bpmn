@@ -3,16 +3,12 @@ package org.imixs.bpmn;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
-import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Image;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.util.ColorConstant;
-import org.eclipse.graphiti.util.IColorConstant;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.model.impl.ValueImpl;
@@ -35,8 +31,6 @@ import org.imixs.bpmn.model.impl.ValueImpl;
 public class ImixsLayoutEventAdapter extends ImixsLayoutAdapter {
 
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
-
-	private static final IColorConstant ACTIVITYENTITY_BACKGROUND = new ColorConstant(255, 217, 64);
 
 	public ImixsLayoutEventAdapter(ContainerShape containerShape) {
 		super(containerShape);
@@ -89,10 +83,6 @@ public class ImixsLayoutEventAdapter extends ImixsLayoutAdapter {
 			Predicate<GraphicsAlgorithm> customImages = p -> (p instanceof Image);
 			shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().removeIf(customImages);
 
-			// now layout the shape...
-			ShapeStyle shapeStyle = new ShapeStyle();
-			shapeStyle.setDefaultColors(ACTIVITYENTITY_BACKGROUND);
-
 			// Add 1. keyupdateacl custom Image
 			Value valueBusinessRule = ImixsBPMNPlugin.getItemValueByName(imixsElement, "txtbusinessrule", null, "");
 			if (!valueBusinessRule.getValue().isEmpty()) {
@@ -109,9 +99,6 @@ public class ImixsLayoutEventAdapter extends ImixsLayoutAdapter {
 				Image img2 = loadCustomTaskIcon("acl-event.gif", shape.getGraphicsAlgorithm());
 				Graphiti.getGaService().setLocation(img2, width - 12, 20);
 			}
-
-			// apply new layout...
-			StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), imixsElement, shapeStyle);
 
 		}
 	}

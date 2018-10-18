@@ -18,6 +18,8 @@ import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.util.ColorConstant;
+import org.eclipse.graphiti.util.IColorConstant;
 
 /**
  * Imixs ProcessEntity task container
@@ -27,9 +29,11 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
  */
 public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
+	public static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
+
 	// these values must match what's in the plugin.xml
 	public final static String PROCESSENTITY_TASK_ID = "org.imixs.workflow.bpmn.ProcessEntityTask";
-	
+
 	/**
 	 * 
 	 * This method inspects the object to determine what its custom task ID should
@@ -85,9 +89,7 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 				return new CreateTaskFeature(fp) {
 				};
 			}
-			
-			
-			
+
 			/**
 			 * This method updates the background color
 			 */
@@ -106,25 +108,25 @@ public class ImixsFeatureContainerTask extends CustomShapeFeatureContainer {
 
 				return multiUpdate;
 			}
-			
-			
+
 			/**
-			 * set new background color
+			 * Set new background color
+			 * <p>
+			 * This can not be done by the Adapter class - see issue #75
 			 * 
-			 * @param containerShape
-			 *            - the ContainerShape that corresponds to the Task.
+			 * @param containerShape - the ContainerShape that corresponds to the Task.
 			 */
 			private void updateShapeStyle(ContainerShape containerShape) {
-				Task ta = BusinessObjectUtil.getFirstElementOfType(containerShape, Task.class);
-				if (ta != null) {
+				Task task = BusinessObjectUtil.getFirstElementOfType(containerShape, Task.class);
+
+				if (task != null) {
 					// set background color
 					ShapeStyle shapeStyle = new ShapeStyle();
-					shapeStyle.setDefaultColors(ImixsLayoutTaskAdapter.PROCESSENTITY_BACKGROUND);
+					shapeStyle.setDefaultColors(PROCESSENTITY_BACKGROUND);
 					Shape shape = containerShape.getChildren().get(0);
-					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), ta, shapeStyle);
+					StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), task, shapeStyle);
 				}
 			}
-
 
 		};
 	}

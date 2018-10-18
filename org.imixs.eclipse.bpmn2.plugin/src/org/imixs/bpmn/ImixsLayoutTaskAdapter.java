@@ -6,8 +6,6 @@ import java.util.logging.Logger;
 import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.di.DIUtils;
 import org.eclipse.bpmn2.modeler.core.model.ModelDecorator;
-import org.eclipse.bpmn2.modeler.core.preferences.ShapeStyle;
-import org.eclipse.bpmn2.modeler.core.utils.StyleUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -17,8 +15,6 @@ import org.eclipse.graphiti.mm.algorithms.styles.Orientation;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
-import org.eclipse.graphiti.util.ColorConstant;
-import org.eclipse.graphiti.util.IColorConstant;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.model.impl.ValueImpl;
@@ -33,7 +29,6 @@ import org.imixs.bpmn.model.impl.ValueImpl;
  *
  */
 public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
-	public static final IColorConstant PROCESSENTITY_BACKGROUND = new ColorConstant(144, 176, 224);
 
 	private static Logger logger = Logger.getLogger(ImixsBPMNPlugin.class.getName());
 
@@ -93,10 +88,6 @@ public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
 			// now we need to clear all existing children of that shape...
 			shape.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().clear();
 
-			// set background color
-			ShapeStyle shapeStyle = new ShapeStyle();
-			shapeStyle.setDefaultColors(PROCESSENTITY_BACKGROUND);
-
 			// add the default image into the upper left corner....
 			Image imga = loadCustomTaskIcon("process-bubble.png", shape.getGraphicsAlgorithm());
 			Graphiti.getGaService().setLocationAndSize(imga, 2, 2, 24, 24);
@@ -133,8 +124,6 @@ public class ImixsLayoutTaskAdapter extends ImixsLayoutAdapter {
 			Graphiti.getGaService().setLocationAndSize(text, width - 105, height - 20, 100, 20);
 			// we set the active mode to false to avoid that the text element is clickable
 			textShape.setActive(false);
-
-			StyleUtil.applyStyle(shape.getGraphicsAlgorithm(), imixsElement, shapeStyle);
 
 		}
 	}
