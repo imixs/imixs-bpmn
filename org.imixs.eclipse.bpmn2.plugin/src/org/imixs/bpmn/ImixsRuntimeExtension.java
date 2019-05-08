@@ -21,13 +21,24 @@ import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
 import org.xml.sax.InputSource;
 
+/**
+ * This is the Imxis BPMN2 Runtime Extension.
+ * <p>
+ * The class provides the Runitme ID and the target namespace.
+ * <p>
+ * In addtion the method notify() is used to validate deprecated FieldMappings.
+ * This can happen with old models or models which where created
+ * programmatically. In this case we need to ensure that the checkboxes for the
+ * ACL settings did match the exact list of defined actor mappings. See also
+ * issue #71
+ * 
+ * @author rsoika
+ *
+ */
 public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 	public static final String RUNTIME_ID = "org.imixs.workflow.bpmn.runtime";
-
 	public static final String targetNamespace = "http://www.imixs.org/bpmn2";
-
-	private Map<String, String> fieldMappings = null;
 
 	private static Logger logger = Logger.getLogger(ImixsRuntimeExtension.class.getName());
 
@@ -88,35 +99,36 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	 */
 	private void validateDeprecatedFieldMappings(EObject object) {
 
-		// get Name Fields if not yet loaded...
-		if (fieldMappings == null) {
-			fieldMappings = ImixsBPMNPlugin.getOptionListFromDefinition((BaseElement) object, "txtFieldMapping");
-		}
-
 		// test for deprecated fieldMappings...
 		if (ImixsBPMNPlugin.isImixsTask(object) || ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-
-			removeDeprecatedEntries(object, "keyownershipfields");
-			removeDeprecatedEntries(object, "keyaddwritefields");
-			removeDeprecatedEntries(object, "keyaddreadfields");
+			removeDeprecatedActorEntries(object, "keyownershipfields");
+			removeDeprecatedActorEntries(object, "keyaddwritefields");
+			removeDeprecatedActorEntries(object, "keyaddreadfields");
 		}
 
 		// test for deprecated time fields...
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-			removeDeprecatedEntries(object, "keytimecomparefield");
+			removeDeprecatedActorEntries(object, "keytimecomparefield");
 		}
 
 	}
 
 	/**
-	 * Validates a specific item for deprecated FieldMappings
+	 * Validates a specific item for deprecated actor FieldMappings
 	 * 
 	 * @param object
 	 *            - task or event entity
 	 * @param itenName
 	 *            - name of the value to validate
 	 */
-	private void removeDeprecatedEntries(EObject object, String itenName) {
+	private void removeDeprecatedActorEntries(EObject object, String itenName) {
+
+		// we can not cache the fieldMapping here!
+		// We need to load for each BaseElement separately because we do not know in
+		// case of multiple opened editors which mapping list is the correct one.
+		Map<String, String> fieldMappings = ImixsBPMNPlugin.getOptionListFromDefinition((BaseElement) object,
+				"txtFieldMapping");
+
 		Item item = ImixsBPMNPlugin.getItemByName((BaseElement) object, itenName, null);
 		EList<Value> valueList = item.getValuelist();
 		List<Value> deprecatedList = new ArrayList<Value>();
