@@ -40,6 +40,13 @@ import org.imixs.bpmn.model.Value;
 public class CheckBoxEditor extends ObjectEditor {
 	protected Composite editorComposite;
 	protected Map<String, String> optionMap;
+
+	
+	
+	public void setOptionMap(Map<String, String> optionMap) {
+		this.optionMap = optionMap;
+	}
+
 	Item item = null;
 
 	/**

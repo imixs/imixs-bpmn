@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 import org.imixs.bpmn.ImixsBPMNPlugin;
+import org.imixs.bpmn.ImixsActorMappingAdapter;
 import org.imixs.bpmn.model.Item;
 import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
@@ -91,6 +92,8 @@ public class ProfilePropertySection extends DefaultPropertySection {
 			listEditor.setImage(ImixsBPMNPlugin.getDefault().getIcon(
 					"name_obj.gif"));
 			listEditor.createControl(attributesComposite, "Actor Properties");
+			item.eAdapters().add(new ImixsActorMappingAdapter(be)); 
+			
 
 			// FieldMapping Actors editor
 			item = ImixsBPMNPlugin.getItemByName((BaseElement) be,

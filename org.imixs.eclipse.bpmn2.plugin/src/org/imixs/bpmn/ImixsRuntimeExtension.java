@@ -1,11 +1,24 @@
 package org.imixs.bpmn;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+
+import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.IntermediateCatchEvent;
+import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.LifecycleEvent;
 import org.eclipse.bpmn2.modeler.core.LifecycleEvent.EventType;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil.Bpmn2DiagramType;
-import org.eclipse.bpmn2.modeler.ui.wizards.FileService;
 import org.eclipse.bpmn2.modeler.ui.AbstractBpmn2RuntimeExtension;
+import org.eclipse.bpmn2.modeler.ui.wizards.FileService;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.IEditorInput;
+import org.imixs.bpmn.model.Item;
+import org.imixs.bpmn.model.Value;
 import org.xml.sax.InputSource;
 
 public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
@@ -14,16 +27,20 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 	public static final String targetNamespace = "http://www.imixs.org/bpmn2";
 
+	private Map<String, String> fieldMappings = null;
+
+	private static Logger logger = Logger.getLogger(ImixsRuntimeExtension.class.getName());
+
 	@Override
 	public String getTargetNamespace(Bpmn2DiagramType diagramType) {
 		return targetNamespace;
 	}
 
 	/**
-	 * IMPORTANT: The plugin is responsible for inspecting the file contents!
-	 * Unless you are absolutely sure that the file is targeted for this runtime
-	 * (by, e.g. looking at the targetNamespace or some other feature) then this
-	 * method must return FALSE.
+	 * IMPORTANT: The plugin is responsible for inspecting the file contents! Unless
+	 * you are absolutely sure that the file is targeted for this runtime (by, e.g.
+	 * looking at the targetNamespace or some other feature) then this method must
+	 * return FALSE.
 	 */
 	@Override
 	public boolean isContentForRuntime(IEditorInput input) {
@@ -43,11 +60,80 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 		// as we can not identify the the Imixs Event here we do add a event
 		// adapter
 		// see: https://www.eclipse.org/forums/index.php/t/1065614/
-		if (event.eventType == EventType.BUSINESSOBJECT_CREATED) {
-			// EObject object = (EObject) event.target;
-			// if (object instanceof IntermediateCatchEvent) {
-			// object.eAdapters().add(new ImixsEventAdapter());
-			// }
+		// if (event.eventType == EventType.BUSINESSOBJECT_CREATED) {
+		if (event.eventType == EventType.BUSINESSOBJECT_LOADED) {
+			EObject object = (EObject) event.target;
+
+			if (object instanceof Task || object instanceof IntermediateCatchEvent) {
+				validateDeprecatedFieldMappings(object);
+			}
+		}
+	}
+
+	/**
+	 * This method is called by the EventType.BUSINESSOBJECT_LOADED after a Imixs
+	 * Task or Imixs Event is loaded. The method verifies if the value of items
+	 * based on the definitions FieldMapping are deprecated. If so, than the method
+	 * will update the item value automatically.
+	 * <p>
+	 * The method does not set an isDirty flag (because this is not possible during
+	 * BUSINESSOBJECT_LOADED). But we assume that the model will be updated at the
+	 * end by the user so this seems not to be a problem on the long run. We hook in
+	 * addition a event handler to react directly on changes to the field mapping
+	 * list,
+	 * 
+	 * 
+	 * @param object
+	 *            - the target EObject of the live cycle event.
+	 */
+	private void validateDeprecatedFieldMappings(EObject object) {
+
+		// get Name Fields if not yet loaded...
+		if (fieldMappings == null) {
+			fieldMappings = ImixsBPMNPlugin.getOptionListFromDefinition((BaseElement) object, "txtFieldMapping");
+		}
+
+		// test for deprecated fieldMappings...
+		if (ImixsBPMNPlugin.isImixsTask(object) || ImixsBPMNPlugin.isImixsCatchEvent(object)) {
+
+			removeDeprecatedEntries(object, "keyownershipfields");
+			removeDeprecatedEntries(object, "keyaddwritefields");
+			removeDeprecatedEntries(object, "keyaddreadfields");
+		}
+
+		// test for deprecated time fields...
+		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
+			removeDeprecatedEntries(object, "keytimecomparefield");
+		}
+
+	}
+
+	/**
+	 * Validates a specific item for deprecated FieldMappings
+	 * 
+	 * @param object
+	 *            - task or event entity
+	 * @param itenName
+	 *            - name of the value to validate
+	 */
+	private void removeDeprecatedEntries(EObject object, String itenName) {
+		Item item = ImixsBPMNPlugin.getItemByName((BaseElement) object, itenName, null);
+		EList<Value> valueList = item.getValuelist();
+		List<Value> deprecatedList = new ArrayList<Value>();
+		if (!valueList.isEmpty()) {
+
+			Iterator<Value> iter = valueList.iterator();
+			while (iter.hasNext()) {
+				Value entry = iter.next();
+				logger.fine("...value = " + entry.getValue());
+
+				// test if value still is defined
+				if (!fieldMappings.containsKey(entry.getValue())) {
+					logger.info("...remove deprecated fieldmapping '" + itenName + "' : " + entry.getValue());
+					deprecatedList.add(entry);
+				}
+			}
+			valueList.removeAll(deprecatedList);
 
 		}
 	}
