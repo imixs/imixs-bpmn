@@ -101,33 +101,35 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 		// test for deprecated fieldMappings...
 		if (ImixsBPMNPlugin.isImixsTask(object) || ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-			removeDeprecatedActorEntries(object, "keyownershipfields");
-			removeDeprecatedActorEntries(object, "keyaddwritefields");
-			removeDeprecatedActorEntries(object, "keyaddreadfields");
+			removeDeprecatedActorEntries(object, "keyownershipfields", "txtFieldMapping");
+			removeDeprecatedActorEntries(object, "keyaddwritefields", "txtFieldMapping");
+			removeDeprecatedActorEntries(object, "keyaddreadfields", "txtFieldMapping");
 		}
 
 		// test for deprecated time fields...
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-			removeDeprecatedActorEntries(object, "keytimecomparefield");
+			removeDeprecatedActorEntries(object, "keytimecomparefield", "txttimefieldmapping");
 		}
 
 	}
 
 	/**
-	 * Validates a specific item for deprecated actor FieldMappings
+	 * Validates a specific item for deprecated FieldMappings. The method can
+	 * validate field mappings from different soruces. Currently 'txtFieldMapping'
+	 * for actors and 'txttimefieldmapping' for Time Fields are known.
 	 * 
 	 * @param object
 	 *            - task or event entity
 	 * @param itenName
 	 *            - name of the value to validate
 	 */
-	private void removeDeprecatedActorEntries(EObject object, String itenName) {
+	private void removeDeprecatedActorEntries(EObject object, String itenName, String mappingSource) {
 
 		// we can not cache the fieldMapping here!
 		// We need to load for each BaseElement separately because we do not know in
 		// case of multiple opened editors which mapping list is the correct one.
 		Map<String, String> fieldMappings = ImixsBPMNPlugin.getOptionListFromDefinition((BaseElement) object,
-				"txtFieldMapping");
+				mappingSource);
 
 		Item item = ImixsBPMNPlugin.getItemByName((BaseElement) object, itenName, null);
 		EList<Value> valueList = item.getValuelist();
