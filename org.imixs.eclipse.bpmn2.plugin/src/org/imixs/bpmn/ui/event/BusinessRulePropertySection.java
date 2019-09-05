@@ -14,7 +14,7 @@ import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Rule config.
  * 
  * @author rsoika
  *

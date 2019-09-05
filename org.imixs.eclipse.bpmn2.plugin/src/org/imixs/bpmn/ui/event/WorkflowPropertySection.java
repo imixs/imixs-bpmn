@@ -22,7 +22,7 @@ import org.imixs.bpmn.ui.ListEditor;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Workflow config.
  * 
  * @author rsoika
  *
@@ -54,7 +54,7 @@ public class WorkflowPropertySection extends AbstractPropertySection {
 				return;
 			}
 
-			setTitle("Basic");
+			setTitle("Workflow Configuration");
 
 			// ProcessID
 			this.bindAttribute(attributesComposite, be, "activityid");

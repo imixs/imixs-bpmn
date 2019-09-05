@@ -15,7 +15,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Version config.
  * 
  * @author rsoika
  *
@@ -47,7 +47,7 @@ public class VersionPropertySection extends AbstractPropertySection {
 				return ;
 			}
 
-			setTitle("Version-Management");
+			setTitle("Version Management");
 
 			Map<String,String> optionList = new HashMap<String,String>();
 			optionList.put("0","no Version (default)");
@@ -63,7 +63,7 @@ public class VersionPropertySection extends AbstractPropertySection {
 					"numVersionActivityID", null, "");
 			TextObjectEditor valueEditor = new TextObjectEditor(this, value,
 					ImixsBPMNPlugin.IMIXS_ITEMVALUE);
-			valueEditor.createControl(attributesComposite, "Activity ID");
+			valueEditor.createControl(attributesComposite, "Event ID");
 		}
 
 	}

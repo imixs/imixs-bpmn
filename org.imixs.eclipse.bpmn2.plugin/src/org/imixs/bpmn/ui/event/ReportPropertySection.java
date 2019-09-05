@@ -15,7 +15,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.RadioButtonEditor;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Report config.
  * 
  * @author rsoika
  *

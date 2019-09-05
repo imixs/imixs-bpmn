@@ -45,7 +45,7 @@ public class ProcessApplicationPropertySection extends AbstractProcessPropertySe
 			if (be == null || !(be instanceof Task)) {
 				return;
 			}
-			setTitle("Application");
+			setTitle("Application Properties");
 
 			// Input Form
 			Value itemValue = ImixsBPMNPlugin.getItemValueByName((BaseElement) be, "txteditorid", null, "");

@@ -24,7 +24,7 @@ import org.imixs.bpmn.ui.ImixsDetailComposite;
 import org.imixs.bpmn.ui.ListEditor;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for ACL config.
  * 
  * @author rsoika
  *
@@ -33,23 +33,23 @@ public class ACLPropertySection extends AbstractPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
-		return new MailDetailComposite(this);
+		return new ACLDetailComposite(this);
 	}
 
 	@Override
 	public AbstractDetailComposite createSectionRoot(Composite parent, int style) {
-		return new MailDetailComposite(parent, style);
+		return new ACLDetailComposite(parent, style);
 	}
 
-	public class MailDetailComposite extends ImixsDetailComposite {
+	public class ACLDetailComposite extends ImixsDetailComposite {
 
 		Composite aclComposite = null;
 
-		public MailDetailComposite(AbstractBpmn2PropertySection section) {
+		public ACLDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
 		}
 
-		public MailDetailComposite(Composite parent, int style) {
+		public ACLDetailComposite(Composite parent, int style) {
 			super(parent, style);
 		}
 

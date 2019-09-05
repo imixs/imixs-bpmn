@@ -19,11 +19,8 @@
             runtimeId="org.imixs.workflow.bpmn.runtime"
             uri="http://www.imixs.org/bpmn2">
       </model>
-      <!-- oder CustomElementFeatureContainer  MyTaskFeatureContainer 
-       org.imixs.bpmn.propertytab.application org.imixs.bpmn.propertytab.mail
-      -->
-      
-    
+     
+     
       <customTask
             category="Imixs-Workflow"
             description="A Workflow Task describes the process performed by a human user. The task is managed by the Imixs-Workflow Engine and provides properties which are describing the status of this task inside the Workflow Engine."
@@ -50,7 +47,7 @@
              featureContainer="org.imixs.bpmn.ImixsFeatureContainerCatchEvent"
              id="org.imixs.workflow.bpmn.ActivityEntityCatchEvent"
              name="Workflow Event"
-             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.acl org.imixs.bpmn.propertytab.event.mail org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
+             propertyTabs="org.imixs.bpmn.propertytab.event.history org.imixs.bpmn.propertytab.event.acl org.imixs.bpmn.propertytab.event.message org.imixs.bpmn.propertytab.event.workflow org.imixs.bpmn.propertytab.event.businessrule org.imixs.bpmn.propertytab.event.report org.imixs.bpmn.propertytab.event.version org.imixs.bpmn.propertytab.event.timer"
              runtimeId="org.imixs.workflow.bpmn.runtime"
              type="IntermediateCatchEvent">
           <property
@@ -91,10 +88,10 @@
       </propertyTab>
       
       <propertyTab
-            class="org.imixs.bpmn.ui.event.MailPropertySection"
-            id="org.imixs.bpmn.propertytab.event.mail"
+            class="org.imixs.bpmn.ui.event.MessagePropertySection"
+            id="org.imixs.bpmn.propertytab.event.message"
             afterTab="org.imixs.bpmn.propertytab.event.history"
-            label="Mail"
+            label="Message"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">
       </propertyTab>
@@ -102,7 +99,7 @@
       <propertyTab
             class="org.imixs.bpmn.ui.event.BusinessRulePropertySection"
             id="org.imixs.bpmn.propertytab.event.businessrule"
-            afterTab="org.imixs.bpmn.propertytab.event.mail"
+            afterTab="org.imixs.bpmn.propertytab.event.message"
             label="Rule"
             runtimeId="org.imixs.workflow.bpmn.runtime"
             type="org.eclipse.bpmn2.CatchEvent">

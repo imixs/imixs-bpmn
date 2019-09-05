@@ -25,24 +25,24 @@ import org.imixs.bpmn.ui.ListEditor;
  * @author rsoika
  *
  */
-public class MailPropertySection extends AbstractPropertySection {
+public class MessagePropertySection extends AbstractPropertySection {
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
-		return new MailDetailComposite(this);
+		return new MessageDetailComposite(this);
 	}
 
 	@Override
 	public AbstractDetailComposite createSectionRoot(Composite parent, int style) {
-		return new MailDetailComposite(parent, style);
+		return new MessageDetailComposite(parent, style);
 	}
 
-	public class MailDetailComposite extends ImixsDetailComposite {
-		public MailDetailComposite(AbstractBpmn2PropertySection section) {
+	public class MessageDetailComposite extends ImixsDetailComposite {
+		public MessageDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
 		}
 
-		public MailDetailComposite(Composite parent, int style) {
+		public MessageDetailComposite(Composite parent, int style) {
 			super(parent, style);
 		}
 
@@ -52,7 +52,7 @@ public class MailPropertySection extends AbstractPropertySection {
 				return ;
 			}
 
-			setTitle("Message");
+			setTitle("Message Content");
 
 			Value value = ImixsBPMNPlugin.getItemValueByName((BaseElement) be,
 					"txtMailSubject", null, "");

@@ -11,7 +11,7 @@ import org.imixs.bpmn.model.Value;
 import org.imixs.bpmn.ui.ImixsDetailComposite;
 
 /**
- * This PorpertySection provides the attributes for Mail config.
+ * This PorpertySection provides the attributes for Process config.
  * 
  * @author rsoika
  *
@@ -43,7 +43,7 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 
 		@Override
 		public void createBindings(EObject be) {
-			setTitle("Workflow");
+			setTitle("Workflow Configuration");
 
 			// ProcessID
 		//	this.bindAttribute(attributesComposite, be, "processid");
@@ -60,8 +60,10 @@ public class ProcessWorkflowPropertySection extends AbstractProcessPropertySecti
 					"txtworkflowabstract", "CDATA", "");
 			valueEditor = new TextObjectEditor(this, itemValue, ImixsBPMNPlugin.IMIXS_ITEMVALUE);
 			valueEditor.setMultiLine(true);
+			
 			valueEditor.createControl(attributesComposite, "Abstract");
 
+			
 		}
 
 	}
