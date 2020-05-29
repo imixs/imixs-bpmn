@@ -17,14 +17,19 @@ http://www.imixs.org/org.imixs.eclipse.bpmn2.updatesite/
 
 ## Development 
 
-Imixs-BPMN extends the Eclipse BPMN2 modelling framework with a runtime extension. The main concepts of the Eclipse BPMN2 plugin extension can be found on the [BPMN2-Modeler/DeveloperTutorials](https://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials).
+Imixs-BPMN is based on [Eclipse BPMN2](https://www.eclipse.org/bpmn2-modeler/) project and extends the Eclipse BPMN2 with a runtime extension. 
+
+In the [Wiki pages](https://github.com/imixs/imixs-bpmn/wiki) on Github you will find further development information about this project.
+
+### Eclipse BPMN2 Development
+
+We are also committer of the [Eclipse BPMN2](https://www.eclipse.org/bpmn2-modeler/) project. So we are involved in the development and also the build process for Eclipse BPMN2. You can find information about how to commit and build the Eclipse BPMN2 project in the wiki page [Eclipse BPMN2 Development](https://github.com/imixs/imixs-bpmn/wiki/Eclipse-BPMN2-Development).
+
+See also the [BPMN2-Modeler/DeveloperTutorials](https://wiki.eclipse.org/BPMN2-Modeler/DeveloperTutorials) for general information about the concepts of the Eclipse BPMN2 plugin extension mechanism.
 
 
-### Checkout the Imixs BPMN Plugin
-You can checkout the source code from this site. To build the plugin form sources just checkout the source code and import the sources located under:
 
-    eclipse/org.imixs.eclipse.bpmn2
 
-For further development concepts of the Imixs BPMN extension see also the [Wiki pages](https://github.com/imixs/imixs-bpmn/wiki).
 
-For general concepts of Imixs-Workflow and the Imixs-Workflow engine see the [Imixs-Workflow project home](http://www.imixs.org).
+
+
