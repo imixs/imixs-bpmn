@@ -159,6 +159,15 @@ public class ImixsActorMappingAdapter extends EContentAdapter {
 		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keyAddReadFields"));
 		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keyAddWriteFields"));
 		
+		// test messaging settings.
+		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keymailreceiverfields"));
+		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keymailreceiverfieldscc"));
+		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keymailreceiverfieldsbcc"));
+				
+		// time compare filed
+		allItems.addAll(ImixsBPMNPlugin.findAllItemsByName((Definitions) imixsElement, "keytimecomparefield"));
+		
+		
 		for (Item item: allItems) {
 			
 			// test if the value is part of this item...
@@ -166,12 +175,12 @@ public class ImixsActorMappingAdapter extends EContentAdapter {
 			for (Value value : valueList) {
 				if (value.getValue().equals(deprecatedValue)) {
 					if (newValue == null) {
-						logger.info("...remove drepecated value '" + deprecatedValue + "' from item " + item.getName()
+						logger.info("...remove deprecated value '" + deprecatedValue + "' from item " + item.getName()
 								+ "...");
 						valueList.remove(value);
 						break;
 					} else {
-						logger.fine("...update drepecated value '" + deprecatedValue + "' from item " + item.getName()
+						logger.fine("...update deprecated value '" + deprecatedValue + "' from item " + item.getName()
 								+ " -> " + newValue + "...");
 						// we need to update the deprecated value with the new value!
 						int i = valueList.indexOf(value);

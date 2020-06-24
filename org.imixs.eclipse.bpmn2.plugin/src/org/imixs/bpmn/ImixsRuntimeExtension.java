@@ -99,23 +99,29 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	 */
 	private void validateDeprecatedFieldMappings(EObject object) {
 
-		// test for deprecated fieldMappings...
+		// test for deprecated fieldMappings for Task elements...
 		if (ImixsBPMNPlugin.isImixsTask(object) || ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-			removeDeprecatedActorEntries(object, "keyownershipfields", "txtFieldMapping");
-			removeDeprecatedActorEntries(object, "keyaddwritefields", "txtFieldMapping");
-			removeDeprecatedActorEntries(object, "keyaddreadfields", "txtFieldMapping");
+			removeDeprecatedFieldMappings(object, "keyownershipfields", "txtFieldMapping");
+			removeDeprecatedFieldMappings(object, "keyaddwritefields", "txtFieldMapping");
+			removeDeprecatedFieldMappings(object, "keyaddreadfields", "txtFieldMapping");
 		}
 
-		// test for deprecated time fields...
+		// test for deprecated fieldMappings for Event elements
+		
 		if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
-			removeDeprecatedActorEntries(object, "keytimecomparefield", "txttimefieldmapping");
+			// test timer settings
+			removeDeprecatedFieldMappings(object, "keytimecomparefield", "txttimefieldmapping");
+			// test messaging settings.
+			removeDeprecatedFieldMappings(object, "keymailreceiverfields", "txtFieldMapping");
+			removeDeprecatedFieldMappings(object, "keymailreceiverfieldscc", "txtFieldMapping");
+			removeDeprecatedFieldMappings(object, "keymailreceiverfieldsbcc", "txtFieldMapping");
 		}
 
 	}
 
 	/**
 	 * Validates a specific item for deprecated FieldMappings. The method can
-	 * validate field mappings from different soruces. Currently 'txtFieldMapping'
+	 * validate field mappings from different sources. Currently 'txtFieldMapping'
 	 * for actors and 'txttimefieldmapping' for Time Fields are known.
 	 * 
 	 * @param object
@@ -123,7 +129,7 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	 * @param itenName
 	 *            - name of the value to validate
 	 */
-	private void removeDeprecatedActorEntries(EObject object, String itenName, String mappingSource) {
+	private void removeDeprecatedFieldMappings(EObject object, String itenName, String mappingSource) {
 
 		// we can not cache the fieldMapping here!
 		// We need to load for each BaseElement separately because we do not know in
@@ -143,7 +149,15 @@ public class ImixsRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 				// test if value still is defined
 				if (!fieldMappings.containsKey(entry.getValue())) {
-					logger.info("...remove deprecated fieldmapping '" + itenName + "' : " + entry.getValue());
+					String objectType="";
+					if (ImixsBPMNPlugin.isImixsTask(object)) {
+						objectType="ImixsTask";
+					}
+					
+					if (ImixsBPMNPlugin.isImixsCatchEvent(object)) {
+						objectType="ImixsEvent";
+					}
+					logger.info("... " + objectType + ": remove deprecated fieldmapping '" + itenName + "' : " + entry.getValue());
 					deprecatedList.add(entry);
 				}
 			}
