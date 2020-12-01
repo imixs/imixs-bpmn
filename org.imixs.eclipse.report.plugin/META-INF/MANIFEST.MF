@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.imixs.eclipse.report.plugin;singleton:=true
-Bundle-Version: 1.4.8.qualifier
+Bundle-Version: 1.4.9.qualifier
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.jface.text,
  org.eclipse.ui.editors,

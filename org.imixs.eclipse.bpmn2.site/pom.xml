@@ -17,7 +17,7 @@
 	<parent>
 		<groupId>org.imixs.eclipse</groupId>
 		<artifactId>org.imixs.eclipse.bpmn2</artifactId>
-		<version>1.4.8-SNAPSHOT</version>
+		<version>1.4.9-SNAPSHOT</version>
 		<!-- 
 		<relativePath>../pom.xml</relativePath>
 		 -->
