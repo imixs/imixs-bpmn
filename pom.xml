@@ -11,12 +11,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<prerequisites>
 		<maven>3.0</maven>
 	</prerequisites>
-
-
 	<groupId>org.imixs.eclipse</groupId>
 	<artifactId>org.imixs.eclipse.bpmn2</artifactId>
 	<version>1.4.9-SNAPSHOT</version>
@@ -91,60 +88,59 @@
 		</license>
 	</licenses>
 
-	<!-- default to Eclipse neon release -->
+	<!-- default to Eclipse 2020-06 release -->
 	<properties>
-		<eclipse-site>http://download.eclipse.org/releases/photon</eclipse-site>
-		<platform-version>[4.8,5.0)</platform-version>
-		<platform-version-name>photon</platform-version-name>
-		<tycho-version>0.21.0</tycho-version>
-		<tycho-extras-version>${tycho-version}</tycho-extras-version>
+		<eclipse-site>http://download.eclipse.org/releases/2020-06</eclipse-site>
+		<platform-version>[4.8,5.2)</platform-version>
+		<platform-version-name>2020-06</platform-version-name>
+		<tycho-version>1.7.0</tycho-version>
+		<tycho-extras-version>${tycho-version}</tycho-extras-version>		
+		<BUILD_ALIAS>Build</BUILD_ALIAS>
 	</properties>
 
 	<profiles>
 		<profile>
-			<id>platform-luna</id>
+			<id>platform-photon</id>
 			<activation>
 				<property>
 					<name>platform-version-name</name>
-					<value>luna</value>
+					<value>photon</value>
 				</property>
 			</activation>
 			<properties>
-				<eclipse-site>http://download.eclipse.org/releases/luna</eclipse-site>
-				<platform-version>[4.4,4.5)</platform-version>
-				<platform-version-name>luna</platform-version-name>
+				<eclipse-site>http://download.eclipse.org/releases/photon</eclipse-site>
+				<platform-version>[4.8,5.0]</platform-version>
+				<platform-version-name>photon</platform-version-name>
 			</properties>
 		</profile>
 		<profile>
-			<id>platform-mars</id>
+			<id>platform-2020-06</id>
 			<activation>
 				<property>
 					<name>platform-version-name</name>
-					<value>mars</value>
+					<value>2020-06</value>
 				</property>
 			</activation>
 			<properties>
-				<eclipse-site>http://download.eclipse.org/releases/mars</eclipse-site>
-				<platform-version>[4.5,5.0]</platform-version>
-				<platform-version-name>mars</platform-version-name>
-			</properties>
-		</profile>
-		<profile>
-			<id>platform-neon</id>
-			<activation>
-				<property>
-					<name>platform-version-name</name>
-					<value>neon</value>
-				</property>
-			</activation>
-			<properties>
-				<eclipse-site>http://download.eclipse.org/releases/neon</eclipse-site>
-				<platform-version>[4.6,5.0)</platform-version>
-				<platform-version-name>neon</platform-version-name>
+				<eclipse-site>http://download.eclipse.org/releases/2020-06</eclipse-site>
+				<platform-version>[4.8,5.2)</platform-version>
+				<platform-version-name>2020-06</platform-version-name>
+				<!--  find the latest orbit repo here: https://download.eclipse.org/tools/orbit/downloads/ -->
+				<eclipse.orbit.url>https://download.eclipse.org/tools/orbit/downloads/drops/R20200529191137/repository</eclipse.orbit.url>
 			</properties>
 		</profile>
 	</profiles>
-
+	
+	<modules>
+		<module>org.imixs.eclipse.bpmn2.plugin</module>
+		<module>org.imixs.eclipse.bpmn2.feature</module>
+		<module>org.imixs.eclipse.report.plugin</module>
+		<module>org.imixs.eclipse.report.feature</module>
+		<module>org.imixs.eclipse.bpmn2.site</module>
+	</modules>
+	
+	
+	
 	<repositories>
 		<repository>
 			<id>eclipse-platform</id>
@@ -153,16 +149,15 @@
 		</repository>
 
 		<repository>
-			<id>eclipse-bpmn2</id>
-			
+			<id>eclipse-bpmn2</id>			
 			<!-- 
-			<url>http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/
-			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/
-			http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/
-			</url>
-			<url>http://download.eclipse.org/bpmn2-modeler/updates/oxygen/1.4.3/</url>
+			  http://download.eclipse.org/modeling/mdt/bpmn2/updates/mars/1.2.1/
+			  http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.3/
+			  http://download.eclipse.org/bpmn2-modeler/updates/mars/1.2.4/
+			  http://download.eclipse.org/bpmn2-modeler/updates/oxygen/1.4.3/
+			  http://download.eclipse.org/bpmn2-modeler/updates/photon/1.5.0/
 			 -->
-			<url>http://download.eclipse.org/bpmn2-modeler/updates/photon/1.5.0/</url>
+			<url>http://download.eclipse.org/bpmn2-modeler/updates/2020-06/1.5.2/</url>
 			<layout>p2</layout>
 			<snapshots>
 				<enabled>true</enabled>
@@ -171,19 +166,8 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-
-		<repository>
-			<id>eclipse-bpel</id>
-			<url>http://download.eclipse.org/bpel/site/1.0.5</url>
-			<layout>p2</layout>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</repository>
-
+		
+		<!-- 
 		<repository>
 			<id>eclipse-graphiti</id>
 			<url>http://download.eclipse.org/graphiti/updates/milestones/</url>
@@ -219,23 +203,33 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
+		 -->
 
 	</repositories>
 
 	<pluginRepositories>
-
 		<pluginRepository>
 			<id>repo.eclipse.org.cbi-releases</id>
 			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
 		</pluginRepository>
-
 		<pluginRepository>
-			<!-- need maven-findbugs-2.3.2-SNAPSHOT, see http://jira.codehaus.org/browse/MFINDBUGS-122 
-				remove this when this version is released -->
+			<id>maven-central</id>
+			<url>http://repo1.maven.org/maven2/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>eclipse-nexus-central</id>
+			<url>http://maven.eclipse.org/nexus/content/groups/central/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>eclipse-nexus-public</id>
+			<url>http://maven.eclipse.org/nexus/content/groups/public/</url>
+		</pluginRepository>
+		<!-- 				
+		<pluginRepository>
 			<id>codehaus.snapshots</id>
 			<url>http://snapshots.repository.codehaus.org/</url>
 		</pluginRepository>
-
+ 		-->		
 		<pluginRepository>
 			<id>m2e-cbi</id>
 			<url>http://download.eclipse.org/technology/m2e/maven/</url>
@@ -243,12 +237,9 @@
 	</pluginRepositories>
 
 
-
-
-
 	<build>
 		<plugins>
-			<!-- use JDK 1.8 settings for compiling -->
+			<!-- use JDK 1.8 settings for compiling 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -269,7 +260,6 @@
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-project-info-reports-plugin</artifactId>
 							<version>2.4</version>
-							<!-- -->
 							<reports>
 								<report>index</report>
 								<report>project-team</report>
@@ -286,7 +276,16 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
-
+			-->
+			
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-packaging-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<format>'${BUILD_ALIAS}-v'yyyyMMdd-HHmm</format>
+				</configuration>
+			</plugin>			
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-source-feature-plugin</artifactId>
@@ -300,11 +299,13 @@
 						</goals>
 					</execution>
 				</executions>
+				<!--  
 				<configuration>
 					<excludes>
 						<plugin id="org.imixs.eclipse.bpmn2.source" />
 					</excludes>
 				</configuration>
+				-->
 			</plugin>
 
 			<plugin>
@@ -320,11 +321,13 @@
 						</goals>
 					</execution>
 				</executions>
+				<!-- 
 				<configuration>
 					<excludes>
 						<plugin id="org.imixs.eclipse.bpmn2.source" />
 					</excludes>
 				</configuration>
+				 -->
 			</plugin>
 
 			<plugin>
@@ -382,7 +385,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>2.3.2-SNAPSHOT</version>
+					<version>2.3.2</version>
 					<configuration>
 						<findbugsXmlOutput>true</findbugsXmlOutput>
 						<failOnError>false</failOnError>
@@ -428,12 +431,6 @@
 
 	</build>
 
-	<modules>
-		<module>org.imixs.eclipse.bpmn2.plugin</module>
-		<module>org.imixs.eclipse.bpmn2.feature</module>
-		<module>org.imixs.eclipse.report.plugin</module>
-		<module>org.imixs.eclipse.report.feature</module>
-		<module>org.imixs.eclipse.bpmn2.site</module>
-	</modules>
+
 
 </project>
